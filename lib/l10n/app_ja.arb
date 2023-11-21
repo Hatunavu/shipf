@@ -1,0 +1,20 @@
+{
+    "language": "言語",
+    "hello": "こんにちは",
+    "welcome_back": "お帰りなさい",
+    "login": "ログインする",
+    "no_account": "アカウントがありませんか？",
+    "register": "登録",
+    "login_to": "ディスコードにログイン",
+    "forgot_password": "パスワードをお忘れですか？",
+    "register_with": "に登録する",
+    "email": "Eメール",
+    "have_account": "アカウントをお持ちですか？",
+    "password": "パスワード",
+    "confirm_password": "パスワードを認証する",
+    "not_receive_code": "コードを受け取っていませんか？",
+    "resend": "再送",
+    "verify": "確認",
+    "code_send": "確認コードが送信されました:",
+    "phone": "Số điện thoại"
+}

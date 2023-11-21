@@ -1,0 +1,20 @@
+{
+    "language": "Ngôn ngữ",
+    "hello": "Xin chào",
+    "welcome_back": "Chào mừng trở lại",
+    "login": "Đăng nhập",
+    "no_account": "Chưa có tài khoản? ",
+    "register": "Đăng ký",
+    "login_to": "Đăng nhập vào ShipF",
+    "forgot_password": "Quên mật khẩu?",
+    "register_with": "Đăng ký với",
+    "email": "Email",
+    "have_account": "Đã có tài khoản? ",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "not_receive_code": "Không nhận được mã? ",
+    "resend": "Gửi lại",
+    "verify": "Xác thực",
+    "code_send": "Một mã xác thực đã được gửi về:",
+    "phone": "Số điện thoại"
+}

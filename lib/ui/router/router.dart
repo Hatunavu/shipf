@@ -7,8 +7,11 @@ import 'package:shipf/ui/screen/auth/reset_pass/reset_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/signup/screen/verify_screen.dart';
 import 'package:shipf/ui/screen/auth/signup/siginup_screen.dart';
 import 'package:shipf/ui/screen/auth/splash/splash_screen.dart';
+import 'package:shipf/ui/screen/main/add_address/add_address_screen.dart';
+import 'package:shipf/ui/screen/main/address/address_screen.dart';
 import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/main_screen.dart';
+import 'package:shipf/ui/screen/main/order/order_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 
 @MaterialAutoRouter(
@@ -54,6 +57,21 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
       page: ResetPassScreen,
       name: "ResetPassPage",
       path: AppRoutes.resetPassScreen,
+    ),
+    AutoRoute(
+      page: OrderScreen,
+      name: "OrderPage",
+      path: AppRoutes.orderScreen,
+    ),
+    AutoRoute(
+      page: AddAddressScreen,
+      name: "AddAddressPage",
+      path: AppRoutes.addAddressScreen,
+    ),
+    AutoRoute(
+      page: AddressScreen,
+      name: "AddressPage",
+      path: AppRoutes.addressScreen,
     ),
   ],
 )

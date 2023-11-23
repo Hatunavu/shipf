@@ -41,3 +41,4 @@ const kDefaultPaddingWidget = 16.0;
 final kDefaultPaddingWidthWidget = 16.w;
 final kDefaultPaddingHeightWidget = 16.h;
 final kDefaultBorderRadius = 12.r;
+final secondaryBorderRadius = 20.r;

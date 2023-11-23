@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class BaseScreen extends StatelessWidget {
@@ -31,6 +29,7 @@ class BaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: key,
       resizeToAvoidBottomInset: true,
       appBar: title != null
@@ -39,11 +38,10 @@ class BaseScreen extends StatelessWidget {
               actions: trailing,
               leading: leading,
               automaticallyImplyLeading: leading != null ? true : false,
-              elevation: elevation,
+              elevation: elevation ?? 0.5,
               centerTitle: true,
               title: Text(title!,
-                  style: primaryTitleStyle.copyWith(
-                      color: primaryColor, fontSize: 18.sp)))
+                  style: primaryHeaderTitleStyle.copyWith(color: Colors.black)))
           : null,
       floatingActionButton: floatingActionButton,
       body: SafeArea(

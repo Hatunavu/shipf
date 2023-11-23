@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
   final BorderRadius? borderRadius;
   final Color? backgroundColor;
   final double? maxWidth;
-  final double? maxHeight;
+  final bool defaultHeight;
   final TextStyle? style;
   final Color? borderColor;
   final double? borderWidth;
@@ -24,7 +24,7 @@ class PrimaryButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.borderWidth = 0.0,
     this.maxWidth = double.infinity,
-    this.maxHeight,
+    this.defaultHeight = false,
     this.style,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class PrimaryButton extends StatelessWidget {
     this.textColor = primaryColor,
     this.borderWidth = 1.0,
     this.maxWidth = double.infinity,
-    this.maxHeight,
+    this.defaultHeight = false,
     this.style,
   }) : super(key: key);
 
@@ -47,13 +47,13 @@ class PrimaryButton extends StatelessWidget {
       this.onPressed,
       required this.label,
       this.borderRadius,
-      this.backgroundColor = Colors.grey,
+      this.backgroundColor = darkContentColor,
       this.maxWidth = double.infinity,
-      this.maxHeight,
+      this.defaultHeight = false,
       this.style,
       this.borderColor = Colors.transparent,
       this.borderWidth = 0.0,
-      this.textColor = Colors.black});
+      this.textColor = greyText});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class PrimaryButton extends StatelessWidget {
       onTap: onPressed ?? () {},
       child: Container(
         width: maxWidth,
-        height: 38.h,
+        height: defaultHeight ? null : 38.h,
         decoration: BoxDecoration(
           color: backgroundColor ?? primaryColor,
           border: Border.all(width: borderWidth!, color: borderColor!),

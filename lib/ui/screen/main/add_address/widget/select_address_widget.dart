@@ -180,6 +180,8 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                 builder: (FormFieldState<String> state) {
                   return InputDecorator(
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: backgroundTextField,
                         errorStyle: const TextStyle(
                           fontSize: 10,
                         ),
@@ -192,18 +194,22 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                         errorText: state.errorText,
                         errorBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius:
+                                BorderRadius.circular(secondaryBorderRadius)),
                         focusedErrorBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(5)),
-                        contentPadding: EdgeInsets.only(
-                            top: 0, bottom: 0, left: 20.w, right: 0),
+                            borderRadius:
+                                BorderRadius.circular(secondaryBorderRadius)),
+                        contentPadding:
+                            EdgeInsets.only(left: kDefaultPaddingWidthWidget),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: borderColor),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.circular(secondaryBorderRadius)),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: primaryColor),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.circular(secondaryBorderRadius)),
                       ),
                       child: Text(
                           widget.isWard

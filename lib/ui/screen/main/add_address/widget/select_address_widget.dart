@@ -200,8 +200,8 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                             borderSide: const BorderSide(color: Colors.red),
                             borderRadius:
                                 BorderRadius.circular(secondaryBorderRadius)),
-                        contentPadding:
-                            EdgeInsets.only(left: kDefaultPaddingWidthWidget),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingWidthWidget),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius:
@@ -212,36 +212,39 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                                 BorderRadius.circular(secondaryBorderRadius)),
                       ),
                       child: Text(
-                          widget.isWard
-                              ? locationState.wards != null && indexWard != -1
-                                  ? locationState.wards![indexWard].name
-                                  : locationState.ward != null
-                                      ? locationState.ward!.name
-                                      : 'Chọn Phường/Xã/Thị trấn'
-                              : widget.isDistrict
-                                  ? locationState.districts != null &&
-                                          indexDistrict != -1
-                                      ? locationState
-                                          .districts![indexDistrict].name
-                                      : locationState.district != null
-                                          ? locationState.district!.name
-                                          : 'Chọn Quận/Huyện'
-                                  : locationState.province != null
-                                      ? locationState.province!.name
-                                      : indexProvince != -1
-                                          ? locationState
-                                              .provinces![indexProvince].name
-                                          : 'Chọn Tỉnh/Thành phố',
-                          style: textBody.copyWith(
-                              color: widget.isWard
-                                  ? locationState.wards != null
-                                      ? titleColor
-                                      : borderColor
-                                  : widget.isDistrict
-                                      ? locationState.districts != null
-                                          ? titleColor
-                                          : borderColor
-                                      : titleColor)));
+                        widget.isWard
+                            ? locationState.wards != null && indexWard != -1
+                                ? locationState.wards![indexWard].name
+                                : locationState.ward != null
+                                    ? locationState.ward!.name
+                                    : 'Chọn Phường/Xã/Thị trấn'
+                            : widget.isDistrict
+                                ? locationState.districts != null &&
+                                        indexDistrict != -1
+                                    ? locationState
+                                        .districts![indexDistrict].name
+                                    : locationState.district != null
+                                        ? locationState.district!.name
+                                        : 'Chọn Quận/Huyện'
+                                : locationState.province != null
+                                    ? locationState.province!.name
+                                    : indexProvince != -1
+                                        ? locationState
+                                            .provinces![indexProvince].name
+                                        : 'Chọn Tỉnh/Thành phố',
+                        style: textBody.copyWith(
+                            color: widget.isWard
+                                ? locationState.wards != null
+                                    ? titleColor
+                                    : borderColor
+                                : widget.isDistrict
+                                    ? locationState.districts != null
+                                        ? titleColor
+                                        : borderColor
+                                    : titleColor),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ));
                 },
               ),
             ));

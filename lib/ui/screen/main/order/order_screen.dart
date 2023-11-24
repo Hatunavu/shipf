@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/ui/router/router.gr.dart';
+import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
+import 'package:shipf/ui/screen/main/add_address/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/main/address/address_screen.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -17,24 +21,143 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _homeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      title: 'Tạo đơn hàng',
-      leading: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: const Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
+    return BlocProvider(
+      create: (context) => AddAddressCubit()..getLocationProvinces(),
+      child: BaseScreen(
+        title: 'Tạo đơn hàng',
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // address(),
+              // Divider(
+              //   thickness: kDefaultPaddingHeightScreen,
+              //   color: backgroundColor,
+              // ),
+              address2('Nơi gửi'),
+              Divider(
+                thickness: kDefaultPaddingHeightScreen,
+                color: backgroundColor,
+              ),
+              address2('Nơi nhận'),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget address2(String type) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          address(),
+          Text(
+            type,
+            style: textHeading,
+          ),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          labelTextField('Họ và Tên'),
+          PrimaryTextField(
+            label: '',
+            controller: _homeController,
+            hintText: 'Ví dụ: Nguyễn Văn A',
+          ),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          labelTextField('Số điện thoại'),
+          PrimaryTextField(
+            label: '',
+            controller: _homeController,
+            hintText: 'Ví dụ: 098xxxxxxx',
+          ),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    labelTextField('Địa chỉ'),
+                    PrimaryTextField(
+                      label: '',
+                      controller: _homeController,
+                      hintText: 'Ví dụ: 123 đường Chiến Thắng,...',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: kDefaultPaddingWidthScreen / 2,
+              ),
+              Expanded(child: itemSelectLocation(label: 'Tỉnh/Thành phố')),
+            ],
+          ),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: itemSelectLocation(
+                      label: 'Quận/Huyện', isDistrict: true)),
+              SizedBox(
+                width: kDefaultPaddingWidthScreen / 2,
+              ),
+              Expanded(
+                  child: itemSelectLocation(
+                      label: 'Phường/Xã/Thị trấn', isWard: true)),
+            ],
+          ),
         ],
       ),
+    );
+  }
+
+  Widget labelTextField(String label) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
+      child: Text(
+        label,
+        style: primarySubTitleStyle,
+      ),
+    );
+  }
+
+  Widget itemSelectLocation(
+      {bool isDistrict = false, bool isWard = false, required String label}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        labelTextField(label),
+        SelectAddressWidget(
+          label: label,
+          isDistrict: isDistrict,
+          isWard: isWard,
+        ),
+      ],
     );
   }
 

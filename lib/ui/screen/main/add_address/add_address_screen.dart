@@ -131,42 +131,60 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           ),
         ],
       ),
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: [
+      //     Text(
+      //       'Loại địa chỉ',
+      //       style: textBody,
+      //     ),
+      //     SizedBox(
+      //       width: 0.5.sw,
+      //       child: Row(
+      //         children: [
+      //           const Expanded(
+      //               child: PrimaryButton(
+      //             defaultHeight: true,
+      //             label: 'Nhà riêng',
+      //           )),
+      //           SizedBox(
+      //             width: kDefaultPaddingWidthScreen,
+      //           ),
+      //           const Expanded(
+      //               child: PrimaryButton.outline(
+      //             label: 'Văn phòng',
+      //             defaultHeight: true,
+      //             borderColor: Colors.grey,
+      //             textColor: Colors.grey,
+      //           )),
+      //         ],
+      //       ),
+      //     )
+      //   ],
+      // ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Loại địa chỉ',
+            'Đặt làm địa chỉ nhận mặc định',
             style: textBody,
           ),
-          SizedBox(
-            width: 0.5.sw,
-            child: Row(
-              children: [
-                const Expanded(
-                    child: PrimaryButton(
-                  defaultHeight: true,
-                  label: 'Nhà riêng',
-                )),
-                SizedBox(
-                  width: kDefaultPaddingWidthScreen,
-                ),
-                const Expanded(
-                    child: PrimaryButton.outline(
-                  label: 'Văn phòng',
-                  defaultHeight: true,
-                  borderColor: Colors.grey,
-                  textColor: Colors.grey,
-                )),
-              ],
-            ),
-          )
+          CupertinoSwitch(
+            activeColor: primaryColor,
+            value: _switchValue,
+            onChanged: (value) {
+              setState(() {
+                _switchValue = value;
+              });
+            },
+          ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Đặt làm địa chỉ mặc định',
+            'Đặt làm địa chỉ gửi mặc định',
             style: textBody,
           ),
           CupertinoSwitch(

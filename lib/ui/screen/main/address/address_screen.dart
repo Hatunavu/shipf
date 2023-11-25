@@ -234,26 +234,9 @@ class _AddressScreenState extends State<AddressScreen> {
                 child: Text(address.fullAddress),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    top: address.type != '' || address.isDefault ? 5.h : 0),
+                padding: EdgeInsets.only(top: address.isDefault ? 5.h : 0),
                 child: Row(
                   children: [
-                    Visibility(
-                      visible: address.type != '',
-                      child: Container(
-                        margin: EdgeInsets.only(right: 5.w),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 5.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 0.5),
-                            borderRadius: BorderRadius.circular(3.r)),
-                        child: Text(
-                          address.type,
-                          style: primarySubTitleStyle.copyWith(
-                              fontSize: 11.sp, color: Colors.black),
-                        ),
-                      ),
-                    ),
                     Visibility(
                       visible: address.isDefault,
                       child: Container(

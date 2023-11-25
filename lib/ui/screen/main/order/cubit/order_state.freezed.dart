@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  StepOrderType get stepOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderStateCopyWith<OrderState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $OrderStateCopyWith<$Res> {
           OrderState value, $Res Function(OrderState) then) =
       _$OrderStateCopyWithImpl<$Res, OrderState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, StepOrderType stepOrderType});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? stepOrderType = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +60,10 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      stepOrderType: null == stepOrderType
+          ? _value.stepOrderType
+          : stepOrderType // ignore: cast_nullable_to_non_nullable
+              as StepOrderType,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$OrderStateImplCopyWith<$Res>
       __$$OrderStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, StepOrderType stepOrderType});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$OrderStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? stepOrderType = null,
   }) {
     return _then(_$OrderStateImpl(
       isLoading: null == isLoading
@@ -96,6 +103,10 @@ class __$$OrderStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      stepOrderType: null == stepOrderType
+          ? _value.stepOrderType
+          : stepOrderType // ignore: cast_nullable_to_non_nullable
+              as StepOrderType,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$OrderStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OrderStateImpl implements _OrderState {
-  const _$OrderStateImpl({required this.isLoading, this.error});
+  const _$OrderStateImpl(
+      {required this.isLoading, this.error, required this.stepOrderType});
 
   @override
   final bool isLoading;
   @override
   final String? error;
+  @override
+  final StepOrderType stepOrderType;
 
   @override
   String toString() {
-    return 'OrderState(isLoading: $isLoading, error: $error)';
+    return 'OrderState(isLoading: $isLoading, error: $error, stepOrderType: $stepOrderType)';
   }
 
   @override
@@ -122,11 +136,13 @@ class _$OrderStateImpl implements _OrderState {
             other is _$OrderStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.stepOrderType, stepOrderType) ||
+                other.stepOrderType == stepOrderType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error, stepOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -137,12 +153,16 @@ class _$OrderStateImpl implements _OrderState {
 
 abstract class _OrderState implements OrderState {
   const factory _OrderState(
-      {required final bool isLoading, final String? error}) = _$OrderStateImpl;
+      {required final bool isLoading,
+      final String? error,
+      required final StepOrderType stepOrderType}) = _$OrderStateImpl;
 
   @override
   bool get isLoading;
   @override
   String? get error;
+  @override
+  StepOrderType get stepOrderType;
   @override
   @JsonKey(ignore: true)
   _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>

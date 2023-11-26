@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/data/model/location/location_model.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
@@ -75,60 +76,77 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
       {required List<LocationData> provinces,
       List<LocationData>? districts,
       List<LocationData>? wards}) {
-    return Container(
-      height: 300.h,
-      width: 300.w,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: widget.isWard
-            ? wards!.length
-            : widget.isDistrict
-                ? districts!.length
-                : provinces.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: GestureDetector(
-              onTap: () {
-                widget.isDistrict
-                    ? _addAddressCubit.getLocationWards(
-                        districtId: districts![index].code)
-                    : widget.isWard
-                        ? null
-                        : _addAddressCubit.getLocationDistricts(
-                            provinceId: provinces[index].code,
-                            isUpdateProvince: true);
-                widget.isWard
-                    ? setState(() {
-                        indexWard = index;
-                      })
-                    : widget.isDistrict
-                        ? setState(() {
-                            indexDistrict = index;
-                          })
-                        : setState(() {
-                            indexProvince = index;
-                          });
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: widget.isWard
+          ? wards!.length
+          : widget.isDistrict
+              ? districts!.length
+              : provinces.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+          title: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              widget.isDistrict
+                  ? _addAddressCubit.getLocationWards(
+                      districtId: districts![index].code)
+                  : widget.isWard
+                      ? null
+                      : _addAddressCubit.getLocationDistricts(
+                          provinceId: provinces[index].code,
+                          isUpdateProvince: true);
+              widget.isWard
+                  ? setState(() {
+                      indexWard = index;
+                    })
+                  : widget.isDistrict
+                      ? setState(() {
+                          indexDistrict = index;
+                        })
+                      : setState(() {
+                          indexProvince = index;
+                        });
 
-                widget.isWard
-                    ? _addAddressCubit.updateWard(wards![index])
-                    : widget.isDistrict
-                        ? _addAddressCubit.updateDistrict(districts![index])
-                        : _addAddressCubit.updateProvince(provinces[index]);
-                Navigator.pop(context);
-              },
-              child: Text(
-                  widget.isWard
-                      ? wards![index].name
-                      : widget.isDistrict
-                          ? districts![index].name
-                          : provinces[index].name,
-                  style: textBody.copyWith(
-                    color: titleColor,
-                  )),
+              widget.isWard
+                  ? _addAddressCubit.updateWard(wards![index])
+                  : widget.isDistrict
+                      ? _addAddressCubit.updateDistrict(districts![index])
+                      : _addAddressCubit.updateProvince(provinces[index]);
+              Navigator.pop(context);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddingWidthScreen,
+                  vertical: kDefaultPaddingHeightScreen),
+              // color: Colors.amber,
+              child: Row(
+                children: [
+                  const Icon(
+                    Ionicons.location,
+                    color: primaryColor,
+                  ),
+                  SizedBox(
+                    width: kDefaultPaddingWidthScreen,
+                  ),
+                  Text(
+                      widget.isWard
+                          ? wards![index].name
+                          : widget.isDistrict
+                              ? districts![index].name
+                              : provinces[index].name,
+                      style: textBody.copyWith(
+                        color: titleColor,
+                      )),
+                ],
+              ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -147,6 +165,54 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
         });
   }
 
+  void _modalButtonAddress(
+      {required List<LocationData> provinces,
+      List<LocationData>? districts,
+      List<LocationData>? wards}) {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.white,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 50.h,
+                  width: 1.sw,
+                  color: backgroundTextField,
+                  child: Text(
+                    widget.label,
+                    style: textHeading,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SizedBox(
+                    height: 50.h,
+                    width: 0.1.sw,
+                    child: const Icon(
+                      Icons.close,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+                height: 0.7.sh,
+                child: setupAlertDialoadContainer(
+                    provinces: provinces, districts: districts, wards: wards)),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddAddressCubit, AddAddressState>(
@@ -155,19 +221,19 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
             onTap: () {
               widget.isWard
                   ? locationState.wards != null
-                      ? _showDialog(
+                      ? _modalButtonAddress(
                           provinces: locationState.provinces!,
                           districts: locationState.districts,
                           wards: locationState.wards)
                       : null
                   : widget.isDistrict
                       ? locationState.districts != null
-                          ? _showDialog(
+                          ? _modalButtonAddress(
                               provinces: locationState.provinces!,
                               districts: locationState.districts,
                               wards: locationState.wards)
                           : null
-                      : _showDialog(
+                      : _modalButtonAddress(
                           provinces: locationState.provinces ?? [],
                           districts: locationState.districts,
                           wards: locationState.wards);

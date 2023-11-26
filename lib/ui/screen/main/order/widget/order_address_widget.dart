@@ -29,7 +29,7 @@ class OrderAddressWidget extends StatelessWidget {
           child: PrimaryButton(
             label: 'Tiếp tục',
             onPressed: () {
-              orderCubit.updateStepOrder(StepOrderType.goods);
+              orderCubit.updateStepOrder(StepOrderType.parcel);
             },
           ),
         )

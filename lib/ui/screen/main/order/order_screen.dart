@@ -7,7 +7,7 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_address_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_app_bar_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_fee_widget.dart';
-import 'package:shipf/ui/screen/main/order/widget/order_goods_widget.dart';
+import 'package:shipf/ui/screen/main/order/widget/order_parcel_widget.dart';
 
 class OrderScreen extends StatefulWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late OrderCubit orderCubit;
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,8 @@ class _OrderScreenState extends State<OrderScreen> {
               ? OrderAddressWidget(
                   orderCubit: orderCubit,
                 )
-              : state.stepOrderType == StepOrderType.goods
-                  ? OrderGoodsWidget()
+              : state.stepOrderType == StepOrderType.parcel
+                  ? OrderParcelWidget()
                   : OrderFeeWidget();
           return Scaffold(
             appBar: OrderAppBar(

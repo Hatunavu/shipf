@@ -1,12 +1,12 @@
-enum StepOrderType { address, goods, fee }
+enum StepOrderType { address, parcel, fee }
 
 extension EnumRole on StepOrderType {
   String toJsonString() {
     switch (this) {
       case StepOrderType.address:
         return 'address';
-      case StepOrderType.goods:
-        return "goods";
+      case StepOrderType.parcel:
+        return "parcel";
       case StepOrderType.fee:
         return "fee";
     }
@@ -16,7 +16,7 @@ extension EnumRole on StepOrderType {
     switch (this) {
       case StepOrderType.address:
         return "customer";
-      case StepOrderType.goods:
+      case StepOrderType.parcel:
         return "shipper";
       case StepOrderType.fee:
         return "bussiness";
@@ -27,7 +27,7 @@ extension EnumRole on StepOrderType {
     switch (this) {
       case StepOrderType.address:
         return "Địa chỉ";
-      case StepOrderType.goods:
+      case StepOrderType.parcel:
         return "Hàng hoá";
       case StepOrderType.fee:
         return "Cước phí";
@@ -38,7 +38,7 @@ extension EnumRole on StepOrderType {
     switch (this) {
       case StepOrderType.address:
         return "1";
-      case StepOrderType.goods:
+      case StepOrderType.parcel:
         return "2";
       case StepOrderType.fee:
         return "3";
@@ -50,8 +50,8 @@ StepOrderType stringToStepOrderType(String type) {
   switch (type) {
     case 'address':
       return StepOrderType.address;
-    case 'goods':
-      return StepOrderType.goods;
+    case 'parcel':
+      return StepOrderType.parcel;
     case 'fee':
       return StepOrderType.fee;
     default:
@@ -63,7 +63,7 @@ String stepOrderTypeToString(StepOrderType type) {
   switch (type) {
     case StepOrderType.address:
       return 'customer';
-    case StepOrderType.goods:
+    case StepOrderType.parcel:
       return 'shipper';
     case StepOrderType.fee:
       return 'bussiness';

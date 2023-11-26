@@ -23,10 +23,10 @@ PreferredSizeWidget OrderAppBar(BuildContext context,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: 35.h,
                 width: 0.1.sw,
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                 ),
               ),
@@ -52,7 +52,7 @@ PreferredSizeWidget OrderAppBar(BuildContext context,
                     ),
                   ),
                   stepItem(
-                      stepOrderType: StepOrderType.goods,
+                      stepOrderType: StepOrderType.parcel,
                       isActive:
                           orderState.stepOrderType != StepOrderType.address,
                       orderCubit: orderCubit),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +27,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool isValidate;
   final bool readOnly;
   final String? passConfirm;
+  final int? lengthLimit;
 
   PrimaryTextField(
       {Key? key,
@@ -46,7 +48,8 @@ class PrimaryTextField extends StatelessWidget {
       this.customErrorText,
       this.isValidate = true,
       this.readOnly = false,
-      this.passConfirm})
+      this.passConfirm,
+      this.lengthLimit})
       : super(key: key);
 
   final ValueNotifier _isShow = ValueNotifier(false);
@@ -67,6 +70,9 @@ class PrimaryTextField extends StatelessWidget {
                 _isError.value =
                     errorText != null && errorText != '' ? true : false;
                 return TextFormField(
+                  inputFormatters: <TextInputFormatter>[
+                    LengthLimitingTextInputFormatter(lengthLimit),
+                  ],
                   maxLines: isPass == true ? 1 : maxLines,
                   enableSuggestions: true,
                   autovalidateMode:

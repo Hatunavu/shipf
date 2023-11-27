@@ -8,6 +8,7 @@ import 'package:shipf/ui/screen/main/order/widget/order_address_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_app_bar_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_fee_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_parcel_widget.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 
 class OrderScreen extends StatefulWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -37,14 +38,19 @@ class _OrderScreenState extends State<OrderScreen> {
               : state.stepOrderType == StepOrderType.parcel
                   ? OrderParcelWidget()
                   : OrderFeeWidget();
-          return Scaffold(
-            appBar: OrderAppBar(
-              context,
-              orderCubit: orderCubit,
-              orderState: state,
-            ),
-            body: SafeArea(
-              child: SingleChildScrollView(child: stepWidget),
+          return GestureDetector(
+            onTap: () {
+              unfocus(context);
+            },
+            child: Scaffold(
+              appBar: OrderAppBar(
+                context,
+                orderCubit: orderCubit,
+                orderState: state,
+              ),
+              body: SafeArea(
+                child: SingleChildScrollView(child: stepWidget),
+              ),
             ),
           );
         },

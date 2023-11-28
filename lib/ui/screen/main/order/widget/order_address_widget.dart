@@ -52,35 +52,17 @@ class OrderAddressWidget extends StatelessWidget {
           SizedBox(
             height: kDefaultPaddingHeightScreen / 2,
           ),
-          labelTextField('Họ và Tên'),
-          PrimaryTextField(
-            label: '',
-            controller: _homeController,
-            hintText: 'Ví dụ: Nguyễn Văn A',
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
-          labelTextField('Số điện thoại'),
-          PrimaryTextField(
-            label: '',
-            controller: _homeController,
-            hintText: 'Ví dụ: 098xxxxxxx',
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
           Row(
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    labelTextField('Địa chỉ'),
+                    labelTextField('Họ và Tên'),
                     PrimaryTextField(
                       label: '',
                       controller: _homeController,
-                      hintText: 'Ví dụ: 123 đường Chiến Thắng,...',
+                      hintText: 'Ví dụ: Nguyễn Văn A',
                     ),
                   ],
                 ),
@@ -88,24 +70,41 @@ class OrderAddressWidget extends StatelessWidget {
               SizedBox(
                 width: kDefaultPaddingWidthScreen / 2,
               ),
-              Expanded(child: itemSelectLocation(label: 'Tỉnh/Thành phố')),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    labelTextField('Số điện thoại'),
+                    PrimaryTextField(
+                      label: '',
+                      controller: _homeController,
+                      hintText: 'Ví dụ: 098xxxxxxx',
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
           SizedBox(
             height: kDefaultPaddingHeightScreen / 2,
           ),
-          Row(
-            children: [
-              Expanded(
-                  child: itemSelectLocation(
-                      label: 'Quận/Huyện', isDistrict: true)),
-              SizedBox(
-                width: kDefaultPaddingWidthScreen / 2,
-              ),
-              Expanded(
-                  child: itemSelectLocation(
-                      label: 'Phường/Xã/Thị trấn', isWard: true)),
-            ],
+          itemSelectLocation(label: 'Tỉnh/Thành phố'),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          itemSelectLocation(label: 'Quận/Huyện', isDistrict: true),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          itemSelectLocation(label: 'Phường/Xã/Thị trấn', isWard: true),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+          labelTextField('Địa chỉ'),
+          PrimaryTextField(
+            label: '',
+            controller: _homeController,
+            hintText: 'Ví dụ: 123 đường Chiến Thắng,...',
           ),
         ],
       ),

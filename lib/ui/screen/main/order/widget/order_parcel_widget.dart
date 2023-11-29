@@ -2,24 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
+import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderParcelWidget extends StatefulWidget {
-  OrderParcelWidget({super.key});
+  const OrderParcelWidget({super.key});
 
   @override
   State<OrderParcelWidget> createState() => _OrderParcelWidgetState();
 }
 
 class _OrderParcelWidgetState extends State<OrderParcelWidget> {
-  final TextEditingController _homeController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-
+  final TextEditingController _parcelNameController = TextEditingController();
+  final TextEditingController _parcelPriceController = TextEditingController();
   final TextEditingController _parcelAmountController = TextEditingController();
   final TextEditingController _parcelWeightController = TextEditingController();
+  final TextEditingController _lengthController = TextEditingController();
+  final TextEditingController _widthController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
   final TextEditingController _codController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -27,7 +33,6 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _parcelAmountController.text = '1';
     _parcelWeightController.text = '1';
@@ -37,234 +42,26 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingWidthWidget,
-            vertical: kDefaultPaddingHeightScreen),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            'Thông tin hàng hoá',
-            style: textHeading,
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              labelTextField('Tên hàng hoá'),
-              PrimaryTextField(
-                label: '',
-                controller: _homeController,
-                hintText: 'Ví dụ: Iphone 15 Pro Max',
-              ),
-            ],
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              labelTextField('Giá trị(đ)'),
-              PrimaryTextField(
-                  isPrice: true,
-                  isNumberKey: true,
-                  label: '',
-                  controller: _priceController,
-                  hintText: '0',
-                  maxLines: 1,
-                  lengthLimit: 18),
-            ],
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child:
-                      parcelAmountWidget(controller: _parcelAmountController)),
-              SizedBox(
-                width: kDefaultPaddingWidthWidget / 2,
-              ),
-              Expanded(
-                child: parcelAmountWidget(
-                    controller: _parcelWeightController, isAmount: false),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
-          ),
-        ]),
-      ),
-      Divider(
-        thickness: kDefaultPaddingHeightScreen,
+      parcelInfo(),
+      VerticalSpace(
+        kDefaultPaddingHeightScreen,
         color: backgroundColor,
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingWidthWidget,
-            vertical: kDefaultPaddingHeightScreen),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Kích thước hàng hoá (cm)',
-              style: textHeading,
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightScreen / 2,
-            ),
-            parcelSize(),
-            SizedBox(
-              height: kDefaultPaddingHeightScreen / 2,
-            ),
-          ],
-        ),
-      ),
-      Divider(
-        thickness: kDefaultPaddingHeightScreen,
+      parcelSize(),
+      VerticalSpace(
+        kDefaultPaddingHeightScreen,
         color: backgroundColor,
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingWidthWidget,
-            vertical: kDefaultPaddingHeightScreen),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Bốc xếp hàng hoá',
-              style: textHeading,
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightWidget,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingWidthWidget),
-                        child: SizedBox(
-                          width: kDefaultPaddingWidthWidget,
-                          height: kDefaultPaddingWidthWidget,
-                          child: Checkbox(
-                            activeColor: primaryColor,
-                            value: false,
-                            onChanged: (value) {},
-                          ),
-                        ),
-                      ),
-                      Text('Đầu lấy')
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingWidthWidget),
-                        child: SizedBox(
-                          width: kDefaultPaddingWidthWidget,
-                          height: kDefaultPaddingWidthWidget,
-                          child: Checkbox(
-                            activeColor: primaryColor,
-                            value: false,
-                            onChanged: (value) {},
-                          ),
-                        ),
-                      ),
-                      Text('Đầu giao')
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightScreen / 2,
-            ),
-          ],
-        ),
-      ),
-      Divider(
-        thickness: kDefaultPaddingHeightScreen,
+      parcelLoading(),
+      VerticalSpace(
+        kDefaultPaddingHeightScreen,
         color: backgroundColor,
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingWidthWidget,
-            vertical: kDefaultPaddingHeightScreen),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Thông tin thanh toán',
-              style: textHeading,
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightScreen / 2,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                labelTextField('COD(đ)'),
-                PrimaryTextField(
-                  label: '',
-                  controller: _codController,
-                  hintText: '0',
-                  isPrice: true,
-                  isNumberKey: true,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightWidget,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: kDefaultPaddingWidthWidget),
-                  child: SizedBox(
-                    width: kDefaultPaddingWidthWidget,
-                    height: kDefaultPaddingWidthWidget,
-                    child: Checkbox(
-                      activeColor: primaryColor,
-                      value: true,
-                      onChanged: (value) {},
-                    ),
-                  ),
-                ),
-                Text('Bảo hiểm hàng hoá')
-              ],
-            ),
-            SizedBox(
-              height: kDefaultPaddingHeightScreen,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                labelTextField('Ghi chú'),
-                PrimaryTextField(
-                  label: '',
-                  controller: _noteController,
-                  maxLines: 3,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      paymentInfo(),
       Padding(
         padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
         child: PrimaryButton(
-          label: 'Tiếp tục',
+          label: text.continuee,
           onPressed: () {
             // orderCubit.updateStepOrder(StepOrderType.parcel);
           },
@@ -273,12 +70,246 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
     ]);
   }
 
+  Widget parcelInfo() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          text.parcel_info,
+          style: textHeading,
+        ),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OrderLabelTextFieldWidget(label: text.parcel_name),
+            PrimaryTextField(
+              label: '',
+              controller: _parcelNameController,
+              hintText: text.parcel_name,
+            ),
+          ],
+        ),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OrderLabelTextFieldWidget(label: '${text.value} (đ)'),
+            PrimaryTextField(
+                isPrice: true,
+                isNumberKey: true,
+                label: '',
+                controller: _parcelPriceController,
+                hintText: '0',
+                maxLines: 1,
+                lengthLimit: 18),
+          ],
+        ),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: parcelAmountWidget(controller: _parcelAmountController)),
+            SizedBox(
+              width: kDefaultPaddingWidthWidget / 2,
+            ),
+            Expanded(
+              child: parcelAmountWidget(
+                  controller: _parcelWeightController, isAmount: false),
+            ),
+          ],
+        ),
+      ]),
+    );
+  }
+
+  Widget parcelSize() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${text.parcel_size} (cm)',
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+          ),
+          SizedBox(
+            child: Row(
+              children: [
+                parcelSizeItem(
+                    label: text.length, controller: _lengthController),
+                HorizontalSpace(
+                  kDefaultPaddingWidthWidget / 2,
+                ),
+                parcelSizeItem(label: text.width, controller: _widthController),
+                HorizontalSpace(
+                  kDefaultPaddingWidthWidget / 2,
+                ),
+                parcelSizeItem(
+                    label: text.height, controller: _heightController)
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget parcelLoading() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text.parcel_loading,
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightWidget,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddingWidthWidget),
+                      child: SizedBox(
+                        width: kDefaultPaddingWidthWidget,
+                        height: kDefaultPaddingWidthWidget,
+                        child: Checkbox(
+                          activeColor: primaryColor,
+                          value: false,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                    ),
+                    Text(text.pickup_point)
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddingWidthWidget),
+                      child: SizedBox(
+                        width: kDefaultPaddingWidthWidget,
+                        height: kDefaultPaddingWidthWidget,
+                        child: Checkbox(
+                          activeColor: primaryColor,
+                          value: false,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                    ),
+                    Text(text.delivery_point)
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: kDefaultPaddingHeightScreen / 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget paymentInfo() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text.payment_info,
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OrderLabelTextFieldWidget(label: '${text.cod} (đ)'),
+              PrimaryTextField(
+                label: '',
+                controller: _codController,
+                hintText: '0',
+                isPrice: true,
+                isNumberKey: true,
+              ),
+            ],
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightWidget,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingWidthWidget),
+                child: SizedBox(
+                  width: kDefaultPaddingWidthWidget,
+                  height: kDefaultPaddingWidthWidget,
+                  child: Checkbox(
+                    activeColor: primaryColor,
+                    value: true,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ),
+              Text(text.insurance)
+            ],
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OrderLabelTextFieldWidget(label: text.note),
+              PrimaryTextField(
+                label: '',
+                controller: _noteController,
+                maxLines: 3,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget parcelAmountWidget(
       {required TextEditingController controller, bool isAmount = true}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        labelTextField(isAmount ? 'Số lượng' : 'Khối lượng(g)'),
+        OrderLabelTextFieldWidget(
+            label: isAmount ? text.quantity : '${text.weight} (g)'),
         SizedBox(
           child: Row(
             children: [
@@ -295,12 +326,13 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
   }
 
   Widget inputNumber(TextEditingController controller, {int lengthLimit = 2}) {
-    String _formatNumber(String s) =>
-        NumberFormat.decimalPattern().format(int.parse(s.isEmpty ? '1' : s));
     return TextFormField(
       controller: controller,
       onChanged: (string) {
-        string = _formatNumber(string.replaceAll(',', ''));
+        string = NumberFormat.decimalPattern().format(int.parse(
+            string.replaceAll(',', '').isEmpty
+                ? '1'
+                : string.replaceAll(',', '')));
         controller.value = TextEditingValue(
           text: string,
           selection: TextSelection.collapsed(offset: string.length),
@@ -358,73 +390,21 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
     );
   }
 
-  Widget parcelSize() {
-    return SizedBox(
-      child: Row(
+  Widget parcelSizeItem(
+      {required String label, required TextEditingController controller}) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                labelTextField('Chiều dài'),
-                PrimaryTextField(
-                  label: '',
-                  controller: _codController,
-                  hintText: '0',
-                  isPrice: true,
-                  isNumberKey: true,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: kDefaultPaddingWidthWidget / 2,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                labelTextField('Chiều rộng'),
-                PrimaryTextField(
-                  label: '',
-                  controller: _codController,
-                  hintText: '0',
-                  isPrice: true,
-                  isNumberKey: true,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: kDefaultPaddingWidthWidget / 2,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                labelTextField('Chiều cao'),
-                PrimaryTextField(
-                  label: '',
-                  controller: _codController,
-                  hintText: '0',
-                  isPrice: true,
-                  isNumberKey: true,
-                ),
-              ],
-            ),
+          OrderLabelTextFieldWidget(label: label),
+          PrimaryTextField(
+            label: '',
+            controller: controller,
+            hintText: '0',
+            isPrice: true,
+            isNumberKey: true,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget labelTextField(String label) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
-      child: Text(
-        label,
-        style: primarySubTitleStyle,
       ),
     );
   }

@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -12,10 +16,6 @@ import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/richtext/custom_richtext.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
@@ -29,7 +29,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = AppLocalizations.of(context);
     return GestureDetector(
       onTap: (() {
         unfocus(context);
@@ -52,7 +51,7 @@ class SignupScreen extends StatelessWidget {
               });
             }
             return Scaffold(
-                appBar: primaryAppBar(context: context, title: text!.register),
+                appBar: primaryAppBar(context: context, title: text.register),
                 backgroundColor: backgroundColor,
                 body: SafeArea(
                   child: Container(

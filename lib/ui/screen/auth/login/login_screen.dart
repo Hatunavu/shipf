@@ -3,7 +3,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_role.dart';
@@ -32,7 +31,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () {
         unfocus(context);

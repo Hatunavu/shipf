@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
+import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -11,55 +14,9 @@ class OrderFeeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: kDefaultPaddingWidthWidget,
-              vertical: kDefaultPaddingHeightScreen),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Dịch vụ',
-                style: textHeading,
-              ),
-              SizedBox(
-                height: kDefaultPaddingHeightScreen,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return serviceItem(isActive: index == 0);
-                  }),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen),
-                child: const Divider(
-                  height: 0,
-                ),
-              ),
-              Text(
-                'Phí khác',
-                style: textHeading,
-              ),
-              SizedBox(
-                height: kDefaultPaddingHeightScreen,
-              ),
-              ListView(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  otherFee(name: 'Giá bốc xếp/tấn/chiều', fee: '0'),
-                  otherFee(name: 'Tổng giá bốc xếp', fee: '0'),
-                  otherFee(name: 'Phí bảo hiểm', fee: '0')
-                ],
-              )
-            ],
-          ),
-        ),
-        Divider(
-          thickness: kDefaultPaddingHeightScreen,
+        service(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
           color: backgroundColor,
         ),
         Padding(
@@ -68,12 +25,12 @@ class OrderFeeWidget extends StatelessWidget {
               vertical: kDefaultPaddingHeightScreen),
           child: Column(
             children: [
-              otherFee(name: 'COD', fee: '0'),
+              otherFeeItem(name: text.cod, fee: '0'),
               Row(
                 children: [
                   Expanded(
                       child: Text(
-                    'Tổng cước',
+                    text.total_price,
                     style: textHeading.copyWith(fontWeight: FontWeight.w500),
                   )),
                   Text(
@@ -89,13 +46,63 @@ class OrderFeeWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
-            label: 'Tạo đơn',
+            label: text.create_order,
             onPressed: () {
               // orderCubit.updateStepOrder(StepOrderType.parcel);
             },
           ),
         )
       ],
+    );
+  }
+
+  Widget service() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text.service,
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return serviceItem(isActive: index == 0);
+              }),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen),
+            child: const Divider(
+              height: 0,
+            ),
+          ),
+          Text(
+            text.other_fee,
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+          ),
+          ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              otherFeeItem(name: text.loading_price, fee: '0'),
+              otherFeeItem(name: text.total_loading_price, fee: '0'),
+              otherFeeItem(name: text.insurance_fee, fee: '0')
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -117,8 +124,8 @@ class OrderFeeWidget extends StatelessWidget {
             isActive ? Icons.radio_button_checked : Icons.radio_button_off,
             color: isActive ? primaryColor : greyText,
           ),
-          SizedBox(
-            width: kDefaultPaddingWidthWidget / 2,
+          HorizontalSpace(
+            kDefaultPaddingWidthWidget / 2,
           ),
           Expanded(
             child: Column(
@@ -142,8 +149,8 @@ class OrderFeeWidget extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: kDefaultPaddingHeightScreen / 2,
+                VerticalSpace(
+                  kDefaultPaddingHeightScreen / 2,
                 ),
                 Text(
                   'Giao ghép hàng',
@@ -157,7 +164,7 @@ class OrderFeeWidget extends StatelessWidget {
     );
   }
 
-  Widget otherFee({required String name, required String fee}) {
+  Widget otherFeeItem({required String name, required String fee}) {
     return Padding(
       padding: EdgeInsets.only(bottom: kDefaultPaddingHeightScreen),
       child: Row(

@@ -1,3 +1,5 @@
+import 'package:shipf/foundation/constant.dart';
+
 enum StepOrderType { address, parcel, fee }
 
 extension EnumRole on StepOrderType {
@@ -15,22 +17,22 @@ extension EnumRole on StepOrderType {
   String getType() {
     switch (this) {
       case StepOrderType.address:
-        return "customer";
+        return "address";
       case StepOrderType.parcel:
-        return "shipper";
+        return "parcel";
       case StepOrderType.fee:
-        return "bussiness";
+        return "fee";
     }
   }
 
   String display() {
     switch (this) {
       case StepOrderType.address:
-        return "Địa chỉ";
+        return text.address;
       case StepOrderType.parcel:
-        return "Hàng hoá";
+        return text.parcel;
       case StepOrderType.fee:
-        return "Cước phí";
+        return text.fee;
     }
   }
 
@@ -62,10 +64,10 @@ StepOrderType stringToStepOrderType(String type) {
 String stepOrderTypeToString(StepOrderType type) {
   switch (type) {
     case StepOrderType.address:
-      return 'customer';
+      return 'address';
     case StepOrderType.parcel:
-      return 'shipper';
+      return 'parcel';
     case StepOrderType.fee:
-      return 'bussiness';
+      return 'fee';
   }
 }

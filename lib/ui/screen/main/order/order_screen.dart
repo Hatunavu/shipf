@@ -19,6 +19,13 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController senderController = TextEditingController();
+  final TextEditingController senderPhoneController = TextEditingController();
+  final TextEditingController senderAddressController = TextEditingController();
+  final TextEditingController receiverController = TextEditingController();
+  final TextEditingController receiverPhoneController = TextEditingController();
+  final TextEditingController receiverAddressController =
+      TextEditingController();
   late OrderCubit orderCubit;
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,13 @@ class _OrderScreenState extends State<OrderScreen> {
           final stepWidget = state.stepOrderType == StepOrderType.address
               ? OrderAddressWidget(
                   orderCubit: orderCubit,
-                )
+                  // senderNameController: senderController,
+                  // senderPhoneController: senderPhoneController,
+                  // senderAddressController: senderAddressController,
+                  // receiverNameController: receiverController,
+                  // receiverPhoneController: receiverPhoneController,
+                  // receiverAddressController: receiverAddressController,
+                  )
               : state.stepOrderType == StepOrderType.parcel
                   ? OrderParcelWidget()
                   : OrderFeeWidget();

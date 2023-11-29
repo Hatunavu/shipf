@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shipf/ui/app_cubit.dart';
 
 class ApiConstants {
@@ -6,3 +7,4 @@ class ApiConstants {
 }
 
 late AppCubit appCubit;
+late AppLocalizations text;

@@ -1,35 +1,62 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_step_order.dart';
+import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/add_address/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
+import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
+import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class OrderAddressWidget extends StatelessWidget {
+class OrderAddressWidget extends StatefulWidget {
   OrderCubit orderCubit;
   OrderAddressWidget({super.key, required this.orderCubit});
-  final TextEditingController _homeController = TextEditingController();
+
+  @override
+  State<OrderAddressWidget> createState() => _OrderAddressWidgetState();
+}
+
+class _OrderAddressWidgetState extends State<OrderAddressWidget> {
+  final TextEditingController _senderController = TextEditingController();
+  final TextEditingController _senderPhoneController = TextEditingController();
+  final TextEditingController _senderAddressController =
+      TextEditingController();
+  final TextEditingController _receiverController = TextEditingController();
+  final TextEditingController _receiverPhoneController =
+      TextEditingController();
+  final TextEditingController _receiverAddressController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        address('Nơi gửi'),
-        Divider(
-          thickness: kDefaultPaddingHeightScreen,
+        address(
+            type: text.sending_place,
+            nameController: _senderController,
+            phoneController: _senderPhoneController,
+            addressController: _senderAddressController),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
           color: backgroundColor,
         ),
-        address('Nơi nhận'),
+        address(
+            type: text.recipients,
+            nameController: _receiverController,
+            phoneController: _receiverPhoneController,
+            addressController: _receiverAddressController),
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
-            label: 'Tiếp tục',
+            label: text.continuee,
             onPressed: () {
-              orderCubit.updateStepOrder(StepOrderType.parcel);
+              widget.orderCubit.updateStepOrder(StepOrderType.parcel);
             },
           ),
         )
@@ -37,7 +64,11 @@ class OrderAddressWidget extends StatelessWidget {
     );
   }
 
-  Widget address(String type) {
+  Widget address(
+      {required String type,
+      required TextEditingController nameController,
+      required TextEditingController phoneController,
+      required TextEditingController addressController}) {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: kDefaultPaddingWidthWidget,
@@ -49,8 +80,8 @@ class OrderAddressWidget extends StatelessWidget {
             type,
             style: textHeading,
           ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
           ),
           Row(
             children: [
@@ -58,66 +89,55 @@ class OrderAddressWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    labelTextField('Họ và Tên'),
+                    OrderLabelTextFieldWidget(label: text.full_name),
                     PrimaryTextField(
                       label: '',
-                      controller: _homeController,
-                      hintText: 'Ví dụ: Nguyễn Văn A',
+                      controller: nameController,
+                      hintText: text.full_name,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                width: kDefaultPaddingWidthScreen / 2,
+              HorizontalSpace(
+                kDefaultPaddingWidthScreen / 2,
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    labelTextField('Số điện thoại'),
+                    OrderLabelTextFieldWidget(label: text.phone),
                     PrimaryTextField(
                       label: '',
-                      controller: _homeController,
-                      hintText: 'Ví dụ: 098xxxxxxx',
+                      controller: phoneController,
+                      hintText: text.phone,
                     ),
                   ],
                 ),
               )
             ],
           ),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: 'Tỉnh/Thành phố'),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
+          itemSelectLocation(label: text.city),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: 'Quận/Huyện', isDistrict: true),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
+          itemSelectLocation(label: text.district, isDistrict: true),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: 'Phường/Xã/Thị trấn', isWard: true),
-          SizedBox(
-            height: kDefaultPaddingHeightScreen / 2,
+          itemSelectLocation(label: text.ward, isWard: true),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
           ),
-          labelTextField('Địa chỉ'),
+          OrderLabelTextFieldWidget(label: text.address),
           PrimaryTextField(
             label: '',
-            controller: _homeController,
-            hintText: 'Ví dụ: 123 đường Chiến Thắng,...',
+            controller: addressController,
+            hintText: text.address,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget labelTextField(String label) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
-      child: Text(
-        label,
-        style: primarySubTitleStyle,
       ),
     );
   }
@@ -127,7 +147,7 @@ class OrderAddressWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        labelTextField(label),
+        OrderLabelTextFieldWidget(label: label),
         SelectAddressWidget(
           label: label,
           isDistrict: isDistrict,

@@ -119,6 +119,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
                       controller: phoneController,
                       hintText: text.phone,
                       isPhone: true,
+                      showPrefixIcon: false,
                     ),
                   ],
                 ),

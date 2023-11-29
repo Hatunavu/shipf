@@ -31,6 +31,7 @@ class PrimaryTextField extends StatelessWidget {
   final String? passConfirm;
   final int? lengthLimit;
   final String fieldRequire;
+  final bool showPrefixIcon;
 
   PrimaryTextField(
       {Key? key,
@@ -53,7 +54,8 @@ class PrimaryTextField extends StatelessWidget {
       this.readOnly = false,
       this.passConfirm,
       this.lengthLimit,
-      this.fieldRequire = ''})
+      this.fieldRequire = '',
+      this.showPrefixIcon = true})
       : super(key: key);
 
   final ValueNotifier _isShow = ValueNotifier(false);
@@ -147,7 +149,7 @@ class PrimaryTextField extends StatelessWidget {
                               color: primaryColor,
                             ))
                         : null,
-                    prefixIcon: isPhone == true
+                    prefixIcon: (isPhone == true && showPrefixIcon)
                         ? Icon(
                             Ionicons.call_outline,
                             size: 18.sp,

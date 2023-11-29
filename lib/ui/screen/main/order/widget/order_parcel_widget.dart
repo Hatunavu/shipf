@@ -42,7 +42,6 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
     super.initState();
     _parcelAmountController.text = '1';
     _parcelWeightController.text = '1';
-    _parcelPriceController.text = '0';
     currentValue = 0;
   }
 
@@ -115,13 +114,15 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
           children: [
             OrderLabelTextFieldWidget(label: '${text.value} (đ)'),
             PrimaryTextField(
-                isPrice: true,
-                isNumberKey: true,
-                label: '',
-                controller: _parcelPriceController,
-                hintText: '0',
-                maxLines: 1,
-                lengthLimit: 18),
+              isPrice: true,
+              isNumberKey: true,
+              label: '',
+              controller: _parcelPriceController,
+              hintText: '0',
+              maxLines: 1,
+              lengthLimit: 18,
+              isValidate: false,
+            ),
           ],
         ),
         VerticalSpace(

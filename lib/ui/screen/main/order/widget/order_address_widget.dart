@@ -15,58 +15,62 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderAddressWidget extends StatefulWidget {
   OrderCubit orderCubit;
-  OrderAddressWidget({super.key, required this.orderCubit});
+  TextEditingController senderNameController;
+  TextEditingController senderPhoneController;
+  TextEditingController senderAddressController;
+  TextEditingController receiverNameController;
+  TextEditingController receiverPhoneController;
+  TextEditingController receiverAddressController;
+
+  GlobalKey<FormState> addressFormKey;
+
+  OrderAddressWidget(
+      {super.key,
+      required this.orderCubit,
+      required this.senderNameController,
+      required this.senderPhoneController,
+      required this.senderAddressController,
+      required this.receiverNameController,
+      required this.receiverPhoneController,
+      required this.receiverAddressController,
+      required this.addressFormKey});
 
   @override
   State<OrderAddressWidget> createState() => _OrderAddressWidgetState();
 }
 
 class _OrderAddressWidgetState extends State<OrderAddressWidget> {
-  final TextEditingController _senderController = TextEditingController();
-  final TextEditingController _senderPhoneController = TextEditingController();
-  final TextEditingController _senderAddressController =
-      TextEditingController();
-  final TextEditingController _receiverController = TextEditingController();
-  final TextEditingController _receiverPhoneController =
-      TextEditingController();
-  final TextEditingController _receiverAddressController =
-      TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          address(
-              type: text.sending_place,
-              nameController: _senderController,
-              phoneController: _senderPhoneController,
-              addressController: _senderAddressController),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
-            color: backgroundColor,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        address(
+            type: text.sending_place,
+            nameController: widget.senderNameController,
+            phoneController: widget.senderPhoneController,
+            addressController: widget.senderAddressController),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        address(
+            type: text.recipients,
+            nameController: widget.receiverNameController,
+            phoneController: widget.receiverPhoneController,
+            addressController: widget.receiverAddressController),
+        Padding(
+          padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
+          child: PrimaryButton(
+            label: text.continuee,
+            onPressed: () {
+              if (widget.addressFormKey.currentState!.validate()) {
+                widget.orderCubit.updateStepOrder(StepOrderType.parcel);
+              }
+            },
           ),
-          address(
-              type: text.recipients,
-              nameController: _receiverController,
-              phoneController: _receiverPhoneController,
-              addressController: _receiverAddressController),
-          Padding(
-            padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
-            child: PrimaryButton(
-              label: text.continuee,
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  widget.orderCubit.updateStepOrder(StepOrderType.parcel);
-                }
-              },
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -147,6 +151,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             controller: addressController,
             hintText: text.address,
             isAddress: true,
+            fieldRequire: text.address,
           ),
         ],
       ),

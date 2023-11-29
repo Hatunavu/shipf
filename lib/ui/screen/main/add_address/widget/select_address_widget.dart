@@ -204,7 +204,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
               ],
             ),
             SizedBox(
-                height: 0.7.sh,
+                height: 0.5.sh,
                 child: setupAlertDialoadContainer(
                     provinces: provinces, districts: districts, wards: wards)),
           ],
@@ -241,16 +241,25 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
             child: Container(
               child: FormField(
                 validator: (_) {
-                  return 'Vui lòng chọn Tỉnh/Thành phố';
+                  return widget.isWard
+                      ? locationState.ward == null
+                          ? 'Vui lòng chọn Phường/Xã/Thị trấn'
+                          : null
+                      : widget.isDistrict
+                          ? locationState.district == null
+                              ? 'Vui lòng chọn Quận/Huyện'
+                              : null
+                          : locationState.province == null
+                              ? 'Vui lòng chọn Tỉnh/Thành phố'
+                              : null;
                 },
                 builder: (FormFieldState<String> state) {
                   return InputDecorator(
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: backgroundTextField,
-                        errorStyle: const TextStyle(
-                          fontSize: 10,
-                        ),
+                        errorStyle:
+                            TextStyle(fontSize: 10.sp, color: Colors.red),
                         // labelText: widget.label,
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                         labelStyle: textBody,

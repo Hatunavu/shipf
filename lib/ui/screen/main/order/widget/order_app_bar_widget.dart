@@ -7,7 +7,10 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 PreferredSizeWidget orderAppBar(BuildContext context,
-    {required OrderState orderState, required OrderCubit orderCubit}) {
+    {required OrderState orderState,
+    required OrderCubit orderCubit,
+    required GlobalKey<FormState> addressformKey,
+    required GlobalKey<FormState> parcelformKey}) {
   return AppBar(
     titleSpacing: 0,
     automaticallyImplyLeading: false,
@@ -42,9 +45,10 @@ PreferredSizeWidget orderAppBar(BuildContext context,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   stepItem(
-                      stepOrderType: StepOrderType.address,
-                      isActive: true,
-                      orderCubit: orderCubit),
+                    stepOrderType: StepOrderType.address,
+                    isActive: true,
+                    orderCubit: orderCubit,
+                  ),
                   Expanded(
                     child: Divider(
                       height: 20.h,
@@ -55,7 +59,8 @@ PreferredSizeWidget orderAppBar(BuildContext context,
                       stepOrderType: StepOrderType.parcel,
                       isActive:
                           orderState.stepOrderType != StepOrderType.address,
-                      orderCubit: orderCubit),
+                      orderCubit: orderCubit,
+                      addressformKey: addressformKey),
                   Expanded(
                     child: Divider(
                       height: 20.h,
@@ -65,7 +70,9 @@ PreferredSizeWidget orderAppBar(BuildContext context,
                   stepItem(
                       stepOrderType: StepOrderType.fee,
                       isActive: orderState.stepOrderType == StepOrderType.fee,
-                      orderCubit: orderCubit)
+                      orderCubit: orderCubit,
+                      parcelformKey: parcelformKey,
+                      addressformKey: addressformKey)
                 ],
               ),
             ),
@@ -79,11 +86,33 @@ PreferredSizeWidget orderAppBar(BuildContext context,
 Widget stepItem(
     {required StepOrderType stepOrderType,
     bool isActive = false,
-    required OrderCubit orderCubit}) {
+    required OrderCubit orderCubit,
+    GlobalKey<FormState>? addressformKey,
+    GlobalKey<FormState>? parcelformKey}) {
   return GestureDetector(
     behavior: HitTestBehavior.translucent,
     onTap: () {
-      orderCubit.updateStepOrder(stepOrderType);
+      if (stepOrderType == StepOrderType.address) {
+        orderCubit.updateStepOrder(stepOrderType);
+      }
+      // else if (stepOrderType == StepOrderType.fee &&
+      //     addressformKey != null &&
+      //     addressformKey.currentState!.validate() &&
+      //     parcelformKey != null &&
+      //     parcelformKey.currentState!.validate()) {
+      //   orderCubit.updateStepOrder(stepOrderType);
+      // }
+      else if (orderCubit.state.stepOrderType == StepOrderType.fee) {
+        orderCubit.updateStepOrder(stepOrderType);
+      } else if (orderCubit.state.stepOrderType == StepOrderType.address &&
+          addressformKey != null &&
+          addressformKey.currentState!.validate()) {
+        orderCubit.updateStepOrder(stepOrderType);
+      } else if (orderCubit.state.stepOrderType == StepOrderType.parcel &&
+          parcelformKey != null &&
+          parcelformKey.currentState!.validate()) {
+        orderCubit.updateStepOrder(stepOrderType);
+      }
     },
     child: Column(
       children: [

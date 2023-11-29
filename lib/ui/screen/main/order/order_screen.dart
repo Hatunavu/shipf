@@ -18,7 +18,24 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> addressformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> parcelformKey = GlobalKey<FormState>();
+  final TextEditingController senderNameController = TextEditingController();
+  final TextEditingController senderPhoneController = TextEditingController();
+  final TextEditingController senderAddressController = TextEditingController();
+  final TextEditingController receiverNameController = TextEditingController();
+  final TextEditingController receiverPhoneController = TextEditingController();
+  final TextEditingController receiverAddressController =
+      TextEditingController();
+  final TextEditingController parcelNameController = TextEditingController();
+  final TextEditingController parcelPriceController = TextEditingController();
+  final TextEditingController parcelAmountController = TextEditingController();
+  final TextEditingController parcelWeightController = TextEditingController();
+  final TextEditingController lengthController = TextEditingController();
+  final TextEditingController widthController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController codController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
 
   late OrderCubit orderCubit;
   @override
@@ -33,12 +50,35 @@ class _OrderScreenState extends State<OrderScreen> {
         builder: (context, state) {
           orderCubit = context.read<OrderCubit>();
           final stepWidget = state.stepOrderType == StepOrderType.address
-              ? OrderAddressWidget(
-                  orderCubit: orderCubit,
+              ? Form(
+                  key: addressformKey,
+                  child: OrderAddressWidget(
+                    orderCubit: orderCubit,
+                    senderNameController: senderNameController,
+                    senderPhoneController: senderPhoneController,
+                    senderAddressController: senderAddressController,
+                    receiverNameController: receiverNameController,
+                    receiverPhoneController: receiverPhoneController,
+                    receiverAddressController: receiverAddressController,
+                    addressFormKey: addressformKey,
+                  ),
                 )
               : state.stepOrderType == StepOrderType.parcel
-                  ? OrderParcelWidget(
-                      orderCubit: orderCubit,
+                  ? Form(
+                      key: parcelformKey,
+                      child: OrderParcelWidget(
+                        orderCubit: orderCubit,
+                        parcelNameController: parcelNameController,
+                        parcelPriceController: parcelPriceController,
+                        parcelWeightController: parcelWeightController,
+                        parcelAmountController: parcelAmountController,
+                        lengthController: lengthController,
+                        widthController: widthController,
+                        heightController: heightController,
+                        codController: codController,
+                        noteController: noteController,
+                        parcelformKey: parcelformKey,
+                      ),
                     )
                   : OrderFeeWidget();
           return GestureDetector(
@@ -46,11 +86,11 @@ class _OrderScreenState extends State<OrderScreen> {
               unfocus(context);
             },
             child: Scaffold(
-              appBar: orderAppBar(
-                context,
-                orderCubit: orderCubit,
-                orderState: state,
-              ),
+              appBar: orderAppBar(context,
+                  orderCubit: orderCubit,
+                  orderState: state,
+                  addressformKey: addressformKey,
+                  parcelformKey: parcelformKey),
               body: SafeArea(
                 child: SingleChildScrollView(child: stepWidget),
               ),

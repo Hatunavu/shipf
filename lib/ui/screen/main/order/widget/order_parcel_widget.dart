@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
@@ -12,7 +16,8 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderParcelWidget extends StatefulWidget {
-  const OrderParcelWidget({super.key});
+  OrderCubit orderCubit;
+  OrderParcelWidget({super.key, required this.orderCubit});
 
   @override
   State<OrderParcelWidget> createState() => _OrderParcelWidgetState();
@@ -28,6 +33,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _codController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late int currentValue;
 
@@ -36,38 +42,44 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
     super.initState();
     _parcelAmountController.text = '1';
     _parcelWeightController.text = '1';
+    _parcelPriceController.text = '0';
     currentValue = 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      parcelInfo(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      parcelSize(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      parcelLoading(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      paymentInfo(),
-      Padding(
-        padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
-        child: PrimaryButton(
-          label: text.continuee,
-          onPressed: () {
-            // orderCubit.updateStepOrder(StepOrderType.parcel);
-          },
+    return Form(
+      key: _formKey,
+      child: Column(children: [
+        parcelInfo(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
         ),
-      )
-    ]);
+        parcelSize(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        parcelLoading(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        paymentInfo(),
+        Padding(
+          padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
+          child: PrimaryButton(
+            label: text.continuee,
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                widget.orderCubit.updateStepOrder(StepOrderType.fee);
+              }
+            },
+          ),
+        )
+      ]),
+    );
   }
 
   Widget parcelInfo() {
@@ -91,6 +103,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               label: '',
               controller: _parcelNameController,
               hintText: text.parcel_name,
+              fieldRequire: text.parcel_name,
             ),
           ],
         ),
@@ -260,6 +273,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                 hintText: '0',
                 isPrice: true,
                 isNumberKey: true,
+                isValidate: false,
               ),
             ],
           ),
@@ -295,6 +309,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                 label: '',
                 controller: _noteController,
                 maxLines: 3,
+                isValidate: false,
               ),
             ],
           ),
@@ -403,6 +418,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
             hintText: '0',
             isPrice: true,
             isNumberKey: true,
+            isValidate: false,
           ),
         ],
       ),

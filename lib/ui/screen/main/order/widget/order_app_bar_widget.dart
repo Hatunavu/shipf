@@ -6,7 +6,7 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-PreferredSizeWidget OrderAppBar(BuildContext context,
+PreferredSizeWidget orderAppBar(BuildContext context,
     {required OrderState orderState, required OrderCubit orderCubit}) {
   return AppBar(
     titleSpacing: 0,

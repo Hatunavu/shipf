@@ -31,36 +31,42 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
       TextEditingController();
   final TextEditingController _receiverAddressController =
       TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        address(
-            type: text.sending_place,
-            nameController: _senderController,
-            phoneController: _senderPhoneController,
-            addressController: _senderAddressController),
-        VerticalSpace(
-          kDefaultPaddingHeightScreen,
-          color: backgroundColor,
-        ),
-        address(
-            type: text.recipients,
-            nameController: _receiverController,
-            phoneController: _receiverPhoneController,
-            addressController: _receiverAddressController),
-        Padding(
-          padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
-          child: PrimaryButton(
-            label: text.continuee,
-            onPressed: () {
-              widget.orderCubit.updateStepOrder(StepOrderType.parcel);
-            },
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          address(
+              type: text.sending_place,
+              nameController: _senderController,
+              phoneController: _senderPhoneController,
+              addressController: _senderAddressController),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+            color: backgroundColor,
           ),
-        )
-      ],
+          address(
+              type: text.recipients,
+              nameController: _receiverController,
+              phoneController: _receiverPhoneController,
+              addressController: _receiverAddressController),
+          Padding(
+            padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
+            child: PrimaryButton(
+              label: text.continuee,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  widget.orderCubit.updateStepOrder(StepOrderType.parcel);
+                }
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -84,6 +90,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             kDefaultPaddingHeightScreen,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
@@ -94,6 +101,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
                       label: '',
                       controller: nameController,
                       hintText: text.full_name,
+                      fieldRequire: text.full_name,
                     ),
                   ],
                 ),
@@ -110,6 +118,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
                       label: '',
                       controller: phoneController,
                       hintText: text.phone,
+                      isPhone: true,
                     ),
                   ],
                 ),
@@ -136,6 +145,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             label: '',
             controller: addressController,
             hintText: text.address,
+            isAddress: true,
           ),
         ],
       ),

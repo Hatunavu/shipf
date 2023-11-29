@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +13,6 @@ import 'package:shipf/ui/theme/text_style.dart';
 class PrimaryTextField extends StatelessWidget {
   final String label;
   final bool? isPass;
-  final bool? isUsername;
   final bool? isEmail;
   final bool? isPhone;
   final bool isNumberKey;
@@ -19,6 +20,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool? isTitle;
   final bool? isPrice;
   final bool? isDesc;
+  final bool isAddress;
   String? errorText;
   final bool isSecondTextField;
   final TextEditingController controller;
@@ -28,13 +30,13 @@ class PrimaryTextField extends StatelessWidget {
   final bool readOnly;
   final String? passConfirm;
   final int? lengthLimit;
+  final String fieldRequire;
 
   PrimaryTextField(
       {Key? key,
       required this.label,
       this.isPass,
       required this.controller,
-      this.isUsername,
       this.isEmail,
       this.isPhone,
       this.errorText,
@@ -42,6 +44,7 @@ class PrimaryTextField extends StatelessWidget {
       this.isTitle,
       this.isPrice,
       this.isDesc,
+      this.isAddress = false,
       this.isNumberKey = false,
       this.isSecondTextField = false,
       this.maxLines,
@@ -49,7 +52,8 @@ class PrimaryTextField extends StatelessWidget {
       this.isValidate = true,
       this.readOnly = false,
       this.passConfirm,
-      this.lengthLimit})
+      this.lengthLimit,
+      this.fieldRequire = ''})
       : super(key: key);
 
   final ValueNotifier _isShow = ValueNotifier(false);
@@ -58,6 +62,32 @@ class PrimaryTextField extends StatelessWidget {
 
   String _formatNumber(String s) => NumberFormat.decimalPattern(_locale)
       .format(int.parse(s.isEmpty ? '0' : s));
+
+  String? validate(String? text) {
+    if (isValidate) {
+      if (isPhone == true) {
+        if (text == null || text.isEmpty) {
+          return 'Vui lòng nhập số điện thoại';
+        } else if (text.formatPhoneNumber().isValidPhone == false) {
+          return "Số điện thoại không đúng";
+        }
+      }
+      if (passConfirm != null) {
+        if (text != passConfirm) {
+          return 'Mật khẩu không khớp';
+        }
+      }
+      if (isPass == true) {
+        if (text == null || text.isEmpty || text.isValidPassword == false) {
+          return 'Mật khẩu phải từ 6 ký tự';
+        }
+      }
+      if (text == null || text.isEmpty) {
+        return "Vui lòng nhập $fieldRequire";
+      }
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,33 +108,7 @@ class PrimaryTextField extends StatelessWidget {
                   autovalidateMode:
                       _isError.value ? AutovalidateMode.always : null,
                   autofillHints: const [AutofillHints.oneTimeCode],
-                  validator: (text) {
-                    if (isValidate) {
-                      if (isPhone == true) {
-                        if (text == null ||
-                            text.isEmpty ||
-                            text.formatPhoneNumber().isValidPhone == false) {
-                          return "Số điện thoại không đúng";
-                        }
-                      }
-                      if (passConfirm != null) {
-                        if (text != passConfirm) {
-                          return 'Mật khẩu không khớp';
-                        }
-                      }
-                      if (isPass == true) {
-                        // if (errorText != null && errorText != '') {
-                        //   return errorText;
-                        // }
-                        if (text == null ||
-                            text.isEmpty ||
-                            text.isValidPassword == false) {
-                          return 'Mật khẩu phải từ 6 ký tự';
-                        }
-                      }
-                    }
-                    return null;
-                  },
+                  validator: (text) => validate(text),
                   readOnly: readOnly,
                   controller: controller,
                   obscureText: isPass == true ? !_isShow.value : false,

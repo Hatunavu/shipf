@@ -21,6 +21,7 @@ void configureDependencies() {
         getIt.get<Dio>(),
         baseUrl: ApiConstants.baseUrl,
       ));
+  mainRepository = getIt.get<MainRepository>();
 }
 
 class _DioDi extends DioDi {}

@@ -42,8 +42,7 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (context) => AddAddressCubit()..getLocationProvinces()),
+        BlocProvider(create: (context) => AddAddressCubit()..getProvinces()),
         BlocProvider(create: (context) => OrderCubit())
       ],
       child: BlocBuilder<OrderCubit, OrderState>(

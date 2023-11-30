@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shipf/data/model/location/location_model.dart';
+import 'package:shipf/data/model/address/address.dart';
 
 part 'add_address_state.freezed.dart';
 
@@ -10,12 +10,12 @@ class AddAddressState with _$AddAddressState {
       String? error,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<LocationData>? provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards,
-      LocationData? province,
-      LocationData? district,
-      LocationData? ward}) = _AddAddressState;
+      List<AddressDataModel>? provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards,
+      AddressDataModel? province,
+      AddressDataModel? district,
+      AddressDataModel? ward}) = _AddAddressState;
 
   factory AddAddressState.initial() =>
       const AddAddressState(isLoading: false, error: "");

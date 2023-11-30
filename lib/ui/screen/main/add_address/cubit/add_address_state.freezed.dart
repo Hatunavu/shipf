@@ -20,12 +20,12 @@ mixin _$AddAddressState {
   String? get error => throw _privateConstructorUsedError;
   bool? get isLoadingDistrict => throw _privateConstructorUsedError;
   bool? get isLoadingWard => throw _privateConstructorUsedError;
-  List<LocationData>? get provinces => throw _privateConstructorUsedError;
-  List<LocationData>? get districts => throw _privateConstructorUsedError;
-  List<LocationData>? get wards => throw _privateConstructorUsedError;
-  LocationData? get province => throw _privateConstructorUsedError;
-  LocationData? get district => throw _privateConstructorUsedError;
-  LocationData? get ward => throw _privateConstructorUsedError;
+  List<AddressDataModel>? get provinces => throw _privateConstructorUsedError;
+  List<AddressDataModel>? get districts => throw _privateConstructorUsedError;
+  List<AddressDataModel>? get wards => throw _privateConstructorUsedError;
+  AddressDataModel? get province => throw _privateConstructorUsedError;
+  AddressDataModel? get district => throw _privateConstructorUsedError;
+  AddressDataModel? get ward => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddAddressStateCopyWith<AddAddressState> get copyWith =>
@@ -43,12 +43,12 @@ abstract class $AddAddressStateCopyWith<$Res> {
       String? error,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<LocationData>? provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards,
-      LocationData? province,
-      LocationData? district,
-      LocationData? ward});
+      List<AddressDataModel>? provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards,
+      AddressDataModel? province,
+      AddressDataModel? district,
+      AddressDataModel? ward});
 }
 
 /// @nodoc
@@ -95,27 +95,27 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
       provinces: freezed == provinces
           ? _value.provinces
           : provinces // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       districts: freezed == districts
           ? _value.districts
           : districts // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       wards: freezed == wards
           ? _value.wards
           : wards // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
       district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
       ward: freezed == ward
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
     ) as $Val);
   }
 }
@@ -133,12 +133,12 @@ abstract class _$$AddAddressStateImplCopyWith<$Res>
       String? error,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<LocationData>? provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards,
-      LocationData? province,
-      LocationData? district,
-      LocationData? ward});
+      List<AddressDataModel>? provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards,
+      AddressDataModel? province,
+      AddressDataModel? district,
+      AddressDataModel? ward});
 }
 
 /// @nodoc
@@ -183,27 +183,27 @@ class __$$AddAddressStateImplCopyWithImpl<$Res>
       provinces: freezed == provinces
           ? _value._provinces
           : provinces // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       districts: freezed == districts
           ? _value._districts
           : districts // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       wards: freezed == wards
           ? _value._wards
           : wards // ignore: cast_nullable_to_non_nullable
-              as List<LocationData>?,
+              as List<AddressDataModel>?,
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
       district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
       ward: freezed == ward
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
-              as LocationData?,
+              as AddressDataModel?,
     ));
   }
 }
@@ -216,9 +216,9 @@ class _$AddAddressStateImpl implements _AddAddressState {
       this.error,
       this.isLoadingDistrict,
       this.isLoadingWard,
-      final List<LocationData>? provinces,
-      final List<LocationData>? districts,
-      final List<LocationData>? wards,
+      final List<AddressDataModel>? provinces,
+      final List<AddressDataModel>? districts,
+      final List<AddressDataModel>? wards,
       this.province,
       this.district,
       this.ward})
@@ -234,9 +234,9 @@ class _$AddAddressStateImpl implements _AddAddressState {
   final bool? isLoadingDistrict;
   @override
   final bool? isLoadingWard;
-  final List<LocationData>? _provinces;
+  final List<AddressDataModel>? _provinces;
   @override
-  List<LocationData>? get provinces {
+  List<AddressDataModel>? get provinces {
     final value = _provinces;
     if (value == null) return null;
     if (_provinces is EqualUnmodifiableListView) return _provinces;
@@ -244,9 +244,9 @@ class _$AddAddressStateImpl implements _AddAddressState {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<LocationData>? _districts;
+  final List<AddressDataModel>? _districts;
   @override
-  List<LocationData>? get districts {
+  List<AddressDataModel>? get districts {
     final value = _districts;
     if (value == null) return null;
     if (_districts is EqualUnmodifiableListView) return _districts;
@@ -254,9 +254,9 @@ class _$AddAddressStateImpl implements _AddAddressState {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<LocationData>? _wards;
+  final List<AddressDataModel>? _wards;
   @override
-  List<LocationData>? get wards {
+  List<AddressDataModel>? get wards {
     final value = _wards;
     if (value == null) return null;
     if (_wards is EqualUnmodifiableListView) return _wards;
@@ -265,11 +265,11 @@ class _$AddAddressStateImpl implements _AddAddressState {
   }
 
   @override
-  final LocationData? province;
+  final AddressDataModel? province;
   @override
-  final LocationData? district;
+  final AddressDataModel? district;
   @override
-  final LocationData? ward;
+  final AddressDataModel? ward;
 
   @override
   String toString() {
@@ -328,12 +328,12 @@ abstract class _AddAddressState implements AddAddressState {
       final String? error,
       final bool? isLoadingDistrict,
       final bool? isLoadingWard,
-      final List<LocationData>? provinces,
-      final List<LocationData>? districts,
-      final List<LocationData>? wards,
-      final LocationData? province,
-      final LocationData? district,
-      final LocationData? ward}) = _$AddAddressStateImpl;
+      final List<AddressDataModel>? provinces,
+      final List<AddressDataModel>? districts,
+      final List<AddressDataModel>? wards,
+      final AddressDataModel? province,
+      final AddressDataModel? district,
+      final AddressDataModel? ward}) = _$AddAddressStateImpl;
 
   @override
   bool get isLoading;
@@ -344,17 +344,17 @@ abstract class _AddAddressState implements AddAddressState {
   @override
   bool? get isLoadingWard;
   @override
-  List<LocationData>? get provinces;
+  List<AddressDataModel>? get provinces;
   @override
-  List<LocationData>? get districts;
+  List<AddressDataModel>? get districts;
   @override
-  List<LocationData>? get wards;
+  List<AddressDataModel>? get wards;
   @override
-  LocationData? get province;
+  AddressDataModel? get province;
   @override
-  LocationData? get district;
+  AddressDataModel? get district;
   @override
-  LocationData? get ward;
+  AddressDataModel? get ward;
   @override
   @JsonKey(ignore: true)
   _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>

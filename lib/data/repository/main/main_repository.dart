@@ -2,10 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:shipf/data/model/no_data/no_data_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:retrofit/http.dart';
+import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/no_data/no_data_response.dart';
 
 import 'endpoint.dart' as endpoint;
 
@@ -20,6 +21,16 @@ abstract class MainRepository {
 
   @GET(endpoint.getUser)
   Future<void> getUserInfo();
+
+  //addresss
+  @GET(endpoint.getProvinces)
+  Future<AddressModel> getProvinces();
+
+  @GET(endpoint.getDistricts)
+  Future<AddressModel> getDistricts(@Path('provinceId') int provinceId);
+
+  @GET(endpoint.getWards)
+  Future<AddressModel> getWards(@Path('districtId') int districtId);
 }
 
 extension ApiClientAWSS3 on MainRepository {

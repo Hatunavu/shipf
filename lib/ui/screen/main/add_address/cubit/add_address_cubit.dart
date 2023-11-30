@@ -1,74 +1,93 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shipf/data/model/location/location_model.dart';
+import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_state.dart';
 
-final responseProvinces = LocationModel(status: 200, message: 'message', data: [
-  LocationData(code: '01', name: 'Hà Nội'),
-  LocationData(code: '02', name: 'Hồ Chí Minh')
-]);
+// final responseProvinces = LocationModel(status: 200, message: 'message', data: [
+//   LocationData(code: '01', name: 'Hà Nội'),
+//   LocationData(code: '02', name: 'Hồ Chí Minh')
+// ]);
 
-final responseDistricts = LocationModel(status: 200, message: 'message', data: [
-  LocationData(code: '001', name: 'Ba Đình'),
-  LocationData(code: '002', name: 'Cầu Giấy')
-]);
+// final responseDistricts = LocationModel(status: 200, message: 'message', data: [
+//   LocationData(code: '001', name: 'Ba Đình'),
+//   LocationData(code: '002', name: 'Cầu Giấy')
+// ]);
 
-final responseWards = LocationModel(status: 200, message: 'message', data: [
-  LocationData(code: '0001', name: 'Cống Vị'),
-  LocationData(code: '0002', name: 'Đội Cấn')
-]);
+// final responseWards = LocationModel(status: 200, message: 'message', data: [
+//   LocationData(code: '0001', name: 'Cống Vị'),
+//   LocationData(code: '0002', name: 'Đội Cấn')
+// ]);
 
 class AddAddressCubit extends Cubit<AddAddressState> {
   AddAddressCubit() : super(AddAddressState.initial());
 
-  Future<List<LocationData>> getLocationProvinces() async {
+  Future<List<AddressDataModel>> getProvinces(
+      {AddressDataModel? addressData}) async {
     emit(state.copyWith(isLoading: true));
-    await Future.delayed(const Duration(seconds: 2));
-    final response = responseProvinces;
+    final response = await mainRepository.getProvinces();
+    final indexProvince = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
 
     emit(state.copyWith(
-        isLoading: false, provinces: response.data, province: null));
+        isLoading: false,
+        provinces: response.data,
+        province: addressData != null ? response.data[indexProvince] : null));
     return response.data;
   }
 
-  Future<List<LocationData>> getLocationDistricts(
-      {required String provinceId, bool? isUpdateProvince}) async {
+  Future<List<AddressDataModel>> getDistricts(
+      {required int provinceId,
+      AddressDataModel? addressData,
+      bool isUpdateProvince = false}) async {
     emit(state.copyWith(isLoading: true, isLoadingDistrict: true));
-    await Future.delayed(const Duration(seconds: 2));
-    final response = responseDistricts;
+    final response = await mainRepository.getDistricts(provinceId);
+    final indexDistrict = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
 
-    emit(state.copyWith(
-      isLoading: false,
-      districts: response.data,
-      isLoadingDistrict: false,
-    ));
-
+    isUpdateProvince
+        ? emit(state.copyWith(
+            isLoading: false,
+            districts: response.data,
+            isLoadingDistrict: false,
+            // district: addressData != null ? response.data[indexDistrict] : null,
+            district: null,
+            ward: null,
+            wards: null))
+        : emit(state.copyWith(
+            isLoading: false,
+            districts: response.data,
+            isLoadingDistrict: false,
+            district: addressData != null ? response.data[indexDistrict] : null,
+          ));
     return response.data;
   }
 
-  Future<List<LocationData>> getLocationWards({
-    required String districtId,
-  }) async {
+  Future<List<AddressDataModel>> getWards(
+      {required int districtId, AddressDataModel? addressData}) async {
     emit(state.copyWith(isLoading: true, isLoadingWard: true));
-    await Future.delayed(const Duration(seconds: 2));
-    final response = responseWards;
-
+    final response = await mainRepository.getWards(districtId);
+    final indexWard = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
     emit(state.copyWith(
-      isLoading: false,
-      wards: response.data,
-      isLoadingWard: false,
-    ));
+        isLoading: false,
+        wards: response.data,
+        isLoadingWard: false,
+        ward: addressData != null ? response.data[indexWard] : null));
     return response.data;
   }
 
-  Future<void> updateProvince(LocationData province) async {
+  Future<void> updateProvince(AddressDataModel province) async {
     emit(state.copyWith(province: province));
   }
 
-  Future<void> updateDistrict(LocationData district) async {
+  Future<void> updateDistrict(AddressDataModel district) async {
     emit(state.copyWith(district: district));
   }
 
-  Future<void> updateWard(LocationData ward) async {
+  Future<void> updateWard(AddressDataModel ward) async {
     emit(state.copyWith(ward: ward));
   }
 }

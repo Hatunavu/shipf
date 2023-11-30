@@ -25,7 +25,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   Widget build(BuildContext context) {
     final sections = _buildContent();
     return BlocProvider(
-      create: (context) => AddAddressCubit()..getLocationProvinces(),
+      create: (context) => AddAddressCubit(),
       child: BaseScreen(
         title: 'Địa chỉ mới',
         leading: InkWell(

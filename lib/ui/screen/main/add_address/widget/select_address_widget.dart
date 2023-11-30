@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:shipf/data/model/address/address_model.dart';
-import 'package:shipf/data/model/location/location_model.dart';
+import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_state.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -14,7 +13,7 @@ class SelectAddressWidget extends StatefulWidget {
   final bool isDistrict;
   final bool isWard;
   final bool enableSelect;
-  final AddressDataResponse? addressData;
+  final AddressDataModel? addressData;
 
   const SelectAddressWidget(
       {Key? key,
@@ -34,7 +33,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   int indexProvince = -1;
   int indexDistrict = -1;
   int indexWard = -1;
-  AddressDataResponse? get addressData => widget.addressData;
+  AddressDataModel? get addressData => widget.addressData;
 
   @override
   void initState() {
@@ -49,33 +48,32 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     super.initState();
   }
 
-  void getProvice() async {
-    final provinces = await _addAddressCubit.getLocationProvinces();
-    final indexProvince = provinces
-        .indexWhere((element) => element.code == addressData!.codes.province);
-    _addAddressCubit.updateProvince(provinces[indexProvince]);
-  }
+  // void getProvice() async {
+  //   final provinces = await _addAddressCubit.getProvinces();
+  //   final indexProvince =
+  //       provinces.indexWhere((element) => element.id == addressData!.id);
+  //   _addAddressCubit.updateProvince(provinces[indexProvince]);
+  // }
 
-  void getDistrict() async {
-    final districts = await _addAddressCubit.getLocationDistricts(
-        provinceId: addressData!.codes.province);
-    final indexDistrict = districts
-        .indexWhere((element) => element.code == addressData!.codes.district);
-    _addAddressCubit.updateDistrict(districts[indexDistrict]);
-  }
+  // void getDistrict() async {
+  //   final districts =
+  //       await _addAddressCubit.getDistricts(provinceId: addressData!.id);
+  //   final indexDistrict =
+  //       districts.indexWhere((element) => element.id == addressData!.id);
+  //   _addAddressCubit.updateDistrict(districts[indexDistrict]);
+  // }
 
-  void getWard() async {
-    final wards = await _addAddressCubit.getLocationWards(
-        districtId: addressData!.codes.district);
-    final indexWard = wards
-        .indexWhere((element) => element.code == addressData!.codes.district);
-    _addAddressCubit.updateDistrict(wards[indexWard]);
-  }
+  // void getWard() async {
+  //   final wards = await _addAddressCubit.getWards(districtId: addressData!.id);
+  //   final indexWard =
+  //       wards.indexWhere((element) => element.id == addressData!.id);
+  //   _addAddressCubit.updateDistrict(wards[indexWard]);
+  // }
 
   Widget setupAlertDialoadContainer(
-      {required List<LocationData> provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards}) {
+      {required List<AddressDataModel> provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards}) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.isWard
@@ -91,31 +89,25 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
           title: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              widget.isDistrict
-                  ? _addAddressCubit.getLocationWards(
-                      districtId: districts![index].code)
-                  : widget.isWard
-                      ? null
-                      : _addAddressCubit.getLocationDistricts(
-                          provinceId: provinces[index].code,
-                          isUpdateProvince: true);
-              widget.isWard
-                  ? setState(() {
-                      indexWard = index;
-                    })
-                  : widget.isDistrict
-                      ? setState(() {
-                          indexDistrict = index;
-                        })
-                      : setState(() {
-                          indexProvince = index;
-                        });
-
-              widget.isWard
-                  ? _addAddressCubit.updateWard(wards![index])
-                  : widget.isDistrict
-                      ? _addAddressCubit.updateDistrict(districts![index])
-                      : _addAddressCubit.updateProvince(provinces[index]);
+              if (widget.isWard) {
+                setState(() {
+                  indexWard = index;
+                  _addAddressCubit.updateWard(wards![index]);
+                });
+              } else if (widget.isDistrict) {
+                _addAddressCubit.getWards(districtId: districts![index].id);
+                setState(() {
+                  indexDistrict = index;
+                });
+                _addAddressCubit.updateDistrict(districts[index]);
+              } else {
+                _addAddressCubit.getDistricts(
+                    provinceId: provinces[index].id, isUpdateProvince: true);
+                setState(() {
+                  indexProvince = index;
+                });
+                _addAddressCubit.updateProvince(provinces[index]);
+              }
               Navigator.pop(context);
             },
             child: Container(
@@ -150,25 +142,10 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     );
   }
 
-  void _showDialog(
-      {required List<LocationData> provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards}) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(widget.label),
-            content: setupAlertDialoadContainer(
-                provinces: provinces, districts: districts, wards: wards),
-          );
-        });
-  }
-
   void _modalButtonAddress(
-      {required List<LocationData> provinces,
-      List<LocationData>? districts,
-      List<LocationData>? wards}) {
+      {required List<AddressDataModel> provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards}) {
     showModalBottomSheet<void>(
       isScrollControlled: true,
       context: context,
@@ -288,14 +265,17 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                       ),
                       child: Text(
                         widget.isWard
-                            ? locationState.wards != null && indexWard != -1
+                            ? locationState.wards != null &&
+                                    indexWard != -1 &&
+                                    locationState.ward != null
                                 ? locationState.wards![indexWard].name
                                 : locationState.ward != null
                                     ? locationState.ward!.name
                                     : 'Chọn Phường/Xã/Thị trấn'
                             : widget.isDistrict
                                 ? locationState.districts != null &&
-                                        indexDistrict != -1
+                                        indexDistrict != -1 &&
+                                        locationState.district != null
                                     ? locationState
                                         .districts![indexDistrict].name
                                     : locationState.district != null

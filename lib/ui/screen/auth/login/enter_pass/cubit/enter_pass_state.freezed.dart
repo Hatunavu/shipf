@@ -63,22 +63,22 @@ class _$EnterPassStateCopyWithImpl<$Res, $Val extends EnterPassState>
 }
 
 /// @nodoc
-abstract class _$$EnterPassStateImplCopyWith<$Res>
+abstract class _$$_EnterPassStateCopyWith<$Res>
     implements $EnterPassStateCopyWith<$Res> {
-  factory _$$EnterPassStateImplCopyWith(_$EnterPassStateImpl value,
-          $Res Function(_$EnterPassStateImpl) then) =
-      __$$EnterPassStateImplCopyWithImpl<$Res>;
+  factory _$$_EnterPassStateCopyWith(
+          _$_EnterPassState value, $Res Function(_$_EnterPassState) then) =
+      __$$_EnterPassStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$EnterPassStateImplCopyWithImpl<$Res>
-    extends _$EnterPassStateCopyWithImpl<$Res, _$EnterPassStateImpl>
-    implements _$$EnterPassStateImplCopyWith<$Res> {
-  __$$EnterPassStateImplCopyWithImpl(
-      _$EnterPassStateImpl _value, $Res Function(_$EnterPassStateImpl) _then)
+class __$$_EnterPassStateCopyWithImpl<$Res>
+    extends _$EnterPassStateCopyWithImpl<$Res, _$_EnterPassState>
+    implements _$$_EnterPassStateCopyWith<$Res> {
+  __$$_EnterPassStateCopyWithImpl(
+      _$_EnterPassState _value, $Res Function(_$_EnterPassState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$EnterPassStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$EnterPassStateImpl(
+    return _then(_$_EnterPassState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$EnterPassStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EnterPassStateImpl implements _EnterPassState {
-  const _$EnterPassStateImpl({required this.isLoading, this.error});
+class _$_EnterPassState implements _EnterPassState {
+  const _$_EnterPassState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -119,7 +119,7 @@ class _$EnterPassStateImpl implements _EnterPassState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EnterPassStateImpl &&
+            other is _$_EnterPassState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,13 @@ class _$EnterPassStateImpl implements _EnterPassState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EnterPassStateImplCopyWith<_$EnterPassStateImpl> get copyWith =>
-      __$$EnterPassStateImplCopyWithImpl<_$EnterPassStateImpl>(
-          this, _$identity);
+  _$$_EnterPassStateCopyWith<_$_EnterPassState> get copyWith =>
+      __$$_EnterPassStateCopyWithImpl<_$_EnterPassState>(this, _$identity);
 }
 
 abstract class _EnterPassState implements EnterPassState {
   const factory _EnterPassState(
-      {required final bool isLoading,
-      final String? error}) = _$EnterPassStateImpl;
+      {required final bool isLoading, final String? error}) = _$_EnterPassState;
 
   @override
   bool get isLoading;
@@ -147,6 +145,6 @@ abstract class _EnterPassState implements EnterPassState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$EnterPassStateImplCopyWith<_$EnterPassStateImpl> get copyWith =>
+  _$$_EnterPassStateCopyWith<_$_EnterPassState> get copyWith =>
       throw _privateConstructorUsedError;
 }

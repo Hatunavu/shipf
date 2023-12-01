@@ -58,7 +58,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             type: text.recipients,
             nameController: widget.receiverNameController,
             phoneController: widget.receiverPhoneController,
-            addressController: widget.receiverAddressController),
+            addressController: widget.receiverAddressController,
+            isRecipients: true),
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
@@ -78,7 +79,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
       {required String type,
       required TextEditingController nameController,
       required TextEditingController phoneController,
-      required TextEditingController addressController}) {
+      required TextEditingController addressController,
+      bool isRecipients = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: kDefaultPaddingWidthWidget,
@@ -133,15 +135,19 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.city),
+          itemSelectLocation(label: text.city, isRecipients: isRecipients),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.district, isDistrict: true),
+          itemSelectLocation(
+              label: text.district,
+              isDistrict: true,
+              isRecipients: isRecipients),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.ward, isWard: true),
+          itemSelectLocation(
+              label: text.ward, isWard: true, isRecipients: isRecipients),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
@@ -159,7 +165,10 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
   }
 
   Widget itemSelectLocation(
-      {bool isDistrict = false, bool isWard = false, required String label}) {
+      {bool isDistrict = false,
+      bool isWard = false,
+      required String label,
+      bool isRecipients = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -168,6 +177,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           label: label,
           isDistrict: isDistrict,
           isWard: isWard,
+          isRecipients: isRecipients,
         ),
       ],
     );

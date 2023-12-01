@@ -26,6 +26,15 @@ mixin _$AddAddressState {
   AddressDataModel? get province => throw _privateConstructorUsedError;
   AddressDataModel? get district => throw _privateConstructorUsedError;
   AddressDataModel? get ward => throw _privateConstructorUsedError;
+  List<AddressDataModel>? get recipientsDistricts =>
+      throw _privateConstructorUsedError;
+  List<AddressDataModel>? get recipientsWards =>
+      throw _privateConstructorUsedError;
+  AddressDataModel? get recipientsProvince =>
+      throw _privateConstructorUsedError;
+  AddressDataModel? get recipientsDistrict =>
+      throw _privateConstructorUsedError;
+  AddressDataModel? get recipientsWard => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddAddressStateCopyWith<AddAddressState> get copyWith =>
@@ -48,7 +57,12 @@ abstract class $AddAddressStateCopyWith<$Res> {
       List<AddressDataModel>? wards,
       AddressDataModel? province,
       AddressDataModel? district,
-      AddressDataModel? ward});
+      AddressDataModel? ward,
+      List<AddressDataModel>? recipientsDistricts,
+      List<AddressDataModel>? recipientsWards,
+      AddressDataModel? recipientsProvince,
+      AddressDataModel? recipientsDistrict,
+      AddressDataModel? recipientsWard});
 }
 
 /// @nodoc
@@ -74,6 +88,11 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
     Object? province = freezed,
     Object? district = freezed,
     Object? ward = freezed,
+    Object? recipientsDistricts = freezed,
+    Object? recipientsWards = freezed,
+    Object? recipientsProvince = freezed,
+    Object? recipientsDistrict = freezed,
+    Object? recipientsWard = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -116,16 +135,36 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
               as AddressDataModel?,
+      recipientsDistricts: freezed == recipientsDistricts
+          ? _value.recipientsDistricts
+          : recipientsDistricts // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>?,
+      recipientsWards: freezed == recipientsWards
+          ? _value.recipientsWards
+          : recipientsWards // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>?,
+      recipientsProvince: freezed == recipientsProvince
+          ? _value.recipientsProvince
+          : recipientsProvince // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
+      recipientsDistrict: freezed == recipientsDistrict
+          ? _value.recipientsDistrict
+          : recipientsDistrict // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
+      recipientsWard: freezed == recipientsWard
+          ? _value.recipientsWard
+          : recipientsWard // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$AddAddressStateImplCopyWith<$Res>
+abstract class _$$_AddAddressStateCopyWith<$Res>
     implements $AddAddressStateCopyWith<$Res> {
-  factory _$$AddAddressStateImplCopyWith(_$AddAddressStateImpl value,
-          $Res Function(_$AddAddressStateImpl) then) =
-      __$$AddAddressStateImplCopyWithImpl<$Res>;
+  factory _$$_AddAddressStateCopyWith(
+          _$_AddAddressState value, $Res Function(_$_AddAddressState) then) =
+      __$$_AddAddressStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -138,15 +177,20 @@ abstract class _$$AddAddressStateImplCopyWith<$Res>
       List<AddressDataModel>? wards,
       AddressDataModel? province,
       AddressDataModel? district,
-      AddressDataModel? ward});
+      AddressDataModel? ward,
+      List<AddressDataModel>? recipientsDistricts,
+      List<AddressDataModel>? recipientsWards,
+      AddressDataModel? recipientsProvince,
+      AddressDataModel? recipientsDistrict,
+      AddressDataModel? recipientsWard});
 }
 
 /// @nodoc
-class __$$AddAddressStateImplCopyWithImpl<$Res>
-    extends _$AddAddressStateCopyWithImpl<$Res, _$AddAddressStateImpl>
-    implements _$$AddAddressStateImplCopyWith<$Res> {
-  __$$AddAddressStateImplCopyWithImpl(
-      _$AddAddressStateImpl _value, $Res Function(_$AddAddressStateImpl) _then)
+class __$$_AddAddressStateCopyWithImpl<$Res>
+    extends _$AddAddressStateCopyWithImpl<$Res, _$_AddAddressState>
+    implements _$$_AddAddressStateCopyWith<$Res> {
+  __$$_AddAddressStateCopyWithImpl(
+      _$_AddAddressState _value, $Res Function(_$_AddAddressState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -162,8 +206,13 @@ class __$$AddAddressStateImplCopyWithImpl<$Res>
     Object? province = freezed,
     Object? district = freezed,
     Object? ward = freezed,
+    Object? recipientsDistricts = freezed,
+    Object? recipientsWards = freezed,
+    Object? recipientsProvince = freezed,
+    Object? recipientsDistrict = freezed,
+    Object? recipientsWard = freezed,
   }) {
-    return _then(_$AddAddressStateImpl(
+    return _then(_$_AddAddressState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -204,14 +253,34 @@ class __$$AddAddressStateImplCopyWithImpl<$Res>
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
               as AddressDataModel?,
+      recipientsDistricts: freezed == recipientsDistricts
+          ? _value._recipientsDistricts
+          : recipientsDistricts // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>?,
+      recipientsWards: freezed == recipientsWards
+          ? _value._recipientsWards
+          : recipientsWards // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>?,
+      recipientsProvince: freezed == recipientsProvince
+          ? _value.recipientsProvince
+          : recipientsProvince // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
+      recipientsDistrict: freezed == recipientsDistrict
+          ? _value.recipientsDistrict
+          : recipientsDistrict // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
+      recipientsWard: freezed == recipientsWard
+          ? _value.recipientsWard
+          : recipientsWard // ignore: cast_nullable_to_non_nullable
+              as AddressDataModel?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$AddAddressStateImpl implements _AddAddressState {
-  const _$AddAddressStateImpl(
+class _$_AddAddressState implements _AddAddressState {
+  const _$_AddAddressState(
       {required this.isLoading,
       this.error,
       this.isLoadingDistrict,
@@ -221,10 +290,17 @@ class _$AddAddressStateImpl implements _AddAddressState {
       final List<AddressDataModel>? wards,
       this.province,
       this.district,
-      this.ward})
+      this.ward,
+      final List<AddressDataModel>? recipientsDistricts,
+      final List<AddressDataModel>? recipientsWards,
+      this.recipientsProvince,
+      this.recipientsDistrict,
+      this.recipientsWard})
       : _provinces = provinces,
         _districts = districts,
-        _wards = wards;
+        _wards = wards,
+        _recipientsDistricts = recipientsDistricts,
+        _recipientsWards = recipientsWards;
 
   @override
   final bool isLoading;
@@ -270,17 +346,44 @@ class _$AddAddressStateImpl implements _AddAddressState {
   final AddressDataModel? district;
   @override
   final AddressDataModel? ward;
+  final List<AddressDataModel>? _recipientsDistricts;
+  @override
+  List<AddressDataModel>? get recipientsDistricts {
+    final value = _recipientsDistricts;
+    if (value == null) return null;
+    if (_recipientsDistricts is EqualUnmodifiableListView)
+      return _recipientsDistricts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AddressDataModel>? _recipientsWards;
+  @override
+  List<AddressDataModel>? get recipientsWards {
+    final value = _recipientsWards;
+    if (value == null) return null;
+    if (_recipientsWards is EqualUnmodifiableListView) return _recipientsWards;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final AddressDataModel? recipientsProvince;
+  @override
+  final AddressDataModel? recipientsDistrict;
+  @override
+  final AddressDataModel? recipientsWard;
 
   @override
   String toString() {
-    return 'AddAddressState(isLoading: $isLoading, error: $error, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward)';
+    return 'AddAddressState(isLoading: $isLoading, error: $error, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, recipientsDistricts: $recipientsDistricts, recipientsWards: $recipientsWards, recipientsProvince: $recipientsProvince, recipientsDistrict: $recipientsDistrict, recipientsWard: $recipientsWard)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddAddressStateImpl &&
+            other is _$_AddAddressState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -297,7 +400,17 @@ class _$AddAddressStateImpl implements _AddAddressState {
                 other.province == province) &&
             (identical(other.district, district) ||
                 other.district == district) &&
-            (identical(other.ward, ward) || other.ward == ward));
+            (identical(other.ward, ward) || other.ward == ward) &&
+            const DeepCollectionEquality()
+                .equals(other._recipientsDistricts, _recipientsDistricts) &&
+            const DeepCollectionEquality()
+                .equals(other._recipientsWards, _recipientsWards) &&
+            (identical(other.recipientsProvince, recipientsProvince) ||
+                other.recipientsProvince == recipientsProvince) &&
+            (identical(other.recipientsDistrict, recipientsDistrict) ||
+                other.recipientsDistrict == recipientsDistrict) &&
+            (identical(other.recipientsWard, recipientsWard) ||
+                other.recipientsWard == recipientsWard));
   }
 
   @override
@@ -312,14 +425,18 @@ class _$AddAddressStateImpl implements _AddAddressState {
       const DeepCollectionEquality().hash(_wards),
       province,
       district,
-      ward);
+      ward,
+      const DeepCollectionEquality().hash(_recipientsDistricts),
+      const DeepCollectionEquality().hash(_recipientsWards),
+      recipientsProvince,
+      recipientsDistrict,
+      recipientsWard);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
-      __$$AddAddressStateImplCopyWithImpl<_$AddAddressStateImpl>(
-          this, _$identity);
+  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
+      __$$_AddAddressStateCopyWithImpl<_$_AddAddressState>(this, _$identity);
 }
 
 abstract class _AddAddressState implements AddAddressState {
@@ -333,7 +450,12 @@ abstract class _AddAddressState implements AddAddressState {
       final List<AddressDataModel>? wards,
       final AddressDataModel? province,
       final AddressDataModel? district,
-      final AddressDataModel? ward}) = _$AddAddressStateImpl;
+      final AddressDataModel? ward,
+      final List<AddressDataModel>? recipientsDistricts,
+      final List<AddressDataModel>? recipientsWards,
+      final AddressDataModel? recipientsProvince,
+      final AddressDataModel? recipientsDistrict,
+      final AddressDataModel? recipientsWard}) = _$_AddAddressState;
 
   @override
   bool get isLoading;
@@ -356,7 +478,17 @@ abstract class _AddAddressState implements AddAddressState {
   @override
   AddressDataModel? get ward;
   @override
+  List<AddressDataModel>? get recipientsDistricts;
+  @override
+  List<AddressDataModel>? get recipientsWards;
+  @override
+  AddressDataModel? get recipientsProvince;
+  @override
+  AddressDataModel? get recipientsDistrict;
+  @override
+  AddressDataModel? get recipientsWard;
+  @override
   @JsonKey(ignore: true)
-  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
+  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
       throw _privateConstructorUsedError;
 }

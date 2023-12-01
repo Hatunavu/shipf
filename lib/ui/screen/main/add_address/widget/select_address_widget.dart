@@ -14,6 +14,7 @@ class SelectAddressWidget extends StatefulWidget {
   final bool isWard;
   final bool enableSelect;
   final AddressDataModel? addressData;
+  final bool isRecipients;
 
   const SelectAddressWidget(
       {Key? key,
@@ -21,7 +22,8 @@ class SelectAddressWidget extends StatefulWidget {
       this.isDistrict = false,
       this.isWard = false,
       this.enableSelect = false,
-      this.addressData})
+      this.addressData,
+      this.isRecipients = false})
       : super(key: key);
 
   @override
@@ -33,44 +35,18 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   int indexProvince = -1;
   int indexDistrict = -1;
   int indexWard = -1;
+  int indexRecipientsProvince = -1;
+  int indexRecipientsDistrict = -1;
+  int indexRecipientsWard = -1;
   AddressDataModel? get addressData => widget.addressData;
 
   @override
   void initState() {
     _addAddressCubit = context.read<AddAddressCubit>();
-
-    // final indexProvince = provinces
-    //     .indexWhere((element) => element.code == addressData!.codes.province);
-    // print(indexProvince);
-    // addressData != null ? getProvice() : null;
-    // addressData != null ? getDistrict() : null;
-    // addressData != null ? getWard() : null;
     super.initState();
   }
 
-  // void getProvice() async {
-  //   final provinces = await _addAddressCubit.getProvinces();
-  //   final indexProvince =
-  //       provinces.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateProvince(provinces[indexProvince]);
-  // }
-
-  // void getDistrict() async {
-  //   final districts =
-  //       await _addAddressCubit.getDistricts(provinceId: addressData!.id);
-  //   final indexDistrict =
-  //       districts.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateDistrict(districts[indexDistrict]);
-  // }
-
-  // void getWard() async {
-  //   final wards = await _addAddressCubit.getWards(districtId: addressData!.id);
-  //   final indexWard =
-  //       wards.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateDistrict(wards[indexWard]);
-  // }
-
-  Widget setupAlertDialoadContainer(
+  Widget setupAlertDialogContainer(
       {required List<AddressDataModel> provinces,
       List<AddressDataModel>? districts,
       List<AddressDataModel>? wards}) {
@@ -92,21 +68,29 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
               if (widget.isWard) {
                 setState(() {
                   indexWard = index;
-                  _addAddressCubit.updateWard(wards![index]);
+                  _addAddressCubit.updateWard(wards![index],
+                      isRecipients: widget.isRecipients);
                 });
               } else if (widget.isDistrict) {
-                _addAddressCubit.getWards(districtId: districts![index].id);
+                _addAddressCubit.getWards(
+                    districtId: districts![index].id,
+                    isRecipients: widget.isRecipients);
                 setState(() {
                   indexDistrict = index;
                 });
-                _addAddressCubit.updateDistrict(districts[index]);
+                _addAddressCubit.updateDistrict(districts[index],
+                    isRecipients: widget.isRecipients);
               } else {
                 _addAddressCubit.getDistricts(
-                    provinceId: provinces[index].id, isUpdateProvince: true);
+                    provinceId: provinces[index].id,
+                    isRecipients: widget.isRecipients);
                 setState(() {
-                  indexProvince = index;
+                  widget.isRecipients
+                      ? indexRecipientsProvince = index
+                      : indexProvince = index;
                 });
-                _addAddressCubit.updateProvince(provinces[index]);
+                _addAddressCubit.updateProvince(provinces[index],
+                    isRecipients: widget.isRecipients);
               }
               Navigator.pop(context);
             },
@@ -114,7 +98,6 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
               padding: EdgeInsets.symmetric(
                   horizontal: kDefaultPaddingWidthScreen,
                   vertical: kDefaultPaddingHeightScreen),
-              // color: Colors.amber,
               child: Row(
                 children: [
                   const Icon(
@@ -182,7 +165,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
             ),
             SizedBox(
                 height: 0.5.sh,
-                child: setupAlertDialoadContainer(
+                child: setupAlertDialogContainer(
                     provinces: provinces, districts: districts, wards: wards)),
           ],
         );
@@ -194,26 +177,57 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<AddAddressCubit, AddAddressState>(
       builder: (context, locationState) {
+        String addressLabel() {
+          if (widget.isWard) {
+            return widget.isRecipients
+                ? (locationState.recipientsWards != null &&
+                        indexRecipientsWard != -1 &&
+                        locationState.recipientsWard != null)
+                    ? locationState.recipientsWards![indexRecipientsWard].name
+                    : 'Chọn Phường/Xã/Thị trấn'
+                : (locationState.wards != null &&
+                        indexWard != -1 &&
+                        locationState.ward != null)
+                    ? locationState.wards![indexWard].name
+                    : 'Chọn Phường/Xã/Thị trấn';
+          } else if (widget.isDistrict) {
+            return widget.isRecipients
+                ? locationState.recipientsDistricts != null &&
+                        indexRecipientsDistrict != -1 &&
+                        locationState.recipientsDistrict != null
+                    ? locationState
+                        .recipientsDistricts![indexRecipientsDistrict].name
+                    : 'Chọn Quận/Huyện'
+                : locationState.districts != null &&
+                        indexDistrict != -1 &&
+                        locationState.district != null
+                    ? locationState.districts![indexDistrict].name
+                    : 'Chọn Quận/Huyện';
+          } else {
+            return widget.isRecipients
+                ? locationState.recipientsProvince != null
+                    ? locationState.recipientsProvince!.name
+                    : indexRecipientsProvince != -1
+                        ? locationState.provinces![indexRecipientsProvince].name
+                        : 'Chọn Tỉnh/Thành phố'
+                : locationState.province != null
+                    ? locationState.province!.name
+                    : indexProvince != -1
+                        ? locationState.provinces![indexProvince].name
+                        : 'Chọn Tỉnh/Thành phố';
+          }
+        }
+
         return GestureDetector(
             onTap: () {
-              widget.isWard
-                  ? locationState.wards != null
-                      ? _modalButtonAddress(
-                          provinces: locationState.provinces!,
-                          districts: locationState.districts,
-                          wards: locationState.wards)
-                      : null
-                  : widget.isDistrict
-                      ? locationState.districts != null
-                          ? _modalButtonAddress(
-                              provinces: locationState.provinces!,
-                              districts: locationState.districts,
-                              wards: locationState.wards)
-                          : null
-                      : _modalButtonAddress(
-                          provinces: locationState.provinces ?? [],
-                          districts: locationState.districts,
-                          wards: locationState.wards);
+              _modalButtonAddress(
+                  provinces: locationState.provinces ?? [],
+                  districts: widget.isRecipients
+                      ? locationState.recipientsDistricts
+                      : locationState.districts,
+                  wards: widget.isRecipients
+                      ? locationState.recipientsWards
+                      : locationState.wards);
             },
             child: Container(
               child: FormField(
@@ -264,29 +278,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                                 BorderRadius.circular(secondaryBorderRadius)),
                       ),
                       child: Text(
-                        widget.isWard
-                            ? locationState.wards != null &&
-                                    indexWard != -1 &&
-                                    locationState.ward != null
-                                ? locationState.wards![indexWard].name
-                                : locationState.ward != null
-                                    ? locationState.ward!.name
-                                    : 'Chọn Phường/Xã/Thị trấn'
-                            : widget.isDistrict
-                                ? locationState.districts != null &&
-                                        indexDistrict != -1 &&
-                                        locationState.district != null
-                                    ? locationState
-                                        .districts![indexDistrict].name
-                                    : locationState.district != null
-                                        ? locationState.district!.name
-                                        : 'Chọn Quận/Huyện'
-                                : locationState.province != null
-                                    ? locationState.province!.name
-                                    : indexProvince != -1
-                                        ? locationState
-                                            .provinces![indexProvince].name
-                                        : 'Chọn Tỉnh/Thành phố',
+                        addressLabel(),
                         style: textBody.copyWith(
                             color: widget.isWard
                                 ? locationState.wards != null

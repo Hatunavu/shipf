@@ -3,21 +3,6 @@ import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_state.dart';
 
-// final responseProvinces = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '01', name: 'Hà Nội'),
-//   LocationData(code: '02', name: 'Hồ Chí Minh')
-// ]);
-
-// final responseDistricts = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '001', name: 'Ba Đình'),
-//   LocationData(code: '002', name: 'Cầu Giấy')
-// ]);
-
-// final responseWards = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '0001', name: 'Cống Vị'),
-//   LocationData(code: '0002', name: 'Đội Cấn')
-// ]);
-
 class AddAddressCubit extends Cubit<AddAddressState> {
   AddAddressCubit() : super(AddAddressState.initial());
 
@@ -39,33 +24,29 @@ class AddAddressCubit extends Cubit<AddAddressState> {
   Future<List<AddressDataModel>> getDistricts(
       {required int provinceId,
       AddressDataModel? addressData,
-      bool isUpdateProvince = false}) async {
+      bool isRecipients = false}) async {
     emit(state.copyWith(isLoading: true, isLoadingDistrict: true));
     final response = await mainRepository.getDistricts(provinceId);
     final indexDistrict = addressData != null
         ? response.data.indexWhere((element) => element.id == addressData.id)
         : -1;
 
-    isUpdateProvince
-        ? emit(state.copyWith(
-            isLoading: false,
-            districts: response.data,
-            isLoadingDistrict: false,
-            // district: addressData != null ? response.data[indexDistrict] : null,
-            district: null,
-            ward: null,
-            wards: null))
-        : emit(state.copyWith(
-            isLoading: false,
-            districts: response.data,
-            isLoadingDistrict: false,
-            district: addressData != null ? response.data[indexDistrict] : null,
-          ));
+    emit(state.copyWith(
+        isLoading: false,
+        districts: isRecipients ? null : response.data,
+        recipientsDistricts: isRecipients ? response.data : null,
+        isLoadingDistrict: false,
+        district: null,
+        ward: null,
+        wards: null));
+
     return response.data;
   }
 
   Future<List<AddressDataModel>> getWards(
-      {required int districtId, AddressDataModel? addressData}) async {
+      {required int districtId,
+      AddressDataModel? addressData,
+      bool isRecipients = false}) async {
     emit(state.copyWith(isLoading: true, isLoadingWard: true));
     final response = await mainRepository.getWards(districtId);
     final indexWard = addressData != null
@@ -73,21 +54,31 @@ class AddAddressCubit extends Cubit<AddAddressState> {
         : -1;
     emit(state.copyWith(
         isLoading: false,
-        wards: response.data,
+        wards: isRecipients ? null : response.data,
+        recipientsWards: isRecipients ? response.data : null,
         isLoadingWard: false,
         ward: addressData != null ? response.data[indexWard] : null));
     return response.data;
   }
 
-  Future<void> updateProvince(AddressDataModel province) async {
-    emit(state.copyWith(province: province));
+  Future<void> updateProvince(AddressDataModel province,
+      {bool isRecipients = false}) async {
+    isRecipients
+        ? emit(state.copyWith(recipientsProvince: province))
+        : emit(state.copyWith(province: province));
   }
 
-  Future<void> updateDistrict(AddressDataModel district) async {
-    emit(state.copyWith(district: district));
+  Future<void> updateDistrict(AddressDataModel district,
+      {bool isRecipients = false}) async {
+    isRecipients
+        ? emit(state.copyWith(recipientsDistrict: district))
+        : emit(state.copyWith(district: district));
   }
 
-  Future<void> updateWard(AddressDataModel ward) async {
-    emit(state.copyWith(ward: ward));
+  Future<void> updateWard(AddressDataModel ward,
+      {bool isRecipients = false}) async {
+    isRecipients
+        ? emit(state.copyWith(recipientsWard: ward))
+        : emit(state.copyWith(ward: ward));
   }
 }

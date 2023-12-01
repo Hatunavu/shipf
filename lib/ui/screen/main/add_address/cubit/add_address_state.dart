@@ -15,7 +15,12 @@ class AddAddressState with _$AddAddressState {
       List<AddressDataModel>? wards,
       AddressDataModel? province,
       AddressDataModel? district,
-      AddressDataModel? ward}) = _AddAddressState;
+      AddressDataModel? ward,
+      List<AddressDataModel>? recipientsDistricts,
+      List<AddressDataModel>? recipientsWards,
+      AddressDataModel? recipientsProvince,
+      AddressDataModel? recipientsDistrict,
+      AddressDataModel? recipientsWard}) = _AddAddressState;
 
   factory AddAddressState.initial() =>
       const AddAddressState(isLoading: false, error: "");

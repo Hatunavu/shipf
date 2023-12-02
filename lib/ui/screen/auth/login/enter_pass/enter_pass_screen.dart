@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
@@ -137,8 +138,9 @@ class EnterPassScreen extends StatelessWidget {
                                       onPressed: () async {
                                         unfocus(context);
                                         if (_formKey.currentState!.validate()) {
-                                          await cubit
-                                              .sendPass(_passController.text);
+                                          await cubit.sendPass(LoginRequest(
+                                              password: _passController.text,
+                                              phone: phone));
                                           AccountServices()
                                               .saveUserToken('token');
                                           context.router.push(MainPage());

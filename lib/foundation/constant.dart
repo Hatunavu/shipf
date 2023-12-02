@@ -3,7 +3,7 @@ import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/ui/app_cubit.dart';
 
 class ApiConstants {
-  static const baseUrl = "http://14.225.254.72:8769";
+  static const baseUrl = "https://api.shipf.vn";
 }
 
 late AppCubit appCubit;

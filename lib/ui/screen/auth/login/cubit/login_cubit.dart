@@ -25,8 +25,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<bool> sendPhone(String phone) async {
     emit(state.copyWith(isLoading: true));
-    final isLogin = phone == '0987654321';
-    await Future.delayed(const Duration(seconds: 2));
+    final isLogin = phone == '0902032999';
+    // await Future.delayed(const Duration(seconds: 2));
     emit(state.copyWith(isLoading: false));
     return isLogin;
   }

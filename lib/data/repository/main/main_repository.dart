@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:retrofit/http.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
 
 import 'endpoint.dart' as endpoint;
@@ -21,6 +22,20 @@ abstract class MainRepository {
 
   @GET(endpoint.getUser)
   Future<void> getUserInfo();
+
+  //auth
+  @POST(endpoint.postVerifyPhone)
+  Future<VerifyResponse> postVerifyPhone(
+      @Body() VerifyRequest verifyPhoneRequest);
+
+  @POST(endpoint.postVerifyOTP)
+  Future<VerifyResponse> postVerifyOTP(@Body() VerifyRequest verifyOTPRequest);
+
+  @POST(endpoint.login)
+  Future<LoginResponse> login(@Body() LoginRequest loginRequest);
+
+  @POST(endpoint.register)
+  Future<RegisterRequest> register(@Body() RegisterRequest registerRequest);
 
   //addresss
   @GET(endpoint.getProvinces)

@@ -40,6 +40,102 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<VerifyResponse> postVerifyPhone(verifyPhoneRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(verifyPhoneRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v2/verify-phone',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> postVerifyOTP(verifyOTPRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(verifyOTPRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v2/verify-otp',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LoginResponse> login(loginRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(loginRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v2/auth/sign-in',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LoginResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RegisterRequest> register(registerRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RegisterRequest>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v2/user/register-customer',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RegisterRequest.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AddressModel> getProvinces() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

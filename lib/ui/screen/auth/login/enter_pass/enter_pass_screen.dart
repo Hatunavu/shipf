@@ -138,12 +138,16 @@ class EnterPassScreen extends StatelessWidget {
                                       onPressed: () async {
                                         unfocus(context);
                                         if (_formKey.currentState!.validate()) {
-                                          await cubit.sendPass(LoginRequest(
-                                              password: _passController.text,
-                                              phone: phone));
-                                          AccountServices()
-                                              .saveUserToken('token');
-                                          context.router.push(MainPage());
+                                          final message = await cubit.sendPass(
+                                              LoginRequest(
+                                                  password:
+                                                      _passController.text,
+                                                  phone: phone));
+                                          if (message.isEmpty) {
+                                            AccountServices()
+                                                .saveUserToken('token');
+                                            context.router.push(MainPage());
+                                          }
                                         }
                                       },
                                     ),
@@ -152,9 +156,9 @@ class EnterPassScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          SizedBox(),
-                          SizedBox(),
-                          SizedBox(),
+                          const SizedBox(),
+                          const SizedBox(),
+                          const SizedBox(),
                         ],
                       )),
                 ),

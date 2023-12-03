@@ -24,18 +24,17 @@ abstract class MainRepository {
   Future<void> getUserInfo();
 
   //auth
-  @POST(endpoint.postVerifyPhone)
-  Future<VerifyResponse> postVerifyPhone(
-      @Body() VerifyRequest verifyPhoneRequest);
+  @POST(endpoint.verifyPhone)
+  Future<VerifyResponse> verifyPhone(@Body() VerifyRequest verifyPhoneRequest);
 
-  @POST(endpoint.postVerifyOTP)
-  Future<VerifyResponse> postVerifyOTP(@Body() VerifyRequest verifyOTPRequest);
+  @POST(endpoint.verifyOTP)
+  Future<VerifyResponse> verifyOTP(@Body() VerifyRequest verifyOTPRequest);
 
   @POST(endpoint.login)
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
   @POST(endpoint.register)
-  Future<RegisterRequest> register(@Body() RegisterRequest registerRequest);
+  Future<RegisterResponse> register(@Body() RegisterRequest registerRequest);
 
   //addresss
   @GET(endpoint.getProvinces)

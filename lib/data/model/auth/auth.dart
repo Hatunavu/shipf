@@ -20,8 +20,10 @@ class VerifyRequest {
 @JsonSerializable()
 class VerifyResponse {
   final String message;
+  final bool success;
+  final int status;
 
-  VerifyResponse({this.message = ''});
+  VerifyResponse({this.message = '', this.status = 0, this.success = false});
 
   factory VerifyResponse.fromJson(Map<String, dynamic> json) =>
       _$VerifyResponseFromJson(json);
@@ -45,13 +47,15 @@ class LoginRequest {
 
 @JsonSerializable()
 class LoginResponse {
-  final String data;
+  final LoginData? data;
   final bool success;
+  final int status;
   final int statusCode;
   final String message;
   final String error;
   LoginResponse(
-      {this.data = '',
+      {this.data,
+      this.status = 0,
       this.success = false,
       this.statusCode = 0,
       this.message = '',
@@ -61,6 +65,19 @@ class LoginResponse {
       _$LoginResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
+}
+
+@JsonSerializable()
+class LoginData {
+  @JsonKey(name: 'access_token')
+  final String accessToken;
+
+  LoginData({this.accessToken = ''});
+
+  factory LoginData.fromJson(Map<String, dynamic> json) =>
+      _$LoginDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoginDataToJson(this);
 }
 
 //register
@@ -82,9 +99,11 @@ class RegisterRequest {
 @JsonSerializable()
 class RegisterResponse {
   final bool success;
-  final RegisterData? data;
+  final int status;
+  final String message;
+  // final RegisterData? data;
 
-  RegisterResponse({this.success = false, this.data});
+  RegisterResponse({this.success = false, this.message = '', this.status = 0});
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseFromJson(json);

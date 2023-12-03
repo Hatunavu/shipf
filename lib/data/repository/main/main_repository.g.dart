@@ -40,7 +40,7 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<VerifyResponse> postVerifyPhone(verifyPhoneRequest) async {
+  Future<VerifyResponse> verifyPhone(verifyPhoneRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -64,7 +64,7 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<VerifyResponse> postVerifyOTP(verifyOTPRequest) async {
+  Future<VerifyResponse> verifyOTP(verifyOTPRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -112,14 +112,14 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<RegisterRequest> register(registerRequest) async {
+  Future<RegisterResponse> register(registerRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerRequest.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RegisterRequest>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -131,7 +131,7 @@ class _MainRepository implements MainRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RegisterRequest.fromJson(_result.data!);
+    final value = RegisterResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -119,12 +119,12 @@ class LoginScreen extends StatelessWidget {
                                         unfocus(context);
                                         if (state.error != null &&
                                             _formKey.currentState!.validate()) {
-                                          final isLogin = await cubit
+                                          bool? isLogin = await cubit
                                               .sendPhone(_phoneController.text);
-                                          if (isLogin) {
+                                          if (isLogin == true) {
                                             context.router.push(EnterPassPage(
                                                 phone: _phoneController.text));
-                                          } else {
+                                          } else if (isLogin == false) {
                                             context.router.push(VerifyPage(
                                                 email: _phoneController.text,
                                                 isSignup: true));

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
@@ -17,17 +18,19 @@ class EnterPassCubit extends Cubit<EnterPassState> {
   }
 
   Future<String> sendPass(LoginRequest loginRequest) async {
-    emit(state.copyWith(isLoading: true));
-    await mainRepository.login(loginRequest);
-    emit(state.copyWith(isLoading: false));
-    return '';
-    // await Future.delayed(const Duration(seconds: 2));
-    // if (pass == '111111') {
-    //   emit(state.copyWith(isLoading: false));
-    //   return '';
-    // } else {
-    //   emit(state.copyWith(isLoading: false, error: 'Mật khẩu không đúng'));
-    //   return 'Mật khẩu không đúng';
+    try {
+      emit(state.copyWith(isLoading: true));
+      await mainRepository.login(loginRequest);
+      emit(state.copyWith(isLoading: false));
+      return '';
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isLoading: false, error: errorMessage));
+      return "Mật khẩu không đúng";
+    }
+    // catch (e) {
+    //   emit(state.copyWith(isLoading: false, error: "Mật khẩu không đúng"));
+    //   return "Mật khẩu không đúng";
     // }
   }
 }

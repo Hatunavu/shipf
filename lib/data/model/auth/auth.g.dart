@@ -21,11 +21,15 @@ Map<String, dynamic> _$VerifyRequestToJson(VerifyRequest instance) =>
 VerifyResponse _$VerifyResponseFromJson(Map<String, dynamic> json) =>
     VerifyResponse(
       message: json['message'] as String? ?? '',
+      status: json['status'] as int? ?? 0,
+      success: json['success'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$VerifyResponseToJson(VerifyResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
+      'success': instance.success,
+      'status': instance.status,
     };
 
 LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
@@ -41,7 +45,10 @@ Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
-      data: json['data'] as String? ?? '',
+      data: json['data'] == null
+          ? null
+          : LoginData.fromJson(json['data'] as Map<String, dynamic>),
+      status: json['status'] as int? ?? 0,
       success: json['success'] as bool? ?? false,
       statusCode: json['statusCode'] as int? ?? 0,
       message: json['message'] as String? ?? '',
@@ -52,9 +59,18 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
     <String, dynamic>{
       'data': instance.data,
       'success': instance.success,
+      'status': instance.status,
       'statusCode': instance.statusCode,
       'message': instance.message,
       'error': instance.error,
+    };
+
+LoginData _$LoginDataFromJson(Map<String, dynamic> json) => LoginData(
+      accessToken: json['access_token'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
+      'access_token': instance.accessToken,
     };
 
 RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
@@ -74,15 +90,15 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
 RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
     RegisterResponse(
       success: json['success'] as bool? ?? false,
-      data: json['data'] == null
-          ? null
-          : RegisterData.fromJson(json['data'] as Map<String, dynamic>),
+      message: json['message'] as String? ?? '',
+      status: json['status'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'data': instance.data,
+      'status': instance.status,
+      'message': instance.message,
     };
 
 RegisterData _$RegisterDataFromJson(Map<String, dynamic> json) => RegisterData(

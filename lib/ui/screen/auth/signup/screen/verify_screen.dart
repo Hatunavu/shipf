@@ -4,13 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
-import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/foundation/app_path.dart';
-import 'package:shipf/injection.dart';
-import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
-import 'package:shipf/ui/screen/auth/login/cubit/login_cubit.dart';
-import 'package:shipf/ui/screen/auth/login/cubit/login_state.dart';
+import 'package:shipf/ui/screen/auth/signup/screen/cubit/verify_cubit.dart';
+import 'package:shipf/ui/screen/auth/signup/screen/cubit/verify_state.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/shared/widget/appbar/primary_appbar.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
@@ -49,24 +47,11 @@ class VerifyScreen extends StatelessWidget {
 
   void onPress(BuildContext context) async {
     unfocus(context);
-    if (formKey.currentState!.validate() &&
-        _pinPutController.text == '111111') {
-      if (isForgotPass || isSignup) {
-        context.router.push(ResetPassPage(phone: email, isSignup: isSignup));
-      } else {
-        // context.router.replace(const MainPage());
-      }
-      // final response = isSignup
-      //     ? await context.read<SigninCubit>().verifyOtpSignup(
-      //         request:
-      //             SigninRequest(phone: phone, code: _pinPutController.text))
-      //     : await context.read<SigninCubit>().verifyOtpSignin(
-      //         request:
-      //             SigninRequest(phone: phone, code: _pinPutController.text));
-      // if (response != null && response.status == 200) {
-      //   isSignup
-      //       ? context.router.replace(FillInformationPage())
-      //       : context.router.replace(const MainPage());
+    if (formKey.currentState!.validate()) {
+      final bool sucess = await context.read<VerifyCubit>().sendOtp(
+          VerifyRequest(phoneNumber: email, otp: _pinPutController.text));
+      // if (sucess) {
+      context.router.push(ResetPassPage(phone: email, isSignup: isSignup));
       // }
     }
   }
@@ -75,9 +60,8 @@ class VerifyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = AppLocalizations.of(context);
     return BlocProvider(
-      create: (context) =>
-          LoginCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>()),
-      child: BlocConsumer<LoginCubit, LoginState>(
+      create: (context) => VerifyCubit(),
+      child: BlocConsumer<VerifyCubit, VerifyState>(
         listener: (context, state) {
           // TODO: implement listener
           if (!state.isLoading) {
@@ -177,10 +161,9 @@ class VerifyScreen extends StatelessWidget {
                                       onPress(context);
                                     },
                                     validator: (pin) {
-                                      if (pin!.length == 6 && pin == '111111') {
+                                      if (pin!.length == 6) {
                                         return null;
                                       }
-
                                       return 'Mã OTP không chính xác';
                                     },
                                     errorTextStyle:

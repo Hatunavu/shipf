@@ -1,4 +1,4 @@
-package com.example.shipf
+package com.n.shipf
 
 import io.flutter.embedding.android.FlutterActivity
 

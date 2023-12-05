@@ -155,3 +155,39 @@ class RegisterData {
 
   Map<String, dynamic> toJson() => _$RegisterDataToJson(this);
 }
+
+//register business
+@JsonSerializable()
+class RegisterBusinessRequest {
+  final String name;
+  @JsonKey(name: 'phone_number')
+  final String phoneNumber;
+  final String password;
+  final String email;
+
+  RegisterBusinessRequest(
+      {this.name = '',
+      this.phoneNumber = '',
+      this.password = '',
+      this.email = ''});
+
+  factory RegisterBusinessRequest.fromJson(Map<String, dynamic> json) =>
+      _$RegisterBusinessRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RegisterBusinessRequestToJson(this);
+}
+
+@JsonSerializable()
+class RegisterBusinessResponse {
+  final bool success;
+  final int status;
+  final String message;
+
+  RegisterBusinessResponse(
+      {this.success = false, this.message = '', this.status = 0});
+
+  factory RegisterBusinessResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegisterBusinessResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RegisterBusinessResponseToJson(this);
+}

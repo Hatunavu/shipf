@@ -10,7 +10,7 @@ class LoginState with _$LoginState {
     required RoleType role,
     required bool isAgreeTerms,
     required bool isLogin,
-    String? error,
+    required String error,
   }) = _LoginState;
 
   factory LoginState.initial() => const LoginState(

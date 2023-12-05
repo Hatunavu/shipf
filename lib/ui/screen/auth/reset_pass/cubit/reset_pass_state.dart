@@ -6,7 +6,7 @@ part 'reset_pass_state.freezed.dart';
 class ResetPassState with _$ResetPassState {
   const factory ResetPassState({
     required bool isLoading,
-    String? error,
+    required String error,
   }) = _ResetPassState;
 
   factory ResetPassState.initial() =>

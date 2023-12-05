@@ -17,6 +17,10 @@ class EnterPassCubit extends Cubit<EnterPassState> {
     emit(state.copyWith(error: error));
   }
 
+  void showPass() {
+    emit(state.copyWith(showPass: !state.showPass));
+  }
+
   Future<String> sendPass(LoginRequest loginRequest) async {
     try {
       emit(state.copyWith(isLoading: true));

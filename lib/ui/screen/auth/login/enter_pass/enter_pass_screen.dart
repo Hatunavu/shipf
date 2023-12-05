@@ -44,6 +44,7 @@ class EnterPassScreen extends StatelessWidget {
           listener: (context, state) {
             if (!state.isLoading) {
               isLoading == true ? context.router.pop() : null;
+              isLoading = false;
             }
             if (state.isLoading) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -94,11 +95,13 @@ class EnterPassScreen extends StatelessWidget {
                                     ),
                                     PrimaryTextField(
                                       errorText: state.error,
-                                      isPass: true,
+                                      isPass: state.showPass,
                                       label: '',
                                       hintText: text.password,
                                       controller: _passController,
                                       isValidate: true,
+                                      callBack: () => cubit.updateError(''),
+                                      showPass: () => cubit.showPass(),
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,

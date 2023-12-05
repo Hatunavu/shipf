@@ -6,7 +6,7 @@ part 'signup_state.freezed.dart';
 class SignupState with _$SignupState {
   const factory SignupState({
     required bool isLoading,
-    String? error,
+    required String error,
   }) = _SignupState;
 
   factory SignupState.initial() => const SignupState(

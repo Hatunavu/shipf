@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ResetPassState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ResetPassStateCopyWith<ResetPassState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $ResetPassStateCopyWith<$Res> {
           ResetPassState value, $Res Function(ResetPassState) then) =
       _$ResetPassStateCopyWithImpl<$Res, ResetPassState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
@@ -47,68 +47,68 @@ class _$ResetPassStateCopyWithImpl<$Res, $Val extends ResetPassState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ResetPassStateImplCopyWith<$Res>
+abstract class _$$_ResetPassStateCopyWith<$Res>
     implements $ResetPassStateCopyWith<$Res> {
-  factory _$$ResetPassStateImplCopyWith(_$ResetPassStateImpl value,
-          $Res Function(_$ResetPassStateImpl) then) =
-      __$$ResetPassStateImplCopyWithImpl<$Res>;
+  factory _$$_ResetPassStateCopyWith(
+          _$_ResetPassState value, $Res Function(_$_ResetPassState) then) =
+      __$$_ResetPassStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
-class __$$ResetPassStateImplCopyWithImpl<$Res>
-    extends _$ResetPassStateCopyWithImpl<$Res, _$ResetPassStateImpl>
-    implements _$$ResetPassStateImplCopyWith<$Res> {
-  __$$ResetPassStateImplCopyWithImpl(
-      _$ResetPassStateImpl _value, $Res Function(_$ResetPassStateImpl) _then)
+class __$$_ResetPassStateCopyWithImpl<$Res>
+    extends _$ResetPassStateCopyWithImpl<$Res, _$_ResetPassState>
+    implements _$$_ResetPassStateCopyWith<$Res> {
+  __$$_ResetPassStateCopyWithImpl(
+      _$_ResetPassState _value, $Res Function(_$_ResetPassState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
   }) {
-    return _then(_$ResetPassStateImpl(
+    return _then(_$_ResetPassState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ResetPassStateImpl implements _ResetPassState {
-  const _$ResetPassStateImpl({required this.isLoading, this.error});
+class _$_ResetPassState implements _ResetPassState {
+  const _$_ResetPassState({required this.isLoading, required this.error});
 
   @override
   final bool isLoading;
   @override
-  final String? error;
+  final String error;
 
   @override
   String toString() {
@@ -119,7 +119,7 @@ class _$ResetPassStateImpl implements _ResetPassState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResetPassStateImpl &&
+            other is _$_ResetPassState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,22 +131,21 @@ class _$ResetPassStateImpl implements _ResetPassState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResetPassStateImplCopyWith<_$ResetPassStateImpl> get copyWith =>
-      __$$ResetPassStateImplCopyWithImpl<_$ResetPassStateImpl>(
-          this, _$identity);
+  _$$_ResetPassStateCopyWith<_$_ResetPassState> get copyWith =>
+      __$$_ResetPassStateCopyWithImpl<_$_ResetPassState>(this, _$identity);
 }
 
 abstract class _ResetPassState implements ResetPassState {
   const factory _ResetPassState(
       {required final bool isLoading,
-      final String? error}) = _$ResetPassStateImpl;
+      required final String error}) = _$_ResetPassState;
 
   @override
   bool get isLoading;
   @override
-  String? get error;
+  String get error;
   @override
   @JsonKey(ignore: true)
-  _$$ResetPassStateImplCopyWith<_$ResetPassStateImpl> get copyWith =>
+  _$$_ResetPassStateCopyWith<_$_ResetPassState> get copyWith =>
       throw _privateConstructorUsedError;
 }

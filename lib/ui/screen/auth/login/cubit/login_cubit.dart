@@ -40,7 +40,8 @@ class LoginCubit extends Cubit<LoginState> {
         emit(state.copyWith(isLoading: false));
         return true;
       } else {
-        final errorMessage = mainRepository.mapDioErrorToMessage(e);
+        // final errorMessage = mainRepository.mapDioErrorToMessage(e);
+        const errorMessage = 'Số điện thoại không đúng';
         emit(state.copyWith(isLoading: false, error: errorMessage));
       }
     }

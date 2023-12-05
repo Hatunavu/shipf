@@ -21,7 +21,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool? isPrice;
   final bool? isDesc;
   final bool isAddress;
-  String? errorText;
+  final String errorText;
   final bool isSecondTextField;
   final TextEditingController controller;
   final int? maxLines;
@@ -32,6 +32,8 @@ class PrimaryTextField extends StatelessWidget {
   final int? lengthLimit;
   final String fieldRequire;
   final bool showPrefixIcon;
+  final Function()? callBack;
+  final Function()? showPass;
 
   PrimaryTextField(
       {Key? key,
@@ -40,7 +42,7 @@ class PrimaryTextField extends StatelessWidget {
       required this.controller,
       this.isEmail,
       this.isPhone,
-      this.errorText,
+      this.errorText = '',
       this.hintText,
       this.isTitle,
       this.isPrice,
@@ -55,7 +57,9 @@ class PrimaryTextField extends StatelessWidget {
       this.passConfirm,
       this.lengthLimit,
       this.fieldRequire = '',
-      this.showPrefixIcon = true})
+      this.showPrefixIcon = true,
+      this.callBack,
+      this.showPass})
       : super(key: key);
 
   final ValueNotifier _isShow = ValueNotifier(false);
@@ -79,7 +83,7 @@ class PrimaryTextField extends StatelessWidget {
           return 'Mật khẩu không khớp';
         }
       }
-      if (isPass == true) {
+      if (isPass != null) {
         if (text == null || text.isEmpty || text.isValidPassword == false) {
           return 'Mật khẩu phải từ 6 ký tự';
         }
@@ -99,21 +103,18 @@ class PrimaryTextField extends StatelessWidget {
           return ValueListenableBuilder(
               valueListenable: _isError,
               builder: (context, value, _) {
-                _isError.value =
-                    errorText != null && errorText != '' ? true : false;
                 return TextFormField(
                   inputFormatters: <TextInputFormatter>[
                     LengthLimitingTextInputFormatter(lengthLimit),
                   ],
-                  maxLines: isPass == true ? 1 : maxLines,
+                  maxLines: isPass != null ? 1 : maxLines,
                   enableSuggestions: true,
-                  autovalidateMode:
-                      _isError.value ? AutovalidateMode.always : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   autofillHints: const [AutofillHints.oneTimeCode],
                   validator: (text) => validate(text),
                   readOnly: readOnly,
                   controller: controller,
-                  obscureText: isPass == true ? !_isShow.value : false,
+                  obscureText: isPass != null ? !isPass! : false,
                   style: primaryTitleStyle.copyWith(
                       color: readOnly ? primaryColor : Colors.black,
                       height: 1.3,
@@ -132,19 +133,22 @@ class PrimaryTextField extends StatelessWidget {
                           );
                         }
                       : null,
+                  onTap: callBack,
                   decoration: InputDecoration(
+                    errorText: errorText.isNotEmpty ? errorText : null,
                     filled: true,
                     fillColor: backgroundTextField,
                     errorStyle: TextStyle(fontSize: 10.sp, color: Colors.red),
                     hintText: hintText ?? '',
                     hintStyle: primaryTitleStyle.copyWith(color: greyText),
-                    suffixIcon: isPass == true
+                    suffixIcon: isPass != null
                         ? IconButton(
-                            onPressed: () {
-                              _isShow.value = !_isShow.value;
-                            },
+                            onPressed: showPass,
+                            // () {
+                            //   _isShow.value = !_isShow.value;
+                            // },
                             icon: Icon(
-                              _isShow.value ? Ionicons.eye_off : Ionicons.eye,
+                              isPass == true ? Ionicons.eye : Ionicons.eye_off,
                               size: 18.sp,
                               color: primaryColor,
                             ))
@@ -155,7 +159,7 @@ class PrimaryTextField extends StatelessWidget {
                             size: 18.sp,
                             color: primaryColor,
                           )
-                        : isPass == true
+                        : isPass != null
                             ? Icon(
                                 Ionicons.lock_closed_outline,
                                 size: 18.sp,

@@ -127,3 +127,37 @@ Map<String, dynamic> _$RegisterDataToJson(RegisterData instance) =>
       'is_active': instance.isActive,
       'id': instance.id,
     };
+
+RegisterBusinessRequest _$RegisterBusinessRequestFromJson(
+        Map<String, dynamic> json) =>
+    RegisterBusinessRequest(
+      name: json['name'] as String? ?? '',
+      phoneNumber: json['phone_number'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$RegisterBusinessRequestToJson(
+        RegisterBusinessRequest instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'phone_number': instance.phoneNumber,
+      'password': instance.password,
+      'email': instance.email,
+    };
+
+RegisterBusinessResponse _$RegisterBusinessResponseFromJson(
+        Map<String, dynamic> json) =>
+    RegisterBusinessResponse(
+      success: json['success'] as bool? ?? false,
+      message: json['message'] as String? ?? '',
+      status: json['status'] as int? ?? 0,
+    );
+
+Map<String, dynamic> _$RegisterBusinessResponseToJson(
+        RegisterBusinessResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'status': instance.status,
+      'message': instance.message,
+    };

@@ -63,22 +63,22 @@ class _$SystemStateCopyWithImpl<$Res, $Val extends SystemState>
 }
 
 /// @nodoc
-abstract class _$$SystemStateImplCopyWith<$Res>
+abstract class _$$_SystemStateCopyWith<$Res>
     implements $SystemStateCopyWith<$Res> {
-  factory _$$SystemStateImplCopyWith(
-          _$SystemStateImpl value, $Res Function(_$SystemStateImpl) then) =
-      __$$SystemStateImplCopyWithImpl<$Res>;
+  factory _$$_SystemStateCopyWith(
+          _$_SystemState value, $Res Function(_$_SystemState) then) =
+      __$$_SystemStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$SystemStateImplCopyWithImpl<$Res>
-    extends _$SystemStateCopyWithImpl<$Res, _$SystemStateImpl>
-    implements _$$SystemStateImplCopyWith<$Res> {
-  __$$SystemStateImplCopyWithImpl(
-      _$SystemStateImpl _value, $Res Function(_$SystemStateImpl) _then)
+class __$$_SystemStateCopyWithImpl<$Res>
+    extends _$SystemStateCopyWithImpl<$Res, _$_SystemState>
+    implements _$$_SystemStateCopyWith<$Res> {
+  __$$_SystemStateCopyWithImpl(
+      _$_SystemState _value, $Res Function(_$_SystemState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$SystemStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$SystemStateImpl(
+    return _then(_$_SystemState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$SystemStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SystemStateImpl implements _SystemState {
-  const _$SystemStateImpl({required this.isLoading, this.error});
+class _$_SystemState implements _SystemState {
+  const _$_SystemState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -119,7 +119,7 @@ class _$SystemStateImpl implements _SystemState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SystemStateImpl &&
+            other is _$_SystemState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,13 +131,13 @@ class _$SystemStateImpl implements _SystemState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SystemStateImplCopyWith<_$SystemStateImpl> get copyWith =>
-      __$$SystemStateImplCopyWithImpl<_$SystemStateImpl>(this, _$identity);
+  _$$_SystemStateCopyWith<_$_SystemState> get copyWith =>
+      __$$_SystemStateCopyWithImpl<_$_SystemState>(this, _$identity);
 }
 
 abstract class _SystemState implements SystemState {
   const factory _SystemState(
-      {required final bool isLoading, final String? error}) = _$SystemStateImpl;
+      {required final bool isLoading, final String? error}) = _$_SystemState;
 
   @override
   bool get isLoading;
@@ -145,6 +145,6 @@ abstract class _SystemState implements SystemState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$SystemStateImplCopyWith<_$SystemStateImpl> get copyWith =>
+  _$$_SystemStateCopyWith<_$_SystemState> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,11 +6,10 @@ part 'enter_pass_state.freezed.dart';
 class EnterPassState with _$EnterPassState {
   const factory EnterPassState({
     required bool isLoading,
-    String? error,
+    required String error,
+    required bool showPass,
   }) = _EnterPassState;
 
-  factory EnterPassState.initial() => const EnterPassState(
-        isLoading: false,
-        error: "",
-      );
+  factory EnterPassState.initial() =>
+      const EnterPassState(isLoading: false, error: "", showPass: false);
 }

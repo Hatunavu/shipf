@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
           listener: (context, state) {
             if (!state.isLoading) {
               isLoading == true ? context.router.pop() : null;
+              isLoading = false;
             }
             if (state.isLoading) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -106,6 +107,7 @@ class LoginScreen extends StatelessWidget {
                                       hintText: text.phone,
                                       controller: _phoneController,
                                       isValidate: true,
+                                      callBack: () => cubit.updateError(''),
                                     ),
                                     SizedBox(
                                       height: kDefaultPaddingHeightWidget,
@@ -117,8 +119,7 @@ class LoginScreen extends StatelessWidget {
                                       label: 'Tiếp tục',
                                       onPressed: () async {
                                         unfocus(context);
-                                        if (state.error != null &&
-                                            _formKey.currentState!.validate()) {
+                                        if (_formKey.currentState!.validate()) {
                                           bool? isLogin = await cubit
                                               .sendPhone(_phoneController.text);
                                           if (isLogin == true) {
@@ -129,9 +130,6 @@ class LoginScreen extends StatelessWidget {
                                                 email: _phoneController.text,
                                                 isSignup: true));
                                           }
-                                        } else {
-                                          cubit.updateError(
-                                              'Số điện thoại không đúng');
                                         }
                                       },
                                     ),
@@ -142,43 +140,31 @@ class LoginScreen extends StatelessWidget {
                                       onTap: () {
                                         cubit.updateAgreeTerms();
                                       },
-                                      child: Container(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                                margin: EdgeInsets.only(
-                                                    right:
-                                                        kDefaultPaddingWidthScreen),
-                                                height:
-                                                    kDefaultPaddingWidthWidget,
-                                                width:
-                                                    kDefaultPaddingWidthWidget,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    color: state.isAgreeTerms
-                                                        ? primaryColor
-                                                        : Colors.white,
-                                                    border: Border.all(
-                                                        color: primaryColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2.r)),
-                                                child: Icon(
-                                                  Icons.done,
-                                                  size:
-                                                      kDefaultPaddingWidthWidget,
-                                                  color: Colors.white,
-                                                )),
-                                            const Expanded(
-                                              child: Text(
-                                                'Tôi đồng ý với cá Điều khoản và điều kiện và Chính sách bảo mật',
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                      behavior: HitTestBehavior.translucent,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                right:
+                                                    kDefaultPaddingWidthScreen),
+                                            height: kDefaultPaddingWidthWidget,
+                                            width: kDefaultPaddingWidthWidget,
+                                            child: Checkbox(
+                                              value: state.isAgreeTerms,
+                                              onChanged: (_) {
+                                                cubit.updateAgreeTerms();
+                                              },
+                                              activeColor: primaryColor,
+                                            ),
+                                          ),
+                                          const Expanded(
+                                            child: Text(
+                                              'Tôi đồng ý với cá Điều khoản và điều kiện và Chính sách bảo mật',
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     )
                                   ],

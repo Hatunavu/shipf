@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EnterPassState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
+  bool get showPass => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EnterPassStateCopyWith<EnterPassState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $EnterPassStateCopyWith<$Res> {
           EnterPassState value, $Res Function(EnterPassState) then) =
       _$EnterPassStateCopyWithImpl<$Res, EnterPassState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error, bool showPass});
 }
 
 /// @nodoc
@@ -47,106 +48,123 @@ class _$EnterPassStateCopyWithImpl<$Res, $Val extends EnterPassState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
+    Object? showPass = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      showPass: null == showPass
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$EnterPassStateImplCopyWith<$Res>
+abstract class _$$_EnterPassStateCopyWith<$Res>
     implements $EnterPassStateCopyWith<$Res> {
-  factory _$$EnterPassStateImplCopyWith(_$EnterPassStateImpl value,
-          $Res Function(_$EnterPassStateImpl) then) =
-      __$$EnterPassStateImplCopyWithImpl<$Res>;
+  factory _$$_EnterPassStateCopyWith(
+          _$_EnterPassState value, $Res Function(_$_EnterPassState) then) =
+      __$$_EnterPassStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error, bool showPass});
 }
 
 /// @nodoc
-class __$$EnterPassStateImplCopyWithImpl<$Res>
-    extends _$EnterPassStateCopyWithImpl<$Res, _$EnterPassStateImpl>
-    implements _$$EnterPassStateImplCopyWith<$Res> {
-  __$$EnterPassStateImplCopyWithImpl(
-      _$EnterPassStateImpl _value, $Res Function(_$EnterPassStateImpl) _then)
+class __$$_EnterPassStateCopyWithImpl<$Res>
+    extends _$EnterPassStateCopyWithImpl<$Res, _$_EnterPassState>
+    implements _$$_EnterPassStateCopyWith<$Res> {
+  __$$_EnterPassStateCopyWithImpl(
+      _$_EnterPassState _value, $Res Function(_$_EnterPassState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
+    Object? showPass = null,
   }) {
-    return _then(_$EnterPassStateImpl(
+    return _then(_$_EnterPassState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      showPass: null == showPass
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$EnterPassStateImpl implements _EnterPassState {
-  const _$EnterPassStateImpl({required this.isLoading, this.error});
+class _$_EnterPassState implements _EnterPassState {
+  const _$_EnterPassState(
+      {required this.isLoading, required this.error, required this.showPass});
 
   @override
   final bool isLoading;
   @override
-  final String? error;
+  final String error;
+  @override
+  final bool showPass;
 
   @override
   String toString() {
-    return 'EnterPassState(isLoading: $isLoading, error: $error)';
+    return 'EnterPassState(isLoading: $isLoading, error: $error, showPass: $showPass)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EnterPassStateImpl &&
+            other is _$_EnterPassState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.showPass, showPass) ||
+                other.showPass == showPass));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error, showPass);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EnterPassStateImplCopyWith<_$EnterPassStateImpl> get copyWith =>
-      __$$EnterPassStateImplCopyWithImpl<_$EnterPassStateImpl>(
-          this, _$identity);
+  _$$_EnterPassStateCopyWith<_$_EnterPassState> get copyWith =>
+      __$$_EnterPassStateCopyWithImpl<_$_EnterPassState>(this, _$identity);
 }
 
 abstract class _EnterPassState implements EnterPassState {
   const factory _EnterPassState(
       {required final bool isLoading,
-      final String? error}) = _$EnterPassStateImpl;
+      required final String error,
+      required final bool showPass}) = _$_EnterPassState;
 
   @override
   bool get isLoading;
   @override
-  String? get error;
+  String get error;
+  @override
+  bool get showPass;
   @override
   @JsonKey(ignore: true)
-  _$$EnterPassStateImplCopyWith<_$EnterPassStateImpl> get copyWith =>
+  _$$_EnterPassStateCopyWith<_$_EnterPassState> get copyWith =>
       throw _privateConstructorUsedError;
 }

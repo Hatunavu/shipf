@@ -63,22 +63,22 @@ class _$NotificationStateCopyWithImpl<$Res, $Val extends NotificationState>
 }
 
 /// @nodoc
-abstract class _$$NotificationStateImplCopyWith<$Res>
+abstract class _$$_NotificationStateCopyWith<$Res>
     implements $NotificationStateCopyWith<$Res> {
-  factory _$$NotificationStateImplCopyWith(_$NotificationStateImpl value,
-          $Res Function(_$NotificationStateImpl) then) =
-      __$$NotificationStateImplCopyWithImpl<$Res>;
+  factory _$$_NotificationStateCopyWith(_$_NotificationState value,
+          $Res Function(_$_NotificationState) then) =
+      __$$_NotificationStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$NotificationStateImplCopyWithImpl<$Res>
-    extends _$NotificationStateCopyWithImpl<$Res, _$NotificationStateImpl>
-    implements _$$NotificationStateImplCopyWith<$Res> {
-  __$$NotificationStateImplCopyWithImpl(_$NotificationStateImpl _value,
-      $Res Function(_$NotificationStateImpl) _then)
+class __$$_NotificationStateCopyWithImpl<$Res>
+    extends _$NotificationStateCopyWithImpl<$Res, _$_NotificationState>
+    implements _$$_NotificationStateCopyWith<$Res> {
+  __$$_NotificationStateCopyWithImpl(
+      _$_NotificationState _value, $Res Function(_$_NotificationState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$NotificationStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$NotificationStateImpl(
+    return _then(_$_NotificationState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$NotificationStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotificationStateImpl implements _NotificationState {
-  const _$NotificationStateImpl({required this.isLoading, this.error});
+class _$_NotificationState implements _NotificationState {
+  const _$_NotificationState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -119,7 +119,7 @@ class _$NotificationStateImpl implements _NotificationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NotificationStateImpl &&
+            other is _$_NotificationState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,15 @@ class _$NotificationStateImpl implements _NotificationState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NotificationStateImplCopyWith<_$NotificationStateImpl> get copyWith =>
-      __$$NotificationStateImplCopyWithImpl<_$NotificationStateImpl>(
+  _$$_NotificationStateCopyWith<_$_NotificationState> get copyWith =>
+      __$$_NotificationStateCopyWithImpl<_$_NotificationState>(
           this, _$identity);
 }
 
 abstract class _NotificationState implements NotificationState {
   const factory _NotificationState(
       {required final bool isLoading,
-      final String? error}) = _$NotificationStateImpl;
+      final String? error}) = _$_NotificationState;
 
   @override
   bool get isLoading;
@@ -147,6 +147,6 @@ abstract class _NotificationState implements NotificationState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$NotificationStateImplCopyWith<_$NotificationStateImpl> get copyWith =>
+  _$$_NotificationStateCopyWith<_$_NotificationState> get copyWith =>
       throw _privateConstructorUsedError;
 }

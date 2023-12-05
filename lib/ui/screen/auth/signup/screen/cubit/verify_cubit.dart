@@ -20,4 +20,8 @@ class VerifyCubit extends Cubit<VerifyState> {
       return false;
     }
   }
+
+  void updateError(String error) {
+    emit(state.copyWith(error: error));
+  }
 }

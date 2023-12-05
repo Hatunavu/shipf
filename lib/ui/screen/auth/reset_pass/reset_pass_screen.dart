@@ -50,6 +50,7 @@ class ResetPassScreen extends StatelessWidget {
           listener: (context, state) {
             if (!state.isLoading) {
               isLoading == true ? context.router.pop() : null;
+              isLoading = false;
             }
             if (state.isLoading) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -107,30 +108,31 @@ class ResetPassScreen extends StatelessWidget {
                                       label: '',
                                       hintText: text.phone,
                                       controller: _phoneController,
-                                      isValidate: true,
+                                      isValidate: false,
                                     ),
                                     SizedBox(
                                       height: kDefaultPaddingHeightWidget,
                                     ),
                                     PrimaryTextField(
                                       errorText: state.error,
-                                      isPass: true,
+                                      isPass: state.showPass,
                                       label: '',
                                       hintText: text.password,
                                       controller: _passController,
-                                      isValidate: true,
+                                      showPass: () => cubit.showPass(),
+                                      callBack: () => cubit.updateError(''),
                                     ),
                                     SizedBox(
                                       height: kDefaultPaddingHeightWidget,
                                     ),
                                     PrimaryTextField(
                                       errorText: state.error,
-                                      isPass: true,
+                                      isPass: state.showConfirmPass,
                                       label: '',
                                       hintText: text.confirm_password,
                                       controller: _confirmPassController,
-                                      isValidate: true,
                                       passConfirm: _passController.text,
+                                      showPass: () => cubit.showConfirmPass(),
                                     ),
                                     SizedBox(
                                       height: kDefaultPaddingHeightWidget,

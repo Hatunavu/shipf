@@ -33,6 +33,7 @@ class VerifyScreen extends StatelessWidget {
   final TextEditingController _pinPutController = TextEditingController();
 
   bool isLoading = false;
+  late VerifyCubit cubit;
 
   final defaultPinTheme = PinTheme(
     width: 55.w,
@@ -50,9 +51,9 @@ class VerifyScreen extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       final bool sucess = await context.read<VerifyCubit>().sendOtp(
           VerifyRequest(phoneNumber: email, otp: _pinPutController.text));
-      // if (sucess) {
-      context.router.push(ResetPassPage(phone: email, isSignup: isSignup));
-      // }
+      if (sucess) {
+        context.router.push(ResetPassPage(phone: email, isSignup: isSignup));
+      }
     }
   }
 
@@ -66,6 +67,7 @@ class VerifyScreen extends StatelessWidget {
           // TODO: implement listener
           if (!state.isLoading) {
             isLoading == true ? context.router.pop() : null;
+            isLoading = false;
           }
           if (state.error != null) {
             // button.onPressed!();
@@ -82,6 +84,7 @@ class VerifyScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          cubit = context.read<VerifyCubit>();
           return GestureDetector(
               onTap: () {
                 _pinPutFocusNode.unfocus();
@@ -153,10 +156,8 @@ class VerifyScreen extends StatelessWidget {
                                     defaultPinTheme: defaultPinTheme,
                                     focusNode: _pinPutFocusNode,
                                     controller: _pinPutController,
-                                    // errorPinTheme:
-                                    //     defaultPinTheme.copyDecorationWith(
-                                    //         border:
-                                    //             Border.all(color: Colors.red)),
+                                    onTap: () => cubit.updateError(''),
+                                    errorText: state.error,
                                     onSubmitted: (_) {
                                       onPress(context);
                                     },
@@ -168,27 +169,6 @@ class VerifyScreen extends StatelessWidget {
                                     },
                                     errorTextStyle:
                                         TextStyle(color: Colors.red),
-                                    // errorText: 'eroor',
-                                    // onCompleted: (_) {
-                                    //   onPress(context);
-                                    // },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Visibility(
-                                  visible: state.error != null,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      // Text(
-                                      //     state.isValidate == true
-                                      //         ? AppText.pleaseEnterOTP
-                                      //         : state.error ?? '',
-                                      //     style: primarySubTitleStyle.copyWith(
-                                      //         color: Colors.red)),
-                                    ],
                                   ),
                                 ),
                                 SizedBox(

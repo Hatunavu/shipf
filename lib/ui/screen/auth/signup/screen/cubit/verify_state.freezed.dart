@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$VerifyState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VerifyStateCopyWith<VerifyState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $VerifyStateCopyWith<$Res> {
           VerifyState value, $Res Function(VerifyState) then) =
       _$VerifyStateCopyWithImpl<$Res, VerifyState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
@@ -47,17 +47,17 @@ class _$VerifyStateCopyWithImpl<$Res, $Val extends VerifyState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_VerifyStateCopyWith<$Res>
       __$$_VerifyStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
@@ -85,17 +85,17 @@ class __$$_VerifyStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$_VerifyState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -103,12 +103,12 @@ class __$$_VerifyStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_VerifyState implements _VerifyState {
-  const _$_VerifyState({required this.isLoading, this.error});
+  const _$_VerifyState({required this.isLoading, required this.error});
 
   @override
   final bool isLoading;
   @override
-  final String? error;
+  final String error;
 
   @override
   String toString() {
@@ -137,12 +137,13 @@ class _$_VerifyState implements _VerifyState {
 
 abstract class _VerifyState implements VerifyState {
   const factory _VerifyState(
-      {required final bool isLoading, final String? error}) = _$_VerifyState;
+      {required final bool isLoading,
+      required final String error}) = _$_VerifyState;
 
   @override
   bool get isLoading;
   @override
-  String? get error;
+  String get error;
   @override
   @JsonKey(ignore: true)
   _$$_VerifyStateCopyWith<_$_VerifyState> get copyWith =>

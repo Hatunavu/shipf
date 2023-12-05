@@ -27,4 +27,12 @@ class ResetPassCubit extends Cubit<ResetPassState> {
   void updateError(String error) {
     emit(state.copyWith(error: error));
   }
+
+  void showPass() {
+    emit(state.copyWith(showPass: !state.showPass));
+  }
+
+  void showConfirmPass() {
+    emit(state.copyWith(showConfirmPass: !state.showConfirmPass));
+  }
 }

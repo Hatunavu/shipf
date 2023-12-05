@@ -135,7 +135,8 @@ class PrimaryTextField extends StatelessWidget {
                       : null,
                   onTap: callBack,
                   decoration: InputDecoration(
-                    errorText: errorText.isNotEmpty ? errorText : null,
+                    errorText:
+                        isValidate && errorText.isNotEmpty ? errorText : null,
                     filled: true,
                     fillColor: backgroundTextField,
                     errorStyle: TextStyle(fontSize: 10.sp, color: Colors.red),

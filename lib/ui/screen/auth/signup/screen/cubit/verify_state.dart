@@ -6,7 +6,7 @@ part 'verify_state.freezed.dart';
 class VerifyState with _$VerifyState {
   const factory VerifyState({
     required bool isLoading,
-    String? error,
+    required String error,
   }) = _VerifyState;
 
   factory VerifyState.initial() => const VerifyState(

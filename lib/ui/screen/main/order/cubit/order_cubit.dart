@@ -29,7 +29,9 @@ class OrderCubit extends Cubit<OrderState> {
           type: 'Giao nguyên chuyến',
           fee: '230.000đ'),
     ];
-    emit(state.copyWith(services: listService));
+    listService.first.isSelect = true;
+    emit(state.copyWith(
+        services: listService, serviceSelected: listService.first));
   }
 
   void updateStepOrder(StepOrderType stepOrderType) {
@@ -49,5 +51,17 @@ class OrderCubit extends Cubit<OrderState> {
     }).toList();
     emit(state.copyWith(
         services: newList, isUpdate: false, serviceSelected: service));
+  }
+
+  void updateDeliveryPoint() {
+    emit(state.copyWith(deliveryPoint: !state.deliveryPoint));
+  }
+
+  void updatePickupPoint() {
+    emit(state.copyWith(pickupPoint: !state.pickupPoint));
+  }
+
+  void updateInsurance() {
+    emit(state.copyWith(insurance: !state.insurance));
   }
 }

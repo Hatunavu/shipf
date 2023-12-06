@@ -121,11 +121,11 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
 }
 
 /// @nodoc
-abstract class _$$_AddAddressStateCopyWith<$Res>
+abstract class _$$AddAddressStateImplCopyWith<$Res>
     implements $AddAddressStateCopyWith<$Res> {
-  factory _$$_AddAddressStateCopyWith(
-          _$_AddAddressState value, $Res Function(_$_AddAddressState) then) =
-      __$$_AddAddressStateCopyWithImpl<$Res>;
+  factory _$$AddAddressStateImplCopyWith(_$AddAddressStateImpl value,
+          $Res Function(_$AddAddressStateImpl) then) =
+      __$$AddAddressStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,11 +142,11 @@ abstract class _$$_AddAddressStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddAddressStateCopyWithImpl<$Res>
-    extends _$AddAddressStateCopyWithImpl<$Res, _$_AddAddressState>
-    implements _$$_AddAddressStateCopyWith<$Res> {
-  __$$_AddAddressStateCopyWithImpl(
-      _$_AddAddressState _value, $Res Function(_$_AddAddressState) _then)
+class __$$AddAddressStateImplCopyWithImpl<$Res>
+    extends _$AddAddressStateCopyWithImpl<$Res, _$AddAddressStateImpl>
+    implements _$$AddAddressStateImplCopyWith<$Res> {
+  __$$AddAddressStateImplCopyWithImpl(
+      _$AddAddressStateImpl _value, $Res Function(_$AddAddressStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_AddAddressStateCopyWithImpl<$Res>
     Object? district = freezed,
     Object? ward = freezed,
   }) {
-    return _then(_$_AddAddressState(
+    return _then(_$AddAddressStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -210,8 +210,8 @@ class __$$_AddAddressStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddAddressState implements _AddAddressState {
-  const _$_AddAddressState(
+class _$AddAddressStateImpl implements _AddAddressState {
+  const _$AddAddressStateImpl(
       {required this.isLoading,
       this.error,
       this.isLoadingDistrict,
@@ -280,7 +280,7 @@ class _$_AddAddressState implements _AddAddressState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddAddressState &&
+            other is _$AddAddressStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -317,8 +317,9 @@ class _$_AddAddressState implements _AddAddressState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
-      __$$_AddAddressStateCopyWithImpl<_$_AddAddressState>(this, _$identity);
+  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
+      __$$AddAddressStateImplCopyWithImpl<_$AddAddressStateImpl>(
+          this, _$identity);
 }
 
 abstract class _AddAddressState implements AddAddressState {
@@ -332,7 +333,7 @@ abstract class _AddAddressState implements AddAddressState {
       final List<AddressDataModel>? wards,
       final AddressDataModel? province,
       final AddressDataModel? district,
-      final AddressDataModel? ward}) = _$_AddAddressState;
+      final AddressDataModel? ward}) = _$AddAddressStateImpl;
 
   @override
   bool get isLoading;
@@ -356,6 +357,6 @@ abstract class _AddAddressState implements AddAddressState {
   AddressDataModel? get ward;
   @override
   @JsonKey(ignore: true)
-  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
+  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

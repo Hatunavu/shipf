@@ -29,8 +29,10 @@ class _OrderScreenState extends State<OrderScreen> {
       TextEditingController();
   final TextEditingController parcelNameController = TextEditingController();
   final TextEditingController parcelPriceController = TextEditingController();
-  final TextEditingController parcelAmountController = TextEditingController();
-  final TextEditingController parcelWeightController = TextEditingController();
+  final TextEditingController parcelAmountController =
+      TextEditingController(text: '1');
+  final TextEditingController parcelWeightController =
+      TextEditingController(text: '1');
   final TextEditingController lengthController = TextEditingController();
   final TextEditingController widthController = TextEditingController();
   final TextEditingController heightController = TextEditingController();

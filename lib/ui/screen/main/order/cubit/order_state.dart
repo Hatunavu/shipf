@@ -12,12 +12,18 @@ class OrderState with _$OrderState {
       String? error,
       required List<OrderService> services,
       OrderService? serviceSelected,
-      required StepOrderType stepOrderType}) = _OrderState;
+      required StepOrderType stepOrderType,
+      required bool pickupPoint,
+      required bool deliveryPoint,
+      required bool insurance}) = _OrderState;
 
   factory OrderState.initial() => const OrderState(
       isLoading: false,
       error: "",
       stepOrderType: StepOrderType.address,
       services: [],
-      isUpdate: false);
+      isUpdate: false,
+      pickupPoint: false,
+      deliveryPoint: false,
+      insurance: false);
 }

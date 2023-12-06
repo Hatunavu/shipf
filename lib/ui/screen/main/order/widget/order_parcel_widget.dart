@@ -52,8 +52,6 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
   @override
   void initState() {
     super.initState();
-    widget.parcelAmountController.text = '1';
-    widget.parcelWeightController.text = '1';
     currentValue = 0;
   }
 
@@ -211,43 +209,53 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
           Row(
             children: [
               Expanded(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: kDefaultPaddingWidthWidget),
-                      child: SizedBox(
-                        width: kDefaultPaddingWidthWidget,
-                        height: kDefaultPaddingWidthWidget,
-                        child: Checkbox(
-                          activeColor: primaryColor,
-                          value: false,
-                          onChanged: (value) {},
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => widget.orderCubit.updatePickupPoint(),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingWidthWidget),
+                        child: SizedBox(
+                          width: kDefaultPaddingWidthWidget,
+                          height: kDefaultPaddingWidthWidget,
+                          child: Checkbox(
+                            activeColor: primaryColor,
+                            value: widget.orderCubit.state.pickupPoint,
+                            onChanged: (value) =>
+                                widget.orderCubit.updatePickupPoint(),
+                          ),
                         ),
                       ),
-                    ),
-                    Text(text.pickup_point)
-                  ],
+                      Text(text.pickup_point)
+                    ],
+                  ),
                 ),
               ),
               Expanded(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: kDefaultPaddingWidthWidget),
-                      child: SizedBox(
-                        width: kDefaultPaddingWidthWidget,
-                        height: kDefaultPaddingWidthWidget,
-                        child: Checkbox(
-                          activeColor: primaryColor,
-                          value: false,
-                          onChanged: (value) {},
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => widget.orderCubit.updateDeliveryPoint(),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingWidthWidget),
+                        child: SizedBox(
+                          width: kDefaultPaddingWidthWidget,
+                          height: kDefaultPaddingWidthWidget,
+                          child: Checkbox(
+                            activeColor: primaryColor,
+                            value: widget.orderCubit.state.deliveryPoint,
+                            onChanged: (value) =>
+                                widget.orderCubit.updateDeliveryPoint(),
+                          ),
                         ),
                       ),
-                    ),
-                    Text(text.delivery_point)
-                  ],
+                      Text(text.delivery_point)
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -289,29 +297,33 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               ),
             ],
           ),
-          VerticalSpace(
-            kDefaultPaddingHeightWidget,
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: kDefaultPaddingWidthWidget),
-                child: SizedBox(
-                  width: kDefaultPaddingWidthWidget,
-                  height: kDefaultPaddingWidthWidget,
-                  child: Checkbox(
-                    activeColor: primaryColor,
-                    value: true,
-                    onChanged: (value) {},
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () => widget.orderCubit.updateInsurance(),
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: kDefaultPaddingHeightWidget),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddingWidthWidget),
+                    child: SizedBox(
+                      width: kDefaultPaddingWidthWidget,
+                      height: kDefaultPaddingWidthWidget,
+                      child: Checkbox(
+                        activeColor: primaryColor,
+                        value: widget.orderCubit.state.insurance,
+                        onChanged: (value) =>
+                            widget.orderCubit.updateInsurance(),
+                      ),
+                    ),
                   ),
-                ),
+                  Text(text.insurance)
+                ],
               ),
-              Text(text.insurance)
-            ],
-          ),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

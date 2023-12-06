@@ -8,6 +8,10 @@ import 'package:shipf/ui/screen/auth/signup/screen/cubit/verify_state.dart';
 class VerifyCubit extends Cubit<VerifyState> {
   VerifyCubit() : super(VerifyState.initial());
 
+  Future init() async {
+    refreshEndTime();
+  }
+
   Future<bool> sendOtp(VerifyRequest verifyRequest) async {
     try {
       emit(state.copyWith(isLoading: true));
@@ -23,5 +27,15 @@ class VerifyCubit extends Cubit<VerifyState> {
 
   void updateError(String error) {
     emit(state.copyWith(error: error));
+  }
+
+  void refreshEndTime() {
+    emit(state.copyWith(
+        finishCountdown: false,
+        endTime: DateTime.now().add(const Duration(minutes: 3))));
+  }
+
+  void updateStatusCountdown({bool isFinish = true}) {
+    emit(state.copyWith(finishCountdown: isFinish));
   }
 }

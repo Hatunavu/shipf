@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pinput/pinput.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/foundation/app_path.dart';
@@ -62,20 +63,12 @@ class VerifyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = AppLocalizations.of(context);
     return BlocProvider(
-      create: (context) => VerifyCubit(),
+      create: (context) => VerifyCubit()..init(),
       child: BlocConsumer<VerifyCubit, VerifyState>(
         listener: (context, state) {
-          // TODO: implement listener
           if (!state.isLoading) {
             isLoading == true ? context.router.pop() : null;
             isLoading = false;
-          }
-          if (state.error != null) {
-            // button.onPressed!();
-            if (formKey.currentState!.validate()) {
-              print('demo');
-            }
-            // context.read<SigninCubit>().emit(state.copyWith(error: null));
           }
           if (state.isLoading) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -94,10 +87,7 @@ class VerifyScreen extends StatelessWidget {
                 backgroundColor: backgroundColor,
                 appBar: primaryAppBar(context: context, title: text!.verify),
                 body: SafeArea(
-                    child: Container(
-                  // height: MediaQuery.of(context).size.height -
-                  //     56 -
-                  //     MediaQuery.of(context).padding.vertical,
+                    child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: kDefaultPaddingWidthWidget),
                   child: Form(
@@ -147,7 +137,7 @@ class VerifyScreen extends StatelessWidget {
                                   // width: 250.w,
                                   child: Pinput(
                                     pinputAutovalidateMode:
-                                        PinputAutovalidateMode.disabled,
+                                        PinputAutovalidateMode.onSubmit,
                                     forceErrorState: true,
                                     pinContentAlignment: Alignment.center,
                                     mainAxisAlignment:
@@ -158,27 +148,52 @@ class VerifyScreen extends StatelessWidget {
                                     focusNode: _pinPutFocusNode,
                                     controller: _pinPutController,
                                     onTap: () => cubit.updateError(''),
-                                    errorText: state.error,
+                                    errorText: state.error.isNotEmpty
+                                        ? state.error
+                                        : null,
                                     onSubmitted: (_) {
                                       onPress(context);
                                     },
                                     validator: (pin) {
-                                      if (pin!.length == 6) {
-                                        return null;
+                                      if (pin == null || pin.length < 6) {
+                                        return 'Mã OTP không hợp lệ';
                                       }
-                                      return 'Mã OTP không chính xác';
+                                      return null;
                                     },
-                                    errorTextStyle:
-                                        TextStyle(color: Colors.red),
+                                    errorTextStyle: TextStyle(
+                                        fontSize: 10.sp, color: Colors.red),
                                   ),
                                 ),
                                 SizedBox(
                                   height: 20.h,
                                 ),
-                                CustomRichtext(
-                                    textSpan1: text.not_receive_code,
-                                    textSpan2: text.resend,
-                                    widgetNavigator: LoginPage()),
+                                state.finishCountdown
+                                    ? CustomRichtext(
+                                        textSpan1: text.not_receive_code,
+                                        textSpan2: text.resend,
+                                        widgetNavigator: LoginPage(),
+                                        onTap: () {
+                                          cubit.refreshEndTime();
+                                        },
+                                      )
+                                    : TimerCountdown(
+                                        enableDescriptions: false,
+                                        endTime: state.endTime!,
+                                        format:
+                                            CountDownTimerFormat.minutesSeconds,
+                                        timeTextStyle:
+                                            primarySubTitleStyle.copyWith(
+                                          color: primaryColor,
+                                        ),
+                                        spacerWidth: 0,
+                                        colonsTextStyle:
+                                            primarySubTitleStyle.copyWith(
+                                          color: primaryColor,
+                                        ),
+                                        onEnd: () {
+                                          cubit.updateStatusCountdown();
+                                        },
+                                      ),
                                 SizedBox(
                                   height: 20.h,
                                 ),

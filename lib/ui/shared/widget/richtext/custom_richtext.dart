@@ -11,6 +11,7 @@ class CustomRichtext extends StatelessWidget {
   final dynamic widgetNavigator;
   final bool isAuth;
   final double? fontSize;
+  final Function()? onTap;
 
   const CustomRichtext(
       {Key? key,
@@ -18,7 +19,8 @@ class CustomRichtext extends StatelessWidget {
       required this.textSpan2,
       this.widgetNavigator,
       this.fontSize,
-      this.isAuth = true})
+      this.isAuth = true,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -31,9 +33,10 @@ class CustomRichtext extends StatelessWidget {
               TextSpan(
                   text: textSpan2,
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      context.router.push(widgetNavigator);
-                    },
+                    ..onTap = onTap ??
+                        () {
+                          context.router.push(widgetNavigator);
+                        },
                   style: primarySubTitleStyle.copyWith(
                     color: primaryColor,
                   ))

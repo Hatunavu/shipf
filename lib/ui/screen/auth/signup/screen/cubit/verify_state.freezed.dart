@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$VerifyState {
   bool get isLoading => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  bool get finishCountdown => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VerifyStateCopyWith<VerifyState> get copyWith =>
@@ -30,7 +32,8 @@ abstract class $VerifyStateCopyWith<$Res> {
           VerifyState value, $Res Function(VerifyState) then) =
       _$VerifyStateCopyWithImpl<$Res, VerifyState>;
   @useResult
-  $Res call({bool isLoading, String error});
+  $Res call(
+      {bool isLoading, String error, DateTime? endTime, bool finishCountdown});
 }
 
 /// @nodoc
@@ -48,6 +51,8 @@ class _$VerifyStateCopyWithImpl<$Res, $Val extends VerifyState>
   $Res call({
     Object? isLoading = null,
     Object? error = null,
+    Object? endTime = freezed,
+    Object? finishCountdown = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +63,14 @@ class _$VerifyStateCopyWithImpl<$Res, $Val extends VerifyState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      finishCountdown: null == finishCountdown
+          ? _value.finishCountdown
+          : finishCountdown // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +83,8 @@ abstract class _$$_VerifyStateCopyWith<$Res>
       __$$_VerifyStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String error});
+  $Res call(
+      {bool isLoading, String error, DateTime? endTime, bool finishCountdown});
 }
 
 /// @nodoc
@@ -86,6 +100,8 @@ class __$$_VerifyStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = null,
+    Object? endTime = freezed,
+    Object? finishCountdown = null,
   }) {
     return _then(_$_VerifyState(
       isLoading: null == isLoading
@@ -96,6 +112,14 @@ class __$$_VerifyStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      finishCountdown: null == finishCountdown
+          ? _value.finishCountdown
+          : finishCountdown // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -103,16 +127,24 @@ class __$$_VerifyStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_VerifyState implements _VerifyState {
-  const _$_VerifyState({required this.isLoading, required this.error});
+  const _$_VerifyState(
+      {required this.isLoading,
+      required this.error,
+      this.endTime,
+      required this.finishCountdown});
 
   @override
   final bool isLoading;
   @override
   final String error;
+  @override
+  final DateTime? endTime;
+  @override
+  final bool finishCountdown;
 
   @override
   String toString() {
-    return 'VerifyState(isLoading: $isLoading, error: $error)';
+    return 'VerifyState(isLoading: $isLoading, error: $error, endTime: $endTime, finishCountdown: $finishCountdown)';
   }
 
   @override
@@ -122,11 +154,15 @@ class _$_VerifyState implements _VerifyState {
             other is _$_VerifyState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.finishCountdown, finishCountdown) ||
+                other.finishCountdown == finishCountdown));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, error, endTime, finishCountdown);
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +174,18 @@ class _$_VerifyState implements _VerifyState {
 abstract class _VerifyState implements VerifyState {
   const factory _VerifyState(
       {required final bool isLoading,
-      required final String error}) = _$_VerifyState;
+      required final String error,
+      final DateTime? endTime,
+      required final bool finishCountdown}) = _$_VerifyState;
 
   @override
   bool get isLoading;
   @override
   String get error;
+  @override
+  DateTime? get endTime;
+  @override
+  bool get finishCountdown;
   @override
   @JsonKey(ignore: true)
   _$$_VerifyStateCopyWith<_$_VerifyState> get copyWith =>

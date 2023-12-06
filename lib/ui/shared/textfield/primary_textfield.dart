@@ -75,7 +75,7 @@ class PrimaryTextField extends StatelessWidget {
         if (text == null || text.isEmpty) {
           return 'Vui lòng nhập số điện thoại';
         } else if (text.formatPhoneNumber().isValidPhone == false) {
-          return "Số điện thoại không đúng";
+          return "Số điện thoại không đúng định dạng";
         }
       }
       if (passConfirm != null) {

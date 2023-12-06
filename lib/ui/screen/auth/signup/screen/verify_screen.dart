@@ -49,9 +49,10 @@ class VerifyScreen extends StatelessWidget {
   void onPress(BuildContext context) async {
     unfocus(context);
     if (formKey.currentState!.validate()) {
-      final bool sucess = await context.read<VerifyCubit>().sendOtp(
-          VerifyRequest(phoneNumber: email, otp: _pinPutController.text));
-      if (sucess) {
+      final bool success = await context
+          .read<VerifyCubit>()
+          .sendOtp(VerifyRequest(phone: email, otp: _pinPutController.text));
+      if (success) {
         context.router.push(ResetPassPage(phone: email, isSignup: isSignup));
       }
     }

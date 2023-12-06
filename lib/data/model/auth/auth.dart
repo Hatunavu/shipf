@@ -5,11 +5,10 @@ part 'auth.g.dart';
 //verify phone and otp
 @JsonSerializable()
 class VerifyRequest {
-  @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String phone;
   final String? otp;
 
-  VerifyRequest({this.phoneNumber = '', this.otp});
+  VerifyRequest({this.phone = '', this.otp});
 
   factory VerifyRequest.fromJson(Map<String, dynamic> json) =>
       _$VerifyRequestFromJson(json);
@@ -84,11 +83,10 @@ class LoginData {
 @JsonSerializable()
 class RegisterRequest {
   final String name;
-  @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String phone;
   final String password;
 
-  RegisterRequest({this.name = '', this.phoneNumber = '', this.password = ''});
+  RegisterRequest({this.name = '', this.phone = '', this.password = ''});
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterRequestFromJson(json);
@@ -160,16 +158,12 @@ class RegisterData {
 @JsonSerializable()
 class RegisterBusinessRequest {
   final String name;
-  @JsonKey(name: 'phone_number')
-  final String phoneNumber;
+  final String phone;
   final String password;
   final String email;
 
   RegisterBusinessRequest(
-      {this.name = '',
-      this.phoneNumber = '',
-      this.password = '',
-      this.email = ''});
+      {this.name = '', this.phone = '', this.password = '', this.email = ''});
 
   factory RegisterBusinessRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterBusinessRequestFromJson(json);

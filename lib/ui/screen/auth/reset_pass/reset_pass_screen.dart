@@ -148,7 +148,7 @@ class ResetPassScreen extends StatelessWidget {
                                               .register(RegisterRequest(
                                                   password:
                                                       _passController.text,
-                                                  phoneNumber: phone));
+                                                  phone: phone));
                                           if (succes) {
                                             AccountServices()
                                                 .saveUserToken('token');

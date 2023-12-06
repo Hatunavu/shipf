@@ -29,7 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(state.copyWith(isLoading: true));
       final response =
-          await mainRepository.verifyPhone(VerifyRequest(phoneNumber: phone));
+          await mainRepository.verifyPhone(VerifyRequest(phone: phone));
       if (response.success) {
         emit(state.copyWith(isLoading: false));
         return false;
@@ -40,8 +40,8 @@ class LoginCubit extends Cubit<LoginState> {
         emit(state.copyWith(isLoading: false));
         return true;
       } else {
-        // final errorMessage = mainRepository.mapDioErrorToMessage(e);
-        const errorMessage = 'Số điện thoại không đúng';
+        final errorMessage = mainRepository.mapDioErrorToMessage(e);
+        // const errorMessage = 'Số điện thoại không đúng từ api';
         emit(state.copyWith(isLoading: false, error: errorMessage));
       }
     }

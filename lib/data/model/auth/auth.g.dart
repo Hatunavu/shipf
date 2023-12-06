@@ -8,13 +8,13 @@ part of 'auth.dart';
 
 VerifyRequest _$VerifyRequestFromJson(Map<String, dynamic> json) =>
     VerifyRequest(
-      phoneNumber: json['phone_number'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
       otp: json['otp'] as String?,
     );
 
 Map<String, dynamic> _$VerifyRequestToJson(VerifyRequest instance) =>
     <String, dynamic>{
-      'phone_number': instance.phoneNumber,
+      'phone': instance.phone,
       'otp': instance.otp,
     };
 
@@ -76,14 +76,14 @@ Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
 RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
     RegisterRequest(
       name: json['name'] as String? ?? '',
-      phoneNumber: json['phone_number'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
       password: json['password'] as String? ?? '',
     );
 
 Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'phone_number': instance.phoneNumber,
+      'phone': instance.phone,
       'password': instance.password,
     };
 
@@ -132,7 +132,7 @@ RegisterBusinessRequest _$RegisterBusinessRequestFromJson(
         Map<String, dynamic> json) =>
     RegisterBusinessRequest(
       name: json['name'] as String? ?? '',
-      phoneNumber: json['phone_number'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
       password: json['password'] as String? ?? '',
       email: json['email'] as String? ?? '',
     );
@@ -141,7 +141,7 @@ Map<String, dynamic> _$RegisterBusinessRequestToJson(
         RegisterBusinessRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'phone_number': instance.phoneNumber,
+      'phone': instance.phone,
       'password': instance.password,
       'email': instance.email,
     };

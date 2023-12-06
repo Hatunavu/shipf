@@ -17,7 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isUpdate => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<OrderService> get services => throw _privateConstructorUsedError;
+  OrderService? get serviceSelected => throw _privateConstructorUsedError;
   StepOrderType get stepOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +34,13 @@ abstract class $OrderStateCopyWith<$Res> {
           OrderState value, $Res Function(OrderState) then) =
       _$OrderStateCopyWithImpl<$Res, OrderState>;
   @useResult
-  $Res call({bool isLoading, String? error, StepOrderType stepOrderType});
+  $Res call(
+      {bool isLoading,
+      bool isUpdate,
+      String? error,
+      List<OrderService> services,
+      OrderService? serviceSelected,
+      StepOrderType stepOrderType});
 }
 
 /// @nodoc
@@ -48,7 +57,10 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isUpdate = null,
     Object? error = freezed,
+    Object? services = null,
+    Object? serviceSelected = freezed,
     Object? stepOrderType = null,
   }) {
     return _then(_value.copyWith(
@@ -56,10 +68,22 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isUpdate: null == isUpdate
+          ? _value.isUpdate
+          : isUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      services: null == services
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
+              as List<OrderService>,
+      serviceSelected: freezed == serviceSelected
+          ? _value.serviceSelected
+          : serviceSelected // ignore: cast_nullable_to_non_nullable
+              as OrderService?,
       stepOrderType: null == stepOrderType
           ? _value.stepOrderType
           : stepOrderType // ignore: cast_nullable_to_non_nullable
@@ -76,7 +100,13 @@ abstract class _$$_OrderStateCopyWith<$Res>
       __$$_OrderStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, StepOrderType stepOrderType});
+  $Res call(
+      {bool isLoading,
+      bool isUpdate,
+      String? error,
+      List<OrderService> services,
+      OrderService? serviceSelected,
+      StepOrderType stepOrderType});
 }
 
 /// @nodoc
@@ -91,7 +121,10 @@ class __$$_OrderStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isUpdate = null,
     Object? error = freezed,
+    Object? services = null,
+    Object? serviceSelected = freezed,
     Object? stepOrderType = null,
   }) {
     return _then(_$_OrderState(
@@ -99,10 +132,22 @@ class __$$_OrderStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isUpdate: null == isUpdate
+          ? _value.isUpdate
+          : isUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      services: null == services
+          ? _value._services
+          : services // ignore: cast_nullable_to_non_nullable
+              as List<OrderService>,
+      serviceSelected: freezed == serviceSelected
+          ? _value.serviceSelected
+          : serviceSelected // ignore: cast_nullable_to_non_nullable
+              as OrderService?,
       stepOrderType: null == stepOrderType
           ? _value.stepOrderType
           : stepOrderType // ignore: cast_nullable_to_non_nullable
@@ -115,18 +160,36 @@ class __$$_OrderStateCopyWithImpl<$Res>
 
 class _$_OrderState implements _OrderState {
   const _$_OrderState(
-      {required this.isLoading, this.error, required this.stepOrderType});
+      {required this.isLoading,
+      required this.isUpdate,
+      this.error,
+      required final List<OrderService> services,
+      this.serviceSelected,
+      required this.stepOrderType})
+      : _services = services;
 
   @override
   final bool isLoading;
   @override
+  final bool isUpdate;
+  @override
   final String? error;
+  final List<OrderService> _services;
+  @override
+  List<OrderService> get services {
+    if (_services is EqualUnmodifiableListView) return _services;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_services);
+  }
+
+  @override
+  final OrderService? serviceSelected;
   @override
   final StepOrderType stepOrderType;
 
   @override
   String toString() {
-    return 'OrderState(isLoading: $isLoading, error: $error, stepOrderType: $stepOrderType)';
+    return 'OrderState(isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType)';
   }
 
   @override
@@ -136,13 +199,25 @@ class _$_OrderState implements _OrderState {
             other is _$_OrderState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isUpdate, isUpdate) ||
+                other.isUpdate == isUpdate) &&
             (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality().equals(other._services, _services) &&
+            (identical(other.serviceSelected, serviceSelected) ||
+                other.serviceSelected == serviceSelected) &&
             (identical(other.stepOrderType, stepOrderType) ||
                 other.stepOrderType == stepOrderType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error, stepOrderType);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isUpdate,
+      error,
+      const DeepCollectionEquality().hash(_services),
+      serviceSelected,
+      stepOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -154,13 +229,22 @@ class _$_OrderState implements _OrderState {
 abstract class _OrderState implements OrderState {
   const factory _OrderState(
       {required final bool isLoading,
+      required final bool isUpdate,
       final String? error,
+      required final List<OrderService> services,
+      final OrderService? serviceSelected,
       required final StepOrderType stepOrderType}) = _$_OrderState;
 
   @override
   bool get isLoading;
   @override
+  bool get isUpdate;
+  @override
   String? get error;
+  @override
+  List<OrderService> get services;
+  @override
+  OrderService? get serviceSelected;
   @override
   StepOrderType get stepOrderType;
   @override

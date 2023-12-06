@@ -43,7 +43,7 @@ class _OrderScreenState extends State<OrderScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AddAddressCubit()..getProvinces()),
-        BlocProvider(create: (context) => OrderCubit())
+        BlocProvider(create: (context) => OrderCubit()..init())
       ],
       child: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
@@ -79,7 +79,10 @@ class _OrderScreenState extends State<OrderScreen> {
                         parcelformKey: parcelformKey,
                       ),
                     )
-                  : OrderFeeWidget();
+                  : OrderFeeWidget(
+                      cubit: orderCubit,
+                      orderState: state,
+                    );
           return GestureDetector(
             onTap: () {
               unfocus(context);

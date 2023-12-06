@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
+import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
@@ -8,7 +11,10 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderFeeWidget extends StatelessWidget {
-  const OrderFeeWidget({super.key});
+  final OrderCubit cubit;
+  final OrderState orderState;
+  const OrderFeeWidget(
+      {super.key, required this.cubit, required this.orderState});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class OrderFeeWidget extends StatelessWidget {
                     style: textHeading.copyWith(fontWeight: FontWeight.w500),
                   )),
                   Text(
-                    '70.000 đ',
+                    orderState.serviceSelected?.fee ?? '',
                     style:
                         primaryHeaderTitleStyle.copyWith(color: primaryColor),
                   )
@@ -74,9 +80,9 @@ class OrderFeeWidget extends StatelessWidget {
           ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 5,
+              itemCount: orderState.services.length,
               itemBuilder: (context, index) {
-                return serviceItem(isActive: index == 0);
+                return serviceItem(orderState.services[index]);
               }),
           Padding(
             padding:
@@ -106,60 +112,70 @@ class OrderFeeWidget extends StatelessWidget {
     );
   }
 
-  Widget serviceItem({bool isActive = false}) {
-    return Container(
-      margin: EdgeInsets.only(bottom: kDefaultPaddingHeightScreen),
-      padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthScreen,
-          vertical: kDefaultPaddingHeightScreen),
-      decoration: BoxDecoration(
-          color:
-              isActive ? primaryColor.withOpacity(0.05) : backgroundTextField,
-          border: Border.all(
-              color: isActive ? primaryColor : greyText.withOpacity(0.2)),
-          borderRadius: BorderRadius.circular(defaultBorderRadius)),
-      child: Row(
-        children: [
-          Icon(
-            isActive ? Icons.radio_button_checked : Icons.radio_button_off,
-            color: isActive ? primaryColor : greyText,
-          ),
-          HorizontalSpace(
-            kDefaultPaddingWidthWidget / 2,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'TV HN - vùng 1 12kg',
-                        style: primaryTitleStyle,
-                      ),
-                    ),
-                    SizedBox(
-                      width: kDefaultPaddingWidthScreen / 2,
-                    ),
-                    Text(
-                      '70.000đ',
-                      style: textHeading.copyWith(color: primaryColor),
-                    )
-                  ],
-                ),
-                VerticalSpace(
-                  kDefaultPaddingHeightScreen / 2,
-                ),
-                Text(
-                  'Giao ghép hàng',
-                  style: textBody.copyWith(fontSize: 12.sp),
-                )
-              ],
+  Widget serviceItem(OrderService service) {
+    return GestureDetector(
+      onTap: () {
+        cubit.selectService(service);
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: kDefaultPaddingHeightScreen),
+        padding: EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingWidthScreen,
+            vertical: kDefaultPaddingHeightScreen),
+        decoration: BoxDecoration(
+            color: service.isSelect
+                ? primaryColor.withOpacity(0.05)
+                : backgroundTextField,
+            border: Border.all(
+                color: service.isSelect
+                    ? primaryColor
+                    : greyText.withOpacity(0.2)),
+            borderRadius: BorderRadius.circular(defaultBorderRadius)),
+        child: Row(
+          children: [
+            Icon(
+              service.isSelect
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_off,
+              color: service.isSelect ? primaryColor : greyText,
             ),
-          )
-        ],
+            HorizontalSpace(
+              kDefaultPaddingWidthWidget / 2,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          service.name,
+                          style: primaryTitleStyle,
+                        ),
+                      ),
+                      SizedBox(
+                        width: kDefaultPaddingWidthScreen / 2,
+                      ),
+                      Text(
+                        service.fee,
+                        style: textHeading.copyWith(color: primaryColor),
+                      )
+                    ],
+                  ),
+                  VerticalSpace(
+                    kDefaultPaddingHeightScreen / 2,
+                  ),
+                  Text(
+                    service.type,
+                    style: textBody.copyWith(fontSize: 12.sp),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

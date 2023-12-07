@@ -64,6 +64,16 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           child: PrimaryButton(
             label: text.continuee,
             onPressed: () {
+              // widget.orderCubit.getService(OrderRequest(
+              //     parcelWeight: 100,
+              //     parcelWidth: 70,
+              //     parcelHeight: 70,
+              //     parcelLength: 50,
+              //     parcelQuantity: 1,
+              //     parcelValue: 0,
+              //     pickAddressId: 1,
+              //     toProvinceId: 4,
+              //     toDistrictId: 40));
               if (widget.addressFormKey.currentState!.validate()) {
                 widget.orderCubit.updateStepOrder(StepOrderType.parcel);
               }

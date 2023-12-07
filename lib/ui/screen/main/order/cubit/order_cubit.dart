@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:shipf/data/model/order/order_request.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_step_order.dart';
+import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 
 class OrderCubit extends Cubit<OrderState> {
@@ -63,5 +67,26 @@ class OrderCubit extends Cubit<OrderState> {
 
   void updateInsurance() {
     emit(state.copyWith(insurance: !state.insurance));
+  }
+
+  Future<void> getService(OrderRequest orderRequest) async {
+    try {
+      emit(state.copyWith(isLoading: true));
+      await mainRepository.getOrderService(
+          orderRequest.pickAddressId,
+          orderRequest.toProvinceId,
+          orderRequest.toDistrictId,
+          orderRequest.parcelWeight,
+          orderRequest.parcelQuantity,
+          orderRequest.parcelLength,
+          orderRequest.parcelWidth,
+          orderRequest.parcelHeight,
+          orderRequest.parcelValue,
+          orderRequest.isInsured);
+      emit(state.copyWith(isLoading: false));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isLoading: false, error: errorMessage));
+    }
   }
 }

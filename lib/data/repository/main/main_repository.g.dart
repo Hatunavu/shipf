@@ -228,6 +228,40 @@ class _MainRepository implements MainRepository {
     return value;
   }
 
+  @override
+  Future<OrderServiceResponse> getOrderService(
+    pickAddressId,
+    toProvinceId,
+    toDistrictId,
+    parcelWeight,
+    parcelQuantity,
+    parcelLength,
+    parcelWidth,
+    parcelHeight,
+    parcelValue,
+    isInsured,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<OrderServiceResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/price-lists/quotes?pick_address_id=${pickAddressId}&to_province_id=${toProvinceId}&to_district_id=${toDistrictId}&parcel_weight=${parcelWeight}&parcel_quantity=${parcelQuantity}&parcel_length=${parcelLength}&parcel_width=${parcelWidth}&parcel_height=${parcelHeight}&parcel_value=${parcelValue}&is_insured=${isInsured}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = OrderServiceResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

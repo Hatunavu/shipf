@@ -13,3 +13,7 @@ const registerBusiness = '/api/v2/user/register-business';
 const getProvinces = "/provinces";
 const getDistricts = "/districts?province_id={provinceId}";
 const getWards = "/wards?district_id={districtId}";
+
+//order
+const getOrderService =
+    '/price-lists/quotes?pick_address_id={pickAddressId}&to_province_id={toProvinceId}&to_district_id={toDistrictId}&parcel_weight={parcelWeight}&parcel_quantity={parcelQuantity}&parcel_length={parcelLength}&parcel_width={parcelWidth}&parcel_height={parcelHeight}&parcel_value={parcelValue}&is_insured={isInsured}';

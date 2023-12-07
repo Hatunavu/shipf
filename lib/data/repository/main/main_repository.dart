@@ -8,6 +8,7 @@ import 'package:retrofit/http.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
+import 'package:shipf/data/model/order/order_service.dart';
 
 import 'endpoint.dart' as endpoint;
 
@@ -49,6 +50,21 @@ abstract class MainRepository {
 
   @GET(endpoint.getWards)
   Future<AddressModel> getWards(@Path('districtId') int districtId);
+
+  //order
+  @GET(endpoint.getOrderService)
+  Future<OrderServiceResponse> getOrderService(
+    @Path('pickAddressId') int pickAddressId,
+    @Path('toProvinceId') int toProvinceId,
+    @Path('toDistrictId') int toDistrictId,
+    @Path('parcelWeight') int parcelWeight,
+    @Path('parcelQuantity') int parcelQuantity,
+    @Path('parcelLength') int parcelLength,
+    @Path('parcelWidth') int parcelWidth,
+    @Path('parcelHeight') int parcelHeight,
+    @Path('parcelValue') int parcelValue,
+    @Path('isInsured') bool isInsured,
+  );
 }
 
 extension ApiClientAWSS3 on MainRepository {

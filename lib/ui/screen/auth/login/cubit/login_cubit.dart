@@ -56,8 +56,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future<bool> login(LoginRequest loginRequest) async {
     try {
       emit(state.copyWith(isLoading: true));
-      await mainRepository.login(loginRequest);
-      AccountServices().saveUserToken('token');
+      final response = await mainRepository.login(loginRequest);
+      AccountServices().saveUserToken(response.data?.accessToken ?? '');
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

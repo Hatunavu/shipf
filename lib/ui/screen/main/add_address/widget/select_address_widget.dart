@@ -14,6 +14,7 @@ class SelectAddressWidget extends StatefulWidget {
   final bool isWard;
   final bool enableSelect;
   final AddressDataModel? addressData;
+  final bool isDeliver;
 
   const SelectAddressWidget(
       {Key? key,
@@ -21,7 +22,8 @@ class SelectAddressWidget extends StatefulWidget {
       this.isDistrict = false,
       this.isWard = false,
       this.enableSelect = false,
-      this.addressData})
+      this.addressData,
+      this.isDeliver = false})
       : super(key: key);
 
   @override
@@ -33,6 +35,9 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   int indexProvince = -1;
   int indexDistrict = -1;
   int indexWard = -1;
+  int indexProvinceDeliver = -1;
+  int indexDistrictDeliver = -1;
+  int indexWardDeliver = -1;
   AddressDataModel? get addressData => widget.addressData;
 
   @override
@@ -89,25 +94,49 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
           title: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              if (widget.isWard) {
-                setState(() {
-                  indexWard = index;
-                  _addAddressCubit.updateWard(wards![index]);
-                });
-              } else if (widget.isDistrict) {
-                _addAddressCubit.getWards(districtId: districts![index].id);
-                setState(() {
-                  indexDistrict = index;
-                });
-                _addAddressCubit.updateDistrict(districts[index]);
+              if (widget.isDeliver) {
+                if (widget.isWard) {
+                  setState(() {
+                    indexWardDeliver = index;
+                    _addAddressCubit.updateWardDeliver(wards![index]);
+                  });
+                } else if (widget.isDistrict) {
+                  _addAddressCubit.getWardsDeliver(
+                      districtId: districts![index].id);
+                  setState(() {
+                    indexDistrictDeliver = index;
+                  });
+                  _addAddressCubit.updateDistrictDeliver(districts[index]);
+                } else {
+                  _addAddressCubit.getDistrictsDeliver(
+                      provinceId: provinces[index].id, isUpdateProvince: true);
+                  setState(() {
+                    indexProvinceDeliver = index;
+                  });
+                  _addAddressCubit.updateProvinceDeliver(provinces[index]);
+                }
               } else {
-                _addAddressCubit.getDistricts(
-                    provinceId: provinces[index].id, isUpdateProvince: true);
-                setState(() {
-                  indexProvince = index;
-                });
-                _addAddressCubit.updateProvince(provinces[index]);
+                if (widget.isWard) {
+                  setState(() {
+                    indexWard = index;
+                    _addAddressCubit.updateWard(wards![index]);
+                  });
+                } else if (widget.isDistrict) {
+                  _addAddressCubit.getWards(districtId: districts![index].id);
+                  setState(() {
+                    indexDistrict = index;
+                  });
+                  _addAddressCubit.updateDistrict(districts[index]);
+                } else {
+                  _addAddressCubit.getDistricts(
+                      provinceId: provinces[index].id, isUpdateProvince: true);
+                  setState(() {
+                    indexProvince = index;
+                  });
+                  _addAddressCubit.updateProvince(provinces[index]);
+                }
               }
+
               Navigator.pop(context);
             },
             child: Padding(
@@ -195,35 +224,66 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
       builder: (context, locationState) {
         return GestureDetector(
             onTap: () {
-              widget.isWard
-                  ? locationState.wards != null
-                      ? _modalButtonAddress(
-                          provinces: locationState.provinces!,
-                          districts: locationState.districts,
-                          wards: locationState.wards)
-                      : null
-                  : widget.isDistrict
-                      ? locationState.districts != null
+              widget.isDeliver
+                  ? widget.isWard
+                      ? locationState.wardsDeliver != null
+                          ? _modalButtonAddress(
+                              provinces: locationState.provinces!,
+                              districts: locationState.districtsDeliver,
+                              wards: locationState.wardsDeliver)
+                          : null
+                      : widget.isDistrict
+                          ? locationState.districts != null
+                              ? _modalButtonAddress(
+                                  provinces: locationState.provinces!,
+                                  districts: locationState.districtsDeliver,
+                                  wards: locationState.wardsDeliver)
+                              : null
+                          : _modalButtonAddress(
+                              provinces: locationState.provinces ?? [],
+                              districts: locationState.districtsDeliver,
+                              wards: locationState.wardsDeliver)
+                  : widget.isWard
+                      ? locationState.wards != null
                           ? _modalButtonAddress(
                               provinces: locationState.provinces!,
                               districts: locationState.districts,
                               wards: locationState.wards)
                           : null
-                      : _modalButtonAddress(
-                          provinces: locationState.provinces ?? [],
-                          districts: locationState.districts,
-                          wards: locationState.wards);
+                      : widget.isDistrict
+                          ? locationState.districts != null
+                              ? _modalButtonAddress(
+                                  provinces: locationState.provinces!,
+                                  districts: locationState.districts,
+                                  wards: locationState.wards)
+                              : null
+                          : _modalButtonAddress(
+                              provinces: locationState.provinces ?? [],
+                              districts: locationState.districts,
+                              wards: locationState.wards);
             },
             child: FormField(
               validator: (_) {
-                if (widget.isWard && locationState.ward == null) {
-                  _addAddressCubit.updateWardError();
-                } else if (widget.isDistrict &&
-                    locationState.district == null) {
-                  _addAddressCubit.updateDistrictError();
-                } else if (locationState.province == null) {
-                  _addAddressCubit.updateProvinceError();
+                if (widget.isDeliver) {
+                  if (widget.isWard && locationState.wardDeliver == null) {
+                    _addAddressCubit.updateWardDeliverError();
+                  } else if (widget.isDistrict &&
+                      locationState.districtDeliver == null) {
+                    _addAddressCubit.updateDistrictDeliverError();
+                  } else if (locationState.provinceDeliver == null) {
+                    _addAddressCubit.updateProvinceDeliverError();
+                  }
+                } else {
+                  if (widget.isWard && locationState.ward == null) {
+                    _addAddressCubit.updateWardError();
+                  } else if (widget.isDistrict &&
+                      locationState.district == null) {
+                    _addAddressCubit.updateDistrictError();
+                  } else if (locationState.province == null) {
+                    _addAddressCubit.updateProvinceError();
+                  }
                 }
+
                 return null;
               },
               builder: (FormFieldState<String> state) {
@@ -238,17 +298,31 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                       floatingLabelStyle: textBody.copyWith(
                         color: Colors.grey,
                       ),
-                      errorText: widget.isWard
-                          ? locationState.errorWard.isNotEmpty
-                              ? locationState.errorWard
-                              : null
-                          : widget.isDistrict
-                              ? locationState.errorDistrict.isNotEmpty
-                                  ? locationState.errorDistrict
+                      errorText: widget.isDeliver
+                          ? widget.isWard
+                              ? locationState.errorWardDeliver.isNotEmpty
+                                  ? locationState.errorWardDeliver
                                   : null
-                              : locationState.errorProvince.isNotEmpty
-                                  ? locationState.errorProvince
-                                  : null,
+                              : widget.isDistrict
+                                  ? locationState
+                                          .errorDistrictDeliver.isNotEmpty
+                                      ? locationState.errorDistrictDeliver
+                                      : null
+                                  : locationState
+                                          .errorProvinceDeliver.isNotEmpty
+                                      ? locationState.errorProvinceDeliver
+                                      : null
+                          : widget.isWard
+                              ? locationState.errorWard.isNotEmpty
+                                  ? locationState.errorWard
+                                  : null
+                              : widget.isDistrict
+                                  ? locationState.errorDistrict.isNotEmpty
+                                      ? locationState.errorDistrict
+                                      : null
+                                  : locationState.errorProvince.isNotEmpty
+                                      ? locationState.errorProvince
+                                      : null,
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.red),
                           borderRadius:
@@ -269,38 +343,77 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                               BorderRadius.circular(secondaryBorderRadius)),
                     ),
                     child: Text(
-                      widget.isWard
-                          ? locationState.wards != null &&
-                                  indexWard != -1 &&
-                                  locationState.ward != null
-                              ? locationState.wards![indexWard].name
-                              : locationState.ward != null
-                                  ? locationState.ward!.name
-                                  : 'Chọn Phường/Xã/Thị trấn'
-                          : widget.isDistrict
-                              ? locationState.districts != null &&
-                                      indexDistrict != -1 &&
-                                      locationState.district != null
-                                  ? locationState.districts![indexDistrict].name
-                                  : locationState.district != null
-                                      ? locationState.district!.name
-                                      : 'Chọn Quận/Huyện'
-                              : locationState.province != null
-                                  ? locationState.province!.name
-                                  : indexProvince != -1
-                                      ? locationState
-                                          .provinces![indexProvince].name
-                                      : 'Chọn Tỉnh/Thành phố',
-                      style: textBody.copyWith(
-                          color: widget.isWard
-                              ? locationState.wards != null
-                                  ? titleColor
-                                  : borderColor
+                      widget.isDeliver
+                          ? widget.isWard
+                              ? locationState.wardsDeliver != null &&
+                                      indexWardDeliver != -1 &&
+                                      locationState.wardDeliver != null
+                                  ? locationState
+                                      .wardsDeliver![indexWardDeliver].name
+                                  : locationState.wardDeliver != null
+                                      ? locationState.wardDeliver!.name
+                                      : 'Chọn Phường/Xã/Thị trấn'
                               : widget.isDistrict
-                                  ? locationState.districts != null
+                                  ? locationState.districtsDeliver != null &&
+                                          indexDistrictDeliver != -1 &&
+                                          locationState.districtDeliver != null
+                                      ? locationState
+                                          .districtsDeliver![
+                                              indexDistrictDeliver]
+                                          .name
+                                      : locationState.districtDeliver != null
+                                          ? locationState.districtDeliver!.name
+                                          : 'Chọn Quận/Huyện'
+                                  : locationState.provinceDeliver != null
+                                      ? locationState.provinceDeliver!.name
+                                      : indexProvinceDeliver != -1
+                                          ? locationState
+                                              .provinces![indexProvinceDeliver]
+                                              .name
+                                          : 'Chọn Tỉnh/Thành phố'
+                          : widget.isWard
+                              ? locationState.wards != null &&
+                                      indexWard != -1 &&
+                                      locationState.ward != null
+                                  ? locationState.wards![indexWard].name
+                                  : locationState.ward != null
+                                      ? locationState.ward!.name
+                                      : 'Chọn Phường/Xã/Thị trấn'
+                              : widget.isDistrict
+                                  ? locationState.districts != null &&
+                                          indexDistrict != -1 &&
+                                          locationState.district != null
+                                      ? locationState
+                                          .districts![indexDistrict].name
+                                      : locationState.district != null
+                                          ? locationState.district!.name
+                                          : 'Chọn Quận/Huyện'
+                                  : locationState.province != null
+                                      ? locationState.province!.name
+                                      : indexProvince != -1
+                                          ? locationState
+                                              .provinces![indexProvince].name
+                                          : 'Chọn Tỉnh/Thành phố',
+                      style: textBody.copyWith(
+                          color: widget.isDeliver
+                              ? widget.isWard
+                                  ? locationState.wardsDeliver != null
                                       ? titleColor
                                       : borderColor
-                                  : titleColor),
+                                  : widget.isDistrict
+                                      ? locationState.districtsDeliver != null
+                                          ? titleColor
+                                          : borderColor
+                                      : titleColor
+                              : widget.isWard
+                                  ? locationState.wards != null
+                                      ? titleColor
+                                      : borderColor
+                                  : widget.isDistrict
+                                      ? locationState.districts != null
+                                          ? titleColor
+                                          : borderColor
+                                      : titleColor),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ));

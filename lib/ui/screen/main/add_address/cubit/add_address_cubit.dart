@@ -87,4 +87,74 @@ class AddAddressCubit extends Cubit<AddAddressState> {
   Future<void> updateWardError() async {
     emit(state.copyWith(errorWard: 'Vui lòng chọn Phường/Xã/Thị trấn'));
   }
+
+  //deliver
+
+  Future<List<AddressDataModel>> getDistrictsDeliver(
+      {required int provinceId,
+      AddressDataModel? addressData,
+      bool isUpdateProvince = false}) async {
+    emit(state.copyWith(isLoading: true, isLoadingDistrict: true));
+    final response = await mainRepository.getDistricts(provinceId);
+    final indexDistrict = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
+
+    isUpdateProvince
+        ? emit(state.copyWith(
+            isLoading: false,
+            districtsDeliver: response.data,
+            isLoadingDistrict: false,
+            // district: addressData != null ? response.data[indexDistrict] : null,
+            districtDeliver: null,
+            wardDeliver: null,
+            wardsDeliver: null))
+        : emit(state.copyWith(
+            isLoading: false,
+            districtsDeliver: response.data,
+            isLoadingDistrict: false,
+            districtDeliver:
+                addressData != null ? response.data[indexDistrict] : null,
+          ));
+    return response.data;
+  }
+
+  Future<List<AddressDataModel>> getWardsDeliver(
+      {required int districtId, AddressDataModel? addressData}) async {
+    emit(state.copyWith(isLoading: true, isLoadingWard: true));
+    final response = await mainRepository.getWards(districtId);
+    final indexWard = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
+    emit(state.copyWith(
+        isLoading: false,
+        wardsDeliver: response.data,
+        isLoadingWard: false,
+        wardDeliver: addressData != null ? response.data[indexWard] : null));
+    return response.data;
+  }
+
+  Future<void> updateProvinceDeliver(AddressDataModel province) async {
+    emit(state.copyWith(provinceDeliver: province, errorProvinceDeliver: ''));
+  }
+
+  Future<void> updateDistrictDeliver(AddressDataModel district) async {
+    emit(state.copyWith(districtDeliver: district, errorDistrictDeliver: ''));
+  }
+
+  Future<void> updateWardDeliver(AddressDataModel ward) async {
+    emit(state.copyWith(wardDeliver: ward, errorWardDeliver: ''));
+  }
+
+  Future<void> updateProvinceDeliverError() async {
+    emit(state.copyWith(errorProvinceDeliver: 'Vui lòng chọn Tỉnh/Thành phố'));
+  }
+
+  Future<void> updateDistrictDeliverError() async {
+    emit(state.copyWith(errorDistrictDeliver: 'Vui lòng chọn Quận/Huyện'));
+  }
+
+  Future<void> updateWardDeliverError() async {
+    emit(state.copyWith(errorWardDeliver: 'Vui lòng chọn Phường/Xã/Thị trấn'));
+  }
 }

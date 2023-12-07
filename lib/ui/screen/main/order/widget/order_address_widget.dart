@@ -58,7 +58,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             type: text.recipients,
             nameController: widget.receiverNameController,
             phoneController: widget.receiverPhoneController,
-            addressController: widget.receiverAddressController),
+            addressController: widget.receiverAddressController,
+            isDeliver: true),
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
@@ -88,7 +89,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
       {required String type,
       required TextEditingController nameController,
       required TextEditingController phoneController,
-      required TextEditingController addressController}) {
+      required TextEditingController addressController,
+      bool isDeliver = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: kDefaultPaddingWidthWidget,
@@ -143,15 +145,17 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.city),
+          itemSelectLocation(label: text.city, isDeliver: isDeliver),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.district, isDistrict: true),
+          itemSelectLocation(
+              label: text.district, isDistrict: true, isDeliver: isDeliver),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.ward, isWard: true),
+          itemSelectLocation(
+              label: text.ward, isWard: true, isDeliver: isDeliver),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
@@ -169,7 +173,10 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
   }
 
   Widget itemSelectLocation(
-      {bool isDistrict = false, bool isWard = false, required String label}) {
+      {bool isDistrict = false,
+      bool isWard = false,
+      required String label,
+      bool isDeliver = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -178,6 +185,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           label: label,
           isDistrict: isDistrict,
           isWard: isWard,
+          isDeliver: isDeliver,
         ),
       ],
     );

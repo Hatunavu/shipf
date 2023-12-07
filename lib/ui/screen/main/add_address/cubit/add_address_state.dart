@@ -18,12 +18,26 @@ class AddAddressState with _$AddAddressState {
       List<AddressDataModel>? wards,
       AddressDataModel? province,
       AddressDataModel? district,
-      AddressDataModel? ward}) = _AddAddressState;
+      AddressDataModel? ward,
+      required String errorProvinceDeliver,
+      required String errorDistrictDeliver,
+      required String errorWardDeliver,
+      bool? isLoadingDistrictDeliver,
+      bool? isLoadingWardDeliver,
+      List<AddressDataModel>? provincesDeliver,
+      List<AddressDataModel>? districtsDeliver,
+      List<AddressDataModel>? wardsDeliver,
+      AddressDataModel? provinceDeliver,
+      AddressDataModel? districtDeliver,
+      AddressDataModel? wardDeliver}) = _AddAddressState;
 
   factory AddAddressState.initial() => const AddAddressState(
       isLoading: false,
       error: "",
       errorDistrict: '',
       errorProvince: '',
-      errorWard: '');
+      errorWard: '',
+      errorDistrictDeliver: '',
+      errorProvinceDeliver: '',
+      errorWardDeliver: '');
 }

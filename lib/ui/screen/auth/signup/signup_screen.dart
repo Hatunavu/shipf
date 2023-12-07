@@ -109,10 +109,12 @@ class SignupScreen extends StatelessWidget {
                                         height: kDefaultPaddingHeightScreen,
                                       ),
                                       PrimaryTextField(
-                                        errorText:
-                                            state.error.contains(text.phone)
-                                                ? state.error
-                                                : '',
+                                        errorText: state.error
+                                                .toUpperCase()
+                                                .contains(
+                                                    text.phone.toUpperCase())
+                                            ? state.error
+                                            : '',
                                         isPhone: true,
                                         controller: _phoneController,
                                         label: '',
@@ -129,7 +131,9 @@ class SignupScreen extends StatelessWidget {
                                             ),
                                             PrimaryTextField(
                                               errorText: state.error
-                                                      .contains(text.email)
+                                                      .toUpperCase()
+                                                      .contains(text.email
+                                                          .toUpperCase())
                                                   ? state.error
                                                   : '',
                                               isEmail: true,
@@ -185,7 +189,7 @@ class SignupScreen extends StatelessWidget {
                                                                 .text,
                                                         phone: _phoneController
                                                             .text,
-                                                        mail:
+                                                        email:
                                                             _mailPassController
                                                                 .text));
                                             success

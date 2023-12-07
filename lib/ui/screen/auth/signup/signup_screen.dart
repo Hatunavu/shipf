@@ -119,19 +119,28 @@ class SignupScreen extends StatelessWidget {
                                         hintText: text.phone,
                                         callBack: () => cubit.updateError(''),
                                       ),
-                                      SizedBox(
-                                        height: kDefaultPaddingHeightScreen,
-                                      ),
-                                      PrimaryTextField(
-                                        errorText:
-                                            state.error.contains(text.email)
-                                                ? state.error
-                                                : '',
-                                        isEmail: true,
-                                        controller: _mailPassController,
-                                        label: '',
-                                        hintText: text.email,
-                                        callBack: () => cubit.updateError(''),
+                                      Visibility(
+                                        visible: roleType == RoleType.business,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height:
+                                                  kDefaultPaddingHeightScreen,
+                                            ),
+                                            PrimaryTextField(
+                                              errorText: state.error
+                                                      .contains(text.email)
+                                                  ? state.error
+                                                  : '',
+                                              isEmail: true,
+                                              controller: _mailPassController,
+                                              label: '',
+                                              hintText: text.email,
+                                              callBack: () =>
+                                                  cubit.updateError(''),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         height: kDefaultPaddingHeightScreen,

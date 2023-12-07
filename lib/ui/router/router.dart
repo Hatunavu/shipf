@@ -5,7 +5,7 @@ import 'package:shipf/ui/screen/auth/login/enter_pass/enter_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/login/login_screen.dart';
 import 'package:shipf/ui/screen/auth/reset_pass/reset_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/signup/screen/verify_screen.dart';
-import 'package:shipf/ui/screen/auth/signup/siginup_screen.dart';
+import 'package:shipf/ui/screen/auth/signup/signup_screen.dart';
 import 'package:shipf/ui/screen/auth/splash/splash_screen.dart';
 import 'package:shipf/ui/screen/main/add_address/add_address_screen.dart';
 import 'package:shipf/ui/screen/main/address/address_screen.dart';

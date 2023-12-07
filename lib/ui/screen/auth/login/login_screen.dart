@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
@@ -26,6 +27,8 @@ class LoginScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+
   bool isLoading = false;
   late LoginCubit cubit;
 
@@ -98,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: kDefaultPaddingHeightWidget * 2,
+                                      height: kDefaultPaddingHeightWidget,
                                     ),
                                     PrimaryTextField(
                                       errorText: state.error,
@@ -108,6 +111,19 @@ class LoginScreen extends StatelessWidget {
                                       controller: _phoneController,
                                       isValidate: true,
                                       callBack: () => cubit.updateError(''),
+                                    ),
+                                    SizedBox(
+                                      height: kDefaultPaddingHeightScreen,
+                                    ),
+                                    PrimaryTextField(
+                                      errorText: state.error,
+                                      isPass: state.showPass,
+                                      label: '',
+                                      hintText: text.password,
+                                      controller: _passController,
+                                      isValidate: true,
+                                      callBack: () => cubit.updateError(''),
+                                      showPass: () => cubit.showPass(),
                                     ),
                                     SizedBox(
                                       height: kDefaultPaddingHeightWidget,
@@ -120,21 +136,32 @@ class LoginScreen extends StatelessWidget {
                                       onPressed: () async {
                                         unfocus(context);
                                         if (_formKey.currentState!.validate()) {
-                                          bool? isLogin = await cubit
-                                              .sendPhone(_phoneController.text);
-                                          if (isLogin == true) {
-                                            context.router.push(EnterPassPage(
-                                                phone: _phoneController.text));
-                                          } else if (isLogin == false) {
-                                            context.router.push(VerifyPage(
-                                                email: _phoneController.text,
-                                                isSignup: true));
-                                          }
+                                          //verify phone
+                                          // bool? isLogin = await cubit
+                                          //     .sendPhone(_phoneController.text);
+                                          // if (isLogin == true) {
+                                          //   context.router.push(EnterPassPage(
+                                          //       phone: _phoneController.text));
+                                          // } else if (isLogin == false) {
+                                          //   context.router.push(VerifyPage(
+                                          //       email: _phoneController.text,
+                                          //       isSignup: true));
+                                          // }
+
+                                          //login
+                                          final bool loginSuccess =
+                                              await cubit.login(LoginRequest(
+                                                  phone: _phoneController.text,
+                                                  password:
+                                                      _passController.text));
+                                          loginSuccess
+                                              ? context.router.push(MainPage())
+                                              : null;
                                         }
                                       },
                                     ),
                                     SizedBox(
-                                      height: kDefaultPaddingHeightWidget * 2,
+                                      height: kDefaultPaddingHeightWidget,
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -176,12 +203,9 @@ class LoginScreen extends StatelessWidget {
                           Column(
                             children: [
                               CustomRichtext(
-                                  textSpan1: state.role == RoleType.bussiness
-                                      ? 'Chưa có tài khoản ${state.role.display()}?'
-                                      : '',
-                                  textSpan2: state.role == RoleType.bussiness
-                                      ? text.register
-                                      : '',
+                                  textSpan1:
+                                      'Chưa có tài khoản ${state.role.display()}? ',
+                                  textSpan2: text.register,
                                   widgetNavigator: SignupPage()),
                               SizedBox(
                                 height: 10.h,

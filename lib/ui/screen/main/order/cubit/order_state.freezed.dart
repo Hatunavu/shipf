@@ -114,11 +114,11 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
 }
 
 /// @nodoc
-abstract class _$$OrderStateImplCopyWith<$Res>
+abstract class _$$_OrderStateCopyWith<$Res>
     implements $OrderStateCopyWith<$Res> {
-  factory _$$OrderStateImplCopyWith(
-          _$OrderStateImpl value, $Res Function(_$OrderStateImpl) then) =
-      __$$OrderStateImplCopyWithImpl<$Res>;
+  factory _$$_OrderStateCopyWith(
+          _$_OrderState value, $Res Function(_$_OrderState) then) =
+      __$$_OrderStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$OrderStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrderStateImplCopyWithImpl<$Res>
-    extends _$OrderStateCopyWithImpl<$Res, _$OrderStateImpl>
-    implements _$$OrderStateImplCopyWith<$Res> {
-  __$$OrderStateImplCopyWithImpl(
-      _$OrderStateImpl _value, $Res Function(_$OrderStateImpl) _then)
+class __$$_OrderStateCopyWithImpl<$Res>
+    extends _$OrderStateCopyWithImpl<$Res, _$_OrderState>
+    implements _$$_OrderStateCopyWith<$Res> {
+  __$$_OrderStateCopyWithImpl(
+      _$_OrderState _value, $Res Function(_$_OrderState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$OrderStateImplCopyWithImpl<$Res>
     Object? deliveryPoint = null,
     Object? insurance = null,
   }) {
-    return _then(_$OrderStateImpl(
+    return _then(_$_OrderState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$OrderStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderStateImpl implements _OrderState {
-  const _$OrderStateImpl(
+class _$_OrderState implements _OrderState {
+  const _$_OrderState(
       {required this.isLoading,
       required this.isUpdate,
       this.error,
@@ -244,7 +244,7 @@ class _$OrderStateImpl implements _OrderState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderStateImpl &&
+            other is _$_OrderState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isUpdate, isUpdate) ||
@@ -279,8 +279,8 @@ class _$OrderStateImpl implements _OrderState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
-      __$$OrderStateImplCopyWithImpl<_$OrderStateImpl>(this, _$identity);
+  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
+      __$$_OrderStateCopyWithImpl<_$_OrderState>(this, _$identity);
 }
 
 abstract class _OrderState implements OrderState {
@@ -293,7 +293,7 @@ abstract class _OrderState implements OrderState {
       required final StepOrderType stepOrderType,
       required final bool pickupPoint,
       required final bool deliveryPoint,
-      required final bool insurance}) = _$OrderStateImpl;
+      required final bool insurance}) = _$_OrderState;
 
   @override
   bool get isLoading;
@@ -315,6 +315,6 @@ abstract class _OrderState implements OrderState {
   bool get insurance;
   @override
   @JsonKey(ignore: true)
-  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
+  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
       throw _privateConstructorUsedError;
 }

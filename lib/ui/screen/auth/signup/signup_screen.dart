@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_role.dart';
+import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/app_cubit.dart';
@@ -13,12 +15,14 @@ import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/shared/widget/appbar/primary_appbar.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
+import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/richtext/custom_richtext.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class SignupScreen extends StatelessWidget {
-  SignupScreen({Key? key}) : super(key: key);
+  final RoleType roleType;
+  SignupScreen({Key? key, this.roleType = RoleType.customer}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _mailController = TextEditingController();
@@ -65,7 +69,13 @@ class SignupScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(),
+                            // const SizedBox(),
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: 0.25.sw),
+                              child: ImageCreator.assetImage(
+                                  imagePath: AppPath.slogan),
+                            ),
                             Column(
                               children: [
                                 Container(
@@ -154,6 +164,7 @@ class SignupScreen extends StatelessWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(),
                             Column(
                               children: [
                                 CustomRichtext(

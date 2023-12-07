@@ -18,7 +18,7 @@ import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i9;
 import '../screen/auth/signup/screen/verify_screen.dart' as _i7;
-import '../screen/auth/signup/siginup_screen.dart' as _i5;
+import '../screen/auth/signup/signup_screen.dart' as _i5;
 import '../screen/auth/splash/splash_screen.dart' as _i2;
 import '../screen/main/add_address/add_address_screen.dart' as _i11;
 import '../screen/main/address/address_screen.dart' as _i12;

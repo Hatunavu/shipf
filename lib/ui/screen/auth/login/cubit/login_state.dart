@@ -11,6 +11,7 @@ class LoginState with _$LoginState {
     required bool isAgreeTerms,
     required bool isLogin,
     required String error,
+    required bool showPass,
   }) = _LoginState;
 
   factory LoginState.initial() => const LoginState(
@@ -18,5 +19,6 @@ class LoginState with _$LoginState {
       error: "",
       role: RoleType.customer,
       isAgreeTerms: true,
-      isLogin: false);
+      isLogin: false,
+      showPass: false);
 }

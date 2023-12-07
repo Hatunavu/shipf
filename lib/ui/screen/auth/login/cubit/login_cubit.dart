@@ -5,6 +5,7 @@ import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/screen/auth/login/cubit/login_state.dart';
+import 'package:shipf/ui/services/account_services.dart';
 
 const homePageAssets = "assets/data/homepage.json";
 
@@ -46,5 +47,23 @@ class LoginCubit extends Cubit<LoginState> {
       }
     }
     return null;
+  }
+
+  void showPass() {
+    emit(state.copyWith(showPass: !state.showPass));
+  }
+
+  Future<bool> login(LoginRequest loginRequest) async {
+    try {
+      emit(state.copyWith(isLoading: true));
+      await mainRepository.login(loginRequest);
+      AccountServices().saveUserToken('token');
+      emit(state.copyWith(isLoading: false));
+      return true;
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isLoading: false, error: errorMessage));
+      return false;
+    }
   }
 }

@@ -7,10 +7,9 @@ class SignupState with _$SignupState {
   const factory SignupState({
     required bool isLoading,
     required String error,
+    required bool showPass,
   }) = _SignupState;
 
-  factory SignupState.initial() => const SignupState(
-        isLoading: false,
-        error: "",
-      );
+  factory SignupState.initial() =>
+      const SignupState(isLoading: false, error: "", showPass: false);
 }

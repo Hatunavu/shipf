@@ -136,6 +136,30 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<RegisterResponse> registerBusiness(registerRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v2/user/register-business',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RegisterResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AddressModel> getProvinces() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

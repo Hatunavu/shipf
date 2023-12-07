@@ -34,190 +34,199 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        unfocus(context);
-      },
-      child: BlocProvider(
-        create: (context) =>
-            LoginCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>()),
-        child: BlocConsumer<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if (!state.isLoading) {
-              isLoading == true ? context.router.pop() : null;
-              isLoading = false;
-            }
-            if (state.isLoading) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                loadingShowDialog(context);
-                isLoading = true;
-              });
-            }
-          },
-          builder: (context, state) {
-            cubit = context.read<LoginCubit>();
-            return Scaffold(
-              backgroundColor: backgroundColor,
-              body: SafeArea(
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: kDefaultPaddingWidthWidget),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.25.sw),
-                            child: ImageCreator.assetImage(
-                                imagePath: AppPath.slogan),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: kDefaultPaddingWidthWidget,
-                                    vertical: kDefaultPaddingHeightWidget),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(
-                                        kDefaultBorderRadius)),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      text.login,
-                                      style: primaryHeaderTitleStyle,
-                                    ),
-                                    SizedBox(
-                                      height: kDefaultPaddingHeightWidget,
-                                    ),
-                                    Row(
-                                      children: [
-                                        roleItem(),
-                                        roleItem(role: RoleType.shipper),
-                                        roleItem(role: RoleType.bussiness)
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: kDefaultPaddingHeightWidget,
-                                    ),
-                                    PrimaryTextField(
-                                      errorText: state.error,
-                                      isPhone: true,
-                                      label: '',
-                                      hintText: text.phone,
-                                      controller: _phoneController,
-                                      isValidate: true,
-                                      callBack: () => cubit.updateError(''),
-                                    ),
-                                    SizedBox(
-                                      height: kDefaultPaddingHeightScreen,
-                                    ),
-                                    PrimaryTextField(
-                                      errorText: state.error,
-                                      isPass: state.showPass,
-                                      label: '',
-                                      hintText: text.password,
-                                      controller: _passController,
-                                      isValidate: true,
-                                      callBack: () => cubit.updateError(''),
-                                      showPass: () => cubit.showPass(),
-                                    ),
-                                    SizedBox(
-                                      height: kDefaultPaddingHeightWidget,
-                                    ),
-                                    PrimaryButton(
-                                      backgroundColor: state.isAgreeTerms
-                                          ? primaryColor
-                                          : Colors.grey[300],
-                                      label: 'Tiếp tục',
-                                      onPressed: () async {
-                                        unfocus(context);
-                                        if (_formKey.currentState!.validate()) {
-                                          //verify phone
-                                          // bool? isLogin = await cubit
-                                          //     .sendPhone(_phoneController.text);
-                                          // if (isLogin == true) {
-                                          //   context.router.push(EnterPassPage(
-                                          //       phone: _phoneController.text));
-                                          // } else if (isLogin == false) {
-                                          //   context.router.push(VerifyPage(
-                                          //       email: _phoneController.text,
-                                          //       isSignup: true));
-                                          // }
-
-                                          //login
-                                          final bool loginSuccess =
-                                              await cubit.login(LoginRequest(
-                                                  phone: _phoneController.text,
-                                                  password:
-                                                      _passController.text));
-                                          loginSuccess
-                                              ? context.router.push(MainPage())
-                                              : null;
-                                        }
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: kDefaultPaddingHeightWidget,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        cubit.updateAgreeTerms();
-                                      },
-                                      behavior: HitTestBehavior.translucent,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: GestureDetector(
+        onTap: () {
+          unfocus(context);
+        },
+        child: BlocProvider(
+          create: (context) =>
+              LoginCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>()),
+          child: BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (!state.isLoading) {
+                isLoading == true ? context.router.pop() : null;
+                isLoading = false;
+              }
+              if (state.isLoading) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  loadingShowDialog(context);
+                  isLoading = true;
+                });
+              }
+            },
+            builder: (context, state) {
+              cubit = context.read<LoginCubit>();
+              return Scaffold(
+                backgroundColor: backgroundColor,
+                body: SafeArea(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddingWidthWidget),
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(),
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: 0.25.sw),
+                              child: ImageCreator.assetImage(
+                                  imagePath: AppPath.slogan),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: kDefaultPaddingWidthWidget,
+                                      vertical: kDefaultPaddingHeightWidget),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                          kDefaultBorderRadius)),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        text.login,
+                                        style: primaryHeaderTitleStyle,
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightWidget,
+                                      ),
+                                      Row(
                                         children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                right:
-                                                    kDefaultPaddingWidthScreen),
-                                            height: kDefaultPaddingWidthWidget,
-                                            width: kDefaultPaddingWidthWidget,
-                                            child: Checkbox(
-                                              value: state.isAgreeTerms,
-                                              onChanged: (_) {
-                                                cubit.updateAgreeTerms();
-                                              },
-                                              activeColor: primaryColor,
-                                            ),
-                                          ),
-                                          const Expanded(
-                                            child: Text(
-                                              'Tôi đồng ý với cá Điều khoản và điều kiện và Chính sách bảo mật',
-                                            ),
-                                          )
+                                          roleItem(),
+                                          // roleItem(role: RoleType.shipper),
+                                          roleItem(role: RoleType.business)
                                         ],
                                       ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(),
-                          Column(
-                            children: [
-                              CustomRichtext(
-                                  textSpan1:
-                                      'Chưa có tài khoản ${state.role.display()}? ',
-                                  textSpan2: text.register,
-                                  widgetNavigator: SignupPage()),
-                              SizedBox(
-                                height: 10.h,
-                              )
-                            ],
-                          )
-                        ],
-                      )),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightWidget,
+                                      ),
+                                      PrimaryTextField(
+                                        errorText: state.error,
+                                        isPhone: true,
+                                        label: '',
+                                        hintText: text.phone,
+                                        controller: _phoneController,
+                                        isValidate: true,
+                                        callBack: () => cubit.updateError(''),
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightScreen,
+                                      ),
+                                      PrimaryTextField(
+                                        errorText: state.error,
+                                        isPass: state.showPass,
+                                        label: '',
+                                        hintText: text.password,
+                                        controller: _passController,
+                                        isValidate: true,
+                                        callBack: () => cubit.updateError(''),
+                                        showPass: () => cubit.showPass(),
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightWidget,
+                                      ),
+                                      PrimaryButton(
+                                        backgroundColor: state.isAgreeTerms
+                                            ? primaryColor
+                                            : Colors.grey[300],
+                                        label: 'Tiếp tục',
+                                        onPressed: () async {
+                                          unfocus(context);
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            //verify phone
+                                            // bool? isLogin = await cubit
+                                            //     .sendPhone(_phoneController.text);
+                                            // if (isLogin == true) {
+                                            //   context.router.push(EnterPassPage(
+                                            //       phone: _phoneController.text));
+                                            // } else if (isLogin == false) {
+                                            //   context.router.push(VerifyPage(
+                                            //       email: _phoneController.text,
+                                            //       isSignup: true));
+                                            // }
+
+                                            //login
+                                            final bool loginSuccess =
+                                                await cubit.login(LoginRequest(
+                                                    phone:
+                                                        _phoneController.text,
+                                                    password:
+                                                        _passController.text));
+                                            loginSuccess
+                                                ? context.router
+                                                    .push(MainPage())
+                                                : null;
+                                          }
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightWidget,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          cubit.updateAgreeTerms();
+                                        },
+                                        behavior: HitTestBehavior.translucent,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  right:
+                                                      kDefaultPaddingWidthScreen),
+                                              height:
+                                                  kDefaultPaddingWidthWidget,
+                                              width: kDefaultPaddingWidthWidget,
+                                              child: Checkbox(
+                                                value: state.isAgreeTerms,
+                                                onChanged: (_) {
+                                                  cubit.updateAgreeTerms();
+                                                },
+                                                activeColor: primaryColor,
+                                              ),
+                                            ),
+                                            const Expanded(
+                                              child: Text(
+                                                'Tôi đồng ý với cá Điều khoản và điều kiện và Chính sách bảo mật',
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(),
+                            Column(
+                              children: [
+                                CustomRichtext(
+                                    textSpan1:
+                                        'Chưa có tài khoản ${state.role.display()}? ',
+                                    textSpan2: text.register,
+                                    widgetNavigator:
+                                        SignupPage(roleType: state.role)),
+                                SizedBox(
+                                  height: 10.h,
+                                )
+                              ],
+                            )
+                          ],
+                        )),
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -242,7 +251,7 @@ class LoginScreen extends StatelessWidget {
                   left: role == RoleType.customer
                       ? Radius.circular(defaultBorderRadius)
                       : Radius.zero,
-                  right: role == RoleType.bussiness
+                  right: role == RoleType.business
                       ? Radius.circular(defaultBorderRadius)
                       : Radius.zero)),
           child: Text(

@@ -36,6 +36,10 @@ abstract class MainRepository {
   @POST(endpoint.register)
   Future<RegisterResponse> register(@Body() RegisterRequest registerRequest);
 
+  @POST(endpoint.registerBusiness)
+  Future<RegisterResponse> registerBusiness(
+      @Body() RegisterRequest registerRequest);
+
   //addresss
   @GET(endpoint.getProvinces)
   Future<AddressModel> getProvinces();

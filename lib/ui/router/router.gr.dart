@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:flutter/material.dart' as _i14;
 
+import '../../enums/enum_role.dart' as _i15;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i9;
@@ -66,7 +67,10 @@ class AppRouter extends _i13.RootStackRouter {
           orElse: () => const SignupPageArgs());
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.SignupScreen(key: args.key),
+        child: _i5.SignupScreen(
+          key: args.key,
+          roleType: args.roleType,
+        ),
       );
     },
     WelcomePage.name: (routeData) {
@@ -262,24 +266,34 @@ class LoginPageArgs {
 /// generated route for
 /// [_i5.SignupScreen]
 class SignupPage extends _i13.PageRouteInfo<SignupPageArgs> {
-  SignupPage({_i14.Key? key})
-      : super(
+  SignupPage({
+    _i14.Key? key,
+    _i15.RoleType roleType = _i15.RoleType.customer,
+  }) : super(
           SignupPage.name,
           path: '/signup',
-          args: SignupPageArgs(key: key),
+          args: SignupPageArgs(
+            key: key,
+            roleType: roleType,
+          ),
         );
 
   static const String name = 'SignupPage';
 }
 
 class SignupPageArgs {
-  const SignupPageArgs({this.key});
+  const SignupPageArgs({
+    this.key,
+    this.roleType = _i15.RoleType.customer,
+  });
 
   final _i14.Key? key;
 
+  final _i15.RoleType roleType;
+
   @override
   String toString() {
-    return 'SignupPageArgs{key: $key}';
+    return 'SignupPageArgs{key: $key, roleType: $roleType}';
   }
 }
 

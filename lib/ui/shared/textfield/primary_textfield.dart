@@ -7,17 +7,18 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:shipf/foundation/extension/string_formatting.dart';
 import 'package:shipf/foundation/extension/validation.dart';
+import 'package:shipf/ui/shared/utils/validation.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String label;
   final bool? isPass;
-  final bool? isEmail;
+  final bool isEmail;
   final bool? isPhone;
   final bool isNumberKey;
   final String? hintText;
-  final bool? isTitle;
+  final bool isName;
   final bool? isPrice;
   final bool? isDesc;
   final bool isAddress;
@@ -40,11 +41,11 @@ class PrimaryTextField extends StatelessWidget {
       required this.label,
       this.isPass,
       required this.controller,
-      this.isEmail,
+      this.isEmail = false,
       this.isPhone,
       this.errorText = '',
       this.hintText,
-      this.isTitle,
+      this.isName = false,
       this.isPrice,
       this.isDesc,
       this.isAddress = false,
@@ -84,8 +85,15 @@ class PrimaryTextField extends StatelessWidget {
         }
       }
       if (isPass != null) {
-        if (text == null || text.isEmpty || text.isValidPassword == false) {
+        if (text == null || text.isEmpty || !StringX(text).isValidPassword()) {
           return 'Mật khẩu phải từ 6 ký tự';
+        }
+      }
+      if (isEmail) {
+        if (text == null || text.isEmpty) {
+          return 'Vui lòng nhập Email';
+        } else if (!StringX(text).isEmail()) {
+          return 'Email không đúng định dạng';
         }
       }
       if (text == null || text.isEmpty) {
@@ -145,9 +153,6 @@ class PrimaryTextField extends StatelessWidget {
                     suffixIcon: isPass != null
                         ? IconButton(
                             onPressed: showPass,
-                            // () {
-                            //   _isShow.value = !_isShow.value;
-                            // },
                             icon: Icon(
                               isPass == true ? Ionicons.eye : Ionicons.eye_off,
                               size: 18.sp,
@@ -172,7 +177,13 @@ class PrimaryTextField extends StatelessWidget {
                                     size: 18.sp,
                                     color: primaryColor,
                                   )
-                                : null,
+                                : isName
+                                    ? Icon(
+                                        Ionicons.person_outline,
+                                        size: 18.sp,
+                                        color: primaryColor,
+                                      )
+                                    : null,
                     labelStyle: primaryTitleStyle.copyWith(
                         color: primaryColor, fontWeight: FontWeight.w400),
                     floatingLabelStyle:

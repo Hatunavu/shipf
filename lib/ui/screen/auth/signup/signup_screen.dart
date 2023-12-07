@@ -2,12 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
-import 'package:shipf/injection.dart';
-import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/auth/signup/cubit/signup_cubit.dart';
 import 'package:shipf/ui/screen/auth/signup/cubit/signup_state.dart';
@@ -25,11 +23,13 @@ class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key, this.roleType = RoleType.customer}) : super(key: key);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _mailController = TextEditingController();
-  final TextEditingController _confirmPassController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _mailPassController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool isButtonPressed = false;
   bool isLoading = false;
+  late SignupCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +38,23 @@ class SignupScreen extends StatelessWidget {
         unfocus(context);
       }),
       child: BlocProvider(
-        create: (context) =>
-            SignupCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>()),
+        create: (context) => SignupCubit(),
         child: BlocConsumer<SignupCubit, SignupState>(
           listener: (context, state) {
             // TODO: implement listener
             if (!state.isLoading) {
               isLoading == true ? context.router.pop() : null;
+              isLoading = false;
             }
-          },
-          builder: (context, state) {
             if (state.isLoading) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 loadingShowDialog(context);
                 isLoading = true;
               });
             }
+          },
+          builder: (context, state) {
+            cubit = context.read<SignupCubit>();
             return Scaffold(
                 appBar: primaryAppBar(context: context, title: text.register),
                 backgroundColor: backgroundColor,
@@ -82,7 +83,7 @@ class SignupScreen extends StatelessWidget {
                                   width: double.infinity,
                                   padding: EdgeInsets.symmetric(
                                       horizontal: kDefaultPaddingWidthWidget,
-                                      vertical: 25.h),
+                                      vertical: kDefaultPaddingHeightWidget),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(
@@ -90,72 +91,98 @@ class SignupScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(
-                                        text.register_with,
+                                        'Đăng ký tài khoản ${roleType.display()}',
                                         style: primaryHeaderTitleStyle,
                                       ),
                                       SizedBox(
-                                        height: 5.h,
-                                      ),
-                                      Text(
-                                        text.email,
-                                        style: primaryTitleStyle,
-                                      ),
-                                      SizedBox(
-                                        height: 20.h,
+                                        height: kDefaultPaddingHeightScreen,
                                       ),
                                       PrimaryTextField(
-                                        errorText: state.error,
+                                        controller: _nameController,
+                                        label: '',
+                                        maxLines: 1,
+                                        hintText: text.full_name,
+                                        fieldRequire: text.full_name,
+                                        isName: true,
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightScreen,
+                                      ),
+                                      PrimaryTextField(
+                                        errorText:
+                                            state.error.contains(text.phone)
+                                                ? state.error
+                                                : '',
+                                        isPhone: true,
+                                        controller: _phoneController,
+                                        label: '',
+                                        hintText: text.phone,
+                                        callBack: () => cubit.updateError(''),
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultPaddingHeightScreen,
+                                      ),
+                                      PrimaryTextField(
+                                        errorText:
+                                            state.error.contains(text.email)
+                                                ? state.error
+                                                : '',
                                         isEmail: true,
-                                        controller: _mailController,
+                                        controller: _mailPassController,
                                         label: '',
                                         hintText: text.email,
+                                        callBack: () => cubit.updateError(''),
                                       ),
                                       SizedBox(
-                                        height: 10.h,
+                                        height: kDefaultPaddingHeightScreen,
                                       ),
                                       PrimaryTextField(
-                                        errorText: state.error,
-                                        isPass: true,
+                                        // errorText: state.error,
+                                        isPass: state.showPass,
                                         controller: _passController,
                                         label: '',
                                         maxLines: 1,
                                         hintText: text.password,
+                                        showPass: () => cubit.showPass(),
                                       ),
                                       SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      PrimaryTextField(
-                                        errorText: state.error,
-                                        isPass: true,
-                                        maxLines: 1,
-                                        controller: _confirmPassController,
-                                        label: '',
-                                        hintText: text.confirm_password,
-                                      ),
-                                      SizedBox(
-                                        height: 20.h,
+                                        height: kDefaultPaddingHeightWidget,
                                       ),
                                       PrimaryButton(
                                         label: text.register,
                                         onPressed: () async {
                                           unfocus(context);
-                                          if (state.error != null ||
-                                              _formKey.currentState!
-                                                  .validate()) {
-                                            // final response = await context
-                                            //     .read<SignupCubit>()
-                                            //     .signup(
-                                            //         phone:
-                                            //             _phoneController.text);
-                                            // if (response != null &&
-                                            //     response.status == 200) {
-                                            //   context.router.push(OtpPage(
-                                            //       isSignup: true,
-                                            //       phone:
-                                            //           _phoneController.text));
-                                            // }
-                                            context.router.push(VerifyPage(
-                                                email: _mailController.text));
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            final success = roleType ==
+                                                    RoleType.customer
+                                                ? await cubit.registerCustomer(
+                                                    RegisterRequest(
+                                                        name: _nameController
+                                                            .text,
+                                                        password:
+                                                            _passController
+                                                                .text,
+                                                        phone:
+                                                            _phoneController
+                                                                .text))
+                                                : await cubit.registerBusiness(
+                                                    RegisterRequest(
+                                                        name:
+                                                            _nameController
+                                                                .text,
+                                                        password:
+                                                            _passController
+                                                                .text,
+                                                        phone: _phoneController
+                                                            .text,
+                                                        mail:
+                                                            _mailPassController
+                                                                .text));
+                                            success
+                                                ? context.router
+                                                    .push(MainPage())
+                                                : null;
                                           }
                                         },
                                       )
@@ -170,6 +197,7 @@ class SignupScreen extends StatelessWidget {
                                 CustomRichtext(
                                     textSpan1: text.have_account,
                                     textSpan2: text.login,
+                                    // onTap: ()=>context.router.pop(),
                                     widgetNavigator: LoginPage()),
                                 SizedBox(
                                   height: 10.h,

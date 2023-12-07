@@ -10,9 +10,9 @@ const register = '/api/v2/user/register-customer';
 const registerBusiness = '/api/v2/user/register-business';
 
 //address
-const getProvinces = "/provinces";
-const getDistricts = "/districts?province_id={provinceId}";
-const getWards = "/wards?district_id={districtId}";
+const getProvinces = "/provinces?size=100";
+const getDistricts = "/districts?province_id={provinceId}&size=100";
+const getWards = "/wards?district_id={districtId}&size=100";
 
 //order
 const getOrderService =

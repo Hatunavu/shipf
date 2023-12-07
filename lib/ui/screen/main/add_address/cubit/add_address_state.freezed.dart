@@ -17,7 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AddAddressState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
+  String get errorProvince => throw _privateConstructorUsedError;
+  String get errorDistrict => throw _privateConstructorUsedError;
+  String get errorWard => throw _privateConstructorUsedError;
   bool? get isLoadingDistrict => throw _privateConstructorUsedError;
   bool? get isLoadingWard => throw _privateConstructorUsedError;
   List<AddressDataModel>? get provinces => throw _privateConstructorUsedError;
@@ -40,7 +43,10 @@ abstract class $AddAddressStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      String? error,
+      String error,
+      String errorProvince,
+      String errorDistrict,
+      String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
       List<AddressDataModel>? provinces,
@@ -65,7 +71,10 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
+    Object? errorProvince = null,
+    Object? errorDistrict = null,
+    Object? errorWard = null,
     Object? isLoadingDistrict = freezed,
     Object? isLoadingWard = freezed,
     Object? provinces = freezed,
@@ -80,10 +89,22 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      errorProvince: null == errorProvince
+          ? _value.errorProvince
+          : errorProvince // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorDistrict: null == errorDistrict
+          ? _value.errorDistrict
+          : errorDistrict // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorWard: null == errorWard
+          ? _value.errorWard
+          : errorWard // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoadingDistrict: freezed == isLoadingDistrict
           ? _value.isLoadingDistrict
           : isLoadingDistrict // ignore: cast_nullable_to_non_nullable
@@ -121,16 +142,19 @@ class _$AddAddressStateCopyWithImpl<$Res, $Val extends AddAddressState>
 }
 
 /// @nodoc
-abstract class _$$_AddAddressStateCopyWith<$Res>
+abstract class _$$AddAddressStateImplCopyWith<$Res>
     implements $AddAddressStateCopyWith<$Res> {
-  factory _$$_AddAddressStateCopyWith(
-          _$_AddAddressState value, $Res Function(_$_AddAddressState) then) =
-      __$$_AddAddressStateCopyWithImpl<$Res>;
+  factory _$$AddAddressStateImplCopyWith(_$AddAddressStateImpl value,
+          $Res Function(_$AddAddressStateImpl) then) =
+      __$$AddAddressStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isLoading,
-      String? error,
+      String error,
+      String errorProvince,
+      String errorDistrict,
+      String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
       List<AddressDataModel>? provinces,
@@ -142,18 +166,21 @@ abstract class _$$_AddAddressStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddAddressStateCopyWithImpl<$Res>
-    extends _$AddAddressStateCopyWithImpl<$Res, _$_AddAddressState>
-    implements _$$_AddAddressStateCopyWith<$Res> {
-  __$$_AddAddressStateCopyWithImpl(
-      _$_AddAddressState _value, $Res Function(_$_AddAddressState) _then)
+class __$$AddAddressStateImplCopyWithImpl<$Res>
+    extends _$AddAddressStateCopyWithImpl<$Res, _$AddAddressStateImpl>
+    implements _$$AddAddressStateImplCopyWith<$Res> {
+  __$$AddAddressStateImplCopyWithImpl(
+      _$AddAddressStateImpl _value, $Res Function(_$AddAddressStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
-    Object? error = freezed,
+    Object? error = null,
+    Object? errorProvince = null,
+    Object? errorDistrict = null,
+    Object? errorWard = null,
     Object? isLoadingDistrict = freezed,
     Object? isLoadingWard = freezed,
     Object? provinces = freezed,
@@ -163,15 +190,27 @@ class __$$_AddAddressStateCopyWithImpl<$Res>
     Object? district = freezed,
     Object? ward = freezed,
   }) {
-    return _then(_$_AddAddressState(
+    return _then(_$AddAddressStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      errorProvince: null == errorProvince
+          ? _value.errorProvince
+          : errorProvince // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorDistrict: null == errorDistrict
+          ? _value.errorDistrict
+          : errorDistrict // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorWard: null == errorWard
+          ? _value.errorWard
+          : errorWard // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoadingDistrict: freezed == isLoadingDistrict
           ? _value.isLoadingDistrict
           : isLoadingDistrict // ignore: cast_nullable_to_non_nullable
@@ -210,10 +249,13 @@ class __$$_AddAddressStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddAddressState implements _AddAddressState {
-  const _$_AddAddressState(
+class _$AddAddressStateImpl implements _AddAddressState {
+  const _$AddAddressStateImpl(
       {required this.isLoading,
-      this.error,
+      required this.error,
+      required this.errorProvince,
+      required this.errorDistrict,
+      required this.errorWard,
       this.isLoadingDistrict,
       this.isLoadingWard,
       final List<AddressDataModel>? provinces,
@@ -229,7 +271,13 @@ class _$_AddAddressState implements _AddAddressState {
   @override
   final bool isLoading;
   @override
-  final String? error;
+  final String error;
+  @override
+  final String errorProvince;
+  @override
+  final String errorDistrict;
+  @override
+  final String errorWard;
   @override
   final bool? isLoadingDistrict;
   @override
@@ -273,17 +321,23 @@ class _$_AddAddressState implements _AddAddressState {
 
   @override
   String toString() {
-    return 'AddAddressState(isLoading: $isLoading, error: $error, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward)';
+    return 'AddAddressState(isLoading: $isLoading, error: $error, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddAddressState &&
+            other is _$AddAddressStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.errorProvince, errorProvince) ||
+                other.errorProvince == errorProvince) &&
+            (identical(other.errorDistrict, errorDistrict) ||
+                other.errorDistrict == errorDistrict) &&
+            (identical(other.errorWard, errorWard) ||
+                other.errorWard == errorWard) &&
             (identical(other.isLoadingDistrict, isLoadingDistrict) ||
                 other.isLoadingDistrict == isLoadingDistrict) &&
             (identical(other.isLoadingWard, isLoadingWard) ||
@@ -305,6 +359,9 @@ class _$_AddAddressState implements _AddAddressState {
       runtimeType,
       isLoading,
       error,
+      errorProvince,
+      errorDistrict,
+      errorWard,
       isLoadingDistrict,
       isLoadingWard,
       const DeepCollectionEquality().hash(_provinces),
@@ -317,14 +374,18 @@ class _$_AddAddressState implements _AddAddressState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
-      __$$_AddAddressStateCopyWithImpl<_$_AddAddressState>(this, _$identity);
+  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
+      __$$AddAddressStateImplCopyWithImpl<_$AddAddressStateImpl>(
+          this, _$identity);
 }
 
 abstract class _AddAddressState implements AddAddressState {
   const factory _AddAddressState(
       {required final bool isLoading,
-      final String? error,
+      required final String error,
+      required final String errorProvince,
+      required final String errorDistrict,
+      required final String errorWard,
       final bool? isLoadingDistrict,
       final bool? isLoadingWard,
       final List<AddressDataModel>? provinces,
@@ -332,12 +393,18 @@ abstract class _AddAddressState implements AddAddressState {
       final List<AddressDataModel>? wards,
       final AddressDataModel? province,
       final AddressDataModel? district,
-      final AddressDataModel? ward}) = _$_AddAddressState;
+      final AddressDataModel? ward}) = _$AddAddressStateImpl;
 
   @override
   bool get isLoading;
   @override
-  String? get error;
+  String get error;
+  @override
+  String get errorProvince;
+  @override
+  String get errorDistrict;
+  @override
+  String get errorWard;
   @override
   bool? get isLoadingDistrict;
   @override
@@ -356,6 +423,6 @@ abstract class _AddAddressState implements AddAddressState {
   AddressDataModel? get ward;
   @override
   @JsonKey(ignore: true)
-  _$$_AddAddressStateCopyWith<_$_AddAddressState> get copyWith =>
+  _$$AddAddressStateImplCopyWith<_$AddAddressStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

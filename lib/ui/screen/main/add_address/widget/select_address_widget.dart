@@ -110,11 +110,10 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
               }
               Navigator.pop(context);
             },
-            child: Container(
+            child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: kDefaultPaddingWidthScreen,
                   vertical: kDefaultPaddingHeightScreen),
-              // color: Colors.amber,
               child: Row(
                 children: [
                   const Icon(
@@ -215,93 +214,97 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                           districts: locationState.districts,
                           wards: locationState.wards);
             },
-            child: Container(
-              child: FormField(
-                validator: (_) {
-                  return widget.isWard
-                      ? locationState.ward == null
-                          ? 'Vui lòng chọn Phường/Xã/Thị trấn'
-                          : null
-                      : widget.isDistrict
-                          ? locationState.district == null
-                              ? 'Vui lòng chọn Quận/Huyện'
-                              : null
-                          : locationState.province == null
-                              ? 'Vui lòng chọn Tỉnh/Thành phố'
-                              : null;
-                },
-                builder: (FormFieldState<String> state) {
-                  return InputDecorator(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: backgroundTextField,
-                        errorStyle:
-                            TextStyle(fontSize: 10.sp, color: Colors.red),
-                        // labelText: widget.label,
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        labelStyle: textBody,
-                        floatingLabelStyle: textBody.copyWith(
-                          color: Colors.grey,
-                        ),
-                        errorText: state.errorText,
-                        errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius:
-                                BorderRadius.circular(secondaryBorderRadius)),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius:
-                                BorderRadius.circular(secondaryBorderRadius)),
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingWidthWidget),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.circular(secondaryBorderRadius)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.circular(secondaryBorderRadius)),
+            child: FormField(
+              validator: (_) {
+                if (widget.isWard && locationState.ward == null) {
+                  _addAddressCubit.updateWardError();
+                } else if (widget.isDistrict &&
+                    locationState.district == null) {
+                  _addAddressCubit.updateDistrictError();
+                } else if (locationState.province == null) {
+                  _addAddressCubit.updateProvinceError();
+                }
+                return null;
+              },
+              builder: (FormFieldState<String> state) {
+                return InputDecorator(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: backgroundTextField,
+                      errorStyle: TextStyle(fontSize: 10.sp, color: Colors.red),
+                      // labelText: widget.label,
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelStyle: textBody,
+                      floatingLabelStyle: textBody.copyWith(
+                        color: Colors.grey,
                       ),
-                      child: Text(
-                        widget.isWard
-                            ? locationState.wards != null &&
-                                    indexWard != -1 &&
-                                    locationState.ward != null
-                                ? locationState.wards![indexWard].name
-                                : locationState.ward != null
-                                    ? locationState.ward!.name
-                                    : 'Chọn Phường/Xã/Thị trấn'
-                            : widget.isDistrict
-                                ? locationState.districts != null &&
-                                        indexDistrict != -1 &&
-                                        locationState.district != null
-                                    ? locationState
-                                        .districts![indexDistrict].name
-                                    : locationState.district != null
-                                        ? locationState.district!.name
-                                        : 'Chọn Quận/Huyện'
-                                : locationState.province != null
-                                    ? locationState.province!.name
-                                    : indexProvince != -1
-                                        ? locationState
-                                            .provinces![indexProvince].name
-                                        : 'Chọn Tỉnh/Thành phố',
-                        style: textBody.copyWith(
-                            color: widget.isWard
-                                ? locationState.wards != null
-                                    ? titleColor
-                                    : borderColor
-                                : widget.isDistrict
-                                    ? locationState.districts != null
-                                        ? titleColor
-                                        : borderColor
-                                    : titleColor),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ));
-                },
-              ),
+                      errorText: widget.isWard
+                          ? locationState.errorWard.isNotEmpty
+                              ? locationState.errorWard
+                              : null
+                          : widget.isDistrict
+                              ? locationState.errorDistrict.isNotEmpty
+                                  ? locationState.errorDistrict
+                                  : null
+                              : locationState.errorProvince.isNotEmpty
+                                  ? locationState.errorProvince
+                                  : null,
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius:
+                              BorderRadius.circular(secondaryBorderRadius)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius:
+                              BorderRadius.circular(secondaryBorderRadius)),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddingWidthWidget),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              BorderRadius.circular(secondaryBorderRadius)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              BorderRadius.circular(secondaryBorderRadius)),
+                    ),
+                    child: Text(
+                      widget.isWard
+                          ? locationState.wards != null &&
+                                  indexWard != -1 &&
+                                  locationState.ward != null
+                              ? locationState.wards![indexWard].name
+                              : locationState.ward != null
+                                  ? locationState.ward!.name
+                                  : 'Chọn Phường/Xã/Thị trấn'
+                          : widget.isDistrict
+                              ? locationState.districts != null &&
+                                      indexDistrict != -1 &&
+                                      locationState.district != null
+                                  ? locationState.districts![indexDistrict].name
+                                  : locationState.district != null
+                                      ? locationState.district!.name
+                                      : 'Chọn Quận/Huyện'
+                              : locationState.province != null
+                                  ? locationState.province!.name
+                                  : indexProvince != -1
+                                      ? locationState
+                                          .provinces![indexProvince].name
+                                      : 'Chọn Tỉnh/Thành phố',
+                      style: textBody.copyWith(
+                          color: widget.isWard
+                              ? locationState.wards != null
+                                  ? titleColor
+                                  : borderColor
+                              : widget.isDistrict
+                                  ? locationState.districts != null
+                                      ? titleColor
+                                      : borderColor
+                                  : titleColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ));
+              },
             ));
       },
     );

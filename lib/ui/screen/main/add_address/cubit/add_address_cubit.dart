@@ -3,21 +3,6 @@ import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_state.dart';
 
-// final responseProvinces = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '01', name: 'Hà Nội'),
-//   LocationData(code: '02', name: 'Hồ Chí Minh')
-// ]);
-
-// final responseDistricts = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '001', name: 'Ba Đình'),
-//   LocationData(code: '002', name: 'Cầu Giấy')
-// ]);
-
-// final responseWards = LocationModel(status: 200, message: 'message', data: [
-//   LocationData(code: '0001', name: 'Cống Vị'),
-//   LocationData(code: '0002', name: 'Đội Cấn')
-// ]);
-
 class AddAddressCubit extends Cubit<AddAddressState> {
   AddAddressCubit() : super(AddAddressState.initial());
 
@@ -80,14 +65,26 @@ class AddAddressCubit extends Cubit<AddAddressState> {
   }
 
   Future<void> updateProvince(AddressDataModel province) async {
-    emit(state.copyWith(province: province));
+    emit(state.copyWith(province: province, errorProvince: ''));
   }
 
   Future<void> updateDistrict(AddressDataModel district) async {
-    emit(state.copyWith(district: district));
+    emit(state.copyWith(district: district, errorDistrict: ''));
   }
 
   Future<void> updateWard(AddressDataModel ward) async {
-    emit(state.copyWith(ward: ward));
+    emit(state.copyWith(ward: ward, errorWard: ''));
+  }
+
+  Future<void> updateProvinceError() async {
+    emit(state.copyWith(errorProvince: 'Vui lòng chọn Tỉnh/Thành phố'));
+  }
+
+  Future<void> updateDistrictError() async {
+    emit(state.copyWith(errorDistrict: 'Vui lòng chọn Quận/Huyện'));
+  }
+
+  Future<void> updateWardError() async {
+    emit(state.copyWith(errorWard: 'Vui lòng chọn Phường/Xã/Thị trấn'));
   }
 }

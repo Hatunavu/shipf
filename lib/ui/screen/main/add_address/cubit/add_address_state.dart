@@ -7,7 +7,10 @@ part 'add_address_state.freezed.dart';
 class AddAddressState with _$AddAddressState {
   const factory AddAddressState(
       {required bool isLoading,
-      String? error,
+      required String error,
+      required String errorProvince,
+      required String errorDistrict,
+      required String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
       List<AddressDataModel>? provinces,
@@ -17,6 +20,10 @@ class AddAddressState with _$AddAddressState {
       AddressDataModel? district,
       AddressDataModel? ward}) = _AddAddressState;
 
-  factory AddAddressState.initial() =>
-      const AddAddressState(isLoading: false, error: "");
+  factory AddAddressState.initial() => const AddAddressState(
+      isLoading: false,
+      error: "",
+      errorDistrict: '',
+      errorProvince: '',
+      errorWard: '');
 }

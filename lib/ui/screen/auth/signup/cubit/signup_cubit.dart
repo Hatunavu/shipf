@@ -21,7 +21,9 @@ class SignupCubit extends Cubit<SignupState> {
     try {
       emit(state.copyWith(isLoading: true));
       await mainRepository.register(registerRequest);
-      AccountServices().saveUserToken('token');
+      final response = await mainRepository.login(LoginRequest(
+          phone: registerRequest.phone, password: registerRequest.password));
+      AccountServices().saveUserToken(response.data?.accessToken ?? '');
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

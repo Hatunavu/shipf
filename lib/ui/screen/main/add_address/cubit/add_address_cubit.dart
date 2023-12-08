@@ -90,6 +90,22 @@ class AddAddressCubit extends Cubit<AddAddressState> {
 
   //deliver
 
+  Future<List<AddressDataModel>> getProvincesDeliver(
+      {AddressDataModel? addressData}) async {
+    emit(state.copyWith(isLoading: true));
+    final response = await mainRepository.getProvinces();
+    final indexProvince = addressData != null
+        ? response.data.indexWhere((element) => element.id == addressData.id)
+        : -1;
+
+    emit(state.copyWith(
+        isLoading: false,
+        provincesDeliver: response.data,
+        provinceDeliver:
+            addressData != null ? response.data[indexProvince] : null));
+    return response.data;
+  }
+
   Future<List<AddressDataModel>> getDistrictsDeliver(
       {required int provinceId,
       AddressDataModel? addressData,

@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 
@@ -15,7 +17,32 @@ class OrderState with _$OrderState {
       required StepOrderType stepOrderType,
       required bool pickupPoint,
       required bool deliveryPoint,
-      required bool insurance}) = _OrderState;
+      required bool insurance,
+      AddressDataResponse? addressPick,
+      AddressDataResponse? addressDeliver,
+      //location
+      required String errorProvince,
+      required String errorDistrict,
+      required String errorWard,
+      bool? isLoadingDistrict,
+      bool? isLoadingWard,
+      List<AddressDataModel>? provinces,
+      List<AddressDataModel>? districts,
+      List<AddressDataModel>? wards,
+      AddressDataModel? province,
+      AddressDataModel? district,
+      AddressDataModel? ward,
+      required String errorProvinceDeliver,
+      required String errorDistrictDeliver,
+      required String errorWardDeliver,
+      bool? isLoadingDistrictDeliver,
+      bool? isLoadingWardDeliver,
+      List<AddressDataModel>? provincesDeliver,
+      List<AddressDataModel>? districtsDeliver,
+      List<AddressDataModel>? wardsDeliver,
+      AddressDataModel? provinceDeliver,
+      AddressDataModel? districtDeliver,
+      AddressDataModel? wardDeliver}) = _OrderState;
 
   factory OrderState.initial() => const OrderState(
       isLoading: false,
@@ -25,5 +52,11 @@ class OrderState with _$OrderState {
       isUpdate: false,
       pickupPoint: false,
       deliveryPoint: false,
-      insurance: false);
+      insurance: false,
+      errorDistrict: '',
+      errorProvince: '',
+      errorWard: '',
+      errorDistrictDeliver: '',
+      errorProvinceDeliver: '',
+      errorWardDeliver: '');
 }

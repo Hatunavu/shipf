@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/add_address/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
@@ -93,18 +96,51 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
       bool isDeliver = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthWidget,
-          vertical: kDefaultPaddingHeightScreen),
+              horizontal: kDefaultPaddingWidthWidget,
+              vertical: kDefaultPaddingHeightScreen)
+          .copyWith(top: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            type,
-            style: textHeading,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                type,
+                style: textHeading,
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () => context.router.push(AddressPage(
+                  selectAddress: (address) {
+                    if (isDeliver) {
+                      widget.orderCubit.selectAddressDeliver(address);
+                      nameController.text = address.fullName;
+                      phoneController.text = address.phone;
+                      addressController.text = address.details;
+                    } else {
+                      widget.orderCubit.selectAddressPick(address);
+                      nameController.text = address.fullName;
+                      phoneController.text = address.phone;
+                      addressController.text = address.details;
+                    }
+                  },
+                )),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      bottom: kDefaultPaddingHeightScreen,
+                      top: kDefaultPaddingWidthWidget),
+                  child: Text(
+                    'Địa chỉ đã lưu',
+                    style: primaryTitleStyle.copyWith(color: primaryColor),
+                  ),
+                ),
+              ),
+            ],
           ),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
-          ),
+          // VerticalSpace(
+          //   kDefaultPaddingHeightScreen,
+          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -145,7 +181,13 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
-          itemSelectLocation(label: text.city, isDeliver: isDeliver),
+          itemSelectLocation(
+            label: text.city,
+            isDeliver: isDeliver,
+            addressData: isDeliver
+                ? widget.orderCubit.state.addressDeliver
+                : widget.orderCubit.state.addressPick,
+          ),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
           ),
@@ -172,11 +214,13 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
     );
   }
 
-  Widget itemSelectLocation(
-      {bool isDistrict = false,
-      bool isWard = false,
-      required String label,
-      bool isDeliver = false}) {
+  Widget itemSelectLocation({
+    bool isDistrict = false,
+    bool isWard = false,
+    required String label,
+    bool isDeliver = false,
+    AddressDataResponse? addressData,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -186,6 +230,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           isDistrict: isDistrict,
           isWard: isWard,
           isDeliver: isDeliver,
+          addressData: addressData,
         ),
       ],
     );

@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:flutter/material.dart' as _i14;
 
+import '../../data/model/address/address_model.dart' as _i16;
 import '../../enums/enum_role.dart' as _i15;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
@@ -133,7 +134,10 @@ class AppRouter extends _i13.RootStackRouter {
           orElse: () => const AddressPageArgs());
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i12.AddressScreen(key: args.key),
+        child: _i12.AddressScreen(
+          key: args.key,
+          selectAddress: args.selectAddress,
+        ),
       );
     },
   };
@@ -477,23 +481,33 @@ class AddAddressPageArgs {
 /// generated route for
 /// [_i12.AddressScreen]
 class AddressPage extends _i13.PageRouteInfo<AddressPageArgs> {
-  AddressPage({_i14.Key? key})
-      : super(
+  AddressPage({
+    _i14.Key? key,
+    dynamic Function(_i16.AddressDataResponse)? selectAddress,
+  }) : super(
           AddressPage.name,
           path: '/address',
-          args: AddressPageArgs(key: key),
+          args: AddressPageArgs(
+            key: key,
+            selectAddress: selectAddress,
+          ),
         );
 
   static const String name = 'AddressPage';
 }
 
 class AddressPageArgs {
-  const AddressPageArgs({this.key});
+  const AddressPageArgs({
+    this.key,
+    this.selectAddress,
+  });
 
   final _i14.Key? key;
 
+  final dynamic Function(_i16.AddressDataResponse)? selectAddress;
+
   @override
   String toString() {
-    return 'AddressPageArgs{key: $key}';
+    return 'AddressPageArgs{key: $key, selectAddress: $selectAddress}';
   }
 }

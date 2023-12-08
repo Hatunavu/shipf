@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_state.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -13,7 +14,7 @@ class SelectAddressWidget extends StatefulWidget {
   final bool isDistrict;
   final bool isWard;
   final bool enableSelect;
-  final AddressDataModel? addressData;
+  final AddressDataResponse? addressData;
   final bool isDeliver;
 
   const SelectAddressWidget(
@@ -38,44 +39,63 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   int indexProvinceDeliver = -1;
   int indexDistrictDeliver = -1;
   int indexWardDeliver = -1;
-  AddressDataModel? get addressData => widget.addressData;
+  AddressDataResponse? get addressData => widget.addressData;
 
   @override
   void initState() {
     _addAddressCubit = context.read<AddAddressCubit>();
 
-    // final indexProvince = provinces
-    //     .indexWhere((element) => element.code == addressData!.codes.province);
-    // print(indexProvince);
-    // addressData != null ? getProvice() : null;
-    // addressData != null ? getDistrict() : null;
-    // addressData != null ? getWard() : null;
     super.initState();
   }
 
-  // void getProvice() async {
-  //   final provinces = await _addAddressCubit.getProvinces();
-  //   final indexProvince =
-  //       provinces.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateProvince(provinces[indexProvince]);
-  // }
+  void getProvince() async {
+    final provinces = await _addAddressCubit.getProvinces();
+    final indexProvince = provinces.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.province);
+    _addAddressCubit.updateProvince(provinces[indexProvince]);
+  }
 
-  // void getDistrict() async {
-  //   final districts =
-  //       await _addAddressCubit.getDistricts(provinceId: addressData!.id);
-  //   final indexDistrict =
-  //       districts.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateDistrict(districts[indexDistrict]);
-  // }
+  void getDistrict() async {
+    final districts = await _addAddressCubit.getDistricts(
+        provinceId: int.parse(addressData!.codes.province));
+    final indexDistrict = districts.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.district);
+    _addAddressCubit.updateDistrict(districts[indexDistrict]);
+  }
 
-  // void getWard() async {
-  //   final wards = await _addAddressCubit.getWards(districtId: addressData!.id);
-  //   final indexWard =
-  //       wards.indexWhere((element) => element.id == addressData!.id);
-  //   _addAddressCubit.updateDistrict(wards[indexWard]);
-  // }
+  void getWard() async {
+    final wards = await _addAddressCubit.getWards(
+        districtId: int.parse(addressData!.codes.district));
+    final indexWard = wards.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.ward);
+    _addAddressCubit.updateWard(wards[indexWard]);
+  }
 
-  Widget setupAlertDialoadContainer(
+//Deliver
+  void getProvinceDeliver() async {
+    final provinces = await _addAddressCubit.getProvincesDeliver();
+    final indexProvince = provinces.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.province);
+    _addAddressCubit.updateProvinceDeliver(provinces[indexProvince]);
+  }
+
+  void getDistrictDeliver() async {
+    final districts = await _addAddressCubit.getDistrictsDeliver(
+        provinceId: int.parse(addressData!.codes.province));
+    final indexDistrict = districts.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.district);
+    _addAddressCubit.updateDistrictDeliver(districts[indexDistrict]);
+  }
+
+  void getWardDeliver() async {
+    final wards = await _addAddressCubit.getWardsDeliver(
+        districtId: int.parse(addressData!.codes.district));
+    final indexWard = wards.indexWhere(
+        (element) => element.id.toString() == addressData!.codes.ward);
+    _addAddressCubit.updateWardDeliver(wards[indexWard]);
+  }
+
+  Widget setupAlertDialogContainer(
       {required List<AddressDataModel> provinces,
       List<AddressDataModel>? districts,
       List<AddressDataModel>? wards}) {
@@ -210,7 +230,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
             ),
             SizedBox(
                 height: 0.5.sh,
-                child: setupAlertDialoadContainer(
+                child: setupAlertDialogContainer(
                     provinces: provinces, districts: districts, wards: wards)),
           ],
         );
@@ -220,6 +240,15 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isDeliver) {
+      addressData != null ? getProvinceDeliver() : null;
+      addressData != null ? getDistrictDeliver() : null;
+      addressData != null ? getWardDeliver() : null;
+    } else {
+      addressData != null ? getProvince() : null;
+      addressData != null ? getDistrict() : null;
+      addressData != null ? getWard() : null;
+    }
     return BlocBuilder<AddAddressCubit, AddAddressState>(
       builder: (context, locationState) {
         return GestureDetector(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
-import 'package:shipf/ui/screen/main/add_address/widget/select_address_widget.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
@@ -207,11 +206,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         labelTextField(label),
-        SelectAddressWidget(
-          label: label,
-          isDistrict: isDistrict,
-          isWard: isWard,
-        ),
+        // SelectAddressWidget(
+        //   label: label,
+        //   isDistrict: isDistrict,
+        //   isWard: isWard,
+        // ),
       ],
     );
   }

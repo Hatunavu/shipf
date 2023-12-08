@@ -3,121 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/address/address_model.dart';
-import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
-import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 final List<AddressDataResponse> listAddress = [
   AddressDataResponse(
     id: '1',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
+    codes: AddressCode(district: '686', province: '62', ward: '10851'),
     location: AddressLocation(coordinates: [0.1, 100]),
     owner: '',
     phone: '0987654321',
     fullName: 'Vu Truong Nam',
-    details: '',
+    details: '234 Chiến Thắng',
     isDeleted: false,
     isDefault: true,
-    fullAddress: '9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi',
+    fullAddress: '234 Chiến Thắng, Phường 2, Tân Bình, Hồ Chí Minh',
     type: 'Văn phòng',
   ),
   AddressDataResponse(
     id: '2',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
+    codes: AddressCode(district: '724', province: '63', ward: '11598'),
     location: AddressLocation(coordinates: [0.1, 100]),
     owner: '',
-    phone: '098888888',
+    phone: '0988888888',
     fullName: 'Nam Vu',
-    details: '',
+    details: '123 Hoàng Quốc Việt',
     isDeleted: false,
     isDefault: false,
-    fullAddress: '186 đường Bưởi, Cống Vị, Ba Đình, Hà Nội',
-    type: 'Nhà',
-  ),
-  AddressDataResponse(
-    id: '1',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '0987654321',
-    fullName: 'Vu Truong Nam',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi',
-    type: 'Văn phòng',
-  ),
-  AddressDataResponse(
-    id: '2',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '098888888',
-    fullName: 'Nam Vu',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '186 đường Bưởi, Cống Vị, Ba Đình, Hà Nội',
-    type: 'Nhà',
-  ),
-  AddressDataResponse(
-    id: '1',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '0987654321',
-    fullName: 'Vu Truong Nam',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi',
-    type: 'Văn phòng',
-  ),
-  AddressDataResponse(
-    id: '2',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '098888888',
-    fullName: 'Nam Vu',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '186 đường Bưởi, Cống Vị, Ba Đình, Hà Nội',
-    type: '',
-  ),
-  AddressDataResponse(
-    id: '1',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '0987654321',
-    fullName: 'Vu Truong Nam',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi',
-    type: 'Văn phòng',
-  ),
-  AddressDataResponse(
-    id: '2',
-    codes: AddressCode(district: '001', province: '01', ward: '0001'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '098888888',
-    fullName: 'Nam Vu',
-    details: '',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '186 đường Bưởi, Cống Vị, Ba Đình, Hà Nội',
+    fullAddress: '123 Hoàng Quốc Việt, Cổ Nhuế 2, Bắc Từ Liêm, Hà Nội',
     type: 'Nhà',
   ),
 ];
 
 class AddressScreen extends StatefulWidget {
-  AddressScreen({Key? key}) : super(key: key);
+  Function(AddressDataResponse address)? selectAddress;
+  AddressScreen({Key? key, this.selectAddress}) : super(key: key);
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -127,7 +48,7 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
-      title: 'Chọn địa chỉ giao hàng',
+      title: 'Chọn địa chỉ',
       leading: InkWell(
         onTap: () {
           Navigator.pop(context);
@@ -140,21 +61,27 @@ class _AddressScreenState extends State<AddressScreen> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.all(kDefaultPaddingHeightWidget),
-              child: PrimaryButton(
-                label: 'Thêm địa chỉ',
-                onPressed: () {
-                  context.router.push(AddAddressPage());
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(kDefaultPaddingHeightWidget),
+            //   child: PrimaryButton(
+            //     label: 'Thêm địa chỉ',
+            //     onPressed: () {
+            //       context.router.push(AddAddressPage());
+            //     },
+            //   ),
+            // ),
             ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: listAddress.length,
                 itemBuilder: (context, index) {
-                  return itemAddress(listAddress[index]);
+                  return GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        widget.selectAddress!(listAddress[index]);
+                        context.router.pop();
+                      },
+                      child: itemAddress(listAddress[index]));
                 })
           ],
         ),
@@ -212,7 +139,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     )),
                     GestureDetector(
                       onTap: () {
-                        context.router.push(AddAddressPage());
+                        // context.router.push(AddAddressPage());
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -221,7 +148,8 @@ class _AddressScreenState extends State<AddressScreen> {
                             .copyWith(right: kDefaultPaddingWidthScreen),
                         color: Colors.transparent,
                         child: Text(
-                          'Chỉnh sửa',
+                          // 'Chỉnh sửa',
+                          '',
                           style: textBody.copyWith(color: primaryColor),
                         ),
                       ),

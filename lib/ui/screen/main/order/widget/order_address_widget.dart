@@ -6,9 +6,9 @@ import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/router/router.gr.dart';
-import 'package:shipf/ui/screen/main/add_address/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
+import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
@@ -16,7 +16,7 @@ import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class OrderAddressWidget extends StatefulWidget {
+class OrderAddressWidget extends StatelessWidget {
   OrderCubit orderCubit;
   TextEditingController senderNameController;
   TextEditingController senderPhoneController;
@@ -39,36 +39,31 @@ class OrderAddressWidget extends StatefulWidget {
       required this.addressFormKey});
 
   @override
-  State<OrderAddressWidget> createState() => _OrderAddressWidgetState();
-}
-
-class _OrderAddressWidgetState extends State<OrderAddressWidget> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        address(
+        address(context,
             type: text.sending_place,
-            nameController: widget.senderNameController,
-            phoneController: widget.senderPhoneController,
-            addressController: widget.senderAddressController),
+            nameController: senderNameController,
+            phoneController: senderPhoneController,
+            addressController: senderAddressController),
         VerticalSpace(
           kDefaultPaddingHeightScreen,
           color: backgroundColor,
         ),
-        address(
+        address(context,
             type: text.recipients,
-            nameController: widget.receiverNameController,
-            phoneController: widget.receiverPhoneController,
-            addressController: widget.receiverAddressController,
+            nameController: receiverNameController,
+            phoneController: receiverPhoneController,
+            addressController: receiverAddressController,
             isDeliver: true),
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
             label: text.continuee,
             onPressed: () {
-              // widget.orderCubit.getService(OrderRequest(
+              // orderCubit.getService(OrderRequest(
               //     parcelWeight: 100,
               //     parcelWidth: 70,
               //     parcelHeight: 70,
@@ -78,8 +73,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
               //     pickAddressId: 1,
               //     toProvinceId: 4,
               //     toDistrictId: 40));
-              if (widget.addressFormKey.currentState!.validate()) {
-                widget.orderCubit.updateStepOrder(StepOrderType.parcel);
+              if (addressFormKey.currentState!.validate()) {
+                orderCubit.updateStepOrder(StepOrderType.parcel);
               }
             },
           ),
@@ -88,7 +83,7 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
     );
   }
 
-  Widget address(
+  Widget address(BuildContext context,
       {required String type,
       required TextEditingController nameController,
       required TextEditingController phoneController,
@@ -114,12 +109,12 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
                 onTap: () => context.router.push(AddressPage(
                   selectAddress: (address) {
                     if (isDeliver) {
-                      widget.orderCubit.selectAddressDeliver(address);
+                      orderCubit.selectAddressDeliver(address);
                       nameController.text = address.fullName;
                       phoneController.text = address.phone;
                       addressController.text = address.details;
                     } else {
-                      widget.orderCubit.selectAddressPick(address);
+                      orderCubit.selectAddressPick(address);
                       nameController.text = address.fullName;
                       phoneController.text = address.phone;
                       addressController.text = address.details;
@@ -138,9 +133,6 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
               ),
             ],
           ),
-          // VerticalSpace(
-          //   kDefaultPaddingHeightScreen,
-          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -185,8 +177,8 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
             label: text.city,
             isDeliver: isDeliver,
             addressData: isDeliver
-                ? widget.orderCubit.state.addressDeliver
-                : widget.orderCubit.state.addressPick,
+                ? orderCubit.state.addressDeliver
+                : orderCubit.state.addressPick,
           ),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
@@ -230,7 +222,83 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           isDistrict: isDistrict,
           isWard: isWard,
           isDeliver: isDeliver,
-          addressData: addressData,
+          provinces: orderCubit.state.provinces,
+          districts: isDeliver
+              ? orderCubit.state.districtsDeliver
+              : orderCubit.state.districts,
+          wards: isDeliver
+              ? orderCubit.state.wardsDeliver
+              : orderCubit.state.wards,
+          province: isDeliver
+              ? orderCubit.state.provinceDeliver
+              : orderCubit.state.province,
+          district: isDeliver
+              ? orderCubit.state.districtDeliver
+              : orderCubit.state.district,
+          ward:
+              isDeliver ? orderCubit.state.wardDeliver : orderCubit.state.ward,
+          errorProvince: isDeliver
+              ? orderCubit.state.errorProvinceDeliver
+              : orderCubit.state.errorProvince,
+          errorDistrict: isDeliver
+              ? orderCubit.state.errorDistrictDeliver
+              : orderCubit.state.errorDistrict,
+          errorWard: isDeliver
+              ? orderCubit.state.errorWardDeliver
+              : orderCubit.state.errorWard,
+          selectProvince: (index) {
+            if (isDeliver) {
+              orderCubit.getDistrictsDeliver(
+                  provinceId: orderCubit.state.provinces[index].id,
+                  isUpdateProvince: true);
+              orderCubit
+                  .updateProvinceDeliver(orderCubit.state.provinces[index]);
+            } else {
+              orderCubit.getDistricts(
+                  provinceId: orderCubit.state.provinces[index].id,
+                  isUpdateProvince: true);
+              orderCubit.updateProvince(orderCubit.state.provinces[index]);
+            }
+          },
+          selectDistrict: (index) {
+            if (isDeliver) {
+              orderCubit.getWardsDeliver(
+                  districtId: orderCubit.state.districtsDeliver[index].id);
+              orderCubit.updateDistrictDeliver(
+                  orderCubit.state.districtsDeliver[index]);
+            } else {
+              orderCubit.getWards(
+                  districtId: orderCubit.state.districts[index].id);
+              orderCubit.updateDistrict(orderCubit.state.districts[index]);
+            }
+          },
+          selectWard: (index) {
+            isDeliver
+                ? orderCubit
+                    .updateWardDeliver(orderCubit.state.wardsDeliver[index])
+                : orderCubit.updateWard(orderCubit.state.wards[index]);
+          },
+          validator: (_) {
+            if (isDeliver) {
+              if (isWard && orderCubit.state.wardDeliver == null) {
+                orderCubit.updateWardDeliverError();
+              } else if (isDistrict &&
+                  orderCubit.state.districtDeliver == null) {
+                orderCubit.updateDistrictDeliverError();
+              } else if (orderCubit.state.provinceDeliver == null) {
+                orderCubit.updateProvinceDeliverError();
+              }
+            } else {
+              if (isWard && orderCubit.state.ward == null) {
+                orderCubit.updateWardError();
+              } else if (isDistrict && orderCubit.state.district == null) {
+                orderCubit.updateDistrictError();
+              } else if (orderCubit.state.province == null) {
+                orderCubit.updateProvinceError();
+              }
+            }
+            return null;
+          },
         ),
       ],
     );

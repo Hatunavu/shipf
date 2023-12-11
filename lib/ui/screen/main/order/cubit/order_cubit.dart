@@ -92,11 +92,36 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  void selectAddressPick(AddressDataResponse? address) {
+  Future<void> selectAddressPick(AddressDataResponse? address) async {
+    final indexProvince = state.provinces.indexWhere(
+        (element) => element.id.toString() == address!.codes.province);
+    updateProvince(state.provinces[indexProvince]);
+    final districts =
+        await getDistricts(provinceId: int.parse(address!.codes.province));
+    final indexDistrict = districts.indexWhere(
+        (element) => element.id.toString() == address.codes.district);
+    updateDistrict(districts[indexDistrict]);
+    final wards = await getWards(districtId: int.parse(address.codes.district));
+    final indexWard = wards
+        .indexWhere((element) => element.id.toString() == address.codes.ward);
+    updateWard(wards[indexWard]);
     emit(state.copyWith(addressPick: address));
   }
 
-  void selectAddressDeliver(AddressDataResponse? address) {
+  Future<void> selectAddressDeliver(AddressDataResponse? address) async {
+    final indexProvince = state.provinces.indexWhere(
+        (element) => element.id.toString() == address!.codes.province);
+    updateProvinceDeliver(state.provinces[indexProvince]);
+    final districts = await getDistrictsDeliver(
+        provinceId: int.parse(address!.codes.province));
+    final indexDistrict = districts.indexWhere(
+        (element) => element.id.toString() == address.codes.district);
+    updateDistrictDeliver(districts[indexDistrict]);
+    final wards =
+        await getWardsDeliver(districtId: int.parse(address.codes.district));
+    final indexWard = wards
+        .indexWhere((element) => element.id.toString() == address.codes.ward);
+    updateWardDeliver(wards[indexWard]);
     emit(state.copyWith(addressDeliver: address));
   }
 
@@ -134,7 +159,7 @@ class OrderCubit extends Cubit<OrderState> {
             // district: addressData != null ? response.data[indexDistrict] : null,
             district: null,
             ward: null,
-            wards: null))
+            wards: []))
         : emit(state.copyWith(
             isLoading: false,
             districts: response.data,
@@ -185,22 +210,6 @@ class OrderCubit extends Cubit<OrderState> {
 
   //deliver
 
-  Future<List<AddressDataModel>> getProvincesDeliver(
-      {AddressDataModel? addressData}) async {
-    emit(state.copyWith(isLoading: true));
-    final response = await mainRepository.getProvinces();
-    final indexProvince = addressData != null
-        ? response.data.indexWhere((element) => element.id == addressData.id)
-        : -1;
-
-    emit(state.copyWith(
-        isLoading: false,
-        provincesDeliver: response.data,
-        provinceDeliver:
-            addressData != null ? response.data[indexProvince] : null));
-    return response.data;
-  }
-
   Future<List<AddressDataModel>> getDistrictsDeliver(
       {required int provinceId,
       AddressDataModel? addressData,
@@ -219,7 +228,7 @@ class OrderCubit extends Cubit<OrderState> {
             // district: addressData != null ? response.data[indexDistrict] : null,
             districtDeliver: null,
             wardDeliver: null,
-            wardsDeliver: null))
+            wardsDeliver: []))
         : emit(state.copyWith(
             isLoading: false,
             districtsDeliver: response.data,

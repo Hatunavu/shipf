@@ -33,9 +33,9 @@ mixin _$OrderState {
   String get errorWard => throw _privateConstructorUsedError;
   bool? get isLoadingDistrict => throw _privateConstructorUsedError;
   bool? get isLoadingWard => throw _privateConstructorUsedError;
-  List<AddressDataModel>? get provinces => throw _privateConstructorUsedError;
-  List<AddressDataModel>? get districts => throw _privateConstructorUsedError;
-  List<AddressDataModel>? get wards => throw _privateConstructorUsedError;
+  List<AddressDataModel> get provinces => throw _privateConstructorUsedError;
+  List<AddressDataModel> get districts => throw _privateConstructorUsedError;
+  List<AddressDataModel> get wards => throw _privateConstructorUsedError;
   AddressDataModel? get province => throw _privateConstructorUsedError;
   AddressDataModel? get district => throw _privateConstructorUsedError;
   AddressDataModel? get ward => throw _privateConstructorUsedError;
@@ -44,12 +44,9 @@ mixin _$OrderState {
   String get errorWardDeliver => throw _privateConstructorUsedError;
   bool? get isLoadingDistrictDeliver => throw _privateConstructorUsedError;
   bool? get isLoadingWardDeliver => throw _privateConstructorUsedError;
-  List<AddressDataModel>? get provincesDeliver =>
+  List<AddressDataModel> get districtsDeliver =>
       throw _privateConstructorUsedError;
-  List<AddressDataModel>? get districtsDeliver =>
-      throw _privateConstructorUsedError;
-  List<AddressDataModel>? get wardsDeliver =>
-      throw _privateConstructorUsedError;
+  List<AddressDataModel> get wardsDeliver => throw _privateConstructorUsedError;
   AddressDataModel? get provinceDeliver => throw _privateConstructorUsedError;
   AddressDataModel? get districtDeliver => throw _privateConstructorUsedError;
   AddressDataModel? get wardDeliver => throw _privateConstructorUsedError;
@@ -82,9 +79,9 @@ abstract class $OrderStateCopyWith<$Res> {
       String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<AddressDataModel>? provinces,
-      List<AddressDataModel>? districts,
-      List<AddressDataModel>? wards,
+      List<AddressDataModel> provinces,
+      List<AddressDataModel> districts,
+      List<AddressDataModel> wards,
       AddressDataModel? province,
       AddressDataModel? district,
       AddressDataModel? ward,
@@ -93,9 +90,8 @@ abstract class $OrderStateCopyWith<$Res> {
       String errorWardDeliver,
       bool? isLoadingDistrictDeliver,
       bool? isLoadingWardDeliver,
-      List<AddressDataModel>? provincesDeliver,
-      List<AddressDataModel>? districtsDeliver,
-      List<AddressDataModel>? wardsDeliver,
+      List<AddressDataModel> districtsDeliver,
+      List<AddressDataModel> wardsDeliver,
       AddressDataModel? provinceDeliver,
       AddressDataModel? districtDeliver,
       AddressDataModel? wardDeliver});
@@ -130,9 +126,9 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
     Object? errorWard = null,
     Object? isLoadingDistrict = freezed,
     Object? isLoadingWard = freezed,
-    Object? provinces = freezed,
-    Object? districts = freezed,
-    Object? wards = freezed,
+    Object? provinces = null,
+    Object? districts = null,
+    Object? wards = null,
     Object? province = freezed,
     Object? district = freezed,
     Object? ward = freezed,
@@ -141,9 +137,8 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
     Object? errorWardDeliver = null,
     Object? isLoadingDistrictDeliver = freezed,
     Object? isLoadingWardDeliver = freezed,
-    Object? provincesDeliver = freezed,
-    Object? districtsDeliver = freezed,
-    Object? wardsDeliver = freezed,
+    Object? districtsDeliver = null,
+    Object? wardsDeliver = null,
     Object? provinceDeliver = freezed,
     Object? districtDeliver = freezed,
     Object? wardDeliver = freezed,
@@ -213,18 +208,18 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.isLoadingWard
           : isLoadingWard // ignore: cast_nullable_to_non_nullable
               as bool?,
-      provinces: freezed == provinces
+      provinces: null == provinces
           ? _value.provinces
           : provinces // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      districts: freezed == districts
+              as List<AddressDataModel>,
+      districts: null == districts
           ? _value.districts
           : districts // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      wards: freezed == wards
+              as List<AddressDataModel>,
+      wards: null == wards
           ? _value.wards
           : wards // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
+              as List<AddressDataModel>,
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
@@ -257,18 +252,14 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.isLoadingWardDeliver
           : isLoadingWardDeliver // ignore: cast_nullable_to_non_nullable
               as bool?,
-      provincesDeliver: freezed == provincesDeliver
-          ? _value.provincesDeliver
-          : provincesDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      districtsDeliver: freezed == districtsDeliver
+      districtsDeliver: null == districtsDeliver
           ? _value.districtsDeliver
           : districtsDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      wardsDeliver: freezed == wardsDeliver
+              as List<AddressDataModel>,
+      wardsDeliver: null == wardsDeliver
           ? _value.wardsDeliver
           : wardsDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
+              as List<AddressDataModel>,
       provinceDeliver: freezed == provinceDeliver
           ? _value.provinceDeliver
           : provinceDeliver // ignore: cast_nullable_to_non_nullable
@@ -310,9 +301,9 @@ abstract class _$$_OrderStateCopyWith<$Res>
       String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<AddressDataModel>? provinces,
-      List<AddressDataModel>? districts,
-      List<AddressDataModel>? wards,
+      List<AddressDataModel> provinces,
+      List<AddressDataModel> districts,
+      List<AddressDataModel> wards,
       AddressDataModel? province,
       AddressDataModel? district,
       AddressDataModel? ward,
@@ -321,9 +312,8 @@ abstract class _$$_OrderStateCopyWith<$Res>
       String errorWardDeliver,
       bool? isLoadingDistrictDeliver,
       bool? isLoadingWardDeliver,
-      List<AddressDataModel>? provincesDeliver,
-      List<AddressDataModel>? districtsDeliver,
-      List<AddressDataModel>? wardsDeliver,
+      List<AddressDataModel> districtsDeliver,
+      List<AddressDataModel> wardsDeliver,
       AddressDataModel? provinceDeliver,
       AddressDataModel? districtDeliver,
       AddressDataModel? wardDeliver});
@@ -356,9 +346,9 @@ class __$$_OrderStateCopyWithImpl<$Res>
     Object? errorWard = null,
     Object? isLoadingDistrict = freezed,
     Object? isLoadingWard = freezed,
-    Object? provinces = freezed,
-    Object? districts = freezed,
-    Object? wards = freezed,
+    Object? provinces = null,
+    Object? districts = null,
+    Object? wards = null,
     Object? province = freezed,
     Object? district = freezed,
     Object? ward = freezed,
@@ -367,9 +357,8 @@ class __$$_OrderStateCopyWithImpl<$Res>
     Object? errorWardDeliver = null,
     Object? isLoadingDistrictDeliver = freezed,
     Object? isLoadingWardDeliver = freezed,
-    Object? provincesDeliver = freezed,
-    Object? districtsDeliver = freezed,
-    Object? wardsDeliver = freezed,
+    Object? districtsDeliver = null,
+    Object? wardsDeliver = null,
     Object? provinceDeliver = freezed,
     Object? districtDeliver = freezed,
     Object? wardDeliver = freezed,
@@ -439,18 +428,18 @@ class __$$_OrderStateCopyWithImpl<$Res>
           ? _value.isLoadingWard
           : isLoadingWard // ignore: cast_nullable_to_non_nullable
               as bool?,
-      provinces: freezed == provinces
+      provinces: null == provinces
           ? _value._provinces
           : provinces // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      districts: freezed == districts
+              as List<AddressDataModel>,
+      districts: null == districts
           ? _value._districts
           : districts // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      wards: freezed == wards
+              as List<AddressDataModel>,
+      wards: null == wards
           ? _value._wards
           : wards // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
+              as List<AddressDataModel>,
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
@@ -483,18 +472,14 @@ class __$$_OrderStateCopyWithImpl<$Res>
           ? _value.isLoadingWardDeliver
           : isLoadingWardDeliver // ignore: cast_nullable_to_non_nullable
               as bool?,
-      provincesDeliver: freezed == provincesDeliver
-          ? _value._provincesDeliver
-          : provincesDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      districtsDeliver: freezed == districtsDeliver
+      districtsDeliver: null == districtsDeliver
           ? _value._districtsDeliver
           : districtsDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
-      wardsDeliver: freezed == wardsDeliver
+              as List<AddressDataModel>,
+      wardsDeliver: null == wardsDeliver
           ? _value._wardsDeliver
           : wardsDeliver // ignore: cast_nullable_to_non_nullable
-              as List<AddressDataModel>?,
+              as List<AddressDataModel>,
       provinceDeliver: freezed == provinceDeliver
           ? _value.provinceDeliver
           : provinceDeliver // ignore: cast_nullable_to_non_nullable
@@ -531,9 +516,9 @@ class _$_OrderState implements _OrderState {
       required this.errorWard,
       this.isLoadingDistrict,
       this.isLoadingWard,
-      final List<AddressDataModel>? provinces,
-      final List<AddressDataModel>? districts,
-      final List<AddressDataModel>? wards,
+      required final List<AddressDataModel> provinces,
+      required final List<AddressDataModel> districts,
+      required final List<AddressDataModel> wards,
       this.province,
       this.district,
       this.ward,
@@ -542,9 +527,8 @@ class _$_OrderState implements _OrderState {
       required this.errorWardDeliver,
       this.isLoadingDistrictDeliver,
       this.isLoadingWardDeliver,
-      final List<AddressDataModel>? provincesDeliver,
-      final List<AddressDataModel>? districtsDeliver,
-      final List<AddressDataModel>? wardsDeliver,
+      required final List<AddressDataModel> districtsDeliver,
+      required final List<AddressDataModel> wardsDeliver,
       this.provinceDeliver,
       this.districtDeliver,
       this.wardDeliver})
@@ -552,7 +536,6 @@ class _$_OrderState implements _OrderState {
         _provinces = provinces,
         _districts = districts,
         _wards = wards,
-        _provincesDeliver = provincesDeliver,
         _districtsDeliver = districtsDeliver,
         _wardsDeliver = wardsDeliver;
 
@@ -595,34 +578,28 @@ class _$_OrderState implements _OrderState {
   final bool? isLoadingDistrict;
   @override
   final bool? isLoadingWard;
-  final List<AddressDataModel>? _provinces;
+  final List<AddressDataModel> _provinces;
   @override
-  List<AddressDataModel>? get provinces {
-    final value = _provinces;
-    if (value == null) return null;
+  List<AddressDataModel> get provinces {
     if (_provinces is EqualUnmodifiableListView) return _provinces;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_provinces);
   }
 
-  final List<AddressDataModel>? _districts;
+  final List<AddressDataModel> _districts;
   @override
-  List<AddressDataModel>? get districts {
-    final value = _districts;
-    if (value == null) return null;
+  List<AddressDataModel> get districts {
     if (_districts is EqualUnmodifiableListView) return _districts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_districts);
   }
 
-  final List<AddressDataModel>? _wards;
+  final List<AddressDataModel> _wards;
   @override
-  List<AddressDataModel>? get wards {
-    final value = _wards;
-    if (value == null) return null;
+  List<AddressDataModel> get wards {
     if (_wards is EqualUnmodifiableListView) return _wards;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_wards);
   }
 
   @override
@@ -641,36 +618,21 @@ class _$_OrderState implements _OrderState {
   final bool? isLoadingDistrictDeliver;
   @override
   final bool? isLoadingWardDeliver;
-  final List<AddressDataModel>? _provincesDeliver;
+  final List<AddressDataModel> _districtsDeliver;
   @override
-  List<AddressDataModel>? get provincesDeliver {
-    final value = _provincesDeliver;
-    if (value == null) return null;
-    if (_provincesDeliver is EqualUnmodifiableListView)
-      return _provincesDeliver;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<AddressDataModel>? _districtsDeliver;
-  @override
-  List<AddressDataModel>? get districtsDeliver {
-    final value = _districtsDeliver;
-    if (value == null) return null;
+  List<AddressDataModel> get districtsDeliver {
     if (_districtsDeliver is EqualUnmodifiableListView)
       return _districtsDeliver;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_districtsDeliver);
   }
 
-  final List<AddressDataModel>? _wardsDeliver;
+  final List<AddressDataModel> _wardsDeliver;
   @override
-  List<AddressDataModel>? get wardsDeliver {
-    final value = _wardsDeliver;
-    if (value == null) return null;
+  List<AddressDataModel> get wardsDeliver {
     if (_wardsDeliver is EqualUnmodifiableListView) return _wardsDeliver;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_wardsDeliver);
   }
 
   @override
@@ -682,7 +644,7 @@ class _$_OrderState implements _OrderState {
 
   @override
   String toString() {
-    return 'OrderState(isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, provincesDeliver: $provincesDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver)';
+    return 'OrderState(isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver)';
   }
 
   @override
@@ -742,8 +704,6 @@ class _$_OrderState implements _OrderState {
             (identical(other.isLoadingWardDeliver, isLoadingWardDeliver) ||
                 other.isLoadingWardDeliver == isLoadingWardDeliver) &&
             const DeepCollectionEquality()
-                .equals(other._provincesDeliver, _provincesDeliver) &&
-            const DeepCollectionEquality()
                 .equals(other._districtsDeliver, _districtsDeliver) &&
             const DeepCollectionEquality()
                 .equals(other._wardsDeliver, _wardsDeliver) &&
@@ -785,7 +745,6 @@ class _$_OrderState implements _OrderState {
         errorWardDeliver,
         isLoadingDistrictDeliver,
         isLoadingWardDeliver,
-        const DeepCollectionEquality().hash(_provincesDeliver),
         const DeepCollectionEquality().hash(_districtsDeliver),
         const DeepCollectionEquality().hash(_wardsDeliver),
         provinceDeliver,
@@ -818,9 +777,9 @@ abstract class _OrderState implements OrderState {
       required final String errorWard,
       final bool? isLoadingDistrict,
       final bool? isLoadingWard,
-      final List<AddressDataModel>? provinces,
-      final List<AddressDataModel>? districts,
-      final List<AddressDataModel>? wards,
+      required final List<AddressDataModel> provinces,
+      required final List<AddressDataModel> districts,
+      required final List<AddressDataModel> wards,
       final AddressDataModel? province,
       final AddressDataModel? district,
       final AddressDataModel? ward,
@@ -829,9 +788,8 @@ abstract class _OrderState implements OrderState {
       required final String errorWardDeliver,
       final bool? isLoadingDistrictDeliver,
       final bool? isLoadingWardDeliver,
-      final List<AddressDataModel>? provincesDeliver,
-      final List<AddressDataModel>? districtsDeliver,
-      final List<AddressDataModel>? wardsDeliver,
+      required final List<AddressDataModel> districtsDeliver,
+      required final List<AddressDataModel> wardsDeliver,
       final AddressDataModel? provinceDeliver,
       final AddressDataModel? districtDeliver,
       final AddressDataModel? wardDeliver}) = _$_OrderState;
@@ -869,11 +827,11 @@ abstract class _OrderState implements OrderState {
   @override
   bool? get isLoadingWard;
   @override
-  List<AddressDataModel>? get provinces;
+  List<AddressDataModel> get provinces;
   @override
-  List<AddressDataModel>? get districts;
+  List<AddressDataModel> get districts;
   @override
-  List<AddressDataModel>? get wards;
+  List<AddressDataModel> get wards;
   @override
   AddressDataModel? get province;
   @override
@@ -891,11 +849,9 @@ abstract class _OrderState implements OrderState {
   @override
   bool? get isLoadingWardDeliver;
   @override
-  List<AddressDataModel>? get provincesDeliver;
+  List<AddressDataModel> get districtsDeliver;
   @override
-  List<AddressDataModel>? get districtsDeliver;
-  @override
-  List<AddressDataModel>? get wardsDeliver;
+  List<AddressDataModel> get wardsDeliver;
   @override
   AddressDataModel? get provinceDeliver;
   @override

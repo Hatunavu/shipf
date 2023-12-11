@@ -26,9 +26,9 @@ class OrderState with _$OrderState {
       required String errorWard,
       bool? isLoadingDistrict,
       bool? isLoadingWard,
-      List<AddressDataModel>? provinces,
-      List<AddressDataModel>? districts,
-      List<AddressDataModel>? wards,
+      required List<AddressDataModel> provinces,
+      required List<AddressDataModel> districts,
+      required List<AddressDataModel> wards,
       AddressDataModel? province,
       AddressDataModel? district,
       AddressDataModel? ward,
@@ -37,9 +37,8 @@ class OrderState with _$OrderState {
       required String errorWardDeliver,
       bool? isLoadingDistrictDeliver,
       bool? isLoadingWardDeliver,
-      List<AddressDataModel>? provincesDeliver,
-      List<AddressDataModel>? districtsDeliver,
-      List<AddressDataModel>? wardsDeliver,
+      required List<AddressDataModel> districtsDeliver,
+      required List<AddressDataModel> wardsDeliver,
       AddressDataModel? provinceDeliver,
       AddressDataModel? districtDeliver,
       AddressDataModel? wardDeliver}) = _OrderState;
@@ -58,5 +57,10 @@ class OrderState with _$OrderState {
       errorWard: '',
       errorDistrictDeliver: '',
       errorProvinceDeliver: '',
-      errorWardDeliver: '');
+      errorWardDeliver: '',
+      provinces: [],
+      districts: [],
+      wards: [],
+      districtsDeliver: [],
+      wardsDeliver: []);
 }

@@ -37,8 +37,8 @@ final List<AddressDataResponse> listAddress = [
 ];
 
 class AddressScreen extends StatefulWidget {
-  Function(AddressDataResponse address)? selectAddress;
-  AddressScreen({Key? key, this.selectAddress}) : super(key: key);
+  Function(AddressDataResponse address) selectAddress;
+  AddressScreen({Key? key, required this.selectAddress}) : super(key: key);
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -78,7 +78,7 @@ class _AddressScreenState extends State<AddressScreen> {
                   return GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        widget.selectAddress!(listAddress[index]);
+                        widget.selectAddress(listAddress[index]);
                         context.router.pop();
                       },
                       child: itemAddress(listAddress[index]));

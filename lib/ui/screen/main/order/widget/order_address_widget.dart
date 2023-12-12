@@ -114,13 +114,12 @@ class OrderAddressWidget extends StatelessWidget {
                 behavior: HitTestBehavior.translucent,
                 onTap: () => context.router.push(AddressPage(
                   selectAddress: (address) {
+                    orderCubit.selectAddress(address, isDeliver: isDeliver);
                     if (isDeliver) {
-                      orderCubit.selectAddressDeliver(address);
                       nameController.text = address.fullName;
                       phoneController.text = address.phone;
                       addressController.text = address.details;
                     } else {
-                      orderCubit.selectAddressPick(address);
                       nameController.text = address.fullName;
                       phoneController.text = address.phone;
                       addressController.text = address.details;
@@ -255,14 +254,13 @@ class OrderAddressWidget extends StatelessWidget {
           selectProvince: (index) {
             if (isDeliver) {
               orderCubit.getDistrictsDeliver(
-                  provinceId: orderCubit.state.provinces[index].id,
-                  isUpdateProvince: true);
+                  provinceId: orderCubit.state.provinces[index].id);
               orderCubit
                   .updateProvinceDeliver(orderCubit.state.provinces[index]);
             } else {
               orderCubit.getDistricts(
-                  provinceId: orderCubit.state.provinces[index].id,
-                  isUpdateProvince: true);
+                provinceId: orderCubit.state.provinces[index].id,
+              );
               orderCubit.updateProvince(orderCubit.state.provinces[index]);
             }
           },

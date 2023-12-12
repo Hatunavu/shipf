@@ -348,7 +348,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OrderLabelTextFieldWidget(
-            label: isAmount ? text.quantity : '${text.weight} (g)'),
+            label: isAmount ? text.quantity : '${text.weight} (kg)'),
         SizedBox(
           child: Row(
             children: [

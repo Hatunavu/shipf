@@ -130,8 +130,7 @@ class AppRouter extends _i13.RootStackRouter {
       );
     },
     AddressPage.name: (routeData) {
-      final args = routeData.argsAs<AddressPageArgs>(
-          orElse: () => const AddressPageArgs());
+      final args = routeData.argsAs<AddressPageArgs>();
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i12.AddressScreen(
@@ -483,7 +482,7 @@ class AddAddressPageArgs {
 class AddressPage extends _i13.PageRouteInfo<AddressPageArgs> {
   AddressPage({
     _i14.Key? key,
-    dynamic Function(_i16.AddressDataResponse)? selectAddress,
+    required dynamic Function(_i16.AddressDataResponse) selectAddress,
   }) : super(
           AddressPage.name,
           path: '/address',
@@ -499,12 +498,12 @@ class AddressPage extends _i13.PageRouteInfo<AddressPageArgs> {
 class AddressPageArgs {
   const AddressPageArgs({
     this.key,
-    this.selectAddress,
+    required this.selectAddress,
   });
 
   final _i14.Key? key;
 
-  final dynamic Function(_i16.AddressDataResponse)? selectAddress;
+  final dynamic Function(_i16.AddressDataResponse) selectAddress;
 
   @override
   String toString() {

@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/enums/enum_step_order.dart';
-import 'package:shipf/ui/screen/main/add_address/cubit/add_address_cubit.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_address_widget.dart';
@@ -40,18 +40,24 @@ class _OrderScreenState extends State<OrderScreen> {
   final TextEditingController noteController = TextEditingController();
 
   late OrderCubit orderCubit;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AddAddressCubit()),
-        BlocProvider(
-            create: (context) => OrderCubit()
-              ..init()
-              ..getProvinces())
-      ],
+    return BlocProvider(
+      create: (context) => OrderCubit()..init(),
       child: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
+          if (!state.isLoading) {
+            isLoading == true ? context.router.pop() : null;
+            isLoading = false;
+          }
+          if (state.isLoading) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              loadingShowDialog(context);
+              isLoading = true;
+            });
+          }
           orderCubit = context.read<OrderCubit>();
           final stepWidget = state.stepOrderType == StepOrderType.address
               ? Form(

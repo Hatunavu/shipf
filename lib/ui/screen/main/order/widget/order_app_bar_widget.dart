@@ -106,7 +106,13 @@ Widget stepItem(
         orderCubit.updateStepOrder(stepOrderType);
       } else if (orderCubit.state.stepOrderType == StepOrderType.address &&
           addressformKey != null &&
-          addressformKey.currentState!.validate()) {
+          addressformKey.currentState!.validate() &&
+          orderCubit.state.province != null &&
+          orderCubit.state.district != null &&
+          orderCubit.state.ward != null &&
+          orderCubit.state.provinceDeliver != null &&
+          orderCubit.state.districtDeliver != null &&
+          orderCubit.state.wardDeliver != null) {
         orderCubit.updateStepOrder(stepOrderType);
       } else if (orderCubit.state.stepOrderType == StepOrderType.parcel &&
           parcelformKey != null &&

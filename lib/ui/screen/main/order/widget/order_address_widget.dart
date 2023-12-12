@@ -73,7 +73,13 @@ class OrderAddressWidget extends StatelessWidget {
               //     pickAddressId: 1,
               //     toProvinceId: 4,
               //     toDistrictId: 40));
-              if (addressFormKey.currentState!.validate()) {
+              if (addressFormKey.currentState!.validate() &&
+                  orderCubit.state.province != null &&
+                  orderCubit.state.district != null &&
+                  orderCubit.state.ward != null &&
+                  orderCubit.state.provinceDeliver != null &&
+                  orderCubit.state.districtDeliver != null &&
+                  orderCubit.state.wardDeliver != null) {
                 orderCubit.updateStepOrder(StepOrderType.parcel);
               }
             },

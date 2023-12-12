@@ -120,7 +120,10 @@ class OrderCubit extends Cubit<OrderState> {
             districtsDeliver: districts.data,
             districtDeliver: districts.data[indexDistrict],
             wardsDeliver: wards.data,
-            wardDeliver: wards.data[indexWard]))
+            wardDeliver: wards.data[indexWard],
+            errorProvinceDeliver: '',
+            errorDistrictDeliver: '',
+            errorWardDeliver: ''))
         : emit(state.copyWith(
             addressPick: address,
             isLoading: false,
@@ -128,7 +131,10 @@ class OrderCubit extends Cubit<OrderState> {
             districts: districts.data,
             district: districts.data[indexDistrict],
             wards: wards.data,
-            ward: wards.data[indexWard]));
+            ward: wards.data[indexWard],
+            errorProvince: '',
+            errorDistrict: '',
+            errorWard: ''));
   }
 
   //location

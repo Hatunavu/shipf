@@ -39,3 +39,8 @@ TextStyle get textButtonPrimary {
   return TextStyle(
       fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.white);
 }
+
+TextStyle get textBottomBar {
+  return TextStyle(
+      fontSize: 11.sp, fontWeight: FontWeight.w400, color: primaryColor);
+}

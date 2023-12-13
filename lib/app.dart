@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
                   : lang.isNotEmpty
                       ? Locale(lang)
                       : null,
-              title: 'shipf',
+              title: 'ShipF',
               debugShowCheckedModeBanner: false,
               routeInformationParser: _appRouter.defaultRouteParser(),
               routerDelegate: AutoRouterDelegate(

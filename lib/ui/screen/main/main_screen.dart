@@ -1,12 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/feed/feed_screen.dart';
 import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
 import 'package:shipf/ui/screen/main/profile/profile_screen.dart';
 import 'package:shipf/ui/screen/main/system/system_screen.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
+import 'package:shipf/ui/theme/text_style.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -45,85 +49,154 @@ class _MainScreenState extends State<MainScreen> {
         return false;
       },
       child: Scaffold(
-        body: getScreen(),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: const Offset(0, 4), // changes position of shadow
-              ),
-            ],
-          ),
-          child: BottomNavigationBar(
-            selectedFontSize: 12.sp,
-            unselectedFontSize: 12.sp,
-            backgroundColor: Colors.white,
-            // selectedLabelStyle: TextStyle(fontSize: ),
-            onTap: changeTabIndex,
-            currentIndex: tabIndex,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: primaryColor,
-            unselectedItemColor: const Color(0xFF102536),
-            elevation: 0,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Container(
-                      padding: EdgeInsets.only(bottom: 6.h, top: 6.h),
-                      width: 30.w,
-                      height: 30.w,
-                      child: Icon(
-                        Ionicons.home_outline,
-                        size: 20.sp,
-                      )),
-                  label: 'Trang chủ'),
-              BottomNavigationBarItem(
-                  icon: Container(
-                      padding: EdgeInsets.only(bottom: 6.h, top: 6.h),
-                      width: 30.w,
-                      height: 30.w,
-                      child: Icon(
-                        Ionicons.heart_outline,
-                        size: 20.sp,
-                      )),
-                  label: 'Hệ thống'),
-              BottomNavigationBarItem(
-                  icon: Container(
-                      width: 30.w,
-                      height: 30.w,
-                      padding: EdgeInsets.only(bottom: 6.h, top: 6.h),
-                      child: Icon(
-                        Ionicons.navigate_circle_outline,
-                        size: 20.sp,
-                      )),
-                  label: 'Bản tin'),
-              BottomNavigationBarItem(
-                  icon: Container(
-                      padding: EdgeInsets.only(bottom: 6.h, top: 6.h),
-                      width: 30.w,
-                      height: 30.w,
-                      child: Icon(
-                        Ionicons.chatbox_outline,
-                        size: 20.sp,
-                      )),
-                  label: 'Thông báo'),
-              BottomNavigationBarItem(
-                  icon: Container(
-                    padding: EdgeInsets.only(bottom: 6.h, top: 6.h),
-                    width: 30.w,
-                    height: 30.w,
-                    child: Icon(
-                      Ionicons.person_circle_outline,
-                      size: 20.sp,
+          body: getScreen(),
+          bottomNavigationBar: SafeArea(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5.h),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                      top: BorderSide(
+                          color: Colors.grey.withOpacity(0.5), width: 0.5))),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        setState(() {
+                          tabIndex = 0;
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            tabIndex == 0
+                                ? Ionicons.home
+                                : Ionicons.home_outline,
+                            size: 20.sp,
+                            color: primaryColor,
+                          ),
+                          VerticalSpace(2.h),
+                          Text(
+                            'Trang chủ',
+                            style: textBottomBar,
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  label: 'Tài khoản')
-            ],
-          ),
-        ),
-      ),
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        setState(() {
+                          tabIndex = 1;
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            tabIndex == 1
+                                ? Ionicons.newspaper
+                                : Ionicons.newspaper_outline,
+                            size: 20.sp,
+                            color: primaryColor,
+                          ),
+                          VerticalSpace(2.h),
+                          Text(
+                            'Bản tin',
+                            style: textBottomBar,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        context.router.push(OrderPage());
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            height: 35.w,
+                            width: 35.w,
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(13)),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 20.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        setState(() {
+                          tabIndex = 2;
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            tabIndex == 2
+                                ? Ionicons.list
+                                : Ionicons.list_outline,
+                            size: 20.sp,
+                            color: primaryColor,
+                          ),
+                          VerticalSpace(2.h),
+                          Text(
+                            'Hóa đơn',
+                            style: textBottomBar,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        setState(() {
+                          tabIndex = 3;
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            tabIndex == 3
+                                ? Ionicons.location
+                                : Ionicons.location_outline,
+                            size: 20.sp,
+                            color: primaryColor,
+                          ),
+                          VerticalSpace(2.h),
+                          Text(
+                            'Lộ trình',
+                            style: textBottomBar,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }

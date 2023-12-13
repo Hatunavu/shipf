@@ -99,8 +99,8 @@ class LoginScreen extends StatelessWidget {
                                       Row(
                                         children: [
                                           roleItem(),
-                                          // roleItem(role: RoleType.shipper),
-                                          roleItem(role: RoleType.business)
+                                          roleItem(role: RoleType.shipper),
+                                          // roleItem(role: RoleType.business)
                                         ],
                                       ),
                                       SizedBox(
@@ -251,7 +251,7 @@ class LoginScreen extends StatelessWidget {
                   left: role == RoleType.customer
                       ? Radius.circular(defaultBorderRadius)
                       : Radius.zero,
-                  right: role == RoleType.business
+                  right: role == RoleType.shipper
                       ? Radius.circular(defaultBorderRadius)
                       : Radius.zero)),
           child: Text(

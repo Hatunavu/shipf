@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/ui/router/router.gr.dart';
+import 'package:shipf/ui/screen/main/bill/bill_screen.dart';
 import 'package:shipf/ui/screen/main/feed/feed_screen.dart';
 import 'package:shipf/ui/screen/main/home/home_screen.dart';
-import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
-import 'package:shipf/ui/screen/main/profile/profile_screen.dart';
-import 'package:shipf/ui/screen/main/system/system_screen.dart';
+import 'package:shipf/ui/screen/main/route/route_screen.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
@@ -26,13 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
-  final _screenList = [
-    HomeScreen(),
-    SystemScreen(),
-    FeedScreen(),
-    NotificationScreen(),
-    ProfileScreen()
-  ];
+  final _screenList = [HomeScreen(), FeedScreen(), BillScreen(), RouteScreen()];
 
   void changeTabIndex(int index) {
     setState(() {

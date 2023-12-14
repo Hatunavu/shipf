@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 
-class FeedScreen extends StatefulWidget {
-  FeedScreen({Key? key}) : super(key: key);
+class BillScreen extends StatefulWidget {
+  BillScreen({Key? key}) : super(key: key);
 
   @override
-  State<FeedScreen> createState() => _FeedScreenState();
+  State<BillScreen> createState() => _BillScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _BillScreenState extends State<BillScreen> {
   @override
   Widget build(BuildContext context) {
     return const BaseScreen(

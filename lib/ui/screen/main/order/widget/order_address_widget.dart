@@ -113,8 +113,9 @@ class OrderAddressWidget extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () => context.router.push(AddressPage(
-                  selectAddress: (address) {
-                    orderCubit.selectAddress(address, isDeliver: isDeliver);
+                  selectAddress: (address) async {
+                    await orderCubit.selectAddress(address,
+                        isDeliver: isDeliver);
                     if (isDeliver) {
                       nameController.text = address.fullName;
                       phoneController.text = address.phone;

@@ -11,7 +11,9 @@ import 'package:shipf/ui/screen/main/add_address/add_address_screen.dart';
 import 'package:shipf/ui/screen/main/address/address_screen.dart';
 import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/main_screen.dart';
+import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
 import 'package:shipf/ui/screen/main/order/order_screen.dart';
+import 'package:shipf/ui/screen/main/setting/setting_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 
 @MaterialAutoRouter(
@@ -72,6 +74,16 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
       page: AddressScreen,
       name: "AddressPage",
       path: AppRoutes.addressScreen,
+    ),
+    AutoRoute(
+      page: SettingScreen,
+      name: "SettingPage",
+      path: AppRoutes.settingScreen,
+    ),
+    AutoRoute(
+      page: NotificationScreen,
+      name: "NotificationPage",
+      path: AppRoutes.notificationScreen,
     ),
   ],
 )

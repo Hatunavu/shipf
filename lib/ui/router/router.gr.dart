@@ -11,11 +11,11 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i13;
-import 'package:flutter/material.dart' as _i14;
+import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:flutter/material.dart' as _i16;
 
-import '../../data/model/address/address_model.dart' as _i16;
-import '../../enums/enum_role.dart' as _i15;
+import '../../data/model/address/address_model.dart' as _i18;
+import '../../enums/enum_role.dart' as _i17;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i9;
@@ -26,23 +26,25 @@ import '../screen/main/add_address/add_address_screen.dart' as _i11;
 import '../screen/main/address/address_screen.dart' as _i12;
 import '../screen/main/home/home_screen.dart' as _i3;
 import '../screen/main/main_screen.dart' as _i1;
+import '../screen/main/notifications/notification_screen.dart' as _i14;
 import '../screen/main/order/order_screen.dart' as _i10;
+import '../screen/main/setting/setting_screen.dart' as _i13;
 import '../screen/main/welcome/welcome_screen.dart' as _i6;
 
-class AppRouter extends _i13.RootStackRouter {
-  AppRouter([_i14.GlobalKey<_i14.NavigatorState>? navigatorKey])
+class AppRouter extends _i15.RootStackRouter {
+  AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i13.PageFactory> pagesMap = {
+  final Map<String, _i15.PageFactory> pagesMap = {
     MainPage.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.MainScreen(),
       );
     },
     SplashPage.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.SplashScreen(),
       );
@@ -50,7 +52,7 @@ class AppRouter extends _i13.RootStackRouter {
     HomePage.name: (routeData) {
       final args =
           routeData.argsAs<HomePageArgs>(orElse: () => const HomePageArgs());
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.HomeScreen(key: args.key),
       );
@@ -58,7 +60,7 @@ class AppRouter extends _i13.RootStackRouter {
     LoginPage.name: (routeData) {
       final args =
           routeData.argsAs<LoginPageArgs>(orElse: () => const LoginPageArgs());
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i4.LoginScreen(key: args.key),
       );
@@ -66,7 +68,7 @@ class AppRouter extends _i13.RootStackRouter {
     SignupPage.name: (routeData) {
       final args = routeData.argsAs<SignupPageArgs>(
           orElse: () => const SignupPageArgs());
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.SignupScreen(
           key: args.key,
@@ -75,14 +77,14 @@ class AppRouter extends _i13.RootStackRouter {
       );
     },
     WelcomePage.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i6.WelcomeScreen(),
       );
     },
     VerifyPage.name: (routeData) {
       final args = routeData.argsAs<VerifyPageArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.VerifyScreen(
           key: args.key,
@@ -94,7 +96,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     EnterPassPage.name: (routeData) {
       final args = routeData.argsAs<EnterPassPageArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.EnterPassScreen(
           key: args.key,
@@ -104,7 +106,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     ResetPassPage.name: (routeData) {
       final args = routeData.argsAs<ResetPassPageArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.ResetPassScreen(
           key: args.key,
@@ -116,7 +118,7 @@ class AppRouter extends _i13.RootStackRouter {
     OrderPage.name: (routeData) {
       final args =
           routeData.argsAs<OrderPageArgs>(orElse: () => const OrderPageArgs());
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i10.OrderScreen(key: args.key),
       );
@@ -124,14 +126,14 @@ class AppRouter extends _i13.RootStackRouter {
     AddAddressPage.name: (routeData) {
       final args = routeData.argsAs<AddAddressPageArgs>(
           orElse: () => const AddAddressPageArgs());
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i11.AddAddressScreen(key: args.key),
       );
     },
     AddressPage.name: (routeData) {
       final args = routeData.argsAs<AddressPageArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i15.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i12.AddressScreen(
           key: args.key,
@@ -139,64 +141,88 @@ class AppRouter extends _i13.RootStackRouter {
         ),
       );
     },
+    SettingPage.name: (routeData) {
+      final args = routeData.argsAs<SettingPageArgs>(
+          orElse: () => const SettingPageArgs());
+      return _i15.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i13.SettingScreen(key: args.key),
+      );
+    },
+    NotificationPage.name: (routeData) {
+      final args = routeData.argsAs<NotificationPageArgs>(
+          orElse: () => const NotificationPageArgs());
+      return _i15.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i14.NotificationScreen(key: args.key),
+      );
+    },
   };
 
   @override
-  List<_i13.RouteConfig> get routes => [
-        _i13.RouteConfig(
+  List<_i15.RouteConfig> get routes => [
+        _i15.RouteConfig(
           MainPage.name,
           path: '/main',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           SplashPage.name,
           path: '/',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           HomePage.name,
           path: '/home',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           LoginPage.name,
           path: '/login',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           SignupPage.name,
           path: '/signup',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           WelcomePage.name,
           path: '/welcome',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           VerifyPage.name,
           path: '/verify',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           EnterPassPage.name,
           path: '/enter_pass',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           ResetPassPage.name,
           path: '/reset_pass',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           OrderPage.name,
           path: '/order',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           AddAddressPage.name,
           path: '/add_address',
         ),
-        _i13.RouteConfig(
+        _i15.RouteConfig(
           AddressPage.name,
           path: '/address',
+        ),
+        _i15.RouteConfig(
+          SettingPage.name,
+          path: '/setting',
+        ),
+        _i15.RouteConfig(
+          NotificationPage.name,
+          path: '/notification',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.MainScreen]
-class MainPage extends _i13.PageRouteInfo<void> {
+class MainPage extends _i15.PageRouteInfo<void> {
   const MainPage()
       : super(
           MainPage.name,
@@ -208,7 +234,7 @@ class MainPage extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SplashScreen]
-class SplashPage extends _i13.PageRouteInfo<void> {
+class SplashPage extends _i15.PageRouteInfo<void> {
   const SplashPage()
       : super(
           SplashPage.name,
@@ -220,8 +246,8 @@ class SplashPage extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.HomeScreen]
-class HomePage extends _i13.PageRouteInfo<HomePageArgs> {
-  HomePage({_i14.Key? key})
+class HomePage extends _i15.PageRouteInfo<HomePageArgs> {
+  HomePage({_i16.Key? key})
       : super(
           HomePage.name,
           path: '/home',
@@ -234,7 +260,7 @@ class HomePage extends _i13.PageRouteInfo<HomePageArgs> {
 class HomePageArgs {
   const HomePageArgs({this.key});
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -244,8 +270,8 @@ class HomePageArgs {
 
 /// generated route for
 /// [_i4.LoginScreen]
-class LoginPage extends _i13.PageRouteInfo<LoginPageArgs> {
-  LoginPage({_i14.Key? key})
+class LoginPage extends _i15.PageRouteInfo<LoginPageArgs> {
+  LoginPage({_i16.Key? key})
       : super(
           LoginPage.name,
           path: '/login',
@@ -258,7 +284,7 @@ class LoginPage extends _i13.PageRouteInfo<LoginPageArgs> {
 class LoginPageArgs {
   const LoginPageArgs({this.key});
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -268,10 +294,10 @@ class LoginPageArgs {
 
 /// generated route for
 /// [_i5.SignupScreen]
-class SignupPage extends _i13.PageRouteInfo<SignupPageArgs> {
+class SignupPage extends _i15.PageRouteInfo<SignupPageArgs> {
   SignupPage({
-    _i14.Key? key,
-    _i15.RoleType roleType = _i15.RoleType.customer,
+    _i16.Key? key,
+    _i17.RoleType roleType = _i17.RoleType.customer,
   }) : super(
           SignupPage.name,
           path: '/signup',
@@ -287,12 +313,12 @@ class SignupPage extends _i13.PageRouteInfo<SignupPageArgs> {
 class SignupPageArgs {
   const SignupPageArgs({
     this.key,
-    this.roleType = _i15.RoleType.customer,
+    this.roleType = _i17.RoleType.customer,
   });
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
-  final _i15.RoleType roleType;
+  final _i17.RoleType roleType;
 
   @override
   String toString() {
@@ -302,7 +328,7 @@ class SignupPageArgs {
 
 /// generated route for
 /// [_i6.WelcomeScreen]
-class WelcomePage extends _i13.PageRouteInfo<void> {
+class WelcomePage extends _i15.PageRouteInfo<void> {
   const WelcomePage()
       : super(
           WelcomePage.name,
@@ -314,9 +340,9 @@ class WelcomePage extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.VerifyScreen]
-class VerifyPage extends _i13.PageRouteInfo<VerifyPageArgs> {
+class VerifyPage extends _i15.PageRouteInfo<VerifyPageArgs> {
   VerifyPage({
-    _i14.Key? key,
+    _i16.Key? key,
     required String email,
     bool isSignup = false,
     bool isForgotPass = false,
@@ -342,7 +368,7 @@ class VerifyPageArgs {
     this.isForgotPass = false,
   });
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   final String email;
 
@@ -358,9 +384,9 @@ class VerifyPageArgs {
 
 /// generated route for
 /// [_i8.EnterPassScreen]
-class EnterPassPage extends _i13.PageRouteInfo<EnterPassPageArgs> {
+class EnterPassPage extends _i15.PageRouteInfo<EnterPassPageArgs> {
   EnterPassPage({
-    _i14.Key? key,
+    _i16.Key? key,
     required String phone,
   }) : super(
           EnterPassPage.name,
@@ -380,7 +406,7 @@ class EnterPassPageArgs {
     required this.phone,
   });
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   final String phone;
 
@@ -392,9 +418,9 @@ class EnterPassPageArgs {
 
 /// generated route for
 /// [_i9.ResetPassScreen]
-class ResetPassPage extends _i13.PageRouteInfo<ResetPassPageArgs> {
+class ResetPassPage extends _i15.PageRouteInfo<ResetPassPageArgs> {
   ResetPassPage({
-    _i14.Key? key,
+    _i16.Key? key,
     required String phone,
     bool isSignup = false,
   }) : super(
@@ -417,7 +443,7 @@ class ResetPassPageArgs {
     this.isSignup = false,
   });
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   final String phone;
 
@@ -431,8 +457,8 @@ class ResetPassPageArgs {
 
 /// generated route for
 /// [_i10.OrderScreen]
-class OrderPage extends _i13.PageRouteInfo<OrderPageArgs> {
-  OrderPage({_i14.Key? key})
+class OrderPage extends _i15.PageRouteInfo<OrderPageArgs> {
+  OrderPage({_i16.Key? key})
       : super(
           OrderPage.name,
           path: '/order',
@@ -445,7 +471,7 @@ class OrderPage extends _i13.PageRouteInfo<OrderPageArgs> {
 class OrderPageArgs {
   const OrderPageArgs({this.key});
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -455,8 +481,8 @@ class OrderPageArgs {
 
 /// generated route for
 /// [_i11.AddAddressScreen]
-class AddAddressPage extends _i13.PageRouteInfo<AddAddressPageArgs> {
-  AddAddressPage({_i14.Key? key})
+class AddAddressPage extends _i15.PageRouteInfo<AddAddressPageArgs> {
+  AddAddressPage({_i16.Key? key})
       : super(
           AddAddressPage.name,
           path: '/add_address',
@@ -469,7 +495,7 @@ class AddAddressPage extends _i13.PageRouteInfo<AddAddressPageArgs> {
 class AddAddressPageArgs {
   const AddAddressPageArgs({this.key});
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
   @override
   String toString() {
@@ -479,10 +505,10 @@ class AddAddressPageArgs {
 
 /// generated route for
 /// [_i12.AddressScreen]
-class AddressPage extends _i13.PageRouteInfo<AddressPageArgs> {
+class AddressPage extends _i15.PageRouteInfo<AddressPageArgs> {
   AddressPage({
-    _i14.Key? key,
-    required dynamic Function(_i16.AddressDataResponse) selectAddress,
+    _i16.Key? key,
+    required dynamic Function(_i18.AddressDataResponse) selectAddress,
   }) : super(
           AddressPage.name,
           path: '/address',
@@ -501,12 +527,60 @@ class AddressPageArgs {
     required this.selectAddress,
   });
 
-  final _i14.Key? key;
+  final _i16.Key? key;
 
-  final dynamic Function(_i16.AddressDataResponse) selectAddress;
+  final dynamic Function(_i18.AddressDataResponse) selectAddress;
 
   @override
   String toString() {
     return 'AddressPageArgs{key: $key, selectAddress: $selectAddress}';
+  }
+}
+
+/// generated route for
+/// [_i13.SettingScreen]
+class SettingPage extends _i15.PageRouteInfo<SettingPageArgs> {
+  SettingPage({_i16.Key? key})
+      : super(
+          SettingPage.name,
+          path: '/setting',
+          args: SettingPageArgs(key: key),
+        );
+
+  static const String name = 'SettingPage';
+}
+
+class SettingPageArgs {
+  const SettingPageArgs({this.key});
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return 'SettingPageArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i14.NotificationScreen]
+class NotificationPage extends _i15.PageRouteInfo<NotificationPageArgs> {
+  NotificationPage({_i16.Key? key})
+      : super(
+          NotificationPage.name,
+          path: '/notification',
+          args: NotificationPageArgs(key: key),
+        );
+
+  static const String name = 'NotificationPage';
+}
+
+class NotificationPageArgs {
+  const NotificationPageArgs({this.key});
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return 'NotificationPageArgs{key: $key}';
   }
 }

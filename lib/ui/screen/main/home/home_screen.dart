@@ -13,14 +13,14 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 final List<Statistic> statistics = [
   Statistic(content: 'Tổng bill', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffff4554'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffff4554'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Tổng bill', data: '0', color: '0xffff4554'),
+  Statistic(content: 'Chờ lấy hàng', data: '0', color: '0xffffd73a'),
+  Statistic(content: 'Đơn thất bại', data: '0', color: '0xffff4554'),
+  Statistic(content: 'Chuyển hàng', data: '0', color: '0xff00c3e3'),
+  Statistic(content: 'Chờ giao hàng', data: '0', color: '0xffffd73a'),
+  Statistic(content: 'Chuyển hoàn', data: '0', color: '0xffff4554'),
+  Statistic(content: 'Phát thành công', data: '0', color: '0xff00c3e3'),
+  Statistic(content: 'Chờ trung chuyển', data: '0', color: '0xffffd73a'),
+  Statistic(content: 'Đối soát', data: '0', color: '0xffff4554'),
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -95,12 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 statistics[index].content,
-                style: textBody.copyWith(
+                style: textBottomBar.copyWith(
                     color: Colors.white, fontWeight: FontWeight.w600),
               ),
               Text(
                 statistics[index].data,
-                style: textBody.copyWith(
+                style: primarySubTitleStyle.copyWith(
                     color: Colors.white, fontWeight: FontWeight.w600),
               )
             ],

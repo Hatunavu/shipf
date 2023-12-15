@@ -19,7 +19,11 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final List<String> settings = ['Đổi mật khẩu', 'Chính sách và điều khoản'];
+  final List<String> settings = [
+    'Đổi mật khẩu',
+    'Sổ địa chỉ',
+    'Chính sách và điều khoản'
+  ];
   @override
   Widget build(BuildContext context) {
     return BaseScreen(

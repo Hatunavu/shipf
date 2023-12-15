@@ -13,6 +13,7 @@ import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/main_screen.dart';
 import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
 import 'package:shipf/ui/screen/main/order/order_screen.dart';
+import 'package:shipf/ui/screen/main/setting/screen/update_info/update_info_screen.dart';
 import 'package:shipf/ui/screen/main/setting/setting_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 
@@ -84,6 +85,11 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
       page: NotificationScreen,
       name: "NotificationPage",
       path: AppRoutes.notificationScreen,
+    ),
+    AutoRoute(
+      page: UpdateInfoScreen,
+      name: "UpdateInfoPage",
+      path: AppRoutes.updateInfoScreen,
     ),
   ],
 )

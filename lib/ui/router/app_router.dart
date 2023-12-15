@@ -13,4 +13,5 @@ class AppRoutes {
   static const String addressScreen = "/address";
   static const String settingScreen = "/setting";
   static const String notificationScreen = "/notification";
+  static const String updateInfoScreen = "/update_info";
 }

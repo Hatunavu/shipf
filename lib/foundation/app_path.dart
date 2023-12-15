@@ -10,4 +10,8 @@ class AppPath {
   static const String failed = "assets/icons/failed.svg";
   static const String success = "assets/icons/success.svg";
   static const String transfer = "assets/icons/transfer.svg";
+  static const String placeholderAvatar =
+      "assets/images/placeholder/placeholder_avatar.png";
+  static const String placeholderNoImage =
+      "assets/images/placeholder/placeholder_no_image.png";
 }

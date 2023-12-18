@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:shipf/ui/theme/text_style.dart';
 
 PreferredSizeWidget primaryAppBar(
     {required BuildContext context,
     required String title,
-    bool isUpdate = false,
     bool isBack = true}) {
   return AppBar(
-    backgroundColor: isUpdate ? Colors.black : Colors.transparent,
+    backgroundColor: Colors.transparent,
     centerTitle: true,
     elevation: 0,
-    // title: Text(
-    //   title,
-    //   style: primaryHeaderTitleStyle.copyWith(
-    //       color: isUpdate ? Colors.white : Colors.black),
-    // ),
+    title: Text(
+      title,
+      style: primaryHeaderTitleStyle.copyWith(color: Colors.black),
+    ),
     leading: isBack
         ? InkWell(
             onTap: () {
@@ -21,7 +20,7 @@ PreferredSizeWidget primaryAppBar(
             },
             child: Icon(
               Icons.arrow_back_ios,
-              color: isUpdate ? Colors.white : Colors.black,
+              color: Colors.black,
             ),
           )
         : null,

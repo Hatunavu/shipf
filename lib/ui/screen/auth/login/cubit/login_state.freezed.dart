@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   bool get isLoading => throw _privateConstructorUsedError;
-  RoleType get role => throw _privateConstructorUsedError;
   bool get isAgreeTerms => throw _privateConstructorUsedError;
   bool get isLogin => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
@@ -36,7 +35,6 @@ abstract class $LoginStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      RoleType role,
       bool isAgreeTerms,
       bool isLogin,
       String error,
@@ -57,7 +55,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? role = null,
     Object? isAgreeTerms = null,
     Object? isLogin = null,
     Object? error = null,
@@ -68,10 +65,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as RoleType,
       isAgreeTerms: null == isAgreeTerms
           ? _value.isAgreeTerms
           : isAgreeTerms // ignore: cast_nullable_to_non_nullable
@@ -102,7 +95,6 @@ abstract class _$$_LoginStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      RoleType role,
       bool isAgreeTerms,
       bool isLogin,
       String error,
@@ -121,7 +113,6 @@ class __$$_LoginStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? role = null,
     Object? isAgreeTerms = null,
     Object? isLogin = null,
     Object? error = null,
@@ -132,10 +123,6 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as RoleType,
       isAgreeTerms: null == isAgreeTerms
           ? _value.isAgreeTerms
           : isAgreeTerms // ignore: cast_nullable_to_non_nullable
@@ -161,7 +148,6 @@ class __$$_LoginStateCopyWithImpl<$Res>
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
       {required this.isLoading,
-      required this.role,
       required this.isAgreeTerms,
       required this.isLogin,
       required this.error,
@@ -169,8 +155,6 @@ class _$_LoginState implements _LoginState {
 
   @override
   final bool isLoading;
-  @override
-  final RoleType role;
   @override
   final bool isAgreeTerms;
   @override
@@ -182,7 +166,7 @@ class _$_LoginState implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, role: $role, isAgreeTerms: $isAgreeTerms, isLogin: $isLogin, error: $error, showPass: $showPass)';
+    return 'LoginState(isLoading: $isLoading, isAgreeTerms: $isAgreeTerms, isLogin: $isLogin, error: $error, showPass: $showPass)';
   }
 
   @override
@@ -192,7 +176,6 @@ class _$_LoginState implements _LoginState {
             other is _$_LoginState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.role, role) || other.role == role) &&
             (identical(other.isAgreeTerms, isAgreeTerms) ||
                 other.isAgreeTerms == isAgreeTerms) &&
             (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
@@ -203,7 +186,7 @@ class _$_LoginState implements _LoginState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, role, isAgreeTerms, isLogin, error, showPass);
+      runtimeType, isLoading, isAgreeTerms, isLogin, error, showPass);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +198,6 @@ class _$_LoginState implements _LoginState {
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {required final bool isLoading,
-      required final RoleType role,
       required final bool isAgreeTerms,
       required final bool isLogin,
       required final String error,
@@ -223,8 +205,6 @@ abstract class _LoginState implements LoginState {
 
   @override
   bool get isLoading;
-  @override
-  RoleType get role;
   @override
   bool get isAgreeTerms;
   @override

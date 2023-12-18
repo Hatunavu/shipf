@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shipf/enums/enum_role.dart';
 
 part 'login_state.freezed.dart';
 
@@ -7,7 +6,6 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const factory LoginState({
     required bool isLoading,
-    required RoleType role,
     required bool isAgreeTerms,
     required bool isLogin,
     required String error,
@@ -17,7 +15,6 @@ class LoginState with _$LoginState {
   factory LoginState.initial() => const LoginState(
       isLoading: false,
       error: "",
-      role: RoleType.customer,
       isAgreeTerms: true,
       isLogin: false,
       showPass: false);

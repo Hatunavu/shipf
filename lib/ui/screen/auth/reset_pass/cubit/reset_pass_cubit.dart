@@ -14,7 +14,7 @@ class ResetPassCubit extends Cubit<ResetPassState> {
   Future<bool> register(RegisterRequest registerRequest) async {
     try {
       emit(state.copyWith(isLoading: true));
-      await mainRepository.register(registerRequest);
+      await mainRepository.registerCustomer(registerRequest);
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

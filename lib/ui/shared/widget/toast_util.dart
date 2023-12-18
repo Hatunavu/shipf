@@ -10,7 +10,7 @@ final Color toastNeutral = Colors.grey.withOpacity(0.5);
 final double defaultFontSize = textSize;
 const Color defaultTextColor = Colors.white;
 const Color defaultNeutralTextColor = primaryColor;
-const ToastGravity defaultPosition = ToastGravity.TOP;
+const ToastGravity defaultPosition = ToastGravity.BOTTOM;
 const Toast defaultLength = Toast.LENGTH_SHORT;
 const defaultTimeinSecForIosWeb = 1;
 

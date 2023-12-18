@@ -18,10 +18,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(error: error));
   }
 
-  void updateRole(RoleType role) {
-    emit(state.copyWith(role: role));
-  }
-
   void updateAgreeTerms() {
     emit(state.copyWith(isAgreeTerms: !state.isAgreeTerms));
   }

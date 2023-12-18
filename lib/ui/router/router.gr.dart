@@ -14,8 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i16;
 import 'package:flutter/material.dart' as _i17;
 
-import '../../data/model/address/address_model.dart' as _i19;
-import '../../enums/enum_role.dart' as _i18;
+import '../../data/model/address/address_model.dart' as _i18;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i9;
@@ -72,10 +71,7 @@ class AppRouter extends _i16.RootStackRouter {
           orElse: () => const SignupPageArgs());
       return _i16.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.SignupScreen(
-          key: args.key,
-          roleType: args.roleType,
-        ),
+        child: _i5.SignupScreen(key: args.key),
       );
     },
     WelcomePage.name: (routeData) {
@@ -307,34 +303,24 @@ class LoginPageArgs {
 /// generated route for
 /// [_i5.SignupScreen]
 class SignupPage extends _i16.PageRouteInfo<SignupPageArgs> {
-  SignupPage({
-    _i17.Key? key,
-    _i18.RoleType roleType = _i18.RoleType.customer,
-  }) : super(
+  SignupPage({_i17.Key? key})
+      : super(
           SignupPage.name,
           path: '/signup',
-          args: SignupPageArgs(
-            key: key,
-            roleType: roleType,
-          ),
+          args: SignupPageArgs(key: key),
         );
 
   static const String name = 'SignupPage';
 }
 
 class SignupPageArgs {
-  const SignupPageArgs({
-    this.key,
-    this.roleType = _i18.RoleType.customer,
-  });
+  const SignupPageArgs({this.key});
 
   final _i17.Key? key;
 
-  final _i18.RoleType roleType;
-
   @override
   String toString() {
-    return 'SignupPageArgs{key: $key, roleType: $roleType}';
+    return 'SignupPageArgs{key: $key}';
   }
 }
 
@@ -520,7 +506,7 @@ class AddAddressPageArgs {
 class AddressPage extends _i16.PageRouteInfo<AddressPageArgs> {
   AddressPage({
     _i17.Key? key,
-    required dynamic Function(_i19.AddressDataResponse) selectAddress,
+    required dynamic Function(_i18.AddressDataResponse) selectAddress,
   }) : super(
           AddressPage.name,
           path: '/address',
@@ -541,7 +527,7 @@ class AddressPageArgs {
 
   final _i17.Key? key;
 
-  final dynamic Function(_i19.AddressDataResponse) selectAddress;
+  final dynamic Function(_i18.AddressDataResponse) selectAddress;
 
   @override
   String toString() {

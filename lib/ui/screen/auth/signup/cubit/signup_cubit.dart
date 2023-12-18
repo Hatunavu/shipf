@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/auth/signup/cubit/signup_state.dart';
 import 'package:shipf/ui/services/account_services.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit() : super(SignupState.initial());
@@ -17,13 +19,18 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(showPass: !state.showPass));
   }
 
-  Future<bool> registerCustomer(RegisterRequest registerRequest) async {
+  Future<bool> register(RegisterRequest registerRequest) async {
     try {
       emit(state.copyWith(isLoading: true));
-      await mainRepository.register(registerRequest);
-      final response = await mainRepository.login(LoginRequest(
-          phone: registerRequest.phone, password: registerRequest.password));
-      AccountServices().saveUserToken(response.data?.accessToken ?? '');
+      final RegisterResponse response;
+      if (state.role == RoleType.shipper) {
+        response = await mainRepository.registerShipper(registerRequest);
+      } else if (state.role == RoleType.business) {
+        response = await mainRepository.registerBusiness(registerRequest);
+      } else {
+        response = await mainRepository.registerCustomer(registerRequest);
+      }
+      ToastUtils.showSuccess(response.message);
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {
@@ -45,5 +52,13 @@ class SignupCubit extends Cubit<SignupState> {
       emit(state.copyWith(isLoading: false, error: errorMessage));
       return false;
     }
+  }
+
+  void updateRole(RoleType role) {
+    emit(state.copyWith(role: role));
+  }
+
+  void updateAgreeTerms() {
+    emit(state.copyWith(isAgreeTerms: !state.isAgreeTerms));
   }
 }

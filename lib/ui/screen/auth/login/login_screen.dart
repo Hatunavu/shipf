@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
-import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/injection.dart';
@@ -96,19 +95,11 @@ class LoginScreen extends StatelessWidget {
                                       SizedBox(
                                         height: kDefaultPaddingHeightWidget,
                                       ),
-                                      Row(
-                                        children: [
-                                          roleItem(),
-                                          roleItem(role: RoleType.shipper),
-                                          // roleItem(role: RoleType.business)
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: kDefaultPaddingHeightWidget,
-                                      ),
                                       PrimaryTextField(
                                         errorText: state.error
-                                                .contains('Số điện thoại')
+                                                .toUpperCase()
+                                                .contains(
+                                                    text.phone.toUpperCase())
                                             ? state.error
                                             : '',
                                         isPhone: true,
@@ -122,10 +113,12 @@ class LoginScreen extends StatelessWidget {
                                         height: kDefaultPaddingHeightScreen,
                                       ),
                                       PrimaryTextField(
-                                        errorText:
-                                            state.error.contains('Mật khẩu')
-                                                ? state.error
-                                                : '',
+                                        errorText: state.error
+                                                .toUpperCase()
+                                                .contains(
+                                                    text.password.toUpperCase())
+                                            ? state.error
+                                            : '',
                                         isPass: state.showPass,
                                         label: '',
                                         hintText: text.password,
@@ -141,36 +134,29 @@ class LoginScreen extends StatelessWidget {
                                         backgroundColor: state.isAgreeTerms
                                             ? primaryColor
                                             : Colors.grey[300],
-                                        label: 'Tiếp tục',
-                                        onPressed: () async {
-                                          unfocus(context);
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            //verify phone
-                                            // bool? isLogin = await cubit
-                                            //     .sendPhone(_phoneController.text);
-                                            // if (isLogin == true) {
-                                            //   context.router.push(EnterPassPage(
-                                            //       phone: _phoneController.text));
-                                            // } else if (isLogin == false) {
-                                            //   context.router.push(VerifyPage(
-                                            //       email: _phoneController.text,
-                                            //       isSignup: true));
-                                            // }
-
-                                            //login
-                                            final bool loginSuccess =
-                                                await cubit.login(LoginRequest(
-                                                    phone:
-                                                        _phoneController.text,
-                                                    password:
-                                                        _passController.text));
-                                            loginSuccess
-                                                ? context.router
-                                                    .push(MainPage())
-                                                : null;
-                                          }
-                                        },
+                                        label: 'Đăng nhập',
+                                        onPressed: state.isAgreeTerms
+                                            ? () async {
+                                                unfocus(context);
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  //login
+                                                  final bool loginSuccess =
+                                                      await cubit.login(
+                                                          LoginRequest(
+                                                              phone:
+                                                                  _phoneController
+                                                                      .text,
+                                                              password:
+                                                                  _passController
+                                                                      .text));
+                                                  loginSuccess
+                                                      ? context.router
+                                                          .push(MainPage())
+                                                      : null;
+                                                }
+                                              }
+                                            : null,
                                       ),
                                       SizedBox(
                                         height: kDefaultPaddingHeightWidget,
@@ -216,11 +202,9 @@ class LoginScreen extends StatelessWidget {
                             Column(
                               children: [
                                 CustomRichtext(
-                                    textSpan1:
-                                        'Chưa có tài khoản ${state.role.display()}? ',
+                                    textSpan1: 'Chưa có tài khoản ShipF? ',
                                     textSpan2: text.register,
-                                    widgetNavigator:
-                                        SignupPage(roleType: state.role)),
+                                    widgetNavigator: SignupPage()),
                                 SizedBox(
                                   height: 10.h,
                                 )
@@ -232,39 +216,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               );
             },
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget roleItem({RoleType role = RoleType.customer}) {
-    final bool isActive = cubit.state.role == role;
-    return Expanded(
-      flex: 1,
-      child: GestureDetector(
-        onTap: () {
-          cubit.updateRole(role);
-          appCubit.updateRole(role);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen),
-          decoration: BoxDecoration(
-              border: Border.all(color: primaryColor),
-              color: isActive ? primaryColor : Colors.white,
-              borderRadius: BorderRadius.horizontal(
-                  left: role == RoleType.customer
-                      ? Radius.circular(defaultBorderRadius)
-                      : Radius.zero,
-                  right: role == RoleType.shipper
-                      ? Radius.circular(defaultBorderRadius)
-                      : Radius.zero)),
-          child: Text(
-            role.display(),
-            style: primarySubTitleStyle.copyWith(
-              color: isActive ? Colors.white : primaryColor,
-            ),
           ),
         ),
       ),

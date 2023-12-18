@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         title: const Text('ShipF'),
         centerTitle: false,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(

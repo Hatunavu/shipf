@@ -6,8 +6,9 @@ const getUser = "/api/users/2";
 const verifyPhone = "/api/v2/verify-phone";
 const verifyOTP = "/api/v2/verify-otp";
 const login = "/authentication/sign-in";
-const register = '/api/v2/user/register-customer';
-const registerBusiness = '/api/v2/user/register-business';
+const registerCustomer = '/users/register-customer';
+const registerBusiness = '/users/register-business';
+const registerShipper = '/users/register-shipper';
 
 //address
 const getProvinces = "/provinces?size=100";

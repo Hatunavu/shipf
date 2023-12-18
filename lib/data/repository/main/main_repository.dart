@@ -34,11 +34,16 @@ abstract class MainRepository {
   @POST(endpoint.login)
   Future<LoginResponse> login(@Body() LoginRequest loginRequest);
 
-  @POST(endpoint.register)
-  Future<RegisterResponse> register(@Body() RegisterRequest registerRequest);
+  @POST(endpoint.registerCustomer)
+  Future<RegisterResponse> registerCustomer(
+      @Body() RegisterRequest registerRequest);
 
   @POST(endpoint.registerBusiness)
   Future<RegisterResponse> registerBusiness(
+      @Body() RegisterRequest registerRequest);
+
+  @POST(endpoint.registerShipper)
+  Future<RegisterResponse> registerShipper(
       @Body() RegisterRequest registerRequest);
 
   //addresss

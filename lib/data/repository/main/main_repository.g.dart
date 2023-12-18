@@ -112,7 +112,7 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<RegisterResponse> register(registerRequest) async {
+  Future<RegisterResponse> registerCustomer(registerRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -126,7 +126,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/api/v2/user/register-customer',
+              '/users/register-customer',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -150,7 +150,31 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/api/v2/user/register-business',
+              '/users/register-business',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RegisterResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RegisterResponse> registerShipper(registerRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/register-shipper',
               queryParameters: queryParameters,
               data: _data,
             )

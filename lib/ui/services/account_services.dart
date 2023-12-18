@@ -5,7 +5,7 @@ class AccountServices {
   final _tokenKey = "userToken";
   final _userIdKey = "userIdKey";
   final _accountType = "accountType";
-  final _accountLangugae = "accountLanguage";
+  final _accountLanguage = "accountLanguage";
   final _isFirstLoad = "_firstLoad";
   final _notificationToken = "notificationToken";
 
@@ -14,7 +14,7 @@ class AccountServices {
   Future<String> getAccountType() async =>
       await _box.getString(_accountType) ?? "";
   Future<String> getAccountLanguage() async =>
-      await _box.getString(_accountLangugae) ?? "";
+      await _box.getString(_accountLanguage) ?? "";
   Future<bool> getIsFirstLoad() async =>
       await _box.getBool(_isFirstLoad) ?? false;
 
@@ -24,7 +24,7 @@ class AccountServices {
   saveUserToken(String token) => _box.setString(_tokenKey, token);
   saveUserId(String userId) => _box.setString(_userIdKey, userId);
   saveAccountType(String type) => _box.setString(_accountType, type);
-  saveAccountLanguage(String type) => _box.setString(_accountLangugae, type);
+  saveAccountLanguage(String type) => _box.setString(_accountLanguage, type);
   saveIsFirstLoad(bool status) => _box.setBool(_isFirstLoad, status);
   saveNotificationToken(String token) =>
       _box.setString(_notificationToken, token);

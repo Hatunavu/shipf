@@ -55,25 +55,11 @@ class LoginCubit extends Cubit<LoginState> {
   Future<bool> login(LoginRequest loginRequest) async {
     try {
       emit(state.copyWith(isLoading: true));
-      if (state.role == RoleType.customer) {
-        final response = await mainRepository.login(loginRequest);
-        AccountServices().saveUserToken(response.data?.accessToken ?? '');
-        emit(state.copyWith(isLoading: false));
-        return true;
-      } else if (state.role == RoleType.shipper) {
-        await Future.delayed(const Duration(seconds: 1));
-        if (loginRequest.phone == '0987654321' &&
-            loginRequest.password == '123456') {
-          AccountServices().saveUserToken('token');
-          emit(state.copyWith(isLoading: false));
-          return true;
-        } else {
-          emit(state.copyWith(
-              isLoading: false,
-              error: 'Số điện thoại hoặc mật khẩu không chính xác'));
-          return false;
-        }
-      }
+      final response = await mainRepository.login(loginRequest);
+      AccountServices().saveUserToken(response.data?.accessToken ?? '');
+      AccountServices().saveAccountType(
+          response.data?.user?.role?.roleType.toJsonString() ?? '');
+      emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shipf/enums/enum_role.dart';
 
 part 'auth.g.dart';
 
@@ -49,16 +50,9 @@ class LoginResponse {
   final LoginData? data;
   final bool success;
   final int status;
-  final int statusCode;
   final String message;
-  final String error;
   LoginResponse(
-      {this.data,
-      this.status = 0,
-      this.success = false,
-      this.statusCode = 0,
-      this.message = '',
-      this.error = ''});
+      {this.data, this.status = 0, this.success = false, this.message = ''});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
@@ -70,13 +64,59 @@ class LoginResponse {
 class LoginData {
   @JsonKey(name: 'access_token')
   final String accessToken;
+  final LoginDataUser? user;
 
-  LoginData({this.accessToken = ''});
+  LoginData({this.accessToken = '', this.user});
 
   factory LoginData.fromJson(Map<String, dynamic> json) =>
       _$LoginDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginDataToJson(this);
+}
+
+@JsonSerializable()
+class LoginDataUser {
+  final int id;
+  final bool isActive;
+  final String name;
+  final String email;
+  final String code;
+  final String phone;
+  final LoginDataUserRole? role;
+
+  LoginDataUser(
+      {this.id = 0,
+      this.isActive = false,
+      this.name = '',
+      this.email = '',
+      this.code = '',
+      this.phone = '',
+      this.role});
+
+  factory LoginDataUser.fromJson(Map<String, dynamic> json) =>
+      _$LoginDataUserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoginDataUserToJson(this);
+}
+
+@JsonSerializable()
+class LoginDataUserRole {
+  final int id;
+  final String name;
+  @JsonKey(
+      name: 'code',
+      fromJson: stringToRoleType,
+      toJson: roleTypeToString,
+      defaultValue: RoleType.customer)
+  final RoleType roleType;
+
+  LoginDataUserRole(
+      {this.id = 0, this.name = '', this.roleType = RoleType.customer});
+
+  factory LoginDataUserRole.fromJson(Map<String, dynamic> json) =>
+      _$LoginDataUserRoleFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoginDataUserRoleToJson(this);
 }
 
 //register
@@ -85,10 +125,15 @@ class RegisterRequest {
   final String name;
   final String phone;
   final String password;
+  final bool isAcceptTermAndCondition;
   final String? email;
 
   RegisterRequest(
-      {this.name = '', this.phone = '', this.password = '', this.email});
+      {this.name = '',
+      this.phone = '',
+      this.password = '',
+      this.email,
+      this.isAcceptTermAndCondition = true});
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterRequestFromJson(json);
@@ -101,7 +146,6 @@ class RegisterResponse {
   final bool success;
   final int status;
   final String message;
-  // final RegisterData? data;
 
   RegisterResponse({this.success = false, this.message = '', this.status = 0});
 
@@ -109,81 +153,4 @@ class RegisterResponse {
       _$RegisterResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterResponseToJson(this);
-}
-
-@JsonSerializable()
-class RegisterData {
-  final String name;
-  @JsonKey(name: 'role_id')
-  final int roleId;
-  final String phone;
-  final String email;
-  final String code;
-  final int type;
-  @JsonKey(name: 'assigned_carrier')
-  final String assignedCarrier;
-  @JsonKey(name: 'is_super')
-  final bool isSuper;
-  // @JsonKey(name: 'assigned_carrier_id')
-  // final String assignedCarrierId;
-  // @JsonKey(name: 'location_id')
-  // final String locationId;
-  // @JsonKey(name: 'avater_url')
-  // final String avatarUrl;
-  // @JsonKey(name: 'parent_id')
-  // final String parentId;
-  // @JsonKey(name: 'config_id')
-  // final String configId;
-  @JsonKey(name: 'is_active')
-  final bool isActive;
-  final int id;
-
-  RegisterData(
-      {this.roleId = 0,
-      this.name = '',
-      this.phone = '',
-      this.email = '',
-      this.code = '',
-      this.type = 0,
-      this.assignedCarrier = '',
-      this.isSuper = false,
-      this.isActive = false,
-      this.id = 0});
-
-  factory RegisterData.fromJson(Map<String, dynamic> json) =>
-      _$RegisterDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RegisterDataToJson(this);
-}
-
-//register business
-@JsonSerializable()
-class RegisterBusinessRequest {
-  final String name;
-  final String phone;
-  final String password;
-  final String email;
-
-  RegisterBusinessRequest(
-      {this.name = '', this.phone = '', this.password = '', this.email = ''});
-
-  factory RegisterBusinessRequest.fromJson(Map<String, dynamic> json) =>
-      _$RegisterBusinessRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RegisterBusinessRequestToJson(this);
-}
-
-@JsonSerializable()
-class RegisterBusinessResponse {
-  final bool success;
-  final int status;
-  final String message;
-
-  RegisterBusinessResponse(
-      {this.success = false, this.message = '', this.status = 0});
-
-  factory RegisterBusinessResponse.fromJson(Map<String, dynamic> json) =>
-      _$RegisterBusinessResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RegisterBusinessResponseToJson(this);
 }

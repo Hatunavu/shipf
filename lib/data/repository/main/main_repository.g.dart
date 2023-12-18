@@ -102,7 +102,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/api/v2/auth/sign-in',
+              '/authentication/sign-in',
               queryParameters: queryParameters,
               data: _data,
             )

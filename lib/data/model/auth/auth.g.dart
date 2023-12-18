@@ -50,9 +50,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
           : LoginData.fromJson(json['data'] as Map<String, dynamic>),
       status: json['status'] as int? ?? 0,
       success: json['success'] as bool? ?? false,
-      statusCode: json['statusCode'] as int? ?? 0,
       message: json['message'] as String? ?? '',
-      error: json['error'] as String? ?? '',
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -60,17 +58,59 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'data': instance.data,
       'success': instance.success,
       'status': instance.status,
-      'statusCode': instance.statusCode,
       'message': instance.message,
-      'error': instance.error,
     };
 
 LoginData _$LoginDataFromJson(Map<String, dynamic> json) => LoginData(
       accessToken: json['access_token'] as String? ?? '',
+      user: json['user'] == null
+          ? null
+          : LoginDataUser.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
       'access_token': instance.accessToken,
+      'user': instance.user,
+    };
+
+LoginDataUser _$LoginDataUserFromJson(Map<String, dynamic> json) =>
+    LoginDataUser(
+      id: json['id'] as int? ?? 0,
+      isActive: json['isActive'] as bool? ?? false,
+      name: json['name'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      role: json['role'] == null
+          ? null
+          : LoginDataUserRole.fromJson(json['role'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LoginDataUserToJson(LoginDataUser instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'isActive': instance.isActive,
+      'name': instance.name,
+      'email': instance.email,
+      'code': instance.code,
+      'phone': instance.phone,
+      'role': instance.role,
+    };
+
+LoginDataUserRole _$LoginDataUserRoleFromJson(Map<String, dynamic> json) =>
+    LoginDataUserRole(
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      roleType: json['code'] == null
+          ? RoleType.customer
+          : stringToRoleType(json['code'] as String),
+    );
+
+Map<String, dynamic> _$LoginDataUserRoleToJson(LoginDataUserRole instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'code': roleTypeToString(instance.roleType),
     };
 
 RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
@@ -79,6 +119,8 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String? ?? '',
       password: json['password'] as String? ?? '',
       email: json['email'] as String?,
+      isAcceptTermAndCondition:
+          json['isAcceptTermAndCondition'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
@@ -86,6 +128,7 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
       'name': instance.name,
       'phone': instance.phone,
       'password': instance.password,
+      'isAcceptTermAndCondition': instance.isAcceptTermAndCondition,
       'email': instance.email,
     };
 
@@ -97,67 +140,6 @@ RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      'status': instance.status,
-      'message': instance.message,
-    };
-
-RegisterData _$RegisterDataFromJson(Map<String, dynamic> json) => RegisterData(
-      roleId: json['role_id'] as int? ?? 0,
-      name: json['name'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
-      email: json['email'] as String? ?? '',
-      code: json['code'] as String? ?? '',
-      type: json['type'] as int? ?? 0,
-      assignedCarrier: json['assigned_carrier'] as String? ?? '',
-      isSuper: json['is_super'] as bool? ?? false,
-      isActive: json['is_active'] as bool? ?? false,
-      id: json['id'] as int? ?? 0,
-    );
-
-Map<String, dynamic> _$RegisterDataToJson(RegisterData instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'role_id': instance.roleId,
-      'phone': instance.phone,
-      'email': instance.email,
-      'code': instance.code,
-      'type': instance.type,
-      'assigned_carrier': instance.assignedCarrier,
-      'is_super': instance.isSuper,
-      'is_active': instance.isActive,
-      'id': instance.id,
-    };
-
-RegisterBusinessRequest _$RegisterBusinessRequestFromJson(
-        Map<String, dynamic> json) =>
-    RegisterBusinessRequest(
-      name: json['name'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
-      password: json['password'] as String? ?? '',
-      email: json['email'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$RegisterBusinessRequestToJson(
-        RegisterBusinessRequest instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'phone': instance.phone,
-      'password': instance.password,
-      'email': instance.email,
-    };
-
-RegisterBusinessResponse _$RegisterBusinessResponseFromJson(
-        Map<String, dynamic> json) =>
-    RegisterBusinessResponse(
-      success: json['success'] as bool? ?? false,
-      message: json['message'] as String? ?? '',
-      status: json['status'] as int? ?? 0,
-    );
-
-Map<String, dynamic> _$RegisterBusinessResponseToJson(
-        RegisterBusinessResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
       'status': instance.status,

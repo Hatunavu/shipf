@@ -107,7 +107,10 @@ class LoginScreen extends StatelessWidget {
                                         height: kDefaultPaddingHeightWidget,
                                       ),
                                       PrimaryTextField(
-                                        errorText: state.error,
+                                        errorText: state.error
+                                                .contains('Số điện thoại')
+                                            ? state.error
+                                            : '',
                                         isPhone: true,
                                         label: '',
                                         hintText: text.phone,
@@ -119,7 +122,10 @@ class LoginScreen extends StatelessWidget {
                                         height: kDefaultPaddingHeightScreen,
                                       ),
                                       PrimaryTextField(
-                                        errorText: state.error,
+                                        errorText:
+                                            state.error.contains('Mật khẩu')
+                                                ? state.error
+                                                : '',
                                         isPass: state.showPass,
                                         label: '',
                                         hintText: text.password,

@@ -6,8 +6,8 @@ part 'address.g.dart';
 class AddressModel {
   final List<AddressDataModel> data;
   final bool success;
-  final MetaData? metadata;
-  AddressModel({this.success = true, this.metadata, this.data = const []});
+  final int status;
+  AddressModel({this.success = true, this.status = 0, this.data = const []});
   factory AddressModel.fromJson(Map<String, dynamic> json) =>
       _$AddressModelFromJson(json);
 
@@ -17,13 +17,9 @@ class AddressModel {
 @JsonSerializable()
 class AddressDataModel {
   final int id;
-  @JsonKey(name: 'is_active')
-  final bool isAvtive;
   final String code;
   final String name;
-  @JsonKey(name: 'map_names')
   final String mapNames;
-  @JsonKey(name: 'short_name')
   final String shortName;
   final String zipcode;
   final int priority;
@@ -34,7 +30,6 @@ class AddressDataModel {
 
   AddressDataModel(
       {this.id = 0,
-      this.isAvtive = false,
       this.code = '',
       this.name = '',
       this.mapNames = '',
@@ -47,14 +42,4 @@ class AddressDataModel {
       _$AddressDataModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressDataModelToJson(this);
-}
-
-@JsonSerializable()
-class MetaData {
-  final int totalRecord;
-  MetaData({this.totalRecord = 0});
-  factory MetaData.fromJson(Map<String, dynamic> json) =>
-      _$MetaDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MetaDataToJson(this);
 }

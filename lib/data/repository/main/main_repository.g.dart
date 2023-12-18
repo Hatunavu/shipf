@@ -220,7 +220,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/districts?province_id=${provinceId}&size=100',
+              '/districts/get-by-province-id/${provinceId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -243,7 +243,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/wards?district_id=${districtId}&size=100',
+              '/wards/get-by-district-id/${districtId}',
               queryParameters: queryParameters,
               data: _data,
             )

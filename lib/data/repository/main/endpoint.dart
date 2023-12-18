@@ -12,8 +12,8 @@ const registerShipper = '/users/register-shipper';
 
 //address
 const getProvinces = "/provinces?size=100";
-const getDistricts = "/districts?province_id={provinceId}&size=100";
-const getWards = "/wards?district_id={districtId}&size=100";
+const getDistricts = "/districts/get-by-province-id/{provinceId}";
+const getWards = "/wards/get-by-district-id/{districtId}";
 
 //order
 const getOrderService =

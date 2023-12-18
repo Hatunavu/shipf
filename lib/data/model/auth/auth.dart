@@ -62,7 +62,6 @@ class LoginResponse {
 
 @JsonSerializable()
 class LoginData {
-  @JsonKey(name: 'access_token')
   final String accessToken;
   final LoginDataUser? user;
 

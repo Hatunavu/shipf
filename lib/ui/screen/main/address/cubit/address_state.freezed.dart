@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddressState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<AddressSavedData> get addresses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddressStateCopyWith<AddressState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $AddressStateCopyWith<$Res> {
           AddressState value, $Res Function(AddressState) then) =
       _$AddressStateCopyWithImpl<$Res, AddressState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<AddressSavedData> addresses});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? addresses = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +60,10 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      addresses: null == addresses
+          ? _value.addresses
+          : addresses // ignore: cast_nullable_to_non_nullable
+              as List<AddressSavedData>,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$_AddressStateCopyWith<$Res>
       __$$_AddressStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<AddressSavedData> addresses});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$_AddressStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? addresses = null,
   }) {
     return _then(_$_AddressState(
       isLoading: null == isLoading
@@ -96,6 +103,10 @@ class __$$_AddressStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      addresses: null == addresses
+          ? _value._addresses
+          : addresses // ignore: cast_nullable_to_non_nullable
+              as List<AddressSavedData>,
     ));
   }
 }
@@ -103,16 +114,27 @@ class __$$_AddressStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddressState implements _AddressState {
-  const _$_AddressState({required this.isLoading, this.error});
+  const _$_AddressState(
+      {required this.isLoading,
+      this.error,
+      required final List<AddressSavedData> addresses})
+      : _addresses = addresses;
 
   @override
   final bool isLoading;
   @override
   final String? error;
+  final List<AddressSavedData> _addresses;
+  @override
+  List<AddressSavedData> get addresses {
+    if (_addresses is EqualUnmodifiableListView) return _addresses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_addresses);
+  }
 
   @override
   String toString() {
-    return 'AddressState(isLoading: $isLoading, error: $error)';
+    return 'AddressState(isLoading: $isLoading, error: $error, addresses: $addresses)';
   }
 
   @override
@@ -122,11 +144,14 @@ class _$_AddressState implements _AddressState {
             other is _$_AddressState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality()
+                .equals(other._addresses, _addresses));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error,
+      const DeepCollectionEquality().hash(_addresses));
 
   @JsonKey(ignore: true)
   @override
@@ -137,12 +162,16 @@ class _$_AddressState implements _AddressState {
 
 abstract class _AddressState implements AddressState {
   const factory _AddressState(
-      {required final bool isLoading, final String? error}) = _$_AddressState;
+      {required final bool isLoading,
+      final String? error,
+      required final List<AddressSavedData> addresses}) = _$_AddressState;
 
   @override
   bool get isLoading;
   @override
   String? get error;
+  @override
+  List<AddressSavedData> get addresses;
   @override
   @JsonKey(ignore: true)
   _$$_AddressStateCopyWith<_$_AddressState> get copyWith =>

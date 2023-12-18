@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:shipf/data/model/address/address.dart';
-import 'package:shipf/data/model/address/address_model.dart';
 import 'package:shipf/data/model/order/order_request.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
@@ -96,22 +95,20 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<void> selectAddress(AddressDataResponse address,
+  Future<void> selectAddress(AddressSavedData address,
       {bool isDeliver = false}) async {
     emit(state.copyWith(isLoading: true));
     //update province
-    final indexProvince = state.provinces.indexWhere(
-        (element) => element.id.toString() == address.codes.province);
+    final indexProvince = state.provinces
+        .indexWhere((element) => element.id == address.provinceId);
     //update district
-    final districts =
-        await mainRepository.getDistricts(int.parse(address.codes.province));
-    final indexDistrict = districts.data.indexWhere(
-        (element) => element.id.toString() == address.codes.district);
+    final districts = await mainRepository.getDistricts(address.provinceId);
+    final indexDistrict = districts.data
+        .indexWhere((element) => element.id == address.districtId);
     //update ward
-    final wards =
-        await mainRepository.getWards(int.parse(address.codes.district));
-    final indexWard = wards.data
-        .indexWhere((element) => element.id.toString() == address.codes.ward);
+    final wards = await mainRepository.getWards(address.districtId);
+    final indexWard =
+        wards.data.indexWhere((element) => element.id == address.wardId);
     isDeliver
         ? emit(state.copyWith(
             addressPick: address,

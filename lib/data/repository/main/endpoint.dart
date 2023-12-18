@@ -11,9 +11,11 @@ const registerBusiness = '/users/register-business';
 const registerShipper = '/users/register-shipper';
 
 //address
-const getProvinces = "/provinces?size=100";
+const getProvinces = "/provinces";
 const getDistricts = "/districts/get-by-province-id/{provinceId}";
 const getWards = "/wards/get-by-district-id/{districtId}";
+const getPickupAddresses = "/pickup-addresses";
+const getDeliveryAddresses = "/delivery-addresses";
 
 //order
 const getOrderService =

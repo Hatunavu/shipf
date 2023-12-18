@@ -18,8 +18,8 @@ class OrderState with _$OrderState {
       required bool pickupPoint,
       required bool deliveryPoint,
       required bool insurance,
-      AddressDataResponse? addressPick,
-      AddressDataResponse? addressDeliver,
+      AddressSavedData? addressPick,
+      AddressSavedData? addressDeliver,
       //location
       required String errorProvince,
       required String errorDistrict,

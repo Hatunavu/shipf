@@ -2,7 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:shipf/data/model/address/address_model.dart';
+import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -113,17 +113,18 @@ class OrderAddressWidget extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () => context.router.push(AddressPage(
+                  isDeliver: isDeliver,
                   selectAddress: (address) async {
                     await orderCubit.selectAddress(address,
                         isDeliver: isDeliver);
                     if (isDeliver) {
-                      nameController.text = address.fullName;
+                      nameController.text = address.name;
                       phoneController.text = address.phone;
-                      addressController.text = address.details;
+                      addressController.text = address.address;
                     } else {
-                      nameController.text = address.fullName;
+                      nameController.text = address.name;
                       phoneController.text = address.phone;
-                      addressController.text = address.details;
+                      addressController.text = address.address;
                     }
                   },
                 )),
@@ -217,7 +218,7 @@ class OrderAddressWidget extends StatelessWidget {
     bool isWard = false,
     required String label,
     bool isDeliver = false,
-    AddressDataResponse? addressData,
+    AddressSavedData? addressData,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

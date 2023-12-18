@@ -1,95 +1,91 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:shipf/data/model/address/address_model.dart';
+import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/ui/screen/main/address/cubit/address_cubit.dart';
+import 'package:shipf/ui/screen/main/address/cubit/address_state.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-final List<AddressDataResponse> listAddress = [
-  AddressDataResponse(
-    id: '1',
-    codes: AddressCode(district: '686', province: '62', ward: '10851'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '0987654321',
-    fullName: 'Vu Truong Nam',
-    details: '234 Chiến Thắng',
-    isDeleted: false,
-    isDefault: true,
-    fullAddress: '234 Chiến Thắng, Phường 2, Tân Bình, Hồ Chí Minh',
-    type: 'Văn phòng',
-  ),
-  AddressDataResponse(
-    id: '2',
-    codes: AddressCode(district: '724', province: '63', ward: '11598'),
-    location: AddressLocation(coordinates: [0.1, 100]),
-    owner: '',
-    phone: '0988888888',
-    fullName: 'Nam Vu',
-    details: '123 Hoàng Quốc Việt',
-    isDeleted: false,
-    isDefault: false,
-    fullAddress: '123 Hoàng Quốc Việt, Cổ Nhuế 2, Bắc Từ Liêm, Hà Nội',
-    type: 'Nhà',
-  ),
-];
-
 class AddressScreen extends StatefulWidget {
-  Function(AddressDataResponse address) selectAddress;
-  AddressScreen({Key? key, required this.selectAddress}) : super(key: key);
+  final bool isDeliver;
+  Function(AddressSavedData address) selectAddress;
+  AddressScreen({Key? key, required this.selectAddress, this.isDeliver = false})
+      : super(key: key);
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
 }
 
 class _AddressScreenState extends State<AddressScreen> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      title: 'Chọn địa chỉ',
-      leading: InkWell(
-        onTap: () {
-          Navigator.pop(context);
+    return BlocProvider(
+      create: (context) => AddressCubit()..getAddresses(widget.isDeliver),
+      child: BlocBuilder<AddressCubit, AddressState>(
+        builder: (context, state) {
+          if (!state.isLoading) {
+            isLoading == true ? context.router.pop() : null;
+            isLoading = false;
+          }
+          if (state.isLoading) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              loadingShowDialog(context);
+              isLoading = true;
+            });
+          }
+          return BaseScreen(
+            title: 'Chọn địa chỉ',
+            leading: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Padding(
+                  //   padding: EdgeInsets.all(kDefaultPaddingHeightWidget),
+                  //   child: PrimaryButton(
+                  //     label: 'Thêm địa chỉ',
+                  //     onPressed: () {
+                  //       context.router.push(AddAddressPage());
+                  //     },
+                  //   ),
+                  // ),
+                  ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.addresses.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () {
+                              widget.selectAddress(state.addresses[index]);
+                              context.router.pop();
+                            },
+                            child: itemAddress(state.addresses[index]));
+                      })
+                ],
+              ),
+            ),
+          );
         },
-        child: const Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
-        ),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Padding(
-            //   padding: EdgeInsets.all(kDefaultPaddingHeightWidget),
-            //   child: PrimaryButton(
-            //     label: 'Thêm địa chỉ',
-            //     onPressed: () {
-            //       context.router.push(AddAddressPage());
-            //     },
-            //   ),
-            // ),
-            ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: listAddress.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () {
-                        widget.selectAddress(listAddress[index]);
-                        context.router.pop();
-                      },
-                      child: itemAddress(listAddress[index]));
-                })
-          ],
-        ),
       ),
     );
   }
 
-  Widget itemAddress(AddressDataResponse address) {
+  Widget itemAddress(AddressSavedData address) {
     return Container(
       decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: borderColor, width: 0.2))),
@@ -122,7 +118,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       children: [
                         Flexible(
                           child: Text(
-                            address.fullName,
+                            address.name,
                             style: primaryTitleStyle,
                             overflow: TextOverflow.ellipsis,
                           ),

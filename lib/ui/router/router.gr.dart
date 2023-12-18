@@ -14,7 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i16;
 import 'package:flutter/material.dart' as _i17;
 
-import '../../data/model/address/address_model.dart' as _i18;
+import '../../data/model/address/address.dart' as _i18;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i8;
 import '../screen/auth/login/login_screen.dart' as _i4;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i9;
@@ -136,6 +136,7 @@ class AppRouter extends _i16.RootStackRouter {
         child: _i12.AddressScreen(
           key: args.key,
           selectAddress: args.selectAddress,
+          isDeliver: args.isDeliver,
         ),
       );
     },
@@ -506,13 +507,15 @@ class AddAddressPageArgs {
 class AddressPage extends _i16.PageRouteInfo<AddressPageArgs> {
   AddressPage({
     _i17.Key? key,
-    required dynamic Function(_i18.AddressDataResponse) selectAddress,
+    required dynamic Function(_i18.AddressSavedData) selectAddress,
+    bool isDeliver = false,
   }) : super(
           AddressPage.name,
           path: '/address',
           args: AddressPageArgs(
             key: key,
             selectAddress: selectAddress,
+            isDeliver: isDeliver,
           ),
         );
 
@@ -523,15 +526,18 @@ class AddressPageArgs {
   const AddressPageArgs({
     this.key,
     required this.selectAddress,
+    this.isDeliver = false,
   });
 
   final _i17.Key? key;
 
-  final dynamic Function(_i18.AddressDataResponse) selectAddress;
+  final dynamic Function(_i18.AddressSavedData) selectAddress;
+
+  final bool isDeliver;
 
   @override
   String toString() {
-    return 'AddressPageArgs{key: $key, selectAddress: $selectAddress}';
+    return 'AddressPageArgs{key: $key, selectAddress: $selectAddress, isDeliver: $isDeliver}';
   }
 }
 

@@ -31,8 +31,8 @@ AddressDataModel _$AddressDataModelFromJson(Map<String, dynamic> json) =>
       shortName: json['shortName'] as String? ?? '',
       zipcode: json['zipcode'] as String? ?? '',
       priority: json['priority'] as int? ?? 0,
-      provinceId: json['province_id'] as int? ?? 0,
-      districtId: json['district_id'] as int? ?? 0,
+      provinceId: json['provinceId'] as int? ?? 0,
+      districtId: json['districtId'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$AddressDataModelToJson(AddressDataModel instance) =>
@@ -44,6 +44,54 @@ Map<String, dynamic> _$AddressDataModelToJson(AddressDataModel instance) =>
       'shortName': instance.shortName,
       'zipcode': instance.zipcode,
       'priority': instance.priority,
-      'province_id': instance.provinceId,
-      'district_id': instance.districtId,
+      'provinceId': instance.provinceId,
+      'districtId': instance.districtId,
+    };
+
+AddressSaved _$AddressSavedFromJson(Map<String, dynamic> json) => AddressSaved(
+      success: json['success'] as bool? ?? true,
+      status: json['status'] as int? ?? 0,
+      message: json['message'] as String? ?? '',
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => AddressSavedData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$AddressSavedToJson(AddressSaved instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'success': instance.success,
+      'status': instance.status,
+      'data': instance.data,
+    };
+
+AddressSavedData _$AddressSavedDataFromJson(Map<String, dynamic> json) =>
+    AddressSavedData(
+      isActive: json['isActive'] as bool? ?? false,
+      id: json['id'] as int? ?? 0,
+      customerId: json['customerId'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      isDefault: json['isDefault'] as bool? ?? false,
+      provinceId: json['provinceId'] as int? ?? 0,
+      districtId: json['districtId'] as int? ?? 0,
+      wardId: json['wardId'] as int? ?? 0,
+      address: json['address'] as String? ?? '',
+      fullAddress: json['fullAddress'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AddressSavedDataToJson(AddressSavedData instance) =>
+    <String, dynamic>{
+      'isActive': instance.isActive,
+      'id': instance.id,
+      'customerId': instance.customerId,
+      'name': instance.name,
+      'phone': instance.phone,
+      'isDefault': instance.isDefault,
+      'provinceId': instance.provinceId,
+      'districtId': instance.districtId,
+      'wardId': instance.wardId,
+      'address': instance.address,
+      'fullAddress': instance.fullAddress,
     };

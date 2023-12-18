@@ -25,8 +25,8 @@ mixin _$OrderState {
   bool get pickupPoint => throw _privateConstructorUsedError;
   bool get deliveryPoint => throw _privateConstructorUsedError;
   bool get insurance => throw _privateConstructorUsedError;
-  AddressDataResponse? get addressPick => throw _privateConstructorUsedError;
-  AddressDataResponse? get addressDeliver =>
+  AddressSavedData? get addressPick => throw _privateConstructorUsedError;
+  AddressSavedData? get addressDeliver =>
       throw _privateConstructorUsedError; //location
   String get errorProvince => throw _privateConstructorUsedError;
   String get errorDistrict => throw _privateConstructorUsedError;
@@ -72,8 +72,8 @@ abstract class $OrderStateCopyWith<$Res> {
       bool pickupPoint,
       bool deliveryPoint,
       bool insurance,
-      AddressDataResponse? addressPick,
-      AddressDataResponse? addressDeliver,
+      AddressSavedData? addressPick,
+      AddressSavedData? addressDeliver,
       String errorProvince,
       String errorDistrict,
       String errorWard,
@@ -183,11 +183,11 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
       addressPick: freezed == addressPick
           ? _value.addressPick
           : addressPick // ignore: cast_nullable_to_non_nullable
-              as AddressDataResponse?,
+              as AddressSavedData?,
       addressDeliver: freezed == addressDeliver
           ? _value.addressDeliver
           : addressDeliver // ignore: cast_nullable_to_non_nullable
-              as AddressDataResponse?,
+              as AddressSavedData?,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -294,8 +294,8 @@ abstract class _$$_OrderStateCopyWith<$Res>
       bool pickupPoint,
       bool deliveryPoint,
       bool insurance,
-      AddressDataResponse? addressPick,
-      AddressDataResponse? addressDeliver,
+      AddressSavedData? addressPick,
+      AddressSavedData? addressDeliver,
       String errorProvince,
       String errorDistrict,
       String errorWard,
@@ -403,11 +403,11 @@ class __$$_OrderStateCopyWithImpl<$Res>
       addressPick: freezed == addressPick
           ? _value.addressPick
           : addressPick // ignore: cast_nullable_to_non_nullable
-              as AddressDataResponse?,
+              as AddressSavedData?,
       addressDeliver: freezed == addressDeliver
           ? _value.addressDeliver
           : addressDeliver // ignore: cast_nullable_to_non_nullable
-              as AddressDataResponse?,
+              as AddressSavedData?,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -564,9 +564,9 @@ class _$_OrderState implements _OrderState {
   @override
   final bool insurance;
   @override
-  final AddressDataResponse? addressPick;
+  final AddressSavedData? addressPick;
   @override
-  final AddressDataResponse? addressDeliver;
+  final AddressSavedData? addressDeliver;
 //location
   @override
   final String errorProvince;
@@ -770,8 +770,8 @@ abstract class _OrderState implements OrderState {
       required final bool pickupPoint,
       required final bool deliveryPoint,
       required final bool insurance,
-      final AddressDataResponse? addressPick,
-      final AddressDataResponse? addressDeliver,
+      final AddressSavedData? addressPick,
+      final AddressSavedData? addressDeliver,
       required final String errorProvince,
       required final String errorDistrict,
       required final String errorWard,
@@ -813,9 +813,9 @@ abstract class _OrderState implements OrderState {
   @override
   bool get insurance;
   @override
-  AddressDataResponse? get addressPick;
+  AddressSavedData? get addressPick;
   @override
-  AddressDataResponse? get addressDeliver;
+  AddressSavedData? get addressDeliver;
   @override //location
   String get errorProvince;
   @override

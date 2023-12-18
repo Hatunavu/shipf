@@ -27,8 +27,14 @@ class OrderService {
 class OrderServiceResponse {
   final List<OrderServiceData> data;
   final bool success;
+  final int status;
+  final String message;
 
-  OrderServiceResponse({this.data = const [], this.success = false});
+  OrderServiceResponse(
+      {this.data = const [],
+      this.success = false,
+      this.message = '',
+      this.status = 0});
 
   factory OrderServiceResponse.fromJson(Map<String, dynamic> json) =>
       _$OrderServiceResponseFromJson(json);
@@ -38,10 +44,49 @@ class OrderServiceResponse {
 
 @JsonSerializable()
 class OrderServiceData {
-  PriceList? priceList;
-  Fee? fee;
+  final int id;
+  final String code;
+  final String name;
+  final String type;
+  final int urbanPickupCharge;
+  final int urbanDeliveryCharge;
+  final int townPickupCharge;
+  final int townDeliveryCharge;
+  final int loadingCharge;
+  final String returnChargeUnit;
+  final int returnCharge;
+  final double insuranceCharge;
+  final int insuranceValue;
+  final int minFreightCharge;
+  final int leadTime;
+  final bool isActive;
+  final Charges? charges;
+  // final List<Null> priceListCustomers;
+  // final List<Null> priceListCarriers;
+  // final List<Null> priceListSteps;
 
-  OrderServiceData({this.priceList, this.fee});
+  OrderServiceData(
+      {this.id = 0,
+      this.code = '',
+      this.name = '',
+      this.type = '',
+      this.urbanPickupCharge = 0,
+      this.urbanDeliveryCharge = 0,
+      this.townPickupCharge = 0,
+      this.townDeliveryCharge = 0,
+      this.loadingCharge = 0,
+      this.returnChargeUnit = '',
+      this.returnCharge = 0,
+      this.insuranceCharge = 0,
+      this.insuranceValue = 0,
+      this.minFreightCharge = 0,
+      this.leadTime = 0,
+      this.isActive = false,
+      this.charges
+      // this.priceListCustomers = const [],
+      // this.priceListCarriers = const [],
+      // this.priceListSteps = const [],
+      });
 
   factory OrderServiceData.fromJson(Map<String, dynamic> json) =>
       _$OrderServiceDataFromJson(json);
@@ -50,76 +95,24 @@ class OrderServiceData {
 }
 
 @JsonSerializable()
-class PriceList {
-  final int id;
-  final bool isActive;
-  final String createdAt;
-  final String name;
-  final String type;
-  final int suburbanPickFee;
-  final int countryPickFee;
-  final int suburbanDelFee;
-  final int countryDelFee;
-  final int loadFee;
-  final String returnFeeUnit;
-  final int returnFeeValue;
-  final double insuranceFee;
-  final int insuranceValue;
-  final int minValue;
-  final int leadTime;
-  final int ownerId;
-  final int fromRegionId;
-  final int toRegionId;
+class Charges {
+  final int freightCharge;
+  final int loadingCharge;
+  final int insuranceCharge;
+  final int returnCharge;
+  final int pickupCharge;
+  final int deliveryCharge;
 
-  PriceList(
-      {this.id = 0,
-      this.isActive = false,
-      this.createdAt = '',
-      this.name = '',
-      this.type = '',
-      this.suburbanPickFee = 0,
-      this.countryPickFee = 0,
-      this.suburbanDelFee = 0,
-      this.countryDelFee = 0,
-      this.loadFee = 0,
-      this.returnFeeUnit = '',
-      this.returnFeeValue = 0,
-      this.insuranceFee = 0,
-      this.insuranceValue = 0,
-      this.minValue = 0,
-      this.leadTime = 0,
-      this.ownerId = 0,
-      this.fromRegionId = 0,
-      this.toRegionId = 0});
+  Charges(
+      {this.freightCharge = 0,
+      this.loadingCharge = 0,
+      this.insuranceCharge = 0,
+      this.returnCharge = 0,
+      this.pickupCharge = 0,
+      this.deliveryCharge = 0});
 
-  factory PriceList.fromJson(Map<String, dynamic> json) =>
-      _$PriceListFromJson(json);
+  factory Charges.fromJson(Map<String, dynamic> json) =>
+      _$ChargesFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PriceListToJson(this);
-}
-
-@JsonSerializable()
-class Fee {
-  final int serviceFee;
-  final int insuranceFee;
-  final int returnFee;
-  final int regionPickFee;
-  final int regionDeliverFee;
-  final int codFee;
-  final int loadFee;
-  final int totalFee;
-
-  Fee(
-      {this.serviceFee = 0,
-      this.insuranceFee = 0,
-      this.returnFee = 0,
-      this.regionPickFee = 0,
-      this.regionDeliverFee = 0,
-      this.codFee = 0,
-      this.loadFee = 0,
-      this.totalFee = 0});
-
-  factory Fee.fromJson(Map<String, dynamic> json) => _$FeeFromJson(json);
-
-  Map<String, dynamic> toJson() => _$FeeToJson(this);
+  Map<String, dynamic> toJson() => _$ChargesToJson(this);
 }

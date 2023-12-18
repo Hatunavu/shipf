@@ -64,18 +64,17 @@ abstract class MainRepository {
 
   //order
   @GET(endpoint.getOrderService)
-  Future<OrderServiceResponse> getOrderService(
-    @Path('pickAddressId') int pickAddressId,
-    @Path('toProvinceId') int toProvinceId,
-    @Path('toDistrictId') int toDistrictId,
-    @Path('parcelWeight') int parcelWeight,
-    @Path('parcelQuantity') int parcelQuantity,
-    @Path('parcelLength') int parcelLength,
-    @Path('parcelWidth') int parcelWidth,
-    @Path('parcelHeight') int parcelHeight,
-    @Path('parcelValue') int parcelValue,
-    @Path('isInsured') bool isInsured,
-  );
+  Future<OrderServiceResponse> getOrderService({
+    @Query('pickupRegionId') required int pickupRegionId,
+    @Query('deliveryRegionId') required int deliveryRegionId,
+    @Query('type') required String type,
+    @Query('netWeight') required int netWeight,
+    @Query('quantity') required int quantity,
+    @Query('length') required int length,
+    @Query('width') required int width,
+    @Query('height') required double height,
+    @Query('declaredValue') required int declaredValue,
+  });
 }
 
 extension ApiClientAWSS3 on MainRepository {

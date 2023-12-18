@@ -18,5 +18,4 @@ const getPickupAddresses = "/pickup-addresses";
 const getDeliveryAddresses = "/delivery-addresses";
 
 //order
-const getOrderService =
-    '/price-lists/quotes?pick_address_id={pickAddressId}&to_province_id={toProvinceId}&to_district_id={toDistrictId}&parcel_weight={parcelWeight}&parcel_quantity={parcelQuantity}&parcel_length={parcelLength}&parcel_width={parcelWidth}&parcel_height={parcelHeight}&parcel_value={parcelValue}&is_insured={isInsured}';
+const getOrderService = '/price-lists/quote';

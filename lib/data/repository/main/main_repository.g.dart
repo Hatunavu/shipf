@@ -299,20 +299,29 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<OrderServiceResponse> getOrderService(
-    pickAddressId,
-    toProvinceId,
-    toDistrictId,
-    parcelWeight,
-    parcelQuantity,
-    parcelLength,
-    parcelWidth,
-    parcelHeight,
-    parcelValue,
-    isInsured,
-  ) async {
+  Future<OrderServiceResponse> getOrderService({
+    required pickupRegionId,
+    required deliveryRegionId,
+    required type,
+    required netWeight,
+    required quantity,
+    required length,
+    required width,
+    required height,
+    required declaredValue,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pickupRegionId': pickupRegionId,
+      r'deliveryRegionId': deliveryRegionId,
+      r'type': type,
+      r'netWeight': netWeight,
+      r'quantity': quantity,
+      r'length': length,
+      r'width': width,
+      r'height': height,
+      r'declaredValue': declaredValue,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -323,7 +332,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/price-lists/quotes?pick_address_id=${pickAddressId}&to_province_id=${toProvinceId}&to_district_id=${toDistrictId}&parcel_weight=${parcelWeight}&parcel_quantity=${parcelQuantity}&parcel_length=${parcelLength}&parcel_width=${parcelWidth}&parcel_height=${parcelHeight}&parcel_value=${parcelValue}&is_insured=${isInsured}',
+              '/price-lists/quote',
               queryParameters: queryParameters,
               data: _data,
             )

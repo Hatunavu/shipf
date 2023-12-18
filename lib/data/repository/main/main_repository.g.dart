@@ -300,20 +300,31 @@ class _MainRepository implements MainRepository {
 
   @override
   Future<OrderServiceResponse> getOrderService({
-    required pickupRegionId,
-    required deliveryRegionId,
+    pickupAddressId,
+    pickupProvinceId,
+    pickupDistrictId,
+    deliveryAddressId,
+    deliveryProvinceId,
+    deliveryDistrictId,
     required type,
     required netWeight,
     required quantity,
     required length,
     required width,
     required height,
-    required declaredValue,
+    declaredValue,
+    loading,
+    loadisInsureding,
+    cod,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'pickupRegionId': pickupRegionId,
-      r'deliveryRegionId': deliveryRegionId,
+      r'pickupAddressId': pickupAddressId,
+      r'pickupProvinceId': pickupProvinceId,
+      r'pickupDistrictId': pickupDistrictId,
+      r'deliveryAddressId': deliveryAddressId,
+      r'deliveryProvinceId': deliveryProvinceId,
+      r'deliveryDistrictId': deliveryDistrictId,
       r'type': type,
       r'netWeight': netWeight,
       r'quantity': quantity,
@@ -321,7 +332,11 @@ class _MainRepository implements MainRepository {
       r'width': width,
       r'height': height,
       r'declaredValue': declaredValue,
+      r'loading': loading,
+      r'isInsured': loadisInsureding,
+      r'cod': cod,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

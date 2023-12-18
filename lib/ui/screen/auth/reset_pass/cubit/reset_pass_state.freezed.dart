@@ -76,11 +76,11 @@ class _$ResetPassStateCopyWithImpl<$Res, $Val extends ResetPassState>
 }
 
 /// @nodoc
-abstract class _$$_ResetPassStateCopyWith<$Res>
+abstract class _$$ResetPassStateImplCopyWith<$Res>
     implements $ResetPassStateCopyWith<$Res> {
-  factory _$$_ResetPassStateCopyWith(
-          _$_ResetPassState value, $Res Function(_$_ResetPassState) then) =
-      __$$_ResetPassStateCopyWithImpl<$Res>;
+  factory _$$ResetPassStateImplCopyWith(_$ResetPassStateImpl value,
+          $Res Function(_$ResetPassStateImpl) then) =
+      __$$ResetPassStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_ResetPassStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ResetPassStateCopyWithImpl<$Res>
-    extends _$ResetPassStateCopyWithImpl<$Res, _$_ResetPassState>
-    implements _$$_ResetPassStateCopyWith<$Res> {
-  __$$_ResetPassStateCopyWithImpl(
-      _$_ResetPassState _value, $Res Function(_$_ResetPassState) _then)
+class __$$ResetPassStateImplCopyWithImpl<$Res>
+    extends _$ResetPassStateCopyWithImpl<$Res, _$ResetPassStateImpl>
+    implements _$$ResetPassStateImplCopyWith<$Res> {
+  __$$ResetPassStateImplCopyWithImpl(
+      _$ResetPassStateImpl _value, $Res Function(_$ResetPassStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_ResetPassStateCopyWithImpl<$Res>
     Object? showPass = null,
     Object? showConfirmPass = null,
   }) {
-    return _then(_$_ResetPassState(
+    return _then(_$ResetPassStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_ResetPassStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPassState implements _ResetPassState {
-  const _$_ResetPassState(
+class _$ResetPassStateImpl implements _ResetPassState {
+  const _$ResetPassStateImpl(
       {required this.isLoading,
       required this.error,
       required this.showPass,
@@ -148,10 +148,10 @@ class _$_ResetPassState implements _ResetPassState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ResetPassState &&
+            other is _$ResetPassStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -168,8 +168,9 @@ class _$_ResetPassState implements _ResetPassState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResetPassStateCopyWith<_$_ResetPassState> get copyWith =>
-      __$$_ResetPassStateCopyWithImpl<_$_ResetPassState>(this, _$identity);
+  _$$ResetPassStateImplCopyWith<_$ResetPassStateImpl> get copyWith =>
+      __$$ResetPassStateImplCopyWithImpl<_$ResetPassStateImpl>(
+          this, _$identity);
 }
 
 abstract class _ResetPassState implements ResetPassState {
@@ -177,7 +178,7 @@ abstract class _ResetPassState implements ResetPassState {
       {required final bool isLoading,
       required final String error,
       required final bool showPass,
-      required final bool showConfirmPass}) = _$_ResetPassState;
+      required final bool showConfirmPass}) = _$ResetPassStateImpl;
 
   @override
   bool get isLoading;
@@ -189,6 +190,6 @@ abstract class _ResetPassState implements ResetPassState {
   bool get showConfirmPass;
   @override
   @JsonKey(ignore: true)
-  _$$_ResetPassStateCopyWith<_$_ResetPassState> get copyWith =>
+  _$$ResetPassStateImplCopyWith<_$ResetPassStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

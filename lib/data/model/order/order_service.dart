@@ -1,4 +1,6 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shipf/enums/enum_order_type.dart';
 
 part 'order_service.g.dart';
 
@@ -47,7 +49,12 @@ class OrderServiceData {
   final int id;
   final String code;
   final String name;
-  final String type;
+  @JsonKey(
+      name: 'type',
+      toJson: orderTypeToString,
+      fromJson: stringToOrderType,
+      defaultValue: OrderType.express)
+  final OrderType type;
   final int urbanPickupCharge;
   final int urbanDeliveryCharge;
   final int townPickupCharge;
@@ -61,6 +68,7 @@ class OrderServiceData {
   final int leadTime;
   final bool isActive;
   final Charges? charges;
+  bool isSelect;
   // final List<Null> priceListCustomers;
   // final List<Null> priceListCarriers;
   // final List<Null> priceListSteps;
@@ -69,7 +77,7 @@ class OrderServiceData {
       {this.id = 0,
       this.code = '',
       this.name = '',
-      this.type = '',
+      this.type = OrderType.express,
       this.urbanPickupCharge = 0,
       this.urbanDeliveryCharge = 0,
       this.townPickupCharge = 0,
@@ -82,11 +90,16 @@ class OrderServiceData {
       this.minFreightCharge = 0,
       this.leadTime = 0,
       this.isActive = false,
-      this.charges
+      this.charges,
+      this.isSelect = false
       // this.priceListCustomers = const [],
       // this.priceListCarriers = const [],
       // this.priceListSteps = const [],
       });
+
+  String get serviceFee {
+    return NumberFormat.decimalPattern().format(loadingCharge).toString();
+  }
 
   factory OrderServiceData.fromJson(Map<String, dynamic> json) =>
       _$OrderServiceDataFromJson(json);

@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_order_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
@@ -11,7 +13,7 @@ class OrderCubit extends Cubit<OrderState> {
   OrderCubit() : super(OrderState.initial());
 
   Future init() async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, isFirstLoad: true));
     await getProvinces();
     List<OrderService> listService = [
       OrderService(
@@ -35,20 +37,37 @@ class OrderCubit extends Cubit<OrderState> {
           type: 'Giao nguyên chuyến',
           fee: '230.000đ'),
     ];
-    listService.first.isSelect = true;
+    // listService.first.isSelect = true;
     emit(state.copyWith(
-        services: listService,
-        serviceSelected: listService.first,
-        isLoading: false));
+      services: listService,
+      // serviceSelected: listService.first,
+      isLoading: false,
+      isFirstLoad: false,
+      senderNameController: TextEditingController(),
+      senderPhoneController: TextEditingController(),
+      senderAddressController: TextEditingController(),
+      receiverNameController: TextEditingController(),
+      receiverPhoneController: TextEditingController(),
+      receiverAddressController: TextEditingController(),
+      parcelNameController: TextEditingController(),
+      parcelPriceController: TextEditingController(),
+      parcelAmountController: TextEditingController(text: '1'),
+      parcelWeightController: TextEditingController(text: '1'),
+      lengthController: TextEditingController(),
+      widthController: TextEditingController(),
+      heightController: TextEditingController(),
+      codController: TextEditingController(),
+      noteController: TextEditingController(),
+    ));
   }
 
   void updateStepOrder(StepOrderType stepOrderType) {
     emit(state.copyWith(stepOrderType: stepOrderType));
   }
 
-  Future<void> selectService(OrderService service) async {
+  Future<void> selectService(OrderServiceData service) async {
     emit(state.copyWith(isUpdate: true));
-    final newList = state.services.map((e) {
+    final newList = state.orderServices.map((e) {
       if (e.id == service.id) {
         service.isSelect = true;
         return service;
@@ -58,7 +77,7 @@ class OrderCubit extends Cubit<OrderState> {
       }
     }).toList();
     emit(state.copyWith(
-        services: newList, isUpdate: false, serviceSelected: service));
+        orderServices: newList, isUpdate: false, serviceSelected: service));
   }
 
   void updateDeliveryPoint() {
@@ -73,23 +92,37 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(insurance: !state.insurance));
   }
 
-  Future<void> getService() async {
+  Future<bool> getService() async {
     try {
       emit(state.copyWith(isLoading: true));
       final response = await mainRepository.getOrderService(
-          pickupRegionId: 58,
-          deliveryRegionId: 51,
-          type: 'EXPRESS',
-          netWeight: 120,
-          quantity: 1,
-          length: 50,
-          width: 60,
-          height: 60.5,
-          declaredValue: 2000000);
-      emit(state.copyWith(isLoading: false));
+        pickupAddressId: 58,
+        deliveryAddressId: 51,
+        // pickupAddressId: state.addressPick?.id,
+        // pickupProvinceId: state.province?.id,
+        // pickupDistrictId: state.district?.id,
+        // deliveryAddressId: state.addressDeliver?.id,
+        // deliveryProvinceId: state.provinceDeliver?.id,
+        // deliveryDistrictId: state.districtDeliver?.id,
+        type: OrderType.express.toJsonString(),
+        netWeight: int.parse(state.parcelWeightController?.text ?? '0'),
+        quantity: int.parse(state.parcelAmountController?.text ?? '0'),
+        length: int.parse(state.lengthController?.text ?? '0'),
+        width: int.parse(state.widthController?.text ?? '0'),
+        height: int.parse(state.heightController?.text ?? '0'),
+        declaredValue: int.parse(
+            state.parcelPriceController?.text.replaceAll(',', '') ?? '0'),
+        // cod: int.parse(state.codController?.text.replaceAll(',', '') ?? '0'),
+        // loadisInsureding: state.insurance,
+        // loading: null
+      );
+
+      emit(state.copyWith(isLoading: false, orderServices: response.data));
+      return true;
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(isLoading: false, error: errorMessage));
+      return false;
     }
   }
 

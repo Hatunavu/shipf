@@ -76,11 +76,11 @@ class _$VerifyStateCopyWithImpl<$Res, $Val extends VerifyState>
 }
 
 /// @nodoc
-abstract class _$$_VerifyStateCopyWith<$Res>
+abstract class _$$VerifyStateImplCopyWith<$Res>
     implements $VerifyStateCopyWith<$Res> {
-  factory _$$_VerifyStateCopyWith(
-          _$_VerifyState value, $Res Function(_$_VerifyState) then) =
-      __$$_VerifyStateCopyWithImpl<$Res>;
+  factory _$$VerifyStateImplCopyWith(
+          _$VerifyStateImpl value, $Res Function(_$VerifyStateImpl) then) =
+      __$$VerifyStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_VerifyStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VerifyStateCopyWithImpl<$Res>
-    extends _$VerifyStateCopyWithImpl<$Res, _$_VerifyState>
-    implements _$$_VerifyStateCopyWith<$Res> {
-  __$$_VerifyStateCopyWithImpl(
-      _$_VerifyState _value, $Res Function(_$_VerifyState) _then)
+class __$$VerifyStateImplCopyWithImpl<$Res>
+    extends _$VerifyStateCopyWithImpl<$Res, _$VerifyStateImpl>
+    implements _$$VerifyStateImplCopyWith<$Res> {
+  __$$VerifyStateImplCopyWithImpl(
+      _$VerifyStateImpl _value, $Res Function(_$VerifyStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_VerifyStateCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? finishCountdown = null,
   }) {
-    return _then(_$_VerifyState(
+    return _then(_$VerifyStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_VerifyStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VerifyState implements _VerifyState {
-  const _$_VerifyState(
+class _$VerifyStateImpl implements _VerifyState {
+  const _$VerifyStateImpl(
       {required this.isLoading,
       required this.error,
       this.endTime,
@@ -148,10 +148,10 @@ class _$_VerifyState implements _VerifyState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VerifyState &&
+            other is _$VerifyStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -167,8 +167,8 @@ class _$_VerifyState implements _VerifyState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VerifyStateCopyWith<_$_VerifyState> get copyWith =>
-      __$$_VerifyStateCopyWithImpl<_$_VerifyState>(this, _$identity);
+  _$$VerifyStateImplCopyWith<_$VerifyStateImpl> get copyWith =>
+      __$$VerifyStateImplCopyWithImpl<_$VerifyStateImpl>(this, _$identity);
 }
 
 abstract class _VerifyState implements VerifyState {
@@ -176,7 +176,7 @@ abstract class _VerifyState implements VerifyState {
       {required final bool isLoading,
       required final String error,
       final DateTime? endTime,
-      required final bool finishCountdown}) = _$_VerifyState;
+      required final bool finishCountdown}) = _$VerifyStateImpl;
 
   @override
   bool get isLoading;
@@ -188,6 +188,6 @@ abstract class _VerifyState implements VerifyState {
   bool get finishCountdown;
   @override
   @JsonKey(ignore: true)
-  _$$_VerifyStateCopyWith<_$_VerifyState> get copyWith =>
+  _$$VerifyStateImplCopyWith<_$VerifyStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

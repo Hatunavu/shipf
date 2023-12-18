@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/enums/enum_step_order.dart';
@@ -20,24 +19,6 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   final GlobalKey<FormState> addressformKey = GlobalKey<FormState>();
   final GlobalKey<FormState> parcelformKey = GlobalKey<FormState>();
-  final TextEditingController senderNameController = TextEditingController();
-  final TextEditingController senderPhoneController = TextEditingController();
-  final TextEditingController senderAddressController = TextEditingController();
-  final TextEditingController receiverNameController = TextEditingController();
-  final TextEditingController receiverPhoneController = TextEditingController();
-  final TextEditingController receiverAddressController =
-      TextEditingController();
-  final TextEditingController parcelNameController = TextEditingController();
-  final TextEditingController parcelPriceController = TextEditingController();
-  final TextEditingController parcelAmountController =
-      TextEditingController(text: '1');
-  final TextEditingController parcelWeightController =
-      TextEditingController(text: '1');
-  final TextEditingController lengthController = TextEditingController();
-  final TextEditingController widthController = TextEditingController();
-  final TextEditingController heightController = TextEditingController();
-  final TextEditingController codController = TextEditingController();
-  final TextEditingController noteController = TextEditingController();
 
   late OrderCubit orderCubit;
   bool isLoading = false;
@@ -48,28 +29,22 @@ class _OrderScreenState extends State<OrderScreen> {
       create: (context) => OrderCubit()..init(),
       child: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
-          if (!state.isLoading) {
-            isLoading == true ? context.router.pop() : null;
-            isLoading = false;
-          }
-          if (state.isLoading) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              loadingShowDialog(context);
-              isLoading = true;
-            });
-          }
+          // if (!state.isLoading) {
+          //   isLoading == true ? context.router.pop() : null;
+          //   isLoading = false;
+          // }
+          // if (state.isLoading) {
+          //   WidgetsBinding.instance.addPostFrameCallback((_) {
+          //     loadingShowDialog(context);
+          //     isLoading = true;
+          //   });
+          // }
           orderCubit = context.read<OrderCubit>();
           final stepWidget = state.stepOrderType == StepOrderType.address
               ? Form(
                   key: addressformKey,
                   child: OrderAddressWidget(
                     orderCubit: orderCubit,
-                    senderNameController: senderNameController,
-                    senderPhoneController: senderPhoneController,
-                    senderAddressController: senderAddressController,
-                    receiverNameController: receiverNameController,
-                    receiverPhoneController: receiverPhoneController,
-                    receiverAddressController: receiverAddressController,
                     addressFormKey: addressformKey,
                   ),
                 )
@@ -78,15 +53,6 @@ class _OrderScreenState extends State<OrderScreen> {
                       key: parcelformKey,
                       child: OrderParcelWidget(
                         orderCubit: orderCubit,
-                        parcelNameController: parcelNameController,
-                        parcelPriceController: parcelPriceController,
-                        parcelWeightController: parcelWeightController,
-                        parcelAmountController: parcelAmountController,
-                        lengthController: lengthController,
-                        widthController: widthController,
-                        heightController: heightController,
-                        codController: codController,
-                        noteController: noteController,
                         parcelformKey: parcelformKey,
                       ),
                     )
@@ -94,6 +60,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       cubit: orderCubit,
                       orderState: state,
                     );
+
           return GestureDetector(
             onTap: () {
               unfocus(context);
@@ -105,7 +72,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   addressformKey: addressformKey,
                   parcelformKey: parcelformKey),
               body: SafeArea(
-                child: SingleChildScrollView(child: stepWidget),
+                child: state.isFirstLoad ? const SizedBox() : stepWidget,
               ),
             ),
           );

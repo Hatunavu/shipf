@@ -18,74 +18,52 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderAddressWidget extends StatelessWidget {
   OrderCubit orderCubit;
-  TextEditingController senderNameController;
-  TextEditingController senderPhoneController;
-  TextEditingController senderAddressController;
-  TextEditingController receiverNameController;
-  TextEditingController receiverPhoneController;
-  TextEditingController receiverAddressController;
 
   GlobalKey<FormState> addressFormKey;
 
   OrderAddressWidget(
-      {super.key,
-      required this.orderCubit,
-      required this.senderNameController,
-      required this.senderPhoneController,
-      required this.senderAddressController,
-      required this.receiverNameController,
-      required this.receiverPhoneController,
-      required this.receiverAddressController,
-      required this.addressFormKey});
+      {super.key, required this.orderCubit, required this.addressFormKey});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        address(context,
-            type: text.sending_place,
-            nameController: senderNameController,
-            phoneController: senderPhoneController,
-            addressController: senderAddressController),
-        VerticalSpace(
-          kDefaultPaddingHeightScreen,
-          color: backgroundColor,
-        ),
-        address(context,
-            type: text.recipients,
-            nameController: receiverNameController,
-            phoneController: receiverPhoneController,
-            addressController: receiverAddressController,
-            isDeliver: true),
-        Padding(
-          padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
-          child: PrimaryButton(
-            label: text.continuee,
-            onPressed: () {
-              // orderCubit.getService(OrderRequest(
-              //     parcelWeight: 100,
-              //     parcelWidth: 70,
-              //     parcelHeight: 70,
-              //     parcelLength: 50,
-              //     parcelQuantity: 1,
-              //     parcelValue: 0,
-              //     pickAddressId: 1,
-              //     toProvinceId: 4,
-              //     toDistrictId: 40));
-              if (addressFormKey.currentState!.validate() &&
-                  orderCubit.state.province != null &&
-                  orderCubit.state.district != null &&
-                  orderCubit.state.ward != null &&
-                  orderCubit.state.provinceDeliver != null &&
-                  orderCubit.state.districtDeliver != null &&
-                  orderCubit.state.wardDeliver != null) {
-                orderCubit.updateStepOrder(StepOrderType.parcel);
-              }
-            },
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          address(context,
+              type: text.sending_place,
+              nameController: orderCubit.state.senderNameController!,
+              phoneController: orderCubit.state.senderPhoneController!,
+              addressController: orderCubit.state.senderAddressController!),
+          VerticalSpace(
+            kDefaultPaddingHeightScreen,
+            color: backgroundColor,
           ),
-        )
-      ],
+          address(context,
+              type: text.recipients,
+              nameController: orderCubit.state.receiverNameController!,
+              phoneController: orderCubit.state.receiverPhoneController!,
+              addressController: orderCubit.state.receiverAddressController!,
+              isDeliver: true),
+          Padding(
+            padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
+            child: PrimaryButton(
+              label: text.continuee,
+              onPressed: () {
+                if (addressFormKey.currentState!.validate() &&
+                    orderCubit.state.province != null &&
+                    orderCubit.state.district != null &&
+                    orderCubit.state.ward != null &&
+                    orderCubit.state.provinceDeliver != null &&
+                    orderCubit.state.districtDeliver != null &&
+                    orderCubit.state.wardDeliver != null) {
+                  orderCubit.updateStepOrder(StepOrderType.parcel);
+                }
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 

@@ -49,7 +49,9 @@ OrderServiceData _$OrderServiceDataFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int? ?? 0,
       code: json['code'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      type: json['type'] as String? ?? '',
+      type: json['type'] == null
+          ? OrderType.express
+          : stringToOrderType(json['type'] as String),
       urbanPickupCharge: json['urbanPickupCharge'] as int? ?? 0,
       urbanDeliveryCharge: json['urbanDeliveryCharge'] as int? ?? 0,
       townPickupCharge: json['townPickupCharge'] as int? ?? 0,
@@ -65,6 +67,7 @@ OrderServiceData _$OrderServiceDataFromJson(Map<String, dynamic> json) =>
       charges: json['charges'] == null
           ? null
           : Charges.fromJson(json['charges'] as Map<String, dynamic>),
+      isSelect: json['isSelect'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$OrderServiceDataToJson(OrderServiceData instance) =>
@@ -72,7 +75,7 @@ Map<String, dynamic> _$OrderServiceDataToJson(OrderServiceData instance) =>
       'id': instance.id,
       'code': instance.code,
       'name': instance.name,
-      'type': instance.type,
+      'type': orderTypeToString(instance.type),
       'urbanPickupCharge': instance.urbanPickupCharge,
       'urbanDeliveryCharge': instance.urbanDeliveryCharge,
       'townPickupCharge': instance.townPickupCharge,
@@ -86,6 +89,7 @@ Map<String, dynamic> _$OrderServiceDataToJson(OrderServiceData instance) =>
       'leadTime': instance.leadTime,
       'isActive': instance.isActive,
       'charges': instance.charges,
+      'isSelect': instance.isSelect,
     };
 
 Charges _$ChargesFromJson(Map<String, dynamic> json) => Charges(

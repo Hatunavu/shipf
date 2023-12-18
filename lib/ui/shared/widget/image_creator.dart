@@ -79,7 +79,7 @@ mixin ImageCreator {
         image: DecorationImage(
           image: CachedNetworkImageProvider(
             url,
-            errorListener: () => placeHolder,
+            // errorListener: () => placeHolder,
             imageRenderMethodForWeb:
                 imageRenderMethodForWeb ?? ImageRenderMethodForWeb.HtmlImage,
             maxWidth: maxWidth,

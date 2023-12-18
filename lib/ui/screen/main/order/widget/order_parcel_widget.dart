@@ -17,30 +17,11 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderParcelWidget extends StatefulWidget {
   OrderCubit orderCubit;
-  TextEditingController parcelNameController;
-  TextEditingController parcelPriceController;
-  TextEditingController parcelAmountController;
-  TextEditingController parcelWeightController;
-  TextEditingController lengthController;
-  TextEditingController widthController;
-  TextEditingController heightController;
-  TextEditingController codController;
-  TextEditingController noteController;
+
   GlobalKey<FormState> parcelformKey;
 
   OrderParcelWidget(
-      {super.key,
-      required this.orderCubit,
-      required this.parcelNameController,
-      required this.parcelPriceController,
-      required this.parcelAmountController,
-      required this.parcelWeightController,
-      required this.lengthController,
-      required this.widthController,
-      required this.heightController,
-      required this.codController,
-      required this.noteController,
-      required this.parcelformKey});
+      {super.key, required this.orderCubit, required this.parcelformKey});
 
   @override
   State<OrderParcelWidget> createState() => _OrderParcelWidgetState();
@@ -57,35 +38,40 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      parcelInfo(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      parcelSize(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      parcelLoading(),
-      VerticalSpace(
-        kDefaultPaddingHeightScreen,
-        color: backgroundColor,
-      ),
-      paymentInfo(),
-      Padding(
-        padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
-        child: PrimaryButton(
-          label: text.continuee,
-          onPressed: () {
-            if (widget.parcelformKey.currentState!.validate()) {
-              widget.orderCubit.updateStepOrder(StepOrderType.fee);
-            }
-          },
+    return SingleChildScrollView(
+      child: Column(children: [
+        parcelInfo(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
         ),
-      )
-    ]);
+        parcelSize(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        parcelLoading(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        paymentInfo(),
+        Padding(
+          padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
+          child: PrimaryButton(
+            label: text.continuee,
+            onPressed: () async {
+              if (widget.parcelformKey.currentState!.validate()) {
+                final success = await widget.orderCubit.getService();
+                success
+                    ? widget.orderCubit.updateStepOrder(StepOrderType.fee)
+                    : null;
+              }
+            },
+          ),
+        )
+      ]),
+    );
   }
 
   Widget parcelInfo() {
@@ -107,7 +93,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
             OrderLabelTextFieldWidget(label: text.parcel_name),
             PrimaryTextField(
               label: '',
-              controller: widget.parcelNameController,
+              controller: widget.orderCubit.state.parcelNameController!,
               hintText: text.parcel_name,
               fieldRequire: text.parcel_name,
             ),
@@ -124,7 +110,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               isPrice: true,
               isNumberKey: true,
               label: '',
-              controller: widget.parcelPriceController,
+              controller: widget.orderCubit.state.parcelPriceController!,
               hintText: '0',
               maxLines: 1,
               lengthLimit: 18,
@@ -139,13 +125,15 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
           children: [
             Expanded(
                 child: parcelAmountWidget(
-                    controller: widget.parcelAmountController)),
+                    controller:
+                        widget.orderCubit.state.parcelAmountController!)),
             SizedBox(
               width: kDefaultPaddingWidthWidget / 2,
             ),
             Expanded(
               child: parcelAmountWidget(
-                  controller: widget.parcelWeightController, isAmount: false),
+                  controller: widget.orderCubit.state.parcelWeightController!,
+                  isAmount: false),
             ),
           ],
         ),
@@ -172,17 +160,20 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
             child: Row(
               children: [
                 parcelSizeItem(
-                    label: text.length, controller: widget.lengthController),
+                    label: text.length,
+                    controller: widget.orderCubit.state.lengthController!),
                 HorizontalSpace(
                   kDefaultPaddingWidthWidget / 2,
                 ),
                 parcelSizeItem(
-                    label: text.width, controller: widget.widthController),
+                    label: text.width,
+                    controller: widget.orderCubit.state.widthController!),
                 HorizontalSpace(
                   kDefaultPaddingWidthWidget / 2,
                 ),
                 parcelSizeItem(
-                    label: text.height, controller: widget.heightController)
+                    label: text.height,
+                    controller: widget.orderCubit.state.heightController!)
               ],
             ),
           ),
@@ -289,7 +280,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               OrderLabelTextFieldWidget(label: '${text.cod} (đ)'),
               PrimaryTextField(
                 label: '',
-                controller: widget.codController,
+                controller: widget.orderCubit.state.codController!,
                 hintText: '0',
                 isPrice: true,
                 isNumberKey: true,
@@ -331,7 +322,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               OrderLabelTextFieldWidget(label: text.note),
               PrimaryTextField(
                 label: '',
-                controller: widget.noteController,
+                controller: widget.orderCubit.state.noteController!,
                 maxLines: 3,
                 isValidate: false,
               ),

@@ -65,15 +65,22 @@ abstract class MainRepository {
   //order
   @GET(endpoint.getOrderService)
   Future<OrderServiceResponse> getOrderService({
-    @Query('pickupRegionId') required int pickupRegionId,
-    @Query('deliveryRegionId') required int deliveryRegionId,
+    @Query('pickupAddressId') int? pickupAddressId,
+    @Query('pickupProvinceId') int? pickupProvinceId,
+    @Query('pickupDistrictId') int? pickupDistrictId,
+    @Query('deliveryAddressId') int? deliveryAddressId,
+    @Query('deliveryProvinceId') int? deliveryProvinceId,
+    @Query('deliveryDistrictId') int? deliveryDistrictId,
     @Query('type') required String type,
     @Query('netWeight') required int netWeight,
     @Query('quantity') required int quantity,
     @Query('length') required int length,
     @Query('width') required int width,
-    @Query('height') required double height,
-    @Query('declaredValue') required int declaredValue,
+    @Query('height') required int height,
+    @Query('declaredValue') int? declaredValue,
+    @Query('loading') String? loading,
+    @Query('isInsured') bool? loadisInsureding,
+    @Query('cod') int? cod,
   });
 }
 

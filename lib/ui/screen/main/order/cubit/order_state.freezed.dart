@@ -29,7 +29,8 @@ mixin _$OrderState {
   AddressSavedData? get addressPick => throw _privateConstructorUsedError;
   AddressSavedData? get addressDeliver => throw _privateConstructorUsedError;
   List<OrderServiceData> get orderServices =>
-      throw _privateConstructorUsedError; //location
+      throw _privateConstructorUsedError;
+  LoadingType? get loadingType => throw _privateConstructorUsedError; //location
   String get errorProvince => throw _privateConstructorUsedError;
   String get errorDistrict => throw _privateConstructorUsedError;
   String get errorWard => throw _privateConstructorUsedError;
@@ -109,6 +110,7 @@ abstract class $OrderStateCopyWith<$Res> {
       AddressSavedData? addressPick,
       AddressSavedData? addressDeliver,
       List<OrderServiceData> orderServices,
+      LoadingType? loadingType,
       String errorProvince,
       String errorDistrict,
       String errorWard,
@@ -173,6 +175,7 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
     Object? addressPick = freezed,
     Object? addressDeliver = freezed,
     Object? orderServices = null,
+    Object? loadingType = freezed,
     Object? errorProvince = null,
     Object? errorDistrict = null,
     Object? errorWard = null,
@@ -263,6 +266,10 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.orderServices
           : orderServices // ignore: cast_nullable_to_non_nullable
               as List<OrderServiceData>,
+      loadingType: freezed == loadingType
+          ? _value.loadingType
+          : loadingType // ignore: cast_nullable_to_non_nullable
+              as LoadingType?,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -412,11 +419,11 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
 }
 
 /// @nodoc
-abstract class _$$OrderStateImplCopyWith<$Res>
+abstract class _$$_OrderStateCopyWith<$Res>
     implements $OrderStateCopyWith<$Res> {
-  factory _$$OrderStateImplCopyWith(
-          _$OrderStateImpl value, $Res Function(_$OrderStateImpl) then) =
-      __$$OrderStateImplCopyWithImpl<$Res>;
+  factory _$$_OrderStateCopyWith(
+          _$_OrderState value, $Res Function(_$_OrderState) then) =
+      __$$_OrderStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -433,6 +440,7 @@ abstract class _$$OrderStateImplCopyWith<$Res>
       AddressSavedData? addressPick,
       AddressSavedData? addressDeliver,
       List<OrderServiceData> orderServices,
+      LoadingType? loadingType,
       String errorProvince,
       String errorDistrict,
       String errorWard,
@@ -472,11 +480,11 @@ abstract class _$$OrderStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrderStateImplCopyWithImpl<$Res>
-    extends _$OrderStateCopyWithImpl<$Res, _$OrderStateImpl>
-    implements _$$OrderStateImplCopyWith<$Res> {
-  __$$OrderStateImplCopyWithImpl(
-      _$OrderStateImpl _value, $Res Function(_$OrderStateImpl) _then)
+class __$$_OrderStateCopyWithImpl<$Res>
+    extends _$OrderStateCopyWithImpl<$Res, _$_OrderState>
+    implements _$$_OrderStateCopyWith<$Res> {
+  __$$_OrderStateCopyWithImpl(
+      _$_OrderState _value, $Res Function(_$_OrderState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -495,6 +503,7 @@ class __$$OrderStateImplCopyWithImpl<$Res>
     Object? addressPick = freezed,
     Object? addressDeliver = freezed,
     Object? orderServices = null,
+    Object? loadingType = freezed,
     Object? errorProvince = null,
     Object? errorDistrict = null,
     Object? errorWard = null,
@@ -532,7 +541,7 @@ class __$$OrderStateImplCopyWithImpl<$Res>
     Object? codController = freezed,
     Object? noteController = freezed,
   }) {
-    return _then(_$OrderStateImpl(
+    return _then(_$_OrderState(
       isFirstLoad: null == isFirstLoad
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
@@ -585,6 +594,10 @@ class __$$OrderStateImplCopyWithImpl<$Res>
           ? _value._orderServices
           : orderServices // ignore: cast_nullable_to_non_nullable
               as List<OrderServiceData>,
+      loadingType: freezed == loadingType
+          ? _value.loadingType
+          : loadingType // ignore: cast_nullable_to_non_nullable
+              as LoadingType?,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -735,8 +748,8 @@ class __$$OrderStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderStateImpl implements _OrderState {
-  const _$OrderStateImpl(
+class _$_OrderState implements _OrderState {
+  const _$_OrderState(
       {required this.isFirstLoad,
       required this.isLoading,
       required this.isUpdate,
@@ -750,6 +763,7 @@ class _$OrderStateImpl implements _OrderState {
       this.addressPick,
       this.addressDeliver,
       required final List<OrderServiceData> orderServices,
+      this.loadingType,
       required this.errorProvince,
       required this.errorDistrict,
       required this.errorWard,
@@ -832,6 +846,8 @@ class _$OrderStateImpl implements _OrderState {
     return EqualUnmodifiableListView(_orderServices);
   }
 
+  @override
+  final LoadingType? loadingType;
 //location
   @override
   final String errorProvince;
@@ -940,14 +956,14 @@ class _$OrderStateImpl implements _OrderState {
 
   @override
   String toString() {
-    return 'OrderState(isFirstLoad: $isFirstLoad, isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, orderServices: $orderServices, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver, senderNameController: $senderNameController, senderPhoneController: $senderPhoneController, senderAddressController: $senderAddressController, receiverNameController: $receiverNameController, receiverPhoneController: $receiverPhoneController, receiverAddressController: $receiverAddressController, parcelNameController: $parcelNameController, parcelPriceController: $parcelPriceController, parcelAmountController: $parcelAmountController, parcelWeightController: $parcelWeightController, lengthController: $lengthController, widthController: $widthController, heightController: $heightController, codController: $codController, noteController: $noteController)';
+    return 'OrderState(isFirstLoad: $isFirstLoad, isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, orderServices: $orderServices, loadingType: $loadingType, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver, senderNameController: $senderNameController, senderPhoneController: $senderPhoneController, senderAddressController: $senderAddressController, receiverNameController: $receiverNameController, receiverPhoneController: $receiverPhoneController, receiverAddressController: $receiverAddressController, parcelNameController: $parcelNameController, parcelPriceController: $parcelPriceController, parcelAmountController: $parcelAmountController, parcelWeightController: $parcelWeightController, lengthController: $lengthController, widthController: $widthController, heightController: $heightController, codController: $codController, noteController: $noteController)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderStateImpl &&
+            other is _$_OrderState &&
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.isLoading, isLoading) ||
@@ -972,6 +988,8 @@ class _$OrderStateImpl implements _OrderState {
                 other.addressDeliver == addressDeliver) &&
             const DeepCollectionEquality()
                 .equals(other._orderServices, _orderServices) &&
+            (identical(other.loadingType, loadingType) ||
+                other.loadingType == loadingType) &&
             (identical(other.errorProvince, errorProvince) ||
                 other.errorProvince == errorProvince) &&
             (identical(other.errorDistrict, errorDistrict) ||
@@ -1054,6 +1072,7 @@ class _$OrderStateImpl implements _OrderState {
         addressPick,
         addressDeliver,
         const DeepCollectionEquality().hash(_orderServices),
+        loadingType,
         errorProvince,
         errorDistrict,
         errorWard,
@@ -1095,8 +1114,8 @@ class _$OrderStateImpl implements _OrderState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
-      __$$OrderStateImplCopyWithImpl<_$OrderStateImpl>(this, _$identity);
+  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
+      __$$_OrderStateCopyWithImpl<_$_OrderState>(this, _$identity);
 }
 
 abstract class _OrderState implements OrderState {
@@ -1114,6 +1133,7 @@ abstract class _OrderState implements OrderState {
       final AddressSavedData? addressPick,
       final AddressSavedData? addressDeliver,
       required final List<OrderServiceData> orderServices,
+      final LoadingType? loadingType,
       required final String errorProvince,
       required final String errorDistrict,
       required final String errorWard,
@@ -1149,7 +1169,7 @@ abstract class _OrderState implements OrderState {
       final TextEditingController? widthController,
       final TextEditingController? heightController,
       final TextEditingController? codController,
-      final TextEditingController? noteController}) = _$OrderStateImpl;
+      final TextEditingController? noteController}) = _$_OrderState;
 
   @override
   bool get isFirstLoad;
@@ -1177,6 +1197,8 @@ abstract class _OrderState implements OrderState {
   AddressSavedData? get addressDeliver;
   @override
   List<OrderServiceData> get orderServices;
+  @override
+  LoadingType? get loadingType;
   @override //location
   String get errorProvince;
   @override
@@ -1251,6 +1273,6 @@ abstract class _OrderState implements OrderState {
   TextEditingController? get noteController;
   @override
   @JsonKey(ignore: true)
-  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
+  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
       throw _privateConstructorUsedError;
 }

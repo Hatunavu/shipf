@@ -202,7 +202,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => widget.orderCubit.updatePickupPoint(),
+                  onTap: () => widget.orderCubit.updateLoadingType(),
                   child: Row(
                     children: [
                       Padding(
@@ -215,7 +215,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                             activeColor: primaryColor,
                             value: widget.orderCubit.state.pickupPoint,
                             onChanged: (value) =>
-                                widget.orderCubit.updatePickupPoint(),
+                                widget.orderCubit..updateLoadingType(),
                           ),
                         ),
                       ),
@@ -227,7 +227,8 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => widget.orderCubit.updateDeliveryPoint(),
+                  onTap: () =>
+                      widget.orderCubit.updateLoadingType(isPickup: false),
                   child: Row(
                     children: [
                       Padding(
@@ -239,8 +240,8 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                           child: Checkbox(
                             activeColor: primaryColor,
                             value: widget.orderCubit.state.deliveryPoint,
-                            onChanged: (value) =>
-                                widget.orderCubit.updateDeliveryPoint(),
+                            onChanged: (value) => widget.orderCubit
+                                .updateLoadingType(isPickup: false),
                           ),
                         ),
                       ),

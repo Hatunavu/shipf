@@ -79,7 +79,7 @@ abstract class MainRepository {
     @Query('height') required int height,
     @Query('declaredValue') int? declaredValue,
     @Query('loading') String? loading,
-    @Query('isInsured') bool? loadisInsureding,
+    @Query('isInsured') bool? isInsured,
     @Query('cod') int? cod,
   });
 }

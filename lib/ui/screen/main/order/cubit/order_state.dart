@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 
 part 'order_state.freezed.dart';
@@ -22,6 +23,7 @@ class OrderState with _$OrderState {
     AddressSavedData? addressPick,
     AddressSavedData? addressDeliver,
     required List<OrderServiceData> orderServices,
+    LoadingType? loadingType,
     //location
     required String errorProvince,
     required String errorDistrict,

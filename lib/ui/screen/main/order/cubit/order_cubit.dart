@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_order_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
@@ -50,12 +51,12 @@ class OrderCubit extends Cubit<OrderState> {
       receiverPhoneController: TextEditingController(),
       receiverAddressController: TextEditingController(),
       parcelNameController: TextEditingController(),
-      parcelPriceController: TextEditingController(),
+      parcelPriceController: TextEditingController(text: '0'),
       parcelAmountController: TextEditingController(text: '1'),
       parcelWeightController: TextEditingController(text: '1'),
-      lengthController: TextEditingController(),
-      widthController: TextEditingController(),
-      heightController: TextEditingController(),
+      lengthController: TextEditingController(text: '0'),
+      widthController: TextEditingController(text: '0'),
+      heightController: TextEditingController(text: '0'),
       codController: TextEditingController(),
       noteController: TextEditingController(),
     ));
@@ -88,6 +89,25 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(pickupPoint: !state.pickupPoint));
   }
 
+  void updateLoadingType({bool isPickup = true}) {
+    if (isPickup) {
+      emit(state.copyWith(pickupPoint: !state.pickupPoint));
+    } else {
+      emit(state.copyWith(deliveryPoint: !state.deliveryPoint));
+    }
+    LoadingType? loadingType;
+    if (state.pickupPoint && state.deliveryPoint) {
+      loadingType = LoadingType.all;
+    } else if (state.pickupPoint && !state.deliveryPoint) {
+      loadingType = LoadingType.pickup;
+    } else if (!state.pickupPoint && state.deliveryPoint) {
+      loadingType = LoadingType.delivery;
+    } else {
+      loadingType = null;
+    }
+    emit(state.copyWith(loadingType: loadingType));
+  }
+
   void updateInsurance() {
     emit(state.copyWith(insurance: !state.insurance));
   }
@@ -96,26 +116,25 @@ class OrderCubit extends Cubit<OrderState> {
     try {
       emit(state.copyWith(isLoading: true));
       final response = await mainRepository.getOrderService(
-        pickupAddressId: 58,
-        deliveryAddressId: 51,
-        // pickupAddressId: state.addressPick?.id,
-        // pickupProvinceId: state.province?.id,
-        // pickupDistrictId: state.district?.id,
-        // deliveryAddressId: state.addressDeliver?.id,
-        // deliveryProvinceId: state.provinceDeliver?.id,
-        // deliveryDistrictId: state.districtDeliver?.id,
-        type: OrderType.express.toJsonString(),
-        netWeight: int.parse(state.parcelWeightController?.text ?? '0'),
-        quantity: int.parse(state.parcelAmountController?.text ?? '0'),
-        length: int.parse(state.lengthController?.text ?? '0'),
-        width: int.parse(state.widthController?.text ?? '0'),
-        height: int.parse(state.heightController?.text ?? '0'),
-        declaredValue: int.parse(
-            state.parcelPriceController?.text.replaceAll(',', '') ?? '0'),
-        // cod: int.parse(state.codController?.text.replaceAll(',', '') ?? '0'),
-        // loadisInsureding: state.insurance,
-        // loading: null
-      );
+          // pickupAddressId: state.addressPick?.id,
+          pickupProvinceId: int.parse(state.province!.code),
+          pickupDistrictId: int.parse(state.district!.code),
+          // deliveryAddressId: state.addressDeliver?.id,
+          deliveryProvinceId: int.parse(state.provinceDeliver!.code),
+          deliveryDistrictId: int.parse(state.districtDeliver!.code),
+          type: OrderType.express.toJsonString(),
+          netWeight: int.parse(state.parcelWeightController!.text),
+          quantity: int.parse(state.parcelAmountController!.text),
+          length: int.parse(state.lengthController!.text),
+          width: int.parse(state.widthController!.text),
+          height: int.parse(state.heightController!.text),
+          declaredValue:
+              int.parse(state.parcelPriceController!.text.replaceAll(',', '')),
+          cod: state.codController!.text.isEmpty
+              ? null
+              : int.parse(state.codController!.text.replaceAll(',', '')),
+          // isInsured: state.insurance,
+          loading: state.loadingType?.toJsonString());
 
       emit(state.copyWith(isLoading: false, orderServices: response.data));
       return true;

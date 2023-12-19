@@ -314,7 +314,7 @@ class _MainRepository implements MainRepository {
     required height,
     declaredValue,
     loading,
-    loadisInsureding,
+    isInsured,
     cod,
   }) async {
     const _extra = <String, dynamic>{};
@@ -333,7 +333,7 @@ class _MainRepository implements MainRepository {
       r'height': height,
       r'declaredValue': declaredValue,
       r'loading': loading,
-      r'isInsured': loadisInsureding,
+      r'isInsured': isInsured,
       r'cod': cod,
     };
     queryParameters.removeWhere((k, v) => v == null);

@@ -16,32 +16,7 @@ class OrderCubit extends Cubit<OrderState> {
   Future init() async {
     emit(state.copyWith(isLoading: true, isFirstLoad: true));
     await getProvinces();
-    List<OrderService> listService = [
-      OrderService(
-          id: 1,
-          name: 'TV HN - Vùng 1 20kg',
-          type: 'Giao ghép hàng',
-          fee: '70.000đ'),
-      OrderService(
-          id: 2,
-          name: 'TV HN - Vùng 1',
-          type: 'Giao nguyên chuyến',
-          fee: '1.000.000đ'),
-      OrderService(
-          id: 3,
-          name: 'TV HN - Vùng 1 50kg',
-          type: 'Giao ghép hàng',
-          fee: '160.000đ'),
-      OrderService(
-          id: 4,
-          name: 'NVX Hà Nội - Miền Bắc 1',
-          type: 'Giao nguyên chuyến',
-          fee: '230.000đ'),
-    ];
-    // listService.first.isSelect = true;
     emit(state.copyWith(
-      services: listService,
-      // serviceSelected: listService.first,
       isLoading: false,
       isFirstLoad: false,
       senderNameController: TextEditingController(),
@@ -81,14 +56,6 @@ class OrderCubit extends Cubit<OrderState> {
         orderServices: newList, isUpdate: false, serviceSelected: service));
   }
 
-  void updateDeliveryPoint() {
-    emit(state.copyWith(deliveryPoint: !state.deliveryPoint));
-  }
-
-  void updatePickupPoint() {
-    emit(state.copyWith(pickupPoint: !state.pickupPoint));
-  }
-
   void updateLoadingType({bool isPickup = true}) {
     if (isPickup) {
       emit(state.copyWith(pickupPoint: !state.pickupPoint));
@@ -112,9 +79,9 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(insurance: !state.insurance));
   }
 
-  Future<bool> getService() async {
+  Future<void> getService() async {
     try {
-      emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(isGettingService: true, serviceSelected: null));
       final response = await mainRepository.getOrderService(
           // pickupAddressId: state.addressPick?.id,
           pickupProvinceId: int.parse(state.province!.code),
@@ -136,12 +103,11 @@ class OrderCubit extends Cubit<OrderState> {
           // isInsured: state.insurance,
           loading: state.loadingType?.toJsonString());
 
-      emit(state.copyWith(isLoading: false, orderServices: response.data));
-      return true;
+      emit(state.copyWith(
+          isGettingService: false, orderServices: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isLoading: false, error: errorMessage));
-      return false;
+      emit(state.copyWith(isGettingService: false, error: errorMessage));
     }
   }
 

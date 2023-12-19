@@ -19,8 +19,8 @@ mixin _$OrderState {
   bool get isFirstLoad => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isUpdate => throw _privateConstructorUsedError;
+  bool get isGettingService => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<OrderService> get services => throw _privateConstructorUsedError;
   OrderServiceData? get serviceSelected => throw _privateConstructorUsedError;
   StepOrderType get stepOrderType => throw _privateConstructorUsedError;
   bool get pickupPoint => throw _privateConstructorUsedError;
@@ -100,8 +100,8 @@ abstract class $OrderStateCopyWith<$Res> {
       {bool isFirstLoad,
       bool isLoading,
       bool isUpdate,
+      bool isGettingService,
       String? error,
-      List<OrderService> services,
       OrderServiceData? serviceSelected,
       StepOrderType stepOrderType,
       bool pickupPoint,
@@ -165,8 +165,8 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
     Object? isFirstLoad = null,
     Object? isLoading = null,
     Object? isUpdate = null,
+    Object? isGettingService = null,
     Object? error = freezed,
-    Object? services = null,
     Object? serviceSelected = freezed,
     Object? stepOrderType = null,
     Object? pickupPoint = null,
@@ -226,14 +226,14 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
           ? _value.isUpdate
           : isUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGettingService: null == isGettingService
+          ? _value.isGettingService
+          : isGettingService // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      services: null == services
-          ? _value.services
-          : services // ignore: cast_nullable_to_non_nullable
-              as List<OrderService>,
       serviceSelected: freezed == serviceSelected
           ? _value.serviceSelected
           : serviceSelected // ignore: cast_nullable_to_non_nullable
@@ -430,8 +430,8 @@ abstract class _$$_OrderStateCopyWith<$Res>
       {bool isFirstLoad,
       bool isLoading,
       bool isUpdate,
+      bool isGettingService,
       String? error,
-      List<OrderService> services,
       OrderServiceData? serviceSelected,
       StepOrderType stepOrderType,
       bool pickupPoint,
@@ -493,8 +493,8 @@ class __$$_OrderStateCopyWithImpl<$Res>
     Object? isFirstLoad = null,
     Object? isLoading = null,
     Object? isUpdate = null,
+    Object? isGettingService = null,
     Object? error = freezed,
-    Object? services = null,
     Object? serviceSelected = freezed,
     Object? stepOrderType = null,
     Object? pickupPoint = null,
@@ -554,14 +554,14 @@ class __$$_OrderStateCopyWithImpl<$Res>
           ? _value.isUpdate
           : isUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGettingService: null == isGettingService
+          ? _value.isGettingService
+          : isGettingService // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      services: null == services
-          ? _value._services
-          : services // ignore: cast_nullable_to_non_nullable
-              as List<OrderService>,
       serviceSelected: freezed == serviceSelected
           ? _value.serviceSelected
           : serviceSelected // ignore: cast_nullable_to_non_nullable
@@ -753,8 +753,8 @@ class _$_OrderState implements _OrderState {
       {required this.isFirstLoad,
       required this.isLoading,
       required this.isUpdate,
+      required this.isGettingService,
       this.error,
-      required final List<OrderService> services,
       this.serviceSelected,
       required this.stepOrderType,
       required this.pickupPoint,
@@ -800,8 +800,7 @@ class _$_OrderState implements _OrderState {
       this.heightController,
       this.codController,
       this.noteController})
-      : _services = services,
-        _orderServices = orderServices,
+      : _orderServices = orderServices,
         _provinces = provinces,
         _districts = districts,
         _wards = wards,
@@ -815,15 +814,9 @@ class _$_OrderState implements _OrderState {
   @override
   final bool isUpdate;
   @override
-  final String? error;
-  final List<OrderService> _services;
+  final bool isGettingService;
   @override
-  List<OrderService> get services {
-    if (_services is EqualUnmodifiableListView) return _services;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_services);
-  }
-
+  final String? error;
   @override
   final OrderServiceData? serviceSelected;
   @override
@@ -956,7 +949,7 @@ class _$_OrderState implements _OrderState {
 
   @override
   String toString() {
-    return 'OrderState(isFirstLoad: $isFirstLoad, isLoading: $isLoading, isUpdate: $isUpdate, error: $error, services: $services, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, orderServices: $orderServices, loadingType: $loadingType, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver, senderNameController: $senderNameController, senderPhoneController: $senderPhoneController, senderAddressController: $senderAddressController, receiverNameController: $receiverNameController, receiverPhoneController: $receiverPhoneController, receiverAddressController: $receiverAddressController, parcelNameController: $parcelNameController, parcelPriceController: $parcelPriceController, parcelAmountController: $parcelAmountController, parcelWeightController: $parcelWeightController, lengthController: $lengthController, widthController: $widthController, heightController: $heightController, codController: $codController, noteController: $noteController)';
+    return 'OrderState(isFirstLoad: $isFirstLoad, isLoading: $isLoading, isUpdate: $isUpdate, isGettingService: $isGettingService, error: $error, serviceSelected: $serviceSelected, stepOrderType: $stepOrderType, pickupPoint: $pickupPoint, deliveryPoint: $deliveryPoint, insurance: $insurance, addressPick: $addressPick, addressDeliver: $addressDeliver, orderServices: $orderServices, loadingType: $loadingType, errorProvince: $errorProvince, errorDistrict: $errorDistrict, errorWard: $errorWard, isLoadingDistrict: $isLoadingDistrict, isLoadingWard: $isLoadingWard, provinces: $provinces, districts: $districts, wards: $wards, province: $province, district: $district, ward: $ward, errorProvinceDeliver: $errorProvinceDeliver, errorDistrictDeliver: $errorDistrictDeliver, errorWardDeliver: $errorWardDeliver, isLoadingDistrictDeliver: $isLoadingDistrictDeliver, isLoadingWardDeliver: $isLoadingWardDeliver, districtsDeliver: $districtsDeliver, wardsDeliver: $wardsDeliver, provinceDeliver: $provinceDeliver, districtDeliver: $districtDeliver, wardDeliver: $wardDeliver, senderNameController: $senderNameController, senderPhoneController: $senderPhoneController, senderAddressController: $senderAddressController, receiverNameController: $receiverNameController, receiverPhoneController: $receiverPhoneController, receiverAddressController: $receiverAddressController, parcelNameController: $parcelNameController, parcelPriceController: $parcelPriceController, parcelAmountController: $parcelAmountController, parcelWeightController: $parcelWeightController, lengthController: $lengthController, widthController: $widthController, heightController: $heightController, codController: $codController, noteController: $noteController)';
   }
 
   @override
@@ -970,8 +963,9 @@ class _$_OrderState implements _OrderState {
                 other.isLoading == isLoading) &&
             (identical(other.isUpdate, isUpdate) ||
                 other.isUpdate == isUpdate) &&
+            (identical(other.isGettingService, isGettingService) ||
+                other.isGettingService == isGettingService) &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other._services, _services) &&
             (identical(other.serviceSelected, serviceSelected) ||
                 other.serviceSelected == serviceSelected) &&
             (identical(other.stepOrderType, stepOrderType) ||
@@ -1046,8 +1040,7 @@ class _$_OrderState implements _OrderState {
                 other.parcelNameController == parcelNameController) &&
             (identical(other.parcelPriceController, parcelPriceController) ||
                 other.parcelPriceController == parcelPriceController) &&
-            (identical(other.parcelAmountController, parcelAmountController) ||
-                other.parcelAmountController == parcelAmountController) &&
+            (identical(other.parcelAmountController, parcelAmountController) || other.parcelAmountController == parcelAmountController) &&
             (identical(other.parcelWeightController, parcelWeightController) || other.parcelWeightController == parcelWeightController) &&
             (identical(other.lengthController, lengthController) || other.lengthController == lengthController) &&
             (identical(other.widthController, widthController) || other.widthController == widthController) &&
@@ -1062,8 +1055,8 @@ class _$_OrderState implements _OrderState {
         isFirstLoad,
         isLoading,
         isUpdate,
+        isGettingService,
         error,
-        const DeepCollectionEquality().hash(_services),
         serviceSelected,
         stepOrderType,
         pickupPoint,
@@ -1123,8 +1116,8 @@ abstract class _OrderState implements OrderState {
       {required final bool isFirstLoad,
       required final bool isLoading,
       required final bool isUpdate,
+      required final bool isGettingService,
       final String? error,
-      required final List<OrderService> services,
       final OrderServiceData? serviceSelected,
       required final StepOrderType stepOrderType,
       required final bool pickupPoint,
@@ -1178,9 +1171,9 @@ abstract class _OrderState implements OrderState {
   @override
   bool get isUpdate;
   @override
-  String? get error;
+  bool get isGettingService;
   @override
-  List<OrderService> get services;
+  String? get error;
   @override
   OrderServiceData? get serviceSelected;
   @override

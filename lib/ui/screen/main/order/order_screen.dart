@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/enums/enum_step_order.dart';
@@ -29,16 +30,16 @@ class _OrderScreenState extends State<OrderScreen> {
       create: (context) => OrderCubit()..init(),
       child: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
-          // if (!state.isLoading) {
-          //   isLoading == true ? context.router.pop() : null;
-          //   isLoading = false;
-          // }
-          // if (state.isLoading) {
-          //   WidgetsBinding.instance.addPostFrameCallback((_) {
-          //     loadingShowDialog(context);
-          //     isLoading = true;
-          //   });
-          // }
+          if (!state.isLoading) {
+            isLoading == true ? context.router.pop() : null;
+            isLoading = false;
+          }
+          if (state.isLoading) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              loadingShowDialog(context);
+              isLoading = true;
+            });
+          }
           orderCubit = context.read<OrderCubit>();
           final stepWidget = state.stepOrderType == StepOrderType.address
               ? Form(

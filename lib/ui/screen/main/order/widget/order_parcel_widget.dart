@@ -62,10 +62,8 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
             label: text.continuee,
             onPressed: () async {
               if (widget.parcelformKey.currentState!.validate()) {
-                final success = await widget.orderCubit.getService();
-                success
-                    ? widget.orderCubit.updateStepOrder(StepOrderType.fee)
-                    : null;
+                widget.orderCubit.updateStepOrder(StepOrderType.fee);
+                await widget.orderCubit.getService();
               }
             },
           ),

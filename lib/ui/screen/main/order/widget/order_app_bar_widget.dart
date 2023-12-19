@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -91,7 +92,7 @@ Widget stepItem(
     GlobalKey<FormState>? parcelformKey}) {
   return GestureDetector(
     behavior: HitTestBehavior.translucent,
-    onTap: () {
+    onTap: () async {
       if (stepOrderType == StepOrderType.address) {
         orderCubit.updateStepOrder(stepOrderType);
       }
@@ -113,11 +114,15 @@ Widget stepItem(
           orderCubit.state.provinceDeliver != null &&
           orderCubit.state.districtDeliver != null &&
           orderCubit.state.wardDeliver != null) {
-        orderCubit.updateStepOrder(stepOrderType);
+        stepOrderType == StepOrderType.parcel
+            ? orderCubit.updateStepOrder(stepOrderType)
+            : ToastUtils.showNeutral(
+                'Vui lòng kiểm tra thông tin tại bước Hàng hóa');
       } else if (orderCubit.state.stepOrderType == StepOrderType.parcel &&
           parcelformKey != null &&
           parcelformKey.currentState!.validate()) {
         orderCubit.updateStepOrder(stepOrderType);
+        await orderCubit.getService();
       }
     },
     child: Column(

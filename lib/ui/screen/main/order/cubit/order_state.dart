@@ -13,8 +13,8 @@ class OrderState with _$OrderState {
     required bool isFirstLoad,
     required bool isLoading,
     required bool isUpdate,
+    required bool isGettingService,
     String? error,
-    required List<OrderService> services,
     OrderServiceData? serviceSelected,
     required StepOrderType stepOrderType,
     required bool pickupPoint,
@@ -69,7 +69,6 @@ class OrderState with _$OrderState {
       isLoading: false,
       error: "",
       stepOrderType: StepOrderType.address,
-      services: [],
       isUpdate: false,
       pickupPoint: false,
       deliveryPoint: false,
@@ -85,5 +84,6 @@ class OrderState with _$OrderState {
       wards: [],
       districtsDeliver: [],
       wardsDeliver: [],
-      orderServices: []);
+      orderServices: [],
+      isGettingService: false);
 }

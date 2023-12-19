@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/enums/enum_order_type.dart';
 import 'package:shipf/foundation/constant.dart';
@@ -8,6 +9,7 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -20,34 +22,39 @@ class OrderFeeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-            child: Padding(
+        Padding(
           padding: EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthWidget,
-                  vertical: kDefaultPaddingHeightScreen)
-              .copyWith(bottom: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                text.service,
-                style: textHeading,
-              ),
-              VerticalSpace(
-                kDefaultPaddingHeightScreen,
-              ),
-              Flexible(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: orderState.orderServices.length,
-                    itemBuilder: (context, index) {
-                      return serviceItem(orderState.orderServices[index]);
-                    }),
-              ),
-            ],
+              horizontal: kDefaultPaddingWidthWidget,
+              vertical: kDefaultPaddingHeightScreen),
+          child: Text(
+            text.service,
+            style: textHeading,
           ),
-        )),
+        ),
+        orderState.isGettingService
+            ? shimmerService()
+            : orderState.orderServices.isEmpty
+                ? Expanded(
+                    child: Center(
+                      child: Text(
+                        'Không tìm thấy dịch vụ phù hợp',
+                        style: textBody,
+                      ),
+                    ),
+                  )
+                : Flexible(
+                    child: ListView.builder(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddingWidthWidget,
+                        ),
+                        shrinkWrap: true,
+                        itemCount: orderState.orderServices.length,
+                        itemBuilder: (context, index) {
+                          return serviceItem(orderState.orderServices[index]);
+                        }),
+                  ),
         Padding(
           padding: EdgeInsets.symmetric(
                   horizontal: kDefaultPaddingWidthWidget,
@@ -114,9 +121,14 @@ class OrderFeeWidget extends StatelessWidget {
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
             label: text.create_order,
-            onPressed: () {
-              // orderCubit.updateStepOrder(StepOrderType.parcel);
-            },
+            backgroundColor: orderState.serviceSelected != null
+                ? primaryColor
+                : Colors.grey[300],
+            onPressed: orderState.serviceSelected == null
+                ? null
+                : () {
+                    ToastUtils.showNeutral('Tính năng đang phát triển');
+                  },
           ),
         ),
       ],
@@ -207,6 +219,29 @@ class OrderFeeWidget extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget shimmerService() {
+    return Expanded(
+      child: Shimmer.fromColors(
+          baseColor: Colors.grey.withOpacity(0.4),
+          highlightColor: Colors.grey.withOpacity(0.1),
+          child: ListView.builder(
+            itemCount: 5,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Container(
+                margin:
+                    EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget)
+                        .copyWith(bottom: kDefaultPaddingHeightScreen),
+                height: 0.1.sh,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
+              );
+            },
+          )),
     );
   }
 }

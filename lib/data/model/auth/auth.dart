@@ -75,7 +75,7 @@ class LoginData {
 
 @JsonSerializable()
 class LoginDataUser {
-  final int id;
+  final String id;
   final bool isActive;
   final String name;
   final String email;
@@ -84,7 +84,7 @@ class LoginDataUser {
   final LoginDataUserRole? role;
 
   LoginDataUser(
-      {this.id = 0,
+      {this.id = '',
       this.isActive = false,
       this.name = '',
       this.email = '',

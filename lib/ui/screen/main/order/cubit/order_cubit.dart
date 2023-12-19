@@ -100,7 +100,7 @@ class OrderCubit extends Cubit<OrderState> {
           cod: state.codController!.text.isEmpty
               ? null
               : int.parse(state.codController!.text.replaceAll(',', '')),
-          // isInsured: state.insurance,
+          isInsured: state.insurance,
           loading: state.loadingType?.toJsonString());
 
       emit(state.copyWith(

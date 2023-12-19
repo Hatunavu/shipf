@@ -63,19 +63,29 @@ class _AddressScreenState extends State<AddressScreen> {
                   //     },
                   //   ),
                   // ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: state.addresses.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onTap: () {
-                              widget.selectAddress(state.addresses[index]);
-                              context.router.pop();
-                            },
-                            child: itemAddress(state.addresses[index]));
-                      })
+                  state.addresses.isEmpty
+                      ? SizedBox(
+                          height: 0.5.sh,
+                          child: Center(
+                            child: Text(
+                              'Chưa có địa chỉ đã lưu',
+                              style: textBody,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.addresses.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  widget.selectAddress(state.addresses[index]);
+                                  context.router.pop();
+                                },
+                                child: itemAddress(state.addresses[index]));
+                          })
                 ],
               ),
             ),

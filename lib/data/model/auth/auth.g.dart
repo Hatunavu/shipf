@@ -75,7 +75,7 @@ Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
 
 LoginDataUser _$LoginDataUserFromJson(Map<String, dynamic> json) =>
     LoginDataUser(
-      id: json['id'] as int? ?? 0,
+      id: json['id'] as String? ?? '',
       isActive: json['isActive'] as bool? ?? false,
       name: json['name'] as String? ?? '',
       email: json['email'] as String? ?? '',

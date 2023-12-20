@@ -2,10 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_order_type.dart';
+import 'package:shipf/enums/enum_payment_type.dart';
+import 'package:shipf/enums/enum_source_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
@@ -32,7 +35,7 @@ class OrderCubit extends Cubit<OrderState> {
       lengthController: TextEditingController(text: '0'),
       widthController: TextEditingController(text: '0'),
       heightController: TextEditingController(text: '0'),
-      codController: TextEditingController(),
+      codController: TextEditingController(text: '0'),
       noteController: TextEditingController(),
     ));
   }
@@ -84,11 +87,11 @@ class OrderCubit extends Cubit<OrderState> {
       emit(state.copyWith(isGettingService: true, serviceSelected: null));
       final response = await mainRepository.getOrderService(
           // pickupAddressId: state.addressPick?.id,
-          pickupProvinceId: int.parse(state.province!.code),
-          pickupDistrictId: int.parse(state.district!.code),
+          pickupProvinceId: state.province!.id,
+          pickupDistrictId: state.district!.id,
           // deliveryAddressId: state.addressDeliver?.id,
-          deliveryProvinceId: int.parse(state.provinceDeliver!.code),
-          deliveryDistrictId: int.parse(state.districtDeliver!.code),
+          deliveryProvinceId: state.provinceDeliver!.id,
+          deliveryDistrictId: state.districtDeliver!.id,
           type: OrderType.express.toJsonString(),
           netWeight: int.parse(state.parcelWeightController!.text),
           quantity: int.parse(state.parcelAmountController!.text),
@@ -108,6 +111,47 @@ class OrderCubit extends Cubit<OrderState> {
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(isGettingService: false, error: errorMessage));
+    }
+  }
+
+  Future<void> createOrder() async {
+    try {
+      emit(state.copyWith(isLoading: true));
+      final response = await mainRepository.createOrder(OrderRequest(
+          // pickupAddressId: 339,
+          pickupProvinceId: state.province!.id,
+          pickupDistrictId: state.district!.id,
+          pickupWardId: state.ward!.id,
+          pickupAddress: state.senderAddressController!.text,
+          pickupName: state.senderNameController!.text,
+          pickupPhone: state.senderPhoneController!.text,
+          // deliveryAddressId: 248,
+          deliveryProvinceId: state.provinceDeliver!.id,
+          deliveryDistrictId: state.districtDeliver!.id,
+          deliveryWardId: state.wardDeliver!.id,
+          deliveryAddress: state.receiverAddressController!.text,
+          deliveryName: state.receiverNameController!.text,
+          deliveryPhone: state.receiverPhoneController!.text,
+          priceListId: state.serviceSelected?.id ?? 0,
+          name: state.parcelNameController!.text,
+          netWeight: int.parse(state.parcelWeightController!.text),
+          quantity: int.parse(state.parcelAmountController!.text),
+          length: int.parse(state.lengthController!.text),
+          width: int.parse(state.widthController!.text),
+          height: int.parse(state.heightController!.text),
+          declaredValue:
+              int.parse(state.parcelPriceController!.text.replaceAll(',', '')),
+          source: SourceType.form,
+          paymentTerm: PaymentType.freightPrepaid,
+          isInsured: state.insurance,
+          loading: state.loadingType?.display(),
+          cod: int.parse(state.codController!.text.replaceAll(',', '')),
+          note: state.noteController?.text));
+
+      emit(state.copyWith(isLoading: false));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isLoading: false, error: errorMessage));
     }
   }
 

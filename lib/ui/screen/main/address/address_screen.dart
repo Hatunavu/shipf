@@ -68,7 +68,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           height: 0.5.sh,
                           child: Center(
                             child: Text(
-                              'Chưa có địa chỉ đã lưu',
+                              state.isLoading ? '' : 'Chưa có địa chỉ đã lưu',
                               style: textBody,
                             ),
                           ),

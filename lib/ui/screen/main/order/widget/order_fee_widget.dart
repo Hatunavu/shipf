@@ -9,7 +9,6 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -44,7 +43,7 @@ class OrderFeeWidget extends StatelessWidget {
                       ),
                     ),
                   )
-                : Flexible(
+                : Expanded(
                     child: ListView.builder(
                         padding: EdgeInsets.symmetric(
                           horizontal: kDefaultPaddingWidthWidget,
@@ -127,7 +126,7 @@ class OrderFeeWidget extends StatelessWidget {
             onPressed: orderState.serviceSelected == null
                 ? null
                 : () {
-                    ToastUtils.showNeutral('Tính năng đang phát triển');
+                    cubit.createOrder();
                   },
           ),
         ),

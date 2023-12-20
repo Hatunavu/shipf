@@ -1,23 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'order_request.dart';
+part of 'order.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 OrderRequest _$OrderRequestFromJson(Map<String, dynamic> json) => OrderRequest(
-      pickupAddressId: json['pickupAddressId'] as int? ?? 0,
-      pickupProvinceId: json['pickupProvinceId'] as int? ?? 0,
-      pickupDistrictId: json['pickupDistrictId'] as int? ?? 0,
-      pickupWardId: json['pickupWardId'] as int? ?? 0,
+      pickupProvinceId: json['pickupProvinceId'] as int?,
+      pickupDistrictId: json['pickupDistrictId'] as int?,
+      pickupWardId: json['pickupWardId'] as int?,
       pickupAddress: json['pickupAddress'] as String? ?? '',
       pickupName: json['pickupName'] as String? ?? '',
       pickupPhone: json['pickupPhone'] as String? ?? '',
-      deliveryAddressId: json['deliveryAddressId'] as int? ?? 0,
-      deliveryProvinceId: json['deliveryProvinceId'] as int? ?? 0,
-      deliveryDistrictId: json['deliveryDistrictId'] as int? ?? 0,
-      deliveryWardId: json['deliveryWardId'] as int? ?? 0,
+      deliveryProvinceId: json['deliveryProvinceId'] as int?,
+      deliveryDistrictId: json['deliveryDistrictId'] as int?,
+      deliveryWardId: json['deliveryWardId'] as int?,
       deliveryAddress: json['deliveryAddress'] as String? ?? '',
       deliveryName: json['deliveryName'] as String? ?? '',
       deliveryPhone: json['deliveryPhone'] as String? ?? '',
@@ -29,24 +27,26 @@ OrderRequest _$OrderRequestFromJson(Map<String, dynamic> json) => OrderRequest(
       width: json['width'] as int? ?? 0,
       height: json['height'] as int? ?? 0,
       declaredValue: json['declaredValue'] as int? ?? 0,
-      source: json['source'] as String? ?? '',
-      paymentTerm: json['paymentTerm'] as String? ?? '',
+      source: json['source'] == null
+          ? SourceType.form
+          : stringToSourceType(json['source'] as String),
+      paymentTerm: json['paymentTerm'] == null
+          ? PaymentType.freightPrepaid
+          : stringToPaymentType(json['paymentTerm'] as String),
       isInsured: json['isInsured'] as bool? ?? false,
-      loading: json['loading'] as String? ?? '',
+      loading: json['loading'] as String?,
       cod: json['cod'] as int? ?? 0,
-      note: json['note'] as String? ?? '',
+      note: json['note'] as String?,
     );
 
 Map<String, dynamic> _$OrderRequestToJson(OrderRequest instance) =>
     <String, dynamic>{
-      'pickupAddressId': instance.pickupAddressId,
       'pickupProvinceId': instance.pickupProvinceId,
       'pickupDistrictId': instance.pickupDistrictId,
       'pickupWardId': instance.pickupWardId,
       'pickupAddress': instance.pickupAddress,
       'pickupName': instance.pickupName,
       'pickupPhone': instance.pickupPhone,
-      'deliveryAddressId': instance.deliveryAddressId,
       'deliveryProvinceId': instance.deliveryProvinceId,
       'deliveryDistrictId': instance.deliveryDistrictId,
       'deliveryWardId': instance.deliveryWardId,
@@ -61,10 +61,24 @@ Map<String, dynamic> _$OrderRequestToJson(OrderRequest instance) =>
       'width': instance.width,
       'height': instance.height,
       'declaredValue': instance.declaredValue,
-      'source': instance.source,
-      'paymentTerm': instance.paymentTerm,
+      'source': sourceTypeToString(instance.source),
+      'paymentTerm': paymentTypeToString(instance.paymentTerm),
       'isInsured': instance.isInsured,
       'loading': instance.loading,
       'cod': instance.cod,
       'note': instance.note,
+    };
+
+OrderResponse _$OrderResponseFromJson(Map<String, dynamic> json) =>
+    OrderResponse(
+      success: json['success'] as bool? ?? false,
+      message: json['message'] as String? ?? '',
+      status: json['status'] as int? ?? 0,
+    );
+
+Map<String, dynamic> _$OrderResponseToJson(OrderResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'status': instance.status,
+      'message': instance.message,
     };

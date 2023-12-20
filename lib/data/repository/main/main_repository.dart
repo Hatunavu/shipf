@@ -8,6 +8,7 @@ import 'package:retrofit/http.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
+import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 
 import 'endpoint.dart' as endpoint;
@@ -82,6 +83,9 @@ abstract class MainRepository {
     @Query('isInsured') bool? isInsured,
     @Query('cod') int? cod,
   });
+
+  @POST(endpoint.createOrder)
+  Future<OrderResponse> createOrder(@Body() OrderRequest orderRequest);
 }
 
 extension ApiClientAWSS3 on MainRepository {

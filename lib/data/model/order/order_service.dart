@@ -98,7 +98,9 @@ class OrderServiceData {
       });
 
   String get serviceFee {
-    return NumberFormat.decimalPattern().format(loadingCharge).toString();
+    return NumberFormat.decimalPattern()
+        .format(charges?.freightCharge)
+        .toString();
   }
 
   factory OrderServiceData.fromJson(Map<String, dynamic> json) =>

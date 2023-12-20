@@ -14,4 +14,8 @@ class AppPath {
       "assets/images/placeholder/placeholder_avatar.png";
   static const String placeholderNoImage =
       "assets/images/placeholder/placeholder_no_image.png";
+
+  //feed
+  static const String express = "assets/images/feeds/express.png";
+  static const String fast = "assets/images/feeds/fast.png";
 }

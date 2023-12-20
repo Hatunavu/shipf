@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:shipf/enums/enum_payment_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
@@ -51,6 +52,11 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
           color: backgroundColor,
         ),
         parcelLoading(),
+        VerticalSpace(
+          kDefaultPaddingHeightScreen,
+          color: backgroundColor,
+        ),
+        parcelPayment(),
         VerticalSpace(
           kDefaultPaddingHeightScreen,
           color: backgroundColor,
@@ -258,6 +264,29 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
     );
   }
 
+  Widget parcelPayment() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthWidget,
+          vertical: kDefaultPaddingHeightScreen),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Hình thức thanh toán',
+            style: textHeading,
+          ),
+          VerticalSpace(
+            kDefaultPaddingHeightWidget / 2,
+          ),
+          paymentItem(PaymentType.freightPrepaid),
+          paymentItem(PaymentType.freightPostpaid),
+          paymentItem(PaymentType.freightCollect),
+        ],
+      ),
+    );
+  }
+
   Widget paymentInfo() {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -435,6 +464,36 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
             isValidate: false,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget paymentItem(PaymentType paymentType) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => widget.orderCubit.updatePaymentType(paymentType),
+      child: Padding(
+        padding:
+            EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen / 2),
+        child: Row(
+          children: [
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget),
+              child: SizedBox(
+                width: kDefaultPaddingWidthWidget,
+                height: kDefaultPaddingWidthWidget,
+                child: Checkbox(
+                  activeColor: primaryColor,
+                  value: widget.orderCubit.state.paymentType == paymentType,
+                  onChanged: (value) =>
+                      widget.orderCubit..updatePaymentType(paymentType),
+                ),
+              ),
+            ),
+            Text(paymentType.display())
+          ],
+        ),
       ),
     );
   }

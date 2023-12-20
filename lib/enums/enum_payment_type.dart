@@ -28,11 +28,11 @@ extension EnumRole on PaymentType {
   String display() {
     switch (this) {
       case PaymentType.freightPrepaid:
-        return "Đầu lấy";
+        return "Người gửi thanh toán ngay";
       case PaymentType.freightCollect:
-        return "Đầu giao";
+        return "Người nhận thanh toán";
       case PaymentType.freightPostpaid:
-        return "Cả hai";
+        return "Người gửi thanh toán sau(Công nợ)";
     }
   }
 }

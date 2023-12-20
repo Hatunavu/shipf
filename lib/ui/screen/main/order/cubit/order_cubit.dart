@@ -78,6 +78,10 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(loadingType: loadingType));
   }
 
+  void updatePaymentType(PaymentType paymentType) {
+    emit(state.copyWith(paymentType: paymentType));
+  }
+
   void updateInsurance() {
     emit(state.copyWith(insurance: !state.insurance));
   }
@@ -142,9 +146,9 @@ class OrderCubit extends Cubit<OrderState> {
           declaredValue:
               int.parse(state.parcelPriceController!.text.replaceAll(',', '')),
           source: SourceType.form,
-          paymentTerm: PaymentType.freightPrepaid,
+          paymentTerm: state.paymentType,
           isInsured: state.insurance,
-          loading: state.loadingType?.display(),
+          loading: state.loadingType?.toJsonString(),
           cod: int.parse(state.codController!.text.replaceAll(',', '')),
           note: state.noteController?.text));
       emit(state.copyWith(isLoading: false));

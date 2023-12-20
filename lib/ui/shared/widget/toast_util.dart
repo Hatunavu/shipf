@@ -6,7 +6,7 @@ import 'package:shipf/ui/theme/constant.dart';
 
 const Color toastSuccess = primaryColor;
 const Color toastFailed = Colors.red;
-final Color toastNeutral = Colors.grey.withOpacity(0.5);
+const Color toastNeutral = greyText;
 final double defaultFontSize = textSize;
 const Color defaultTextColor = Colors.white;
 const Color defaultNeutralTextColor = primaryColor;

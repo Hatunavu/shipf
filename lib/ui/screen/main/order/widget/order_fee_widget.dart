@@ -81,9 +81,16 @@ class OrderFeeWidget extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: [
-                  otherFeeItem(name: text.loading_price, fee: '0'),
-                  otherFeeItem(name: text.total_loading_price, fee: '0'),
-                  otherFeeItem(name: text.insurance_fee, fee: '0')
+                  otherFeeItem(
+                      name: text.total_loading_price,
+                      fee: orderState.serviceSelected?.charges?.loadingCharge
+                              .toString() ??
+                          '0'),
+                  otherFeeItem(
+                      name: text.insurance_fee,
+                      fee: orderState.serviceSelected?.charges?.insuranceCharge
+                              .toString() ??
+                          '0')
                 ],
               ),
             ],
@@ -100,7 +107,7 @@ class OrderFeeWidget extends StatelessWidget {
               .copyWith(bottom: 0),
           child: Column(
             children: [
-              otherFeeItem(name: text.cod, fee: '0'),
+              otherFeeItem(name: text.cod, fee: orderState.codController!.text),
               Row(
                 children: [
                   Expanded(

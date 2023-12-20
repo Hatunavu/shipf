@@ -114,10 +114,10 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<void> createOrder() async {
+  Future<bool> createOrder() async {
     try {
       emit(state.copyWith(isLoading: true));
-      final response = await mainRepository.createOrder(OrderRequest(
+      await mainRepository.createOrder(OrderRequest(
           // pickupAddressId: 339,
           pickupProvinceId: state.province!.id,
           pickupDistrictId: state.district!.id,
@@ -147,11 +147,12 @@ class OrderCubit extends Cubit<OrderState> {
           loading: state.loadingType?.display(),
           cod: int.parse(state.codController!.text.replaceAll(',', '')),
           note: state.noteController?.text));
-
       emit(state.copyWith(isLoading: false));
+      return true;
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(isLoading: false, error: errorMessage));
+      return false;
     }
   }
 

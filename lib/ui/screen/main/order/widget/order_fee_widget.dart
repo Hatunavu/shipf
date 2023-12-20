@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/enums/enum_order_type.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_cubit.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
@@ -125,8 +127,9 @@ class OrderFeeWidget extends StatelessWidget {
                 : Colors.grey[300],
             onPressed: orderState.serviceSelected == null
                 ? null
-                : () {
-                    cubit.createOrder();
+                : () async {
+                    final bool success = await cubit.createOrder();
+                    success ? context.router.push(OrderSuccessPage()) : null;
                   },
           ),
         ),

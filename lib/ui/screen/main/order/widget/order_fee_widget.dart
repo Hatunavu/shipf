@@ -83,14 +83,13 @@ class OrderFeeWidget extends StatelessWidget {
                 children: [
                   otherFeeItem(
                       name: text.total_loading_price,
-                      fee: orderState.serviceSelected?.charges?.loadingCharge
-                              .toString() ??
+                      fee: orderState.serviceSelected?.loadingFee.toString() ??
                           '0'),
                   otherFeeItem(
                       name: text.insurance_fee,
-                      fee: orderState.serviceSelected?.charges?.insuranceCharge
-                              .toString() ??
-                          '0')
+                      fee:
+                          orderState.serviceSelected?.insuranceFee.toString() ??
+                              '0')
                 ],
               ),
             ],

@@ -18,4 +18,18 @@ class AppPath {
   //feed
   static const String express = "assets/images/feeds/express.png";
   static const String fast = "assets/images/feeds/fast.png";
+  static const String doitac1 = "assets/images/feeds/doitac1.png";
+  static const String doitac2 = "assets/images/feeds/doitac2.png";
+  static const String doitac3 = "assets/images/feeds/doitac3.png";
+  static const String doitac4 = "assets/images/feeds/doitac4.png";
+  static const String doitac5 = "assets/images/feeds/doitac5.png";
+  static const String doitac6 = "assets/images/feeds/doitac6.jpg";
+  static const String doitac7 = "assets/images/feeds/doitac7.png";
+  static const String doitac8 = "assets/images/feeds/doitac8.jpg";
+  static const String new1 = "assets/images/feeds/new1.png";
+  static const String new2 = "assets/images/feeds/new2.png";
+  static const String new3 = "assets/images/feeds/new3.png";
+  static const String promo1 = "assets/images/feeds/promo1.png";
+  static const String promo2 = "assets/images/feeds/promo2.png";
+  static const String promo3 = "assets/images/feeds/promo3.png";
 }

@@ -103,6 +103,18 @@ class OrderServiceData {
         .toString();
   }
 
+  String get insuranceFee {
+    return NumberFormat.decimalPattern()
+        .format(charges?.insuranceCharge)
+        .toString();
+  }
+
+  String get loadingFee {
+    return NumberFormat.decimalPattern()
+        .format(charges?.loadingCharge)
+        .toString();
+  }
+
   factory OrderServiceData.fromJson(Map<String, dynamic> json) =>
       _$OrderServiceDataFromJson(json);
 

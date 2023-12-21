@@ -17,16 +17,24 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  final List<String> promo = [AppPath.promo1, AppPath.promo2, AppPath.promo3];
+  final List<String> imageSmallFeed = [AppPath.express, AppPath.fast];
+  final List<String> imageLargeFeed = [
+    AppPath.new1,
+    AppPath.new2,
+    AppPath.new3
+  ];
+  final List<String> imagePartner = [
+    AppPath.doitac1,
+    AppPath.doitac2,
+    AppPath.doitac3,
+    AppPath.doitac4,
+    AppPath.doitac5,
+    AppPath.doitac6,
+    AppPath.doitac7,
+    AppPath.doitac8,
   ];
 
-  final List<String> imageSmallFeed = [AppPath.express, AppPath.fast];
   final List<String> lableSmallFeed = [
     'Giao hàng hoả tốc',
     'Giao hàng tiết kiệm'
@@ -74,17 +82,20 @@ class _FeedScreenState extends State<FeedScreen> {
         CarouselSlider(
           options: CarouselOptions(
               autoPlay: true, aspectRatio: 2 / 1, enableInfiniteScroll: true),
-          items: imgList
+          items: promo
               .map((item) => Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: kDefaultPaddingWidthScreen / 2),
                     child: ClipRRect(
                         borderRadius: BorderRadius.all(
                             Radius.circular(defaultBorderRadius)),
-                        child: ImageCreator.imageWithPlaceHolder(
-                            url: item,
-                            placeHolderAssetUri: AppPath.placeholderNoImage,
-                            fit: BoxFit.cover)),
+                        child: ImageCreator.assetImage(
+                            imagePath: item, fit: BoxFit.cover)
+                        // ImageCreator.imageWithPlaceHolder(
+                        //     url: item,
+                        //     placeHolderAssetUri: AppPath.placeholderNoImage,
+                        //     fit: BoxFit.cover)
+                        ),
                   ))
               .toList(),
         )
@@ -192,7 +203,8 @@ class _FeedScreenState extends State<FeedScreen> {
             shrinkWrap: true,
             itemCount: lableLargeFeed.length,
             itemBuilder: (context, index) {
-              return largeFeedItem(imgList[index], lableLargeFeed[index]);
+              return largeFeedItem(
+                  imageLargeFeed[index], lableLargeFeed[index]);
             },
             separatorBuilder: (BuildContext context, int index) {
               return HorizontalSpace(kDefaultPaddingWidthWidget);
@@ -221,10 +233,13 @@ class _FeedScreenState extends State<FeedScreen> {
             child: ClipRRect(
                 borderRadius: BorderRadius.vertical(
                     top: Radius.circular(defaultBorderRadius)),
-                child: ImageCreator.imageWithPlaceHolder(
-                    url: image,
-                    placeHolderAssetUri: AppPath.placeholderNoImage,
-                    fit: BoxFit.cover)),
+                child:
+                    ImageCreator.assetImage(imagePath: image, fit: BoxFit.cover)
+                // ImageCreator.imageWithPlaceHolder(
+                //     url: image,
+                //     placeHolderAssetUri: AppPath.placeholderNoImage,
+                //     fit: BoxFit.cover)
+                ),
           ),
           Container(
             height: 0.08.sh,
@@ -262,15 +277,15 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
         ),
         SizedBox(
-          height: 0.1.sh,
+          height: 0.11.sh,
           child: ListView.separated(
             padding:
                 EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen),
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            itemCount: imgList.length,
+            itemCount: imagePartner.length,
             itemBuilder: (context, index) {
-              return partnerItem(imgList[index]);
+              return partnerItem(imagePartner[index]);
             },
             separatorBuilder: (BuildContext context, int index) {
               return HorizontalSpace(kDefaultPaddingWidthWidget);
@@ -292,12 +307,22 @@ class _FeedScreenState extends State<FeedScreen> {
               blurRadius: 20,
             ),
           ]),
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(defaultBorderRadius),
-          child: ImageCreator.imageWithPlaceHolder(
-              url: image,
-              placeHolderAssetUri: AppPath.placeholderNoImage,
-              fit: BoxFit.cover)),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 0.1.sh,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(defaultBorderRadius),
+                child:
+                    ImageCreator.assetImage(imagePath: image, fit: BoxFit.cover)
+                // ImageCreator.imageWithPlaceHolder(
+                //     url: image,
+                //     placeHolderAssetUri: AppPath.placeholderNoImage,
+                //     fit: BoxFit.cover)
+                ),
+          ),
+        ],
+      ),
     );
   }
 }

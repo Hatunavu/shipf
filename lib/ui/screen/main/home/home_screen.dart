@@ -76,21 +76,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget statistic() {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.only(
-          left: kDefaultPaddingWidthScreen, top: kDefaultPaddingHeightScreen),
+      padding: EdgeInsets.symmetric(
+          horizontal: kDefaultPaddingWidthScreen,
+          vertical: kDefaultPaddingHeightScreen),
       shrinkWrap: true,
       itemCount: statistics.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, childAspectRatio: 2),
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          margin: EdgeInsets.only(
-              right: kDefaultPaddingWidthScreen,
-              bottom: kDefaultPaddingHeightScreen),
+          // margin: EdgeInsets.only(
+          //     right: kDefaultPaddingWidthScreen,
+          //     bottom: kDefaultPaddingHeightScreen),
           padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen),
           decoration: BoxDecoration(
               color: Color(int.parse(statistics[index].color)),
-              borderRadius: BorderRadius.circular(defaultBorderRadius)),
+              border: Border.all(color: Colors.white)
+              // borderRadius: BorderRadius.circular(defaultBorderRadius)
+              ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 right: kDefaultPaddingWidthScreen,
                 bottom: kDefaultPaddingHeightScreen),
             decoration: BoxDecoration(
+                color: primaryColor,
                 borderRadius: BorderRadius.circular(defaultBorderRadius)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -141,11 +145,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 0.2.sw,
                     width: 0.2.sw,
                     child: ImageCreator.assetImage(
-                        imagePath: actions[index].icon, color: primaryColor)),
+                        imagePath: actions[index].icon, color: Colors.white)),
                 Text(
                   actions[index].content,
                   style: primarySubTitleStyle.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.w600),
+                      color: Colors.white, fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                 )
               ],

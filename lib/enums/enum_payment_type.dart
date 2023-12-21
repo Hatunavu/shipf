@@ -30,9 +30,9 @@ extension EnumRole on PaymentType {
       case PaymentType.freightPrepaid:
         return "Người gửi thanh toán ngay";
       case PaymentType.freightCollect:
-        return "Người nhận thanh toán";
+        return "Người nhận thanh toán ngay";
       case PaymentType.freightPostpaid:
-        return "Người gửi thanh toán sau(Công nợ)";
+        return "Người gửi thanh toán sau";
     }
   }
 }

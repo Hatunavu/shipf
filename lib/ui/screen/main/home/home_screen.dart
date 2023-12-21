@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +6,7 @@ import 'package:shipf/data/model/statistic/statistic.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -128,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
-            log('object');
+            ToastUtils.showNeutral('Tính năng đăng được phát triển');
           },
           child: Container(
             margin: EdgeInsets.only(

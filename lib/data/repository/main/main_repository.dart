@@ -47,6 +47,9 @@ abstract class MainRepository {
   Future<RegisterResponse> registerShipper(
       @Body() RegisterRequest registerRequest);
 
+  @DELETE(endpoint.deleteUser)
+  Future<RegisterResponse> deleteUser();
+
   //addresss
   @GET(endpoint.getProvinces)
   Future<AddressModel> getProvinces();

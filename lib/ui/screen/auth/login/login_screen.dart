@@ -97,9 +97,12 @@ class LoginScreen extends StatelessWidget {
                                       ),
                                       PrimaryTextField(
                                         errorText: state.error
-                                                .toUpperCase()
-                                                .contains(
-                                                    text.phone.toUpperCase())
+                                                    .toUpperCase()
+                                                    .contains(text.phone
+                                                        .toUpperCase()) ||
+                                                state.error
+                                                    .toUpperCase()
+                                                    .contains('TÀI KHOẢN')
                                             ? state.error
                                             : '',
                                         isPhone: true,

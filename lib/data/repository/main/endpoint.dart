@@ -9,6 +9,7 @@ const login = "/authentication/sign-in";
 const registerCustomer = '/users/register-customer';
 const registerBusiness = '/users/register-business';
 const registerShipper = '/users/register-shipper';
+const deleteUser = '/users';
 
 //address
 const getProvinces = "/provinces";

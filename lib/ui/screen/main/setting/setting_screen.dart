@@ -1,11 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
+import 'package:shipf/ui/screen/main/setting/cubit/setting_cubit.dart';
+import 'package:shipf/ui/screen/main/setting/cubit/setting_state.dart';
 import 'package:shipf/ui/services/account_services.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
+import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
+import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -24,24 +30,53 @@ class _SettingScreenState extends State<SettingScreen> {
     'Sổ địa chỉ',
     'Chính sách và điều khoản'
   ];
+  bool isLoading = false;
+  late SettingCubit cubit;
+
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-        title: 'Cài đặt',
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [mainInfo(), settingList(), logout()],
-          ),
-        ));
+    return BlocProvider(
+      create: (context) => SettingCubit(),
+      child: BlocConsumer<SettingCubit, SettingState>(
+        listener: (context, state) {
+          if (!state.isLoading) {
+            isLoading == true ? context.router.pop() : null;
+            isLoading = false;
+          }
+          if (state.isLoading) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              loadingShowDialog(context);
+              isLoading = true;
+            });
+          }
+        },
+        builder: (context, state) {
+          cubit = context.read<SettingCubit>();
+          return BaseScreen(
+              title: 'Cài đặt',
+              leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    mainInfo(),
+                    settingList(),
+                    logout(),
+                    VerticalSpace(kDefaultPaddingHeightWidget),
+                    deleteUser(context)
+                  ],
+                ),
+              ));
+        },
+      ),
+    );
   }
 
   Widget mainInfo() {
@@ -171,5 +206,64 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       ),
     );
+  }
+
+  Widget deleteUser(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        deleteDialog('Bạn có muốn xóa tài khoản này?');
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen),
+        child: Text(
+          'Xóa tài khoản',
+          style: textBody.copyWith(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
+  void deleteDialog(String title) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text(
+                title,
+                textAlign: TextAlign.center,
+              ),
+              titlePadding: EdgeInsets.symmetric(
+                  vertical: kDefaultPaddingHeightScreen,
+                  horizontal: kDefaultPaddingWidthWidget),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: kDefaultPaddingHeightWidget,
+                  horizontal: kDefaultPaddingWidthScreen),
+              content: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: PrimaryButton(
+                      label: 'Hủy',
+                      backgroundColor: greyText,
+                      onPressed: () => context.router.pop(),
+                    ),
+                  ),
+                  HorizontalSpace(kDefaultPaddingWidthScreen),
+                  Expanded(
+                    flex: 1,
+                    child: PrimaryButton.outline(
+                      onPressed: () async {
+                        final success = await cubit.deleteUser();
+                        success ? context.router.push(LoginPage()) : null;
+                      },
+                      label: 'Xóa',
+                      borderColor: Colors.red,
+                      textColor: Colors.red,
+                    ),
+                  )
+                ],
+              ));
+        });
   }
 }

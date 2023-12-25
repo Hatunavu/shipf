@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58445022548",
+    "project_id": "shipfdev",
+    "storage_bucket": "shipfdev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58445022548:android:7b3a38496721a9d89c74c1",
+        "android_client_info": {
+          "package_name": "com.n.shipf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_T8tudsgWXArb4mE2A5n35HtpSZSNzhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

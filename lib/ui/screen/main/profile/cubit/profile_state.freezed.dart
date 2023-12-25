@@ -63,22 +63,22 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
 }
 
 /// @nodoc
-abstract class _$$ProfileStateImplCopyWith<$Res>
+abstract class _$$_ProfileStateCopyWith<$Res>
     implements $ProfileStateCopyWith<$Res> {
-  factory _$$ProfileStateImplCopyWith(
-          _$ProfileStateImpl value, $Res Function(_$ProfileStateImpl) then) =
-      __$$ProfileStateImplCopyWithImpl<$Res>;
+  factory _$$_ProfileStateCopyWith(
+          _$_ProfileState value, $Res Function(_$_ProfileState) then) =
+      __$$_ProfileStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$ProfileStateImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileStateImpl>
-    implements _$$ProfileStateImplCopyWith<$Res> {
-  __$$ProfileStateImplCopyWithImpl(
-      _$ProfileStateImpl _value, $Res Function(_$ProfileStateImpl) _then)
+class __$$_ProfileStateCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$_ProfileState>
+    implements _$$_ProfileStateCopyWith<$Res> {
+  __$$_ProfileStateCopyWithImpl(
+      _$_ProfileState _value, $Res Function(_$_ProfileState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$ProfileStateImpl(
+    return _then(_$_ProfileState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileStateImpl implements _ProfileState {
-  const _$ProfileStateImpl({required this.isLoading, this.error});
+class _$_ProfileState implements _ProfileState {
+  const _$_ProfileState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$ProfileStateImpl implements _ProfileState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileStateImpl &&
+            other is _$_ProfileState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,14 +131,13 @@ class _$ProfileStateImpl implements _ProfileState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
-      __$$ProfileStateImplCopyWithImpl<_$ProfileStateImpl>(this, _$identity);
+  _$$_ProfileStateCopyWith<_$_ProfileState> get copyWith =>
+      __$$_ProfileStateCopyWithImpl<_$_ProfileState>(this, _$identity);
 }
 
 abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
-      {required final bool isLoading,
-      final String? error}) = _$ProfileStateImpl;
+      {required final bool isLoading, final String? error}) = _$_ProfileState;
 
   @override
   bool get isLoading;
@@ -146,6 +145,6 @@ abstract class _ProfileState implements ProfileState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
+  _$$_ProfileStateCopyWith<_$_ProfileState> get copyWith =>
       throw _privateConstructorUsedError;
 }

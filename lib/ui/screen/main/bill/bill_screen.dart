@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shipf/ui/screen/main/bill/cubit/bill_cubit.dart';
+import 'package:shipf/ui/screen/main/bill/cubit/bill_state.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
@@ -16,11 +19,19 @@ class BillScreen extends StatefulWidget {
 class _BillScreenState extends State<BillScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [billList()],
-        ),
+    return BlocProvider(
+      create: (context) => BillCubit()..getListOrder(),
+      child: BlocConsumer<BillCubit, BillState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return BaseScreen(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [billList()],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

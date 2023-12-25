@@ -8,6 +8,7 @@ import 'package:retrofit/http.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
+import 'package:shipf/data/model/order/list_order.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 
@@ -89,6 +90,19 @@ abstract class MainRepository {
 
   @POST(endpoint.createOrder)
   Future<OrderResponse> createOrder(@Body() OrderRequest orderRequest);
+
+  @GET(endpoint.getListOrder)
+  Future<ListOrderResponse> getListOrder({
+    @Query('page') int? page,
+    @Query('size') int? size,
+    @Query('search') String? search,
+    @Query('orderKey') String? orderKey,
+    @Query('orderBy') String? orderBy,
+    @Query('fromDate') String? fromDate,
+    @Query('toDate') String? toDate,
+    @Query('customerId') int? customerId,
+    @Query('carrierId') int? carrierId,
+  });
 }
 
 extension ApiClientAWSS3 on MainRepository {

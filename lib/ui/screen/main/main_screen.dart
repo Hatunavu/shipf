@@ -152,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           VerticalSpace(2.h),
                           Text(
-                            'Hóa đơn',
+                            'DS vận đơn',
                             style: textBottomBar,
                           )
                         ],

@@ -21,3 +21,4 @@ const getDeliveryAddresses = "/delivery-addresses";
 //order
 const getOrderService = '/price-lists/quote';
 const createOrder = '/shipments';
+const getListOrder = '/shipments';

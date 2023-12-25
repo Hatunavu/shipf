@@ -403,6 +403,50 @@ class _MainRepository implements MainRepository {
     return value;
   }
 
+  @override
+  Future<ListOrderResponse> getListOrder({
+    page,
+    size,
+    search,
+    orderKey,
+    orderBy,
+    fromDate,
+    toDate,
+    customerId,
+    carrierId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'size': size,
+      r'search': search,
+      r'orderKey': orderKey,
+      r'orderBy': orderBy,
+      r'fromDate': fromDate,
+      r'toDate': toDate,
+      r'customerId': customerId,
+      r'carrierId': carrierId,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ListOrderResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/shipments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListOrderResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

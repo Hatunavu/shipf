@@ -73,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           VerticalSpace(2.h),
                           Text(
-                            'Trang chủ',
+                            'Trang Chủ',
                             style: textBottomBar,
                           )
                         ],
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           VerticalSpace(2.h),
                           Text(
-                            'Bản tin',
+                            'Bảng Tin',
                             style: textBottomBar,
                           )
                         ],
@@ -152,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           VerticalSpace(2.h),
                           Text(
-                            'DS vận đơn',
+                            'DS Vận Đơn',
                             style: textBottomBar,
                           )
                         ],
@@ -179,7 +179,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           VerticalSpace(2.h),
                           Text(
-                            'Lộ trình',
+                            'Lộ Trình',
                             style: textBottomBar,
                           )
                         ],

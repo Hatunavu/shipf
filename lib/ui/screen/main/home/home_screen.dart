@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/statistic/statistic.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
+import 'package:shipf/ui/screen/main/home/cubit/home_cubit.dart';
+import 'package:shipf/ui/screen/main/home/cubit/home_state.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -41,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeAction(content: 'Đơn thành công', icon: AppPath.success),
     HomeAction(content: 'Đối soát', icon: AppPath.transfer),
   ];
+  late HomeCubit homeCubit;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,9 +68,18 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: false,
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [statistic(), action()],
+      body: BlocProvider(
+        create: (context) => HomeCubit(),
+        child: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            homeCubit = context.read<HomeCubit>();
+            return SingleChildScrollView(
+              child: Column(
+                children: [statistic(), action()],
+              ),
+            );
+          },
         ),
       ),
     );

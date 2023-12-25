@@ -82,3 +82,19 @@ Map<String, dynamic> _$OrderResponseToJson(OrderResponse instance) =>
       'status': instance.status,
       'message': instance.message,
     };
+
+UpdateOrderStatusRequest _$UpdateOrderStatusRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateOrderStatusRequest(
+      shipmentStatusCode: json['shipmentStatusCode'] == null
+          ? ShipmentStatus.neww
+          : stringToShipmentStatus(json['shipmentStatusCode'] as String),
+      note: json['note'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$UpdateOrderStatusRequestToJson(
+        UpdateOrderStatusRequest instance) =>
+    <String, dynamic>{
+      'shipmentStatusCode': shipmentStatusToString(instance.shipmentStatusCode),
+      'note': instance.note,
+    };

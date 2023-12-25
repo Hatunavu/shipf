@@ -103,6 +103,11 @@ abstract class MainRepository {
     @Query('customerId') int? customerId,
     @Query('carrierId') int? carrierId,
   });
+
+  @PUT(endpoint.updateOrderStatus)
+  Future<OrderResponse> updateOrderStatus(
+      {@Path('orderId') required int orderId,
+      @Body() required UpdateOrderStatusRequest updateOrderRequest});
 }
 
 extension ApiClientAWSS3 on MainRepository {

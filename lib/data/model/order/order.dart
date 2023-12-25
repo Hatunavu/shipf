@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/enums/enum_payment_type.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_source_type.dart';
 
 part 'order.g.dart';
@@ -93,4 +94,22 @@ class OrderResponse {
       _$OrderResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderResponseToJson(this);
+}
+
+@JsonSerializable()
+class UpdateOrderStatusRequest {
+  @JsonKey(
+      name: 'shipmentStatusCode',
+      toJson: shipmentStatusToString,
+      fromJson: stringToShipmentStatus)
+  final ShipmentStatus shipmentStatusCode;
+  final String note;
+
+  UpdateOrderStatusRequest(
+      {this.shipmentStatusCode = ShipmentStatus.neww, this.note = ''});
+
+  factory UpdateOrderStatusRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateOrderStatusRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateOrderStatusRequestToJson(this);
 }

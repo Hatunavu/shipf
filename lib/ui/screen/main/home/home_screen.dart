@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             homeCubit = context.read<HomeCubit>();
             return SingleChildScrollView(
               child: Column(
-                children: [statistic(), action()],
+                children: [statistic(), action(), ],
               ),
             );
           },

@@ -63,4 +63,10 @@ class LoginCubit extends Cubit<LoginState> {
       return false;
     }
   }
+
+  //test token
+  Future getNotificationToken() async {
+    final notificationToken = await AccountServices().getNotificationToken();
+    emit(state.copyWith(notificationToken: notificationToken));
+  }
 }

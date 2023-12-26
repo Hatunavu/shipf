@@ -6,6 +6,8 @@ import 'package:shipf/data/remote/firebase/firebase_api.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/services/ThemePreferences.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //firebase

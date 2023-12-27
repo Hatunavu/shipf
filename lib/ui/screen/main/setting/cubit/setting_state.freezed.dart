@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFirstLoad => throw _privateConstructorUsedError;
+  AccountData? get userInfo => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +32,8 @@ abstract class $SettingStateCopyWith<$Res> {
           SettingState value, $Res Function(SettingState) then) =
       _$SettingStateCopyWithImpl<$Res, SettingState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call(
+      {bool isLoading, bool isFirstLoad, AccountData? userInfo, String? error});
 }
 
 /// @nodoc
@@ -47,6 +50,8 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
+    Object? userInfo = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +59,14 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as AccountData?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -63,35 +76,46 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
 }
 
 /// @nodoc
-abstract class _$$_SettingStateCopyWith<$Res>
+abstract class _$$SettingStateImplCopyWith<$Res>
     implements $SettingStateCopyWith<$Res> {
-  factory _$$_SettingStateCopyWith(
-          _$_SettingState value, $Res Function(_$_SettingState) then) =
-      __$$_SettingStateCopyWithImpl<$Res>;
+  factory _$$SettingStateImplCopyWith(
+          _$SettingStateImpl value, $Res Function(_$SettingStateImpl) then) =
+      __$$SettingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call(
+      {bool isLoading, bool isFirstLoad, AccountData? userInfo, String? error});
 }
 
 /// @nodoc
-class __$$_SettingStateCopyWithImpl<$Res>
-    extends _$SettingStateCopyWithImpl<$Res, _$_SettingState>
-    implements _$$_SettingStateCopyWith<$Res> {
-  __$$_SettingStateCopyWithImpl(
-      _$_SettingState _value, $Res Function(_$_SettingState) _then)
+class __$$SettingStateImplCopyWithImpl<$Res>
+    extends _$SettingStateCopyWithImpl<$Res, _$SettingStateImpl>
+    implements _$$SettingStateImplCopyWith<$Res> {
+  __$$SettingStateImplCopyWithImpl(
+      _$SettingStateImpl _value, $Res Function(_$SettingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
+    Object? userInfo = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_SettingState(
+    return _then(_$SettingStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as AccountData?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -102,49 +126,69 @@ class __$$_SettingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingState implements _SettingState {
-  const _$_SettingState({required this.isLoading, this.error});
+class _$SettingStateImpl implements _SettingState {
+  const _$SettingStateImpl(
+      {required this.isLoading,
+      required this.isFirstLoad,
+      this.userInfo,
+      this.error});
 
   @override
   final bool isLoading;
+  @override
+  final bool isFirstLoad;
+  @override
+  final AccountData? userInfo;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'SettingState(isLoading: $isLoading, error: $error)';
+    return 'SettingState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, userInfo: $userInfo, error: $error)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingState &&
+            other is _$SettingStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFirstLoad, isFirstLoad) ||
+                other.isFirstLoad == isFirstLoad) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, isFirstLoad, userInfo, error);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
-      __$$_SettingStateCopyWithImpl<_$_SettingState>(this, _$identity);
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
+      __$$SettingStateImplCopyWithImpl<_$SettingStateImpl>(this, _$identity);
 }
 
 abstract class _SettingState implements SettingState {
   const factory _SettingState(
-      {required final bool isLoading, final String? error}) = _$_SettingState;
+      {required final bool isLoading,
+      required final bool isFirstLoad,
+      final AccountData? userInfo,
+      final String? error}) = _$SettingStateImpl;
 
   @override
   bool get isLoading;
   @override
+  bool get isFirstLoad;
+  @override
+  AccountData? get userInfo;
+  @override
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

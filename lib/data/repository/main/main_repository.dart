@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:retrofit/http.dart';
+import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
@@ -24,7 +25,7 @@ abstract class MainRepository {
   }) = _MainRepository;
 
   @GET(endpoint.getUser)
-  Future<void> getUserInfo();
+  Future<void> getUser();
 
   //auth
   @POST(endpoint.verifyPhone)
@@ -108,6 +109,10 @@ abstract class MainRepository {
   Future<OrderResponse> updateOrderStatus(
       {@Path('orderId') required int orderId,
       @Body() required UpdateOrderStatusRequest updateOrderRequest});
+
+  //account
+  @GET(endpoint.getUserInfo)
+  Future<AccountResponse> getUserInfo();
 }
 
 extension ApiClientAWSS3 on MainRepository {

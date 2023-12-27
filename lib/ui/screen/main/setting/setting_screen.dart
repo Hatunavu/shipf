@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_cubit.dart';
@@ -36,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SettingCubit(),
+      create: (context) => SettingCubit()..getUserInfo(),
       child: BlocConsumer<SettingCubit, SettingState>(
         listener: (context, state) {
           if (!state.isLoading) {
@@ -52,6 +53,7 @@ class _SettingScreenState extends State<SettingScreen> {
         },
         builder: (context, state) {
           cubit = context.read<SettingCubit>();
+
           return BaseScreen(
               title: 'Cài đặt',
               leading: InkWell(
@@ -63,23 +65,29 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: Colors.black,
                 ),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    mainInfo(),
-                    settingList(),
-                    logout(),
-                    VerticalSpace(kDefaultPaddingHeightWidget),
-                    deleteUser(context)
-                  ],
-                ),
-              ));
+              child: state.isFirstLoad
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          mainInfo(state.userInfo!),
+                          settingList(),
+                          logout(),
+                          VerticalSpace(kDefaultPaddingHeightWidget),
+                          deleteUser(context)
+                        ],
+                      ),
+                    ));
         },
       ),
     );
   }
 
-  Widget mainInfo() {
+  Widget mainInfo(AccountData userInfo) {
     return GestureDetector(
       onTap: () {
         context.router.push(UpdateInfoPage());
@@ -116,12 +124,12 @@ class _SettingScreenState extends State<SettingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nam Vu',
+                  userInfo.name,
                   style: textHeading,
                 ),
                 VerticalSpace(kDefaultPaddingHeightScreen / 2),
                 Text(
-                  '0987654321',
+                  userInfo.phone,
                   style: textBody,
                 ),
               ],

@@ -68,21 +68,22 @@ class _$BillStateCopyWithImpl<$Res, $Val extends BillState>
 }
 
 /// @nodoc
-abstract class _$$_BillStateCopyWith<$Res> implements $BillStateCopyWith<$Res> {
-  factory _$$_BillStateCopyWith(
-          _$_BillState value, $Res Function(_$_BillState) then) =
-      __$$_BillStateCopyWithImpl<$Res>;
+abstract class _$$BillStateImplCopyWith<$Res>
+    implements $BillStateCopyWith<$Res> {
+  factory _$$BillStateImplCopyWith(
+          _$BillStateImpl value, $Res Function(_$BillStateImpl) then) =
+      __$$BillStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
 }
 
 /// @nodoc
-class __$$_BillStateCopyWithImpl<$Res>
-    extends _$BillStateCopyWithImpl<$Res, _$_BillState>
-    implements _$$_BillStateCopyWith<$Res> {
-  __$$_BillStateCopyWithImpl(
-      _$_BillState _value, $Res Function(_$_BillState) _then)
+class __$$BillStateImplCopyWithImpl<$Res>
+    extends _$BillStateCopyWithImpl<$Res, _$BillStateImpl>
+    implements _$$BillStateImplCopyWith<$Res> {
+  __$$BillStateImplCopyWithImpl(
+      _$BillStateImpl _value, $Res Function(_$BillStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +93,7 @@ class __$$_BillStateCopyWithImpl<$Res>
     Object? error = freezed,
     Object? listOrder = null,
   }) {
-    return _then(_$_BillState(
+    return _then(_$BillStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -111,8 +112,8 @@ class __$$_BillStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillState implements _BillState {
-  const _$_BillState(
+class _$BillStateImpl implements _BillState {
+  const _$BillStateImpl(
       {required this.isLoading,
       this.error,
       required final List<ListOrderData> listOrder})
@@ -136,10 +137,10 @@ class _$_BillState implements _BillState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillState &&
+            other is _$BillStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -154,15 +155,15 @@ class _$_BillState implements _BillState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillStateCopyWith<_$_BillState> get copyWith =>
-      __$$_BillStateCopyWithImpl<_$_BillState>(this, _$identity);
+  _$$BillStateImplCopyWith<_$BillStateImpl> get copyWith =>
+      __$$BillStateImplCopyWithImpl<_$BillStateImpl>(this, _$identity);
 }
 
 abstract class _BillState implements BillState {
   const factory _BillState(
       {required final bool isLoading,
       final String? error,
-      required final List<ListOrderData> listOrder}) = _$_BillState;
+      required final List<ListOrderData> listOrder}) = _$BillStateImpl;
 
   @override
   bool get isLoading;
@@ -172,6 +173,6 @@ abstract class _BillState implements BillState {
   List<ListOrderData> get listOrder;
   @override
   @JsonKey(ignore: true)
-  _$$_BillStateCopyWith<_$_BillState> get copyWith =>
+  _$$BillStateImplCopyWith<_$BillStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -8,6 +8,17 @@ import 'package:shipf/ui/services/account_services.dart';
 class SettingCubit extends Cubit<SettingState> {
   SettingCubit() : super(SettingState.initial());
 
+  Future getUserInfo() async {
+    try {
+      emit(state.copyWith(isFirstLoad: true));
+      final response = await mainRepository.getUserInfo();
+      emit(state.copyWith(isFirstLoad: false, userInfo: response.data));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
+    }
+  }
+
   Future<bool> deleteUser() async {
     try {
       emit(state.copyWith(isLoading: true));

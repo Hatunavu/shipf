@@ -6,21 +6,17 @@ part 'account_model.g.dart';
 class Account {
   @JsonKey(name: '_id')
   final String id;
-  final Profile profile;
   final String? phone;
   final String? password;
   final String? type;
   final int? status;
-  final AuthenticationModel? authentication;
   final String? address;
   Account(
       {required this.id,
-      required this.profile,
       this.phone,
       this.type,
       this.password,
       this.status = 1,
-      this.authentication,
       this.address});
 
   factory Account.fromJson(Map<String, dynamic> json) =>
@@ -30,48 +26,44 @@ class Account {
 }
 
 @JsonSerializable()
-class Profile {
-  final String fullName;
-  String? avatar;
-  final String? email;
-  final DateTime? dateOfBirth;
+class AccountResponse {
+  final String message;
+  final bool success;
+  final int status;
+  final AccountData? data;
+  AccountResponse(
+      {this.message = '', this.status = 0, this.success = false, this.data});
 
-  final String? gender;
+  factory AccountResponse.fromJson(Map<String, dynamic> json) =>
+      _$AccountResponseFromJson(json);
 
-  Profile(
-      {required this.fullName,
-      this.avatar,
-      this.email,
-      this.dateOfBirth,
-      this.gender});
-
-  factory Profile.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ProfileToJson(this);
+  Map<String, dynamic> toJson() => _$AccountResponseToJson(this);
 }
 
 @JsonSerializable()
-class AuthenticationModel {
-  @JsonKey(name: 'lock', defaultValue: false)
-  final bool? lock;
-  @JsonKey(name: 'status', defaultValue: false)
-  final bool? status;
-  final String? ip;
-  final DateTime? recentSMSOTP;
-  @JsonKey(name: 'isPhoneVerified', defaultValue: false)
-  final bool isPhoneVerified;
+class AccountData {
+  final int id;
+  final int userConfigId;
+  final int roleId;
+  final int parentId;
+  final String code;
+  final String name;
+  final String phone;
+  final String email;
+  final bool isActive;
+  AccountData(
+      {this.id = 0,
+      this.userConfigId = 0,
+      this.roleId = 0,
+      this.parentId = 0,
+      this.code = '',
+      this.name = '',
+      this.phone = '',
+      this.email = '',
+      this.isActive = false});
 
-  AuthenticationModel({
-    this.lock,
-    this.status,
-    this.ip,
-    this.recentSMSOTP,
-    required this.isPhoneVerified,
-  });
+  factory AccountData.fromJson(Map<String, dynamic> json) =>
+      _$AccountDataFromJson(json);
 
-  factory AuthenticationModel.fromJson(Map<String, dynamic> json) =>
-      _$AuthenticationModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AuthenticationModelToJson(this);
+  Map<String, dynamic> toJson() => _$AccountDataToJson(this);
 }

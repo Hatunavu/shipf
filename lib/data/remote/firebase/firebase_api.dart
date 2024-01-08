@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -65,8 +66,26 @@ class FirebaseApi {
   }
 
   Future<void> initNotifications() async {
+    String? fCMToken = '';
     await _firebaseMessaging.requestPermission();
-    final fCMToken = await _firebaseMessaging.getToken();
+    if (Platform.isIOS) {
+      String? apnsToken = await _firebaseMessaging.getAPNSToken();
+      if (apnsToken != null) {
+        fCMToken = await _firebaseMessaging.getToken();
+      } else {
+        await Future.delayed(
+          const Duration(
+            seconds: 3,
+          ),
+        );
+        apnsToken = await _firebaseMessaging.getAPNSToken();
+        if (apnsToken != null) {
+          fCMToken = await _firebaseMessaging.getToken();
+        }
+      }
+    } else {
+      fCMToken = await _firebaseMessaging.getToken();
+    }
     AccountServices().saveNotificationToken(fCMToken ?? '');
     log('Token: $fCMToken');
     initPushNotifications();

@@ -155,8 +155,8 @@ class LoginScreen extends StatelessWidget {
                                                                   _passController
                                                                       .text));
                                                   loginSuccess
-                                                      ? context.router.push(
-                                                          const MainPage())
+                                                      ? context.router
+                                                          .push(MainPage())
                                                       : null;
                                                 }
                                               }

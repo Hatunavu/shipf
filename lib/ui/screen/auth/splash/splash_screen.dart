@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // context.read<SetUpCubit>().updateUser(token, userId);
       // final status = await handleGetAccountMe();
       // Future.delayed(Duration(seconds: 2));
-      context.router.replace(const MainPage());
+      context.router.replace(MainPage());
 
       // if (status == true) {
       //   context.router.replace(const MainPage());

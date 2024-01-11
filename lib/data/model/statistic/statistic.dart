@@ -16,15 +16,15 @@ class Statistic {
   Map<String, dynamic> toJson() => _$StatisticToJson(this);
 }
 
-@JsonSerializable()
 class HomeAction {
   final String content;
   final String icon;
+  final Function()? onTap;
 
-  HomeAction({this.content = '', this.icon = ''});
+  HomeAction({this.content = '', this.icon = '', this.onTap});
 
-  factory HomeAction.fromJson(Map<String, dynamic> json) =>
-      _$HomeActionFromJson(json);
+  // factory HomeAction.fromJson(Map<String, dynamic> json) =>
+  //     _$HomeActionFromJson(json);
 
-  Map<String, dynamic> toJson() => _$HomeActionToJson(this);
+  // Map<String, dynamic> toJson() => _$HomeActionToJson(this);
 }

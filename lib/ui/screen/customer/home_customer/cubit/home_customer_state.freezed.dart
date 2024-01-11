@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'bill_state.dart';
+part of 'home_customer_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$BillState {
+mixin _$HomeCustomerState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<ListOrderData> get listOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BillStateCopyWith<BillState> get copyWith =>
+  $HomeCustomerStateCopyWith<HomeCustomerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BillStateCopyWith<$Res> {
-  factory $BillStateCopyWith(BillState value, $Res Function(BillState) then) =
-      _$BillStateCopyWithImpl<$Res, BillState>;
+abstract class $HomeCustomerStateCopyWith<$Res> {
+  factory $HomeCustomerStateCopyWith(
+          HomeCustomerState value, $Res Function(HomeCustomerState) then) =
+      _$HomeCustomerStateCopyWithImpl<$Res, HomeCustomerState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
+  $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class _$BillStateCopyWithImpl<$Res, $Val extends BillState>
-    implements $BillStateCopyWith<$Res> {
-  _$BillStateCopyWithImpl(this._value, this._then);
+class _$HomeCustomerStateCopyWithImpl<$Res, $Val extends HomeCustomerState>
+    implements $HomeCustomerStateCopyWith<$Res> {
+  _$HomeCustomerStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -48,7 +48,6 @@ class _$BillStateCopyWithImpl<$Res, $Val extends BillState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
-    Object? listOrder = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -59,31 +58,27 @@ class _$BillStateCopyWithImpl<$Res, $Val extends BillState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      listOrder: null == listOrder
-          ? _value.listOrder
-          : listOrder // ignore: cast_nullable_to_non_nullable
-              as List<ListOrderData>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$BillStateImplCopyWith<$Res>
-    implements $BillStateCopyWith<$Res> {
-  factory _$$BillStateImplCopyWith(
-          _$BillStateImpl value, $Res Function(_$BillStateImpl) then) =
-      __$$BillStateImplCopyWithImpl<$Res>;
+abstract class _$$HomeCustomerStateImplCopyWith<$Res>
+    implements $HomeCustomerStateCopyWith<$Res> {
+  factory _$$HomeCustomerStateImplCopyWith(_$HomeCustomerStateImpl value,
+          $Res Function(_$HomeCustomerStateImpl) then) =
+      __$$HomeCustomerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
+  $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$BillStateImplCopyWithImpl<$Res>
-    extends _$BillStateCopyWithImpl<$Res, _$BillStateImpl>
-    implements _$$BillStateImplCopyWith<$Res> {
-  __$$BillStateImplCopyWithImpl(
-      _$BillStateImpl _value, $Res Function(_$BillStateImpl) _then)
+class __$$HomeCustomerStateImplCopyWithImpl<$Res>
+    extends _$HomeCustomerStateCopyWithImpl<$Res, _$HomeCustomerStateImpl>
+    implements _$$HomeCustomerStateImplCopyWith<$Res> {
+  __$$HomeCustomerStateImplCopyWithImpl(_$HomeCustomerStateImpl _value,
+      $Res Function(_$HomeCustomerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,9 +86,8 @@ class __$$BillStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
-    Object? listOrder = null,
   }) {
-    return _then(_$BillStateImpl(
+    return _then(_$HomeCustomerStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,77 +96,57 @@ class __$$BillStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      listOrder: null == listOrder
-          ? _value._listOrder
-          : listOrder // ignore: cast_nullable_to_non_nullable
-              as List<ListOrderData>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$BillStateImpl implements _BillState {
-  const _$BillStateImpl(
-      {required this.isLoading,
-      this.error,
-      required final List<ListOrderData> listOrder})
-      : _listOrder = listOrder;
+class _$HomeCustomerStateImpl implements _HomeCustomerState {
+  const _$HomeCustomerStateImpl({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
   @override
   final String? error;
-  final List<ListOrderData> _listOrder;
-  @override
-  List<ListOrderData> get listOrder {
-    if (_listOrder is EqualUnmodifiableListView) return _listOrder;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_listOrder);
-  }
 
   @override
   String toString() {
-    return 'BillState(isLoading: $isLoading, error: $error, listOrder: $listOrder)';
+    return 'HomeCustomerState(isLoading: $isLoading, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BillStateImpl &&
+            other is _$HomeCustomerStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality()
-                .equals(other._listOrder, _listOrder));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error,
-      const DeepCollectionEquality().hash(_listOrder));
+  int get hashCode => Object.hash(runtimeType, isLoading, error);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BillStateImplCopyWith<_$BillStateImpl> get copyWith =>
-      __$$BillStateImplCopyWithImpl<_$BillStateImpl>(this, _$identity);
+  _$$HomeCustomerStateImplCopyWith<_$HomeCustomerStateImpl> get copyWith =>
+      __$$HomeCustomerStateImplCopyWithImpl<_$HomeCustomerStateImpl>(
+          this, _$identity);
 }
 
-abstract class _BillState implements BillState {
-  const factory _BillState(
+abstract class _HomeCustomerState implements HomeCustomerState {
+  const factory _HomeCustomerState(
       {required final bool isLoading,
-      final String? error,
-      required final List<ListOrderData> listOrder}) = _$BillStateImpl;
+      final String? error}) = _$HomeCustomerStateImpl;
 
   @override
   bool get isLoading;
   @override
   String? get error;
   @override
-  List<ListOrderData> get listOrder;
-  @override
   @JsonKey(ignore: true)
-  _$$BillStateImplCopyWith<_$BillStateImpl> get copyWith =>
+  _$$HomeCustomerStateImplCopyWith<_$HomeCustomerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

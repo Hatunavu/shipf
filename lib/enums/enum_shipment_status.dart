@@ -87,33 +87,33 @@ extension EnumRole on ShipmentStatus {
   String display() {
     switch (this) {
       case ShipmentStatus.neww:
-        return 'NEW';
+        return 'Đơn mới';
       case ShipmentStatus.pendingPickup:
-        return "PENDING_PICKUP";
+        return "Chờ lấy hàng";
       case ShipmentStatus.pickingUp:
-        return "PICKING_UP";
+        return "Đang lấy hàng";
       case ShipmentStatus.pickedUp:
-        return "PICKED_UP";
+        return "Đã lấy hàng";
       case ShipmentStatus.failPickup:
-        return "FAIL_PICKUP";
+        return "Lấy hàng thất bại";
       case ShipmentStatus.pendingTransit:
-        return "PENDING_TRANSIT";
+        return "Chờ trung chuyển";
       case ShipmentStatus.transiting:
-        return "TRANSITING";
+        return "Đang trung chuyển";
       case ShipmentStatus.delivering:
-        return "DELIVERING";
+        return "Đang giao hàng";
       case ShipmentStatus.successDelivery:
-        return "SUCCESS_DELIVERY";
+        return "Giao thành công";
       case ShipmentStatus.failDelivery:
-        return "FAIL_DELIVERY";
+        return "Giao thất bại";
       case ShipmentStatus.pendingReturn:
-        return "PENDING_RETURN";
+        return "Chờ chuyển hoàn";
       case ShipmentStatus.returning:
-        return "RETURNING";
+        return "Đang hoàn";
       case ShipmentStatus.returned:
-        return "RETURNED";
+        return "Đã hoàn";
       case ShipmentStatus.canceled:
-        return "CANCELED";
+        return "Đã huỷ";
     }
   }
 }

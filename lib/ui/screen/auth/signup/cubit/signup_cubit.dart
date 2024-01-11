@@ -5,7 +5,6 @@ import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/auth/signup/cubit/signup_state.dart';
-import 'package:shipf/ui/services/account_services.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -31,20 +30,6 @@ class SignupCubit extends Cubit<SignupState> {
         response = await mainRepository.registerCustomer(registerRequest);
       }
       ToastUtils.showSuccess(response.message);
-      emit(state.copyWith(isLoading: false));
-      return true;
-    } on DioError catch (e) {
-      final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isLoading: false, error: errorMessage));
-      return false;
-    }
-  }
-
-  Future<bool> registerBusiness(RegisterRequest registerRequest) async {
-    try {
-      emit(state.copyWith(isLoading: true));
-      await mainRepository.registerBusiness(registerRequest);
-      AccountServices().saveUserToken('token');
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

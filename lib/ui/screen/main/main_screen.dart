@@ -7,46 +7,47 @@ import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/auth/login/login_screen.dart';
-import 'package:shipf/ui/screen/main/bill/bill_screen.dart';
+import 'package:shipf/ui/screen/customer/home_customer/home_customer_screen.dart';
 import 'package:shipf/ui/screen/main/feed/feed_screen.dart';
-import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/route/route_screen.dart';
+import 'package:shipf/ui/screen/shipper/bill_shipper/bill_shipper_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int tabIndex;
+  const MainScreen({Key? key, this.tabIndex = 0}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  var tabIndex = 0;
+  late int tabIndex;
   @override
   void initState() {
+    tabIndex = widget.tabIndex;
     super.initState();
   }
 
   final _screenListCustomer = [
-    HomeScreen(),
-    FeedScreen(),
-    BillScreen(),
+    const HomeCustomerScreen(),
+    RouteScreen(),
+    RouteScreen(),
     RouteScreen()
   ];
   final _screenListShipper = [
-    HomeScreen(),
+    HomeShipperScreen(),
     FeedScreen(),
-    BillScreen(),
+    const BillShipperScreen(),
     RouteScreen()
   ];
 
   final _screenListlogout = [
     FeedScreen(),
     LoginScreen(),
-    LoginScreen(),
-    LoginScreen()
   ];
 
   void changeTabIndex(int index) {

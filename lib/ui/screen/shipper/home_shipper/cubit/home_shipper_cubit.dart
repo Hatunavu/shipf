@@ -4,12 +4,12 @@ import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/foundation/constant.dart';
-import 'package:shipf/ui/screen/main/home/cubit/home_state.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/cubit/home_shipper_state.dart';
 
 const homePageAssets = "assets/data/homepage.json";
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeState.initial());
+class HomeShipperCubit extends Cubit<HomeShipperState> {
+  HomeShipperCubit() : super(HomeShipperState.initial());
 
   Future<void> updateOrderStatus() async {
     try {

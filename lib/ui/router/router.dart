@@ -7,9 +7,9 @@ import 'package:shipf/ui/screen/auth/reset_pass/reset_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/signup/screen/verify_screen.dart';
 import 'package:shipf/ui/screen/auth/signup/signup_screen.dart';
 import 'package:shipf/ui/screen/auth/splash/splash_screen.dart';
+import 'package:shipf/ui/screen/customer/home_customer/home_customer_screen.dart';
 import 'package:shipf/ui/screen/main/add_address/add_address_screen.dart';
 import 'package:shipf/ui/screen/main/address/address_screen.dart';
-import 'package:shipf/ui/screen/main/home/home_screen.dart';
 import 'package:shipf/ui/screen/main/main_screen.dart';
 import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
 import 'package:shipf/ui/screen/main/order/order_screen.dart';
@@ -17,6 +17,9 @@ import 'package:shipf/ui/screen/main/order/screens/order_success_screen.dart';
 import 'package:shipf/ui/screen/main/setting/screen/update_info/update_info_screen.dart';
 import 'package:shipf/ui/screen/main/setting/setting_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/order_list_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/trips_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -27,11 +30,7 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
         name: "SplashPage",
         path: AppRoutes.splashScreen,
         initial: true),
-    AutoRoute(
-      page: HomeScreen,
-      name: "HomePage",
-      path: AppRoutes.homeScreen,
-    ),
+
     AutoRoute(
       page: LoginScreen,
       name: "LoginPage",
@@ -96,6 +95,29 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
       page: OrderSuccessScreen,
       name: "OrderSuccessPage",
       path: AppRoutes.orderSuccessScreen,
+    ),
+
+    //customer
+    AutoRoute(
+      page: HomeCustomerScreen,
+      name: "HomeCustomerPage",
+      path: AppRoutes.homeCustomerScreen,
+    ),
+    //shipper
+    AutoRoute(
+      page: HomeShipperScreen,
+      name: "HomeShipperPage",
+      path: AppRoutes.homeShipperScreen,
+    ),
+    AutoRoute(
+      page: OrderListScreen,
+      name: "OrderListPage",
+      path: AppRoutes.orderList,
+    ),
+    AutoRoute(
+      page: TripsScreen,
+      name: "TripsPage",
+      path: AppRoutes.trips,
     ),
   ],
 )

@@ -196,7 +196,7 @@ class _SettingScreenState extends State<SettingScreen> {
       onTap: () {
         AccountServices().saveUserToken('');
         appCubit.updateRole(RoleType.logout);
-        context.router.push(const MainPage());
+        context.router.push(MainPage());
       },
       child: Container(
         decoration: BoxDecoration(

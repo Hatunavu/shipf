@@ -29,7 +29,7 @@ class AuthInterceptor extends Interceptor {
     if (err.response?.statusCode == 401) {
       AccountServices().saveUserToken('');
       appCubit.updateRole(RoleType.logout);
-      getIt<AppRouter>().push(const MainPage());
+      getIt<AppRouter>().push(MainPage());
       ToastUtils.showFail('Tài khoản đã hết hạn đăng nhập');
     }
     super.onError(err, handler);

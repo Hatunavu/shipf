@@ -5,9 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/statistic/statistic.dart';
 import 'package:shipf/foundation/app_path.dart';
+import 'package:shipf/injection.dart';
 import 'package:shipf/ui/router/router.gr.dart';
-import 'package:shipf/ui/screen/main/home/cubit/home_cubit.dart';
-import 'package:shipf/ui/screen/main/home/cubit/home_state.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/cubit/home_shipper_cubit.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/cubit/home_shipper_state.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -25,26 +26,51 @@ final List<Statistic> statistics = [
   Statistic(content: 'Đối soát', data: '0', color: '0xffff4554'),
 ];
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+class HomeShipperScreen extends StatefulWidget {
+  HomeShipperScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeShipperScreen> createState() => _HomeShipperScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeShipperScreenState extends State<HomeShipperScreen> {
   final List<HomeAction> actions = [
-    HomeAction(content: 'Chuyển lấy', icon: AppPath.pick),
-    HomeAction(content: 'Chuyến giao', icon: AppPath.deliver),
-    HomeAction(content: 'Trung chuyển', icon: AppPath.transshipment),
-    HomeAction(content: 'Đơn lấy', icon: AppPath.application),
-    HomeAction(content: 'Đơn giao', icon: AppPath.deliverOrder),
+    HomeAction(
+        content: 'Chuyển lấy',
+        icon: AppPath.pick,
+        onTap: () {
+          getIt<AppRouter>().push(const TripsPage());
+        }),
+    HomeAction(
+        content: 'Chuyến giao',
+        icon: AppPath.deliver,
+        onTap: () {
+          getIt<AppRouter>().push(const TripsPage());
+        }),
+    HomeAction(
+        content: 'Trung chuyển',
+        icon: AppPath.transshipment,
+        onTap: () {
+          getIt<AppRouter>().push(const TripsPage());
+        }),
+    HomeAction(
+        content: 'Đơn lấy',
+        icon: AppPath.application,
+        onTap: () {
+          getIt<AppRouter>().push(const OrderListPage());
+        }),
+    HomeAction(
+        content: 'Đơn giao',
+        icon: AppPath.deliverOrder,
+        onTap: () {
+          getIt<AppRouter>().push(const OrderListPage());
+        }),
     HomeAction(content: 'Chuyến hoàn', icon: AppPath.returnTrip),
     HomeAction(content: 'Đơn thất bại', icon: AppPath.failed),
     HomeAction(content: 'Đơn thành công', icon: AppPath.success),
     HomeAction(content: 'Đối soát', icon: AppPath.transfer),
   ];
-  late HomeCubit homeCubit;
+  late HomeShipperCubit homeShipperCubit;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,14 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
       ),
       body: BlocProvider(
-        create: (context) => HomeCubit(),
-        child: BlocConsumer<HomeCubit, HomeState>(
+        create: (context) => HomeShipperCubit(),
+        child: BlocConsumer<HomeShipperCubit, HomeShipperState>(
           listener: (context, state) {},
           builder: (context, state) {
-            homeCubit = context.read<HomeCubit>();
+            homeShipperCubit = context.read<HomeShipperCubit>();
             return SingleChildScrollView(
               child: Column(
-                children: [statistic(), action(), ],
+                children: [
+                  statistic(),
+                  action(),
+                ],
               ),
             );
           },
@@ -139,9 +168,10 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
-          onTap: () {
-            ToastUtils.showNeutral('Tính năng đăng được phát triển');
-          },
+          onTap: actions[index].onTap ??
+              () {
+                ToastUtils.showNeutral('Tính năng đăng được phát triển');
+              },
           child: Container(
             margin: EdgeInsets.only(
                 right: kDefaultPaddingWidthScreen,

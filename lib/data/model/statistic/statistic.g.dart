@@ -17,14 +17,3 @@ Map<String, dynamic> _$StatisticToJson(Statistic instance) => <String, dynamic>{
       'data': instance.data,
       'color': instance.color,
     };
-
-HomeAction _$HomeActionFromJson(Map<String, dynamic> json) => HomeAction(
-      content: json['content'] as String? ?? '',
-      icon: json['icon'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$HomeActionToJson(HomeAction instance) =>
-    <String, dynamic>{
-      'content': instance.content,
-      'icon': instance.icon,
-    };

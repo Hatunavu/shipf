@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shipf/ui/screen/main/bill/cubit/bill_cubit.dart';
-import 'package:shipf/ui/screen/main/bill/cubit/bill_state.dart';
+import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_cubit.dart';
+import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_state.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
@@ -9,19 +9,19 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class BillScreen extends StatefulWidget {
-  BillScreen({Key? key}) : super(key: key);
+class BillShipperScreen extends StatefulWidget {
+  const BillShipperScreen({Key? key}) : super(key: key);
 
   @override
-  State<BillScreen> createState() => _BillScreenState();
+  State<BillShipperScreen> createState() => _BillShipperScreenState();
 }
 
-class _BillScreenState extends State<BillScreen> {
+class _BillShipperScreenState extends State<BillShipperScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BillCubit()..getListOrder(),
-      child: BlocConsumer<BillCubit, BillState>(
+      create: (context) => BillShipperCubit(),
+      child: BlocConsumer<BillShipperCubit, BillShipperState>(
         listener: (context, state) {},
         builder: (context, state) {
           return BaseScreen(

@@ -177,8 +177,8 @@ class SignupScreen extends StatelessWidget {
                                                               _mailPassController
                                                                   .text));
                                                   success
-                                                      ? context.router
-                                                          .push(LoginPage())
+                                                      ? context.router.push(
+                                                          MainPage(tabIndex: 1))
                                                       : null;
                                                 }
                                               }
@@ -254,7 +254,6 @@ class SignupScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           cubit.updateRole(role);
-          appCubit.updateRole(role);
         },
         child: Container(
           alignment: Alignment.center,

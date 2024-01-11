@@ -73,7 +73,7 @@ class NotLoginScreen extends StatelessWidget {
                       PrimaryButton(
                         onPressed: () {
                           // context.router.push(MainPage());
-                          context.router.replace(const MainPage());
+                          context.router.replace(MainPage());
                         },
                         label: "Đăng nhập ngay",
                       ),

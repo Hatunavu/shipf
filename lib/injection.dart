@@ -5,6 +5,7 @@ import 'package:shipf/data/repository/auth/auth_repository.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/app_cubit.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/shared/widget/toast.dart';
 
 final getIt = GetIt.instance;
@@ -22,6 +23,7 @@ void configureDependencies() {
         baseUrl: ApiConstants.baseUrl,
       ));
   mainRepository = getIt.get<MainRepository>();
+  getIt.registerSingleton<AppRouter>(AppRouter());
 }
 
 class _DioDi extends DioDi {}

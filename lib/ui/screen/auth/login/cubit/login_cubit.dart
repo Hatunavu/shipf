@@ -7,8 +7,6 @@ import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/screen/auth/login/cubit/login_state.dart';
 import 'package:shipf/ui/services/account_services.dart';
 
-const homePageAssets = "assets/data/homepage.json";
-
 class LoginCubit extends Cubit<LoginState> {
   final MainRepository mainRepository;
   final AppCubit appCubit;
@@ -55,7 +53,8 @@ class LoginCubit extends Cubit<LoginState> {
       AccountServices().saveUserToken(response.data?.accessToken ?? '');
       AccountServices().saveAccountType(
           response.data?.user?.role?.roleType.toJsonString() ?? '');
-      appCubit.updateRole(response.data?.user?.role?.roleType);
+      appCubit
+          .updateRole(response.data?.user?.role?.roleType ?? RoleType.logout);
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

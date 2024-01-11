@@ -21,9 +21,8 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(languageCode: languageCode));
   }
 
-  void updateRole(RoleType? role) {
-    AccountServices()
-        .saveAccountType(role == null ? '' : roleTypeToString(role));
+  void updateRole(RoleType role) {
+    AccountServices().saveAccountType(roleTypeToString(role));
     emit(state.copyWith(role: role));
   }
 }

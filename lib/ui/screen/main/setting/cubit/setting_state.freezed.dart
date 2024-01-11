@@ -76,11 +76,11 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
 }
 
 /// @nodoc
-abstract class _$$_SettingStateCopyWith<$Res>
+abstract class _$$SettingStateImplCopyWith<$Res>
     implements $SettingStateCopyWith<$Res> {
-  factory _$$_SettingStateCopyWith(
-          _$_SettingState value, $Res Function(_$_SettingState) then) =
-      __$$_SettingStateCopyWithImpl<$Res>;
+  factory _$$SettingStateImplCopyWith(
+          _$SettingStateImpl value, $Res Function(_$SettingStateImpl) then) =
+      __$$SettingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_SettingStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SettingStateCopyWithImpl<$Res>
-    extends _$SettingStateCopyWithImpl<$Res, _$_SettingState>
-    implements _$$_SettingStateCopyWith<$Res> {
-  __$$_SettingStateCopyWithImpl(
-      _$_SettingState _value, $Res Function(_$_SettingState) _then)
+class __$$SettingStateImplCopyWithImpl<$Res>
+    extends _$SettingStateCopyWithImpl<$Res, _$SettingStateImpl>
+    implements _$$SettingStateImplCopyWith<$Res> {
+  __$$SettingStateImplCopyWithImpl(
+      _$SettingStateImpl _value, $Res Function(_$SettingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_SettingStateCopyWithImpl<$Res>
     Object? userInfo = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_SettingState(
+    return _then(_$SettingStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_SettingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingState implements _SettingState {
-  const _$_SettingState(
+class _$SettingStateImpl implements _SettingState {
+  const _$SettingStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.userInfo,
@@ -148,10 +148,10 @@ class _$_SettingState implements _SettingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingState &&
+            other is _$SettingStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -168,8 +168,8 @@ class _$_SettingState implements _SettingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
-      __$$_SettingStateCopyWithImpl<_$_SettingState>(this, _$identity);
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
+      __$$SettingStateImplCopyWithImpl<_$SettingStateImpl>(this, _$identity);
 }
 
 abstract class _SettingState implements SettingState {
@@ -177,7 +177,7 @@ abstract class _SettingState implements SettingState {
       {required final bool isLoading,
       required final bool isFirstLoad,
       final AccountData? userInfo,
-      final String? error}) = _$_SettingState;
+      final String? error}) = _$SettingStateImpl;
 
   @override
   bool get isLoading;
@@ -189,6 +189,6 @@ abstract class _SettingState implements SettingState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

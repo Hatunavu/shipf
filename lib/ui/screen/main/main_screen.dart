@@ -41,14 +41,13 @@ class _MainScreenState extends State<MainScreen> {
     BillScreen(),
     RouteScreen()
   ];
-  final _screenListBusiness = [
-    HomeScreen(),
-    FeedScreen(),
-    BillScreen(),
-    RouteScreen()
-  ];
 
-  final _screenListNotLogin = [FeedScreen(), LoginScreen()];
+  final _screenListlogout = [
+    FeedScreen(),
+    LoginScreen(),
+    LoginScreen(),
+    LoginScreen()
+  ];
 
   void changeTabIndex(int index) {
     setState(() {
@@ -61,18 +60,16 @@ class _MainScreenState extends State<MainScreen> {
     RoleType? role = context.read<AppCubit>().state.role;
 
     getScreen() {
-      if (role == RoleType.customer) {
+      if (role == RoleType.customer || role == RoleType.business) {
         return _screenListCustomer[tabIndex];
       } else if (role == RoleType.shipper) {
         return _screenListShipper[tabIndex];
-      } else if (role == RoleType.business) {
-        return _screenListBusiness[tabIndex];
       } else {
-        return _screenListNotLogin[tabIndex];
+        return _screenListlogout[tabIndex];
       }
     }
 
-    final List<Widget> bottomBarNotLogin = [
+    final List<Widget> bottomBarlogout = [
       Expanded(
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
@@ -85,13 +82,13 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                tabIndex == 0 ? Ionicons.home : Ionicons.home_outline,
+                tabIndex == 0 ? Ionicons.newspaper : Ionicons.newspaper_outline,
                 size: 20.sp,
                 color: primaryColor,
               ),
               VerticalSpace(2.h),
               Text(
-                'Trang Chủ',
+                'Tin Tức',
                 style: textBottomBar,
               )
             ],
@@ -110,13 +107,13 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                tabIndex == 1 ? Ionicons.newspaper : Ionicons.newspaper_outline,
+                tabIndex == 1 ? Ionicons.log_in : Ionicons.log_in_outline,
                 size: 20.sp,
                 color: primaryColor,
               ),
               VerticalSpace(2.h),
               Text(
-                'Bảng Tin',
+                'Đăng Nhập',
                 style: textBottomBar,
               )
             ],
@@ -168,8 +165,10 @@ class _MainScreenState extends State<MainScreen> {
               ),
               VerticalSpace(2.h),
               Text(
-                'Bảng Tin',
+                'Quản Lý Đơn',
                 style: textBottomBar,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               )
             ],
           ),
@@ -218,8 +217,10 @@ class _MainScreenState extends State<MainScreen> {
               ),
               VerticalSpace(2.h),
               Text(
-                'DS Vận Đơn',
+                'Quản Lý COD',
                 style: textBottomBar,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               )
             ],
           ),
@@ -243,7 +244,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               VerticalSpace(2.h),
               Text(
-                'Lộ Trình',
+                'Cước',
                 style: textBottomBar,
               )
             ],
@@ -295,7 +296,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               VerticalSpace(2.h),
               Text(
-                'Bảng Tin',
+                'Tin Tức',
                 style: textBottomBar,
               )
             ],
@@ -320,7 +321,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               VerticalSpace(2.h),
               Text(
-                'DS Vận Đơn',
+                'Vận Đơn',
                 style: textBottomBar,
               )
             ],
@@ -354,138 +355,12 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ];
 
-    final List<Widget> bottomBarBusiness = [
-      Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            setState(() {
-              tabIndex = 0;
-            });
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                tabIndex == 0 ? Ionicons.home : Ionicons.home_outline,
-                size: 20.sp,
-                color: primaryColor,
-              ),
-              VerticalSpace(2.h),
-              Text(
-                'Trang Chủ',
-                style: textBottomBar,
-              )
-            ],
-          ),
-        ),
-      ),
-      Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            setState(() {
-              tabIndex = 1;
-            });
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                tabIndex == 1 ? Ionicons.newspaper : Ionicons.newspaper_outline,
-                size: 20.sp,
-                color: primaryColor,
-              ),
-              VerticalSpace(2.h),
-              Text(
-                'Bảng Tin',
-                style: textBottomBar,
-              )
-            ],
-          ),
-        ),
-      ),
-      Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            context.router.push(OrderPage());
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 35.w,
-                width: 35.w,
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(13)),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 20.sp,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            setState(() {
-              tabIndex = 2;
-            });
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                tabIndex == 2 ? Ionicons.list : Ionicons.list_outline,
-                size: 20.sp,
-                color: primaryColor,
-              ),
-              VerticalSpace(2.h),
-              Text(
-                'DS Vận Đơn',
-                style: textBottomBar,
-              )
-            ],
-          ),
-        ),
-      ),
-      Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            setState(() {
-              tabIndex = 3;
-            });
-          },
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                tabIndex == 3 ? Ionicons.location : Ionicons.location_outline,
-                size: 20.sp,
-                color: primaryColor,
-              ),
-              VerticalSpace(2.h),
-              Text(
-                'Lộ Trình',
-                style: textBottomBar,
-              )
-            ],
-          ),
-        ),
-      ),
-    ];
     return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
+          backgroundColor: Colors.white,
           body: getScreen(),
           bottomNavigationBar: SafeArea(
             child: Container(
@@ -496,13 +371,12 @@ class _MainScreenState extends State<MainScreen> {
                       top: BorderSide(
                           color: Colors.grey.withOpacity(0.5), width: 0.5))),
               child: Row(
-                  children: role == RoleType.customer
-                      ? bottomBarCustomer
-                      : role == RoleType.shipper
-                          ? bottomBarShipper
-                          : role == RoleType.business
-                              ? bottomBarBusiness
-                              : bottomBarNotLogin),
+                  children:
+                      role == RoleType.customer || role == RoleType.business
+                          ? bottomBarCustomer
+                          : role == RoleType.shipper
+                              ? bottomBarShipper
+                              : bottomBarlogout),
             ),
           )),
     );

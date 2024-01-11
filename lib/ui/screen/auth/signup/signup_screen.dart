@@ -258,7 +258,8 @@ class SignupScreen extends StatelessWidget {
         },
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: kDefaultPaddingHeightScreen),
+          padding: EdgeInsets.symmetric(
+              vertical: kDefaultPaddingHeightScreen, horizontal: 2.w),
           decoration: BoxDecoration(
               border: Border.all(color: primaryColor),
               color: isActive ? primaryColor : Colors.white,
@@ -271,6 +272,8 @@ class SignupScreen extends StatelessWidget {
                       : Radius.zero)),
           child: Text(
             role.display(),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: primarySubTitleStyle.copyWith(
               color: isActive ? Colors.white : primaryColor,
             ),

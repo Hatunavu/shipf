@@ -7,12 +7,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/injection.dart';
 import 'package:shipf/l10n/l10n.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/app_state.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 
-final _appRouter = AppRouter();
+final _appRouter = getIt<AppRouter>();
 final _botToastBuilder = BotToastInit();
 
 class MyApp extends StatelessWidget {

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppState {
   UserSession? get userSession => throw _privateConstructorUsedError;
   String get languageCode => throw _privateConstructorUsedError;
-  RoleType get role => throw _privateConstructorUsedError;
+  RoleType? get role => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({UserSession? userSession, String languageCode, RoleType role});
+  $Res call({UserSession? userSession, String languageCode, RoleType? role});
 }
 
 /// @nodoc
@@ -48,7 +48,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   $Res call({
     Object? userSession = freezed,
     Object? languageCode = null,
-    Object? role = null,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
       userSession: freezed == userSession
@@ -59,31 +59,30 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
               as String,
-      role: null == role
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as RoleType,
+              as RoleType?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$AppStateImplCopyWith<$Res>
-    implements $AppStateCopyWith<$Res> {
-  factory _$$AppStateImplCopyWith(
-          _$AppStateImpl value, $Res Function(_$AppStateImpl) then) =
-      __$$AppStateImplCopyWithImpl<$Res>;
+abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
+  factory _$$_AppStateCopyWith(
+          _$_AppState value, $Res Function(_$_AppState) then) =
+      __$$_AppStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserSession? userSession, String languageCode, RoleType role});
+  $Res call({UserSession? userSession, String languageCode, RoleType? role});
 }
 
 /// @nodoc
-class __$$AppStateImplCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res, _$AppStateImpl>
-    implements _$$AppStateImplCopyWith<$Res> {
-  __$$AppStateImplCopyWithImpl(
-      _$AppStateImpl _value, $Res Function(_$AppStateImpl) _then)
+class __$$_AppStateCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_AppState>
+    implements _$$_AppStateCopyWith<$Res> {
+  __$$_AppStateCopyWithImpl(
+      _$_AppState _value, $Res Function(_$_AppState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,9 +90,9 @@ class __$$AppStateImplCopyWithImpl<$Res>
   $Res call({
     Object? userSession = freezed,
     Object? languageCode = null,
-    Object? role = null,
+    Object? role = freezed,
   }) {
-    return _then(_$AppStateImpl(
+    return _then(_$_AppState(
       userSession: freezed == userSession
           ? _value.userSession
           : userSession // ignore: cast_nullable_to_non_nullable
@@ -102,26 +101,25 @@ class __$$AppStateImplCopyWithImpl<$Res>
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
               as String,
-      role: null == role
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as RoleType,
+              as RoleType?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
-  const _$AppStateImpl(
-      {this.userSession, required this.languageCode, required this.role});
+class _$_AppState with DiagnosticableTreeMixin implements _AppState {
+  const _$_AppState({this.userSession, required this.languageCode, this.role});
 
   @override
   final UserSession? userSession;
   @override
   final String languageCode;
   @override
-  final RoleType role;
+  final RoleType? role;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -139,10 +137,10 @@ class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppStateImpl &&
+            other is _$_AppState &&
             (identical(other.userSession, userSession) ||
                 other.userSession == userSession) &&
             (identical(other.languageCode, languageCode) ||
@@ -156,24 +154,24 @@ class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
-      __$$AppStateImplCopyWithImpl<_$AppStateImpl>(this, _$identity);
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
+      __$$_AppStateCopyWithImpl<_$_AppState>(this, _$identity);
 }
 
 abstract class _AppState implements AppState {
   const factory _AppState(
       {final UserSession? userSession,
       required final String languageCode,
-      required final RoleType role}) = _$AppStateImpl;
+      final RoleType? role}) = _$_AppState;
 
   @override
   UserSession? get userSession;
   @override
   String get languageCode;
   @override
-  RoleType get role;
+  RoleType? get role;
   @override
   @JsonKey(ignore: true)
-  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
       throw _privateConstructorUsedError;
 }

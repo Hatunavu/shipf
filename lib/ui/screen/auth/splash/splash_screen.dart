@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //   print("da co loi xay ra");
       // }
     } else {
-      context.router.replace(LoginPage());
+      context.router.replace(MainPage());
     }
 
     // }

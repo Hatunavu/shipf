@@ -55,6 +55,7 @@ class LoginCubit extends Cubit<LoginState> {
       AccountServices().saveUserToken(response.data?.accessToken ?? '');
       AccountServices().saveAccountType(
           response.data?.user?.role?.roleType.toJsonString() ?? '');
+      appCubit.updateRole(response.data?.user?.role?.roleType);
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

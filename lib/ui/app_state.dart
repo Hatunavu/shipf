@@ -11,8 +11,8 @@ class AppState with _$AppState {
   const factory AppState({
     UserSession? userSession,
     required String languageCode,
-    required RoleType role,
+    RoleType? role,
   }) = _AppState;
-  factory AppState.initial() => const AppState(
-      userSession: null, languageCode: '', role: RoleType.customer);
+  factory AppState.initial() =>
+      const AppState(userSession: null, languageCode: '');
 }

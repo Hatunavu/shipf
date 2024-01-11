@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/foundation/app_path.dart';
+import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_cubit.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_state.dart';
@@ -193,7 +194,8 @@ class _SettingScreenState extends State<SettingScreen> {
     return GestureDetector(
       onTap: () {
         AccountServices().saveUserToken('');
-        context.router.push(LoginPage());
+        context.read<AppCubit>().updateRole(null);
+        context.router.push(MainPage());
       },
       child: Container(
         decoration: BoxDecoration(

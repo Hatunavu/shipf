@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/cubit/trips_cubit.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/cubit/trips_state.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/cubit/order_complete_cubit.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/cubit/order_complete_state.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 
-class TripsScreen extends StatefulWidget {
-  const TripsScreen({Key? key}) : super(key: key);
+class OrderCompleteScreen extends StatefulWidget {
+  const OrderCompleteScreen({Key? key}) : super(key: key);
 
   @override
-  State<TripsScreen> createState() => _TripsScreenState();
+  State<OrderCompleteScreen> createState() => _OrderCompleteScreenState();
 }
 
-class _TripsScreenState extends State<TripsScreen> {
+class _OrderCompleteScreenState extends State<OrderCompleteScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TripsCubit(),
-      child: BlocConsumer<TripsCubit, TripsState>(
+      create: (context) => OrderCompleteCubit(),
+      child: BlocConsumer<OrderCompleteCubit, OrderCompleteState>(
         listener: (context, state) {},
         builder: (context, state) {
           return BaseScreen(
-              title: 'Danh sách chuyến',
+              title: 'Danh sách đơn hàng',
               leading: InkWell(
                 onTap: () {
                   Navigator.pop(context);
@@ -35,7 +36,9 @@ class _TripsScreenState extends State<TripsScreen> {
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return const OrderItem();
+                    return const OrderItem(
+                      shipmentStatus: ShipmentStatus.successDelivery,
+                    );
                   }));
         },
       ),

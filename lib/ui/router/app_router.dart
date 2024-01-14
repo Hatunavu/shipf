@@ -21,4 +21,5 @@ class AppRoutes {
   static const String homeShipperScreen = "/home_shipper";
   static const String orderList = "/order_list";
   static const String trips = "/trips";
+  static const String orderComplete = "/order_complete";
 }

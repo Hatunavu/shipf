@@ -18,6 +18,7 @@ import 'package:shipf/ui/screen/main/setting/screen/update_info/update_info_scre
 import 'package:shipf/ui/screen/main/setting/setting_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/order_complete_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/order_list_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/trips_screen.dart';
 
@@ -118,6 +119,11 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/trips_screen.d
       page: TripsScreen,
       name: "TripsPage",
       path: AppRoutes.trips,
+    ),
+    AutoRoute(
+      page: OrderCompleteScreen,
+      name: "OrderCompletePage",
+      path: AppRoutes.orderComplete,
     ),
   ],
 )

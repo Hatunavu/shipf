@@ -65,9 +65,24 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
         onTap: () {
           getIt<AppRouter>().push(const OrderListPage());
         }),
-    HomeAction(content: 'Chuyến hoàn', icon: AppPath.returnTrip),
-    HomeAction(content: 'Đơn thất bại', icon: AppPath.failed),
-    HomeAction(content: 'Đơn thành công', icon: AppPath.success),
+    HomeAction(
+        content: 'Chuyến hoàn',
+        icon: AppPath.returnTrip,
+        onTap: () {
+          getIt<AppRouter>().push(const OrderListPage());
+        }),
+    HomeAction(
+        content: 'Đơn thất bại',
+        icon: AppPath.failed,
+        onTap: () {
+          getIt<AppRouter>().push(const OrderCompletePage());
+        }),
+    HomeAction(
+        content: 'Đơn thành công',
+        icon: AppPath.success,
+        onTap: () {
+          getIt<AppRouter>().push(const OrderCompletePage());
+        }),
     HomeAction(content: 'Đối soát', icon: AppPath.transfer),
   ];
   late HomeShipperCubit homeShipperCubit;
@@ -100,14 +115,7 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
           listener: (context, state) {},
           builder: (context, state) {
             homeShipperCubit = context.read<HomeShipperCubit>();
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  statistic(),
-                  action(),
-                ],
-              ),
-            );
+            return action();
           },
         ),
       ),
@@ -158,13 +166,12 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
 
   Widget action() {
     return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(
           left: kDefaultPaddingWidthScreen, top: kDefaultPaddingHeightScreen),
       shrinkWrap: true,
       itemCount: actions.length,
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, childAspectRatio: 2 / 3),
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
@@ -179,15 +186,24 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
             decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(defaultBorderRadius)),
+            padding: EdgeInsets.symmetric(
+                vertical: kDefaultPaddingHeightScreen / 2,
+                horizontal: kDefaultPaddingWidthScreen / 2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                    height: 0.2.sw,
-                    width: 0.2.sw,
+                    height: 0.15.sw,
+                    width: 0.15.sw,
                     child: ImageCreator.assetImage(
                         imagePath: actions[index].icon, color: Colors.white)),
+                Text(
+                  '100',
+                  overflow: TextOverflow.ellipsis,
+                  style: primaryHeaderTitleStyle.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
                 Text(
                   actions[index].content,
                   style: primarySubTitleStyle.copyWith(

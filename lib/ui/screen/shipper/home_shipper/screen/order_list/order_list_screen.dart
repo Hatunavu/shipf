@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_state.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 
 class OrderListScreen extends StatefulWidget {
@@ -30,7 +32,14 @@ class _OrderListScreenState extends State<OrderListScreen> {
                   color: Colors.black,
                 ),
               ),
-              child: Center());
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return const OrderItem(
+                      shipmentStatus: ShipmentStatus.delivering,
+                    );
+                  }));
         },
       ),
     );

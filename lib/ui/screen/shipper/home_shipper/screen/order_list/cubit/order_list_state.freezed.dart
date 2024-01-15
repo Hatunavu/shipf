@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderListState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<ListOrderData> get listOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderListStateCopyWith<OrderListState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $OrderListStateCopyWith<$Res> {
           OrderListState value, $Res Function(OrderListState) then) =
       _$OrderListStateCopyWithImpl<$Res, OrderListState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? listOrder = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,27 +60,31 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      listOrder: null == listOrder
+          ? _value.listOrder
+          : listOrder // ignore: cast_nullable_to_non_nullable
+              as List<ListOrderData>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$OrderListStateImplCopyWith<$Res>
+abstract class _$$_OrderListStateCopyWith<$Res>
     implements $OrderListStateCopyWith<$Res> {
-  factory _$$OrderListStateImplCopyWith(_$OrderListStateImpl value,
-          $Res Function(_$OrderListStateImpl) then) =
-      __$$OrderListStateImplCopyWithImpl<$Res>;
+  factory _$$_OrderListStateCopyWith(
+          _$_OrderListState value, $Res Function(_$_OrderListState) then) =
+      __$$_OrderListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
 }
 
 /// @nodoc
-class __$$OrderListStateImplCopyWithImpl<$Res>
-    extends _$OrderListStateCopyWithImpl<$Res, _$OrderListStateImpl>
-    implements _$$OrderListStateImplCopyWith<$Res> {
-  __$$OrderListStateImplCopyWithImpl(
-      _$OrderListStateImpl _value, $Res Function(_$OrderListStateImpl) _then)
+class __$$_OrderListStateCopyWithImpl<$Res>
+    extends _$OrderListStateCopyWithImpl<$Res, _$_OrderListState>
+    implements _$$_OrderListStateCopyWith<$Res> {
+  __$$_OrderListStateCopyWithImpl(
+      _$_OrderListState _value, $Res Function(_$_OrderListState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,8 +92,9 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? listOrder = null,
   }) {
-    return _then(_$OrderListStateImpl(
+    return _then(_$_OrderListState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -96,57 +103,77 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      listOrder: null == listOrder
+          ? _value._listOrder
+          : listOrder // ignore: cast_nullable_to_non_nullable
+              as List<ListOrderData>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$OrderListStateImpl implements _OrderListState {
-  const _$OrderListStateImpl({required this.isLoading, this.error});
+class _$_OrderListState implements _OrderListState {
+  const _$_OrderListState(
+      {required this.isLoading,
+      this.error,
+      required final List<ListOrderData> listOrder})
+      : _listOrder = listOrder;
 
   @override
   final bool isLoading;
   @override
   final String? error;
+  final List<ListOrderData> _listOrder;
+  @override
+  List<ListOrderData> get listOrder {
+    if (_listOrder is EqualUnmodifiableListView) return _listOrder;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listOrder);
+  }
 
   @override
   String toString() {
-    return 'OrderListState(isLoading: $isLoading, error: $error)';
+    return 'OrderListState(isLoading: $isLoading, error: $error, listOrder: $listOrder)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderListStateImpl &&
+            other is _$_OrderListState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality()
+                .equals(other._listOrder, _listOrder));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error,
+      const DeepCollectionEquality().hash(_listOrder));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
-      __$$OrderListStateImplCopyWithImpl<_$OrderListStateImpl>(
-          this, _$identity);
+  _$$_OrderListStateCopyWith<_$_OrderListState> get copyWith =>
+      __$$_OrderListStateCopyWithImpl<_$_OrderListState>(this, _$identity);
 }
 
 abstract class _OrderListState implements OrderListState {
   const factory _OrderListState(
       {required final bool isLoading,
-      final String? error}) = _$OrderListStateImpl;
+      final String? error,
+      required final List<ListOrderData> listOrder}) = _$_OrderListState;
 
   @override
   bool get isLoading;
   @override
   String? get error;
   @override
+  List<ListOrderData> get listOrder;
+  @override
   @JsonKey(ignore: true)
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
+  _$$_OrderListStateCopyWith<_$_OrderListState> get copyWith =>
       throw _privateConstructorUsedError;
 }

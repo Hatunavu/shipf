@@ -68,22 +68,21 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
 }
 
 /// @nodoc
-abstract class _$$AppStateImplCopyWith<$Res>
-    implements $AppStateCopyWith<$Res> {
-  factory _$$AppStateImplCopyWith(
-          _$AppStateImpl value, $Res Function(_$AppStateImpl) then) =
-      __$$AppStateImplCopyWithImpl<$Res>;
+abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
+  factory _$$_AppStateCopyWith(
+          _$_AppState value, $Res Function(_$_AppState) then) =
+      __$$_AppStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({UserSession? userSession, String languageCode, RoleType? role});
 }
 
 /// @nodoc
-class __$$AppStateImplCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res, _$AppStateImpl>
-    implements _$$AppStateImplCopyWith<$Res> {
-  __$$AppStateImplCopyWithImpl(
-      _$AppStateImpl _value, $Res Function(_$AppStateImpl) _then)
+class __$$_AppStateCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_AppState>
+    implements _$$_AppStateCopyWith<$Res> {
+  __$$_AppStateCopyWithImpl(
+      _$_AppState _value, $Res Function(_$_AppState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +92,7 @@ class __$$AppStateImplCopyWithImpl<$Res>
     Object? languageCode = null,
     Object? role = freezed,
   }) {
-    return _then(_$AppStateImpl(
+    return _then(_$_AppState(
       userSession: freezed == userSession
           ? _value.userSession
           : userSession // ignore: cast_nullable_to_non_nullable
@@ -112,9 +111,8 @@ class __$$AppStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
-  const _$AppStateImpl(
-      {this.userSession, required this.languageCode, this.role});
+class _$_AppState with DiagnosticableTreeMixin implements _AppState {
+  const _$_AppState({this.userSession, required this.languageCode, this.role});
 
   @override
   final UserSession? userSession;
@@ -139,10 +137,10 @@ class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppStateImpl &&
+            other is _$_AppState &&
             (identical(other.userSession, userSession) ||
                 other.userSession == userSession) &&
             (identical(other.languageCode, languageCode) ||
@@ -156,15 +154,15 @@ class _$AppStateImpl with DiagnosticableTreeMixin implements _AppState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
-      __$$AppStateImplCopyWithImpl<_$AppStateImpl>(this, _$identity);
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
+      __$$_AppStateCopyWithImpl<_$_AppState>(this, _$identity);
 }
 
 abstract class _AppState implements AppState {
   const factory _AppState(
       {final UserSession? userSession,
       required final String languageCode,
-      final RoleType? role}) = _$AppStateImpl;
+      final RoleType? role}) = _$_AppState;
 
   @override
   UserSession? get userSession;
@@ -174,6 +172,6 @@ abstract class _AppState implements AppState {
   RoleType? get role;
   @override
   @JsonKey(ignore: true)
-  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
       throw _privateConstructorUsedError;
 }

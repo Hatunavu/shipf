@@ -86,11 +86,11 @@ class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
 }
 
 /// @nodoc
-abstract class _$$SignupStateImplCopyWith<$Res>
+abstract class _$$_SignupStateCopyWith<$Res>
     implements $SignupStateCopyWith<$Res> {
-  factory _$$SignupStateImplCopyWith(
-          _$SignupStateImpl value, $Res Function(_$SignupStateImpl) then) =
-      __$$SignupStateImplCopyWithImpl<$Res>;
+  factory _$$_SignupStateCopyWith(
+          _$_SignupState value, $Res Function(_$_SignupState) then) =
+      __$$_SignupStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$SignupStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SignupStateImplCopyWithImpl<$Res>
-    extends _$SignupStateCopyWithImpl<$Res, _$SignupStateImpl>
-    implements _$$SignupStateImplCopyWith<$Res> {
-  __$$SignupStateImplCopyWithImpl(
-      _$SignupStateImpl _value, $Res Function(_$SignupStateImpl) _then)
+class __$$_SignupStateCopyWithImpl<$Res>
+    extends _$SignupStateCopyWithImpl<$Res, _$_SignupState>
+    implements _$$_SignupStateCopyWith<$Res> {
+  __$$_SignupStateCopyWithImpl(
+      _$_SignupState _value, $Res Function(_$_SignupState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$SignupStateImplCopyWithImpl<$Res>
     Object? role = null,
     Object? isAgreeTerms = null,
   }) {
-    return _then(_$SignupStateImpl(
+    return _then(_$_SignupState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$SignupStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignupStateImpl implements _SignupState {
-  const _$SignupStateImpl(
+class _$_SignupState implements _SignupState {
+  const _$_SignupState(
       {required this.isLoading,
       required this.error,
       required this.showPass,
@@ -170,10 +170,10 @@ class _$SignupStateImpl implements _SignupState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignupStateImpl &&
+            other is _$_SignupState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -191,8 +191,8 @@ class _$SignupStateImpl implements _SignupState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
-      __$$SignupStateImplCopyWithImpl<_$SignupStateImpl>(this, _$identity);
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
+      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
 }
 
 abstract class _SignupState implements SignupState {
@@ -201,7 +201,7 @@ abstract class _SignupState implements SignupState {
       required final String error,
       required final bool showPass,
       required final RoleType role,
-      required final bool isAgreeTerms}) = _$SignupStateImpl;
+      required final bool isAgreeTerms}) = _$_SignupState;
 
   @override
   bool get isLoading;
@@ -215,6 +215,6 @@ abstract class _SignupState implements SignupState {
   bool get isAgreeTerms;
   @override
   @JsonKey(ignore: true)
-  _$$SignupStateImplCopyWith<_$SignupStateImpl> get copyWith =>
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }

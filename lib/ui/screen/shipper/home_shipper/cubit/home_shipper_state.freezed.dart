@@ -63,22 +63,22 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
 }
 
 /// @nodoc
-abstract class _$$HomeShipperStateImplCopyWith<$Res>
+abstract class _$$_HomeShipperStateCopyWith<$Res>
     implements $HomeShipperStateCopyWith<$Res> {
-  factory _$$HomeShipperStateImplCopyWith(_$HomeShipperStateImpl value,
-          $Res Function(_$HomeShipperStateImpl) then) =
-      __$$HomeShipperStateImplCopyWithImpl<$Res>;
+  factory _$$_HomeShipperStateCopyWith(
+          _$_HomeShipperState value, $Res Function(_$_HomeShipperState) then) =
+      __$$_HomeShipperStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$HomeShipperStateImplCopyWithImpl<$Res>
-    extends _$HomeShipperStateCopyWithImpl<$Res, _$HomeShipperStateImpl>
-    implements _$$HomeShipperStateImplCopyWith<$Res> {
-  __$$HomeShipperStateImplCopyWithImpl(_$HomeShipperStateImpl _value,
-      $Res Function(_$HomeShipperStateImpl) _then)
+class __$$_HomeShipperStateCopyWithImpl<$Res>
+    extends _$HomeShipperStateCopyWithImpl<$Res, _$_HomeShipperState>
+    implements _$$_HomeShipperStateCopyWith<$Res> {
+  __$$_HomeShipperStateCopyWithImpl(
+      _$_HomeShipperState _value, $Res Function(_$_HomeShipperState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$HomeShipperStateImpl(
+    return _then(_$_HomeShipperState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HomeShipperStateImpl implements _HomeShipperState {
-  const _$HomeShipperStateImpl({required this.isLoading, this.error});
+class _$_HomeShipperState implements _HomeShipperState {
+  const _$_HomeShipperState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$HomeShipperStateImpl implements _HomeShipperState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeShipperStateImpl &&
+            other is _$_HomeShipperState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,14 @@ class _$HomeShipperStateImpl implements _HomeShipperState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
-      __$$HomeShipperStateImplCopyWithImpl<_$HomeShipperStateImpl>(
-          this, _$identity);
+  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
+      __$$_HomeShipperStateCopyWithImpl<_$_HomeShipperState>(this, _$identity);
 }
 
 abstract class _HomeShipperState implements HomeShipperState {
   const factory _HomeShipperState(
       {required final bool isLoading,
-      final String? error}) = _$HomeShipperStateImpl;
+      final String? error}) = _$_HomeShipperState;
 
   @override
   bool get isLoading;
@@ -147,6 +146,6 @@ abstract class _HomeShipperState implements HomeShipperState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
+  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
       throw _privateConstructorUsedError;
 }

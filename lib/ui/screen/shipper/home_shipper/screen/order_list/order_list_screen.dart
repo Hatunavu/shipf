@@ -4,7 +4,9 @@ import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_state.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/theme/constant.dart';
 
 class OrderListScreen extends StatefulWidget {
   const OrderListScreen({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderListCubit(),
+      create: (context) => OrderListCubit()..getListOrder(),
       child: BlocConsumer<OrderListCubit, OrderListState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -32,14 +34,21 @@ class _OrderListScreenState extends State<OrderListScreen> {
                   color: Colors.black,
                 ),
               ),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return const OrderItem(
-                      shipmentStatus: ShipmentStatus.delivering,
-                    );
-                  }));
+              child: SingleChildScrollView(
+                child: state.listOrder.isEmpty
+                    ? const OrderShimmer()
+                    : ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 3,
+                        padding: EdgeInsets.only(
+                            bottom: kDefaultPaddingHeightScreen),
+                        itemBuilder: (context, index) {
+                          return const OrderItem(
+                            shipmentStatus: ShipmentStatus.delivering,
+                          );
+                        }),
+              ));
         },
       ),
     );

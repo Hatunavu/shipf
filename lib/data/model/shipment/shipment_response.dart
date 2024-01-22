@@ -1,37 +1,39 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_payment_type.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_source_type.dart';
 
-part 'list_order.g.dart';
+part 'shipment_response.g.dart';
 
 @JsonSerializable()
-class ListOrderResponse {
+class ShipmentResponse {
   final String message;
-  final List<ListOrderData> data;
+  final List<ShipmentData> data;
   final bool success;
   final int status;
 
-  ListOrderResponse(
+  ShipmentResponse(
       {this.message = '',
       this.success = false,
       this.status = 0,
       this.data = const []});
 
-  factory ListOrderResponse.fromJson(Map<String, dynamic> json) =>
-      _$ListOrderResponseFromJson(json);
+  factory ShipmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ListOrderResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ShipmentResponseToJson(this);
 }
 
 @JsonSerializable()
-class ListOrderData {
+class ShipmentData {
   final int id;
   final int pickupAddressId;
   final int deliveryAddressId;
   final int priceListId;
   final int customerId;
   final int carrierId;
+  final int shipperId;
   final int currentShipmentStatusTrackingId;
   final String code;
   final String name;
@@ -54,6 +56,9 @@ class ListOrderData {
   final int deliveryCharge;
   final int surcharge;
   final int totalCharge;
+  final int totalShipperCharge;
+  final int pickupLeadTime;
+  final int deliveryLeadTime;
   @JsonKey(
       name: 'source', toJson: sourceTypeToString, fromJson: stringToSourceType)
   final SourceType source;
@@ -62,16 +67,19 @@ class ListOrderData {
       toJson: paymentTypeToString,
       fromJson: stringToPaymentType)
   final PaymentType paymentTerm;
-  final ListOrderAddress? pickupAddress;
-  final ListOrderAddress? deliveryAddress;
+  final String createdAt;
+  final ShipmentAddress? pickupAddress;
+  final ShipmentAddress? deliveryAddress;
+  final ShipmentStatusTracking? currentShipmentStatusTracking;
 
-  ListOrderData(
+  ShipmentData(
       {this.id = 0,
       this.pickupAddressId = 0,
       this.deliveryAddressId = 0,
       this.priceListId = 0,
       this.customerId = 0,
       this.carrierId = 0,
+      this.shipperId = 0,
       this.currentShipmentStatusTrackingId = 0,
       this.code = '',
       this.name = '',
@@ -94,23 +102,28 @@ class ListOrderData {
       this.deliveryCharge = 0,
       this.surcharge = 0,
       this.totalCharge = 0,
+      this.totalShipperCharge = 0,
+      this.pickupLeadTime = 0,
+      this.deliveryLeadTime = 0,
       this.source = SourceType.form,
       this.paymentTerm = PaymentType.freightPrepaid,
+      this.createdAt = '',
       this.pickupAddress,
-      this.deliveryAddress});
+      this.deliveryAddress,
+      this.currentShipmentStatusTracking});
 
   LoadingType? get loadingType {
     return loading != null ? stringToLoadingType(loading!) : null;
   }
 
-  factory ListOrderData.fromJson(Map<String, dynamic> json) =>
-      _$ListOrderDataFromJson(json);
+  factory ShipmentData.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ListOrderDataToJson(this);
+  Map<String, dynamic> toJson() => _$ShipmentDataToJson(this);
 }
 
 @JsonSerializable()
-class ListOrderAddress {
+class ShipmentAddress {
   final int id;
   final int customerId;
   final String name;
@@ -122,7 +135,7 @@ class ListOrderAddress {
   final String address;
   final String fullAddress;
 
-  ListOrderAddress({
+  ShipmentAddress({
     this.id = 0,
     this.customerId = 0,
     this.name = '',
@@ -135,8 +148,59 @@ class ListOrderAddress {
     this.fullAddress = '',
   });
 
-  factory ListOrderAddress.fromJson(Map<String, dynamic> json) =>
-      _$ListOrderAddressFromJson(json);
+  factory ShipmentAddress.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentAddressFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ListOrderAddressToJson(this);
+  Map<String, dynamic> toJson() => _$ShipmentAddressToJson(this);
+}
+
+@JsonSerializable()
+class ShipmentStatusTracking {
+  final int id;
+  final int shipmentId;
+  final int updatedById;
+  final int shipmentStatusId;
+  final String note;
+  final String createdAt;
+  final ShipmentShipmentStatus? shipmentStatus;
+
+  ShipmentStatusTracking(
+      {this.id = 0,
+      this.shipmentId = 0,
+      this.updatedById = 0,
+      this.shipmentStatusId = 0,
+      this.note = '',
+      this.createdAt = '',
+      this.shipmentStatus});
+
+  factory ShipmentStatusTracking.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentStatusTrackingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShipmentStatusTrackingToJson(this);
+}
+
+@JsonSerializable()
+class ShipmentShipmentStatus {
+  final int id;
+
+  @JsonKey(
+      name: 'code',
+      fromJson: stringToShipmentStatus,
+      toJson: shipmentStatusToString)
+  final ShipmentStatus code;
+  final String name;
+  final String message;
+  final String color;
+
+  ShipmentShipmentStatus(
+      {this.id = 0,
+      this.code = ShipmentStatus.neww,
+      this.name = '',
+      this.message = '',
+      this.color = ''});
+
+  factory ShipmentShipmentStatus.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentShipmentStatusFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShipmentShipmentStatusToJson(this);
 }

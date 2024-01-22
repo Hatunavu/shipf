@@ -9,9 +9,9 @@ import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
-import 'package:shipf/data/model/order/list_order.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/model/shipment/shipment_response.dart';
 
 import 'endpoint.dart' as endpoint;
 
@@ -92,8 +92,8 @@ abstract class MainRepository {
   @POST(endpoint.createOrder)
   Future<OrderResponse> createOrder(@Body() OrderRequest orderRequest);
 
-  @GET(endpoint.getListOrder)
-  Future<ListOrderResponse> getListOrder({
+  @GET(endpoint.getShipments)
+  Future<ShipmentResponse> getShipments({
     @Query('page') int? page,
     @Query('size') int? size,
     @Query('search') String? search,
@@ -101,8 +101,7 @@ abstract class MainRepository {
     @Query('orderBy') String? orderBy,
     @Query('fromDate') String? fromDate,
     @Query('toDate') String? toDate,
-    @Query('customerId') int? customerId,
-    @Query('carrierId') int? carrierId,
+    @Query('shipmentStatusCode') String? shipmentStatusCode,
   });
 
   @PUT(endpoint.updateOrderStatus)

@@ -7,10 +7,10 @@ import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_state.da
 class BillShipperCubit extends Cubit<BillShipperState> {
   BillShipperCubit() : super(BillShipperState.initial());
 
-  Future<void> getListOrder() async {
+  Future<void> getShipments() async {
     try {
       emit(state.copyWith(isLoading: true));
-      final response = await mainRepository.getListOrder();
+      final response = await mainRepository.getShipments();
       emit(state.copyWith(isLoading: false, listOrder: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);

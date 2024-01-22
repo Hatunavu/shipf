@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderListState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<ListOrderData> get listOrder => throw _privateConstructorUsedError;
+  List<ShipmentData> get listOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderListStateCopyWith<OrderListState> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $OrderListStateCopyWith<$Res> {
           OrderListState value, $Res Function(OrderListState) then) =
       _$OrderListStateCopyWithImpl<$Res, OrderListState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
+  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
       listOrder: null == listOrder
           ? _value.listOrder
           : listOrder // ignore: cast_nullable_to_non_nullable
-              as List<ListOrderData>,
+              as List<ShipmentData>,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$_OrderListStateCopyWith<$Res>
       __$$_OrderListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<ListOrderData> listOrder});
+  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class __$$_OrderListStateCopyWithImpl<$Res>
       listOrder: null == listOrder
           ? _value._listOrder
           : listOrder // ignore: cast_nullable_to_non_nullable
-              as List<ListOrderData>,
+              as List<ShipmentData>,
     ));
   }
 }
@@ -117,16 +117,16 @@ class _$_OrderListState implements _OrderListState {
   const _$_OrderListState(
       {required this.isLoading,
       this.error,
-      required final List<ListOrderData> listOrder})
+      required final List<ShipmentData> listOrder})
       : _listOrder = listOrder;
 
   @override
   final bool isLoading;
   @override
   final String? error;
-  final List<ListOrderData> _listOrder;
+  final List<ShipmentData> _listOrder;
   @override
-  List<ListOrderData> get listOrder {
+  List<ShipmentData> get listOrder {
     if (_listOrder is EqualUnmodifiableListView) return _listOrder;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listOrder);
@@ -164,14 +164,14 @@ abstract class _OrderListState implements OrderListState {
   const factory _OrderListState(
       {required final bool isLoading,
       final String? error,
-      required final List<ListOrderData> listOrder}) = _$_OrderListState;
+      required final List<ShipmentData> listOrder}) = _$_OrderListState;
 
   @override
   bool get isLoading;
   @override
   String? get error;
   @override
-  List<ListOrderData> get listOrder;
+  List<ShipmentData> get listOrder;
   @override
   @JsonKey(ignore: true)
   _$$_OrderListStateCopyWith<_$_OrderListState> get copyWith =>

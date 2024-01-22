@@ -7,10 +7,10 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/ord
 class OrderListCubit extends Cubit<OrderListState> {
   OrderListCubit() : super(OrderListState.initial());
 
-  Future<void> getListOrder() async {
+  Future<void> getShipments() async {
     try {
       emit(state.copyWith(isLoading: true));
-      final response = await mainRepository.getListOrder();
+      final response = await mainRepository.getShipments();
       emit(state.copyWith(isLoading: false, listOrder: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);

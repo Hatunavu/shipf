@@ -404,7 +404,7 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<ListOrderResponse> getListOrder({
+  Future<ShipmentResponse> getShipments({
     page,
     size,
     search,
@@ -412,8 +412,7 @@ class _MainRepository implements MainRepository {
     orderBy,
     fromDate,
     toDate,
-    customerId,
-    carrierId,
+    shipmentStatusCode,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -424,14 +423,13 @@ class _MainRepository implements MainRepository {
       r'orderBy': orderBy,
       r'fromDate': fromDate,
       r'toDate': toDate,
-      r'customerId': customerId,
-      r'carrierId': carrierId,
+      r'shipmentStatusCode': shipmentStatusCode,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ListOrderResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ShipmentResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -443,7 +441,7 @@ class _MainRepository implements MainRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ListOrderResponse.fromJson(_result.data!);
+    final value = ShipmentResponse.fromJson(_result.data!);
     return value;
   }
 

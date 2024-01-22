@@ -19,7 +19,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderListCubit()..getListOrder(),
+      create: (context) => OrderListCubit()..getShipments(),
       child: BlocConsumer<OrderListCubit, OrderListState>(
         listener: (context, state) {},
         builder: (context, state) {

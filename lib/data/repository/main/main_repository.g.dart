@@ -404,48 +404,6 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<ShipmentResponse> getShipments({
-    page,
-    size,
-    search,
-    orderKey,
-    orderBy,
-    fromDate,
-    toDate,
-    shipmentStatusCode,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'size': size,
-      r'search': search,
-      r'orderKey': orderKey,
-      r'orderBy': orderBy,
-      r'fromDate': fromDate,
-      r'toDate': toDate,
-      r'shipmentStatusCode': shipmentStatusCode,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ShipmentResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/shipments',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ShipmentResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
   Future<OrderResponse> updateOrderStatus({
     required orderId,
     required updateOrderRequest,
@@ -492,6 +450,71 @@ class _MainRepository implements MainRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AccountResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShipmentResponse> getShipments({
+    page,
+    size,
+    search,
+    orderKey,
+    orderBy,
+    fromDate,
+    toDate,
+    shipmentStatusCode,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'size': size,
+      r'search': search,
+      r'orderKey': orderKey,
+      r'orderBy': orderBy,
+      r'fromDate': fromDate,
+      r'toDate': toDate,
+      r'shipmentStatusCode': shipmentStatusCode,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ShipmentResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/shipments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShipmentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShipmentSummaryResponse> getShipmentSummary() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShipmentSummaryResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/shipments/get-summary',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShipmentSummaryResponse.fromJson(_result.data!);
     return value;
   }
 

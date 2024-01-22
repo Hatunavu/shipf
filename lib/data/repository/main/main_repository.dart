@@ -12,6 +12,7 @@ import 'package:shipf/data/model/no_data/no_data_response.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
+import 'package:shipf/data/model/shipment/shipment_summary.dart';
 
 import 'endpoint.dart' as endpoint;
 
@@ -92,6 +93,16 @@ abstract class MainRepository {
   @POST(endpoint.createOrder)
   Future<OrderResponse> createOrder(@Body() OrderRequest orderRequest);
 
+  @PUT(endpoint.updateOrderStatus)
+  Future<OrderResponse> updateOrderStatus(
+      {@Path('orderId') required int orderId,
+      @Body() required UpdateOrderStatusRequest updateOrderRequest});
+
+  //account
+  @GET(endpoint.getUserInfo)
+  Future<AccountResponse> getUserInfo();
+
+  //shipment
   @GET(endpoint.getShipments)
   Future<ShipmentResponse> getShipments({
     @Query('page') int? page,
@@ -104,14 +115,8 @@ abstract class MainRepository {
     @Query('shipmentStatusCode') String? shipmentStatusCode,
   });
 
-  @PUT(endpoint.updateOrderStatus)
-  Future<OrderResponse> updateOrderStatus(
-      {@Path('orderId') required int orderId,
-      @Body() required UpdateOrderStatusRequest updateOrderRequest});
-
-  //account
-  @GET(endpoint.getUserInfo)
-  Future<AccountResponse> getUserInfo();
+  @GET(endpoint.getShipmentSummary)
+  Future<ShipmentSummaryResponse> getShipmentSummary();
 }
 
 extension ApiClientAWSS3 on MainRepository {

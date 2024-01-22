@@ -28,3 +28,4 @@ const getUserInfo = '/users/information';
 
 //shipment
 const getShipments = '/shipments';
+const getShipmentSummary = '/shipments/get-summary';

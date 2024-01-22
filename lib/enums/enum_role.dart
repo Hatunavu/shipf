@@ -4,11 +4,11 @@ extension EnumRole on RoleType {
   String toJsonString() {
     switch (this) {
       case RoleType.customer:
-        return 'CUSTOMER';
+        return 'SYSTEM_CUSTOMER';
       case RoleType.shipper:
         return "SYSTEM_SHIPPER";
       case RoleType.business:
-        return "BUSINESS";
+        return 'SYSTEM_BUSINESS';
       case RoleType.logout:
         return "";
     }
@@ -16,11 +16,11 @@ extension EnumRole on RoleType {
 
   RoleType getType(String type) {
     switch (type) {
-      case 'CUSTOMER':
+      case 'SYSTEM_CUSTOMER':
         return RoleType.customer;
       case 'SYSTEM_SHIPPER':
         return RoleType.shipper;
-      case 'BUSINESS':
+      case 'SYSTEM_BUSINESS':
         return RoleType.business;
       default:
         return RoleType.logout;
@@ -43,11 +43,11 @@ extension EnumRole on RoleType {
 
 RoleType stringToRoleType(String type) {
   switch (type) {
-    case 'CUSTOMER':
+    case 'SYSTEM_CUSTOMER':
       return RoleType.customer;
     case 'SYSTEM_SHIPPER':
       return RoleType.shipper;
-    case 'BUSINESS':
+    case 'SYSTEM_BUSINESS':
       return RoleType.business;
     default:
       return RoleType.logout;
@@ -57,11 +57,11 @@ RoleType stringToRoleType(String type) {
 String roleTypeToString(RoleType type) {
   switch (type) {
     case RoleType.customer:
-      return 'CUSTOMER';
+      return 'SYSTEM_CUSTOMER';
     case RoleType.shipper:
       return 'SYSTEM_SHIPPER';
     case RoleType.business:
-      return 'BUSINESS';
+      return 'SYSTEM_BUSINESS';
     case RoleType.logout:
       return "";
   }

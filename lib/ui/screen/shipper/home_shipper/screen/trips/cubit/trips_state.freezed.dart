@@ -63,22 +63,22 @@ class _$TripsStateCopyWithImpl<$Res, $Val extends TripsState>
 }
 
 /// @nodoc
-abstract class _$$_TripsStateCopyWith<$Res>
+abstract class _$$TripsStateImplCopyWith<$Res>
     implements $TripsStateCopyWith<$Res> {
-  factory _$$_TripsStateCopyWith(
-          _$_TripsState value, $Res Function(_$_TripsState) then) =
-      __$$_TripsStateCopyWithImpl<$Res>;
+  factory _$$TripsStateImplCopyWith(
+          _$TripsStateImpl value, $Res Function(_$TripsStateImpl) then) =
+      __$$TripsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$_TripsStateCopyWithImpl<$Res>
-    extends _$TripsStateCopyWithImpl<$Res, _$_TripsState>
-    implements _$$_TripsStateCopyWith<$Res> {
-  __$$_TripsStateCopyWithImpl(
-      _$_TripsState _value, $Res Function(_$_TripsState) _then)
+class __$$TripsStateImplCopyWithImpl<$Res>
+    extends _$TripsStateCopyWithImpl<$Res, _$TripsStateImpl>
+    implements _$$TripsStateImplCopyWith<$Res> {
+  __$$TripsStateImplCopyWithImpl(
+      _$TripsStateImpl _value, $Res Function(_$TripsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_TripsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$_TripsState(
+    return _then(_$TripsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_TripsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TripsState implements _TripsState {
-  const _$_TripsState({required this.isLoading, this.error});
+class _$TripsStateImpl implements _TripsState {
+  const _$TripsStateImpl({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$_TripsState implements _TripsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TripsState &&
+            other is _$TripsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,13 +131,13 @@ class _$_TripsState implements _TripsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TripsStateCopyWith<_$_TripsState> get copyWith =>
-      __$$_TripsStateCopyWithImpl<_$_TripsState>(this, _$identity);
+  _$$TripsStateImplCopyWith<_$TripsStateImpl> get copyWith =>
+      __$$TripsStateImplCopyWithImpl<_$TripsStateImpl>(this, _$identity);
 }
 
 abstract class _TripsState implements TripsState {
   const factory _TripsState(
-      {required final bool isLoading, final String? error}) = _$_TripsState;
+      {required final bool isLoading, final String? error}) = _$TripsStateImpl;
 
   @override
   bool get isLoading;
@@ -145,6 +145,6 @@ abstract class _TripsState implements TripsState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_TripsStateCopyWith<_$_TripsState> get copyWith =>
+  _$$TripsStateImplCopyWith<_$TripsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

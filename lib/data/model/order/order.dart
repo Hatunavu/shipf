@@ -22,7 +22,7 @@ class OrderRequest {
   final String deliveryName;
   final String deliveryPhone;
   final int priceListId;
-  final String name;
+  final String goodsName;
   final int netWeight;
   final int quantity;
   final int length;
@@ -62,7 +62,7 @@ class OrderRequest {
       this.deliveryName = '',
       this.deliveryPhone = '',
       this.priceListId = 0,
-      this.name = '',
+      this.goodsName = '',
       this.netWeight = 0,
       this.quantity = 0,
       this.length = 0,

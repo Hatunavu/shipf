@@ -137,7 +137,7 @@ class OrderCubit extends Cubit<OrderState> {
           deliveryName: state.receiverNameController!.text,
           deliveryPhone: state.receiverPhoneController!.text,
           priceListId: state.serviceSelected?.id ?? 0,
-          name: state.parcelNameController!.text,
+          goodsName: state.parcelNameController!.text,
           netWeight: int.parse(state.parcelWeightController!.text),
           quantity: int.parse(state.parcelAmountController!.text),
           length: int.parse(state.lengthController!.text),

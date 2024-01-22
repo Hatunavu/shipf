@@ -69,22 +69,22 @@ class _$BillShipperStateCopyWithImpl<$Res, $Val extends BillShipperState>
 }
 
 /// @nodoc
-abstract class _$$_BillShipperStateCopyWith<$Res>
+abstract class _$$BillShipperStateImplCopyWith<$Res>
     implements $BillShipperStateCopyWith<$Res> {
-  factory _$$_BillShipperStateCopyWith(
-          _$_BillShipperState value, $Res Function(_$_BillShipperState) then) =
-      __$$_BillShipperStateCopyWithImpl<$Res>;
+  factory _$$BillShipperStateImplCopyWith(_$BillShipperStateImpl value,
+          $Res Function(_$BillShipperStateImpl) then) =
+      __$$BillShipperStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
 }
 
 /// @nodoc
-class __$$_BillShipperStateCopyWithImpl<$Res>
-    extends _$BillShipperStateCopyWithImpl<$Res, _$_BillShipperState>
-    implements _$$_BillShipperStateCopyWith<$Res> {
-  __$$_BillShipperStateCopyWithImpl(
-      _$_BillShipperState _value, $Res Function(_$_BillShipperState) _then)
+class __$$BillShipperStateImplCopyWithImpl<$Res>
+    extends _$BillShipperStateCopyWithImpl<$Res, _$BillShipperStateImpl>
+    implements _$$BillShipperStateImplCopyWith<$Res> {
+  __$$BillShipperStateImplCopyWithImpl(_$BillShipperStateImpl _value,
+      $Res Function(_$BillShipperStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_BillShipperStateCopyWithImpl<$Res>
     Object? error = freezed,
     Object? listOrder = null,
   }) {
-    return _then(_$_BillShipperState(
+    return _then(_$BillShipperStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_BillShipperStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillShipperState implements _BillShipperState {
-  const _$_BillShipperState(
+class _$BillShipperStateImpl implements _BillShipperState {
+  const _$BillShipperStateImpl(
       {required this.isLoading,
       this.error,
       required final List<ShipmentData> listOrder})
@@ -138,10 +138,10 @@ class _$_BillShipperState implements _BillShipperState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillShipperState &&
+            other is _$BillShipperStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -156,15 +156,16 @@ class _$_BillShipperState implements _BillShipperState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillShipperStateCopyWith<_$_BillShipperState> get copyWith =>
-      __$$_BillShipperStateCopyWithImpl<_$_BillShipperState>(this, _$identity);
+  _$$BillShipperStateImplCopyWith<_$BillShipperStateImpl> get copyWith =>
+      __$$BillShipperStateImplCopyWithImpl<_$BillShipperStateImpl>(
+          this, _$identity);
 }
 
 abstract class _BillShipperState implements BillShipperState {
   const factory _BillShipperState(
       {required final bool isLoading,
       final String? error,
-      required final List<ShipmentData> listOrder}) = _$_BillShipperState;
+      required final List<ShipmentData> listOrder}) = _$BillShipperStateImpl;
 
   @override
   bool get isLoading;
@@ -174,6 +175,6 @@ abstract class _BillShipperState implements BillShipperState {
   List<ShipmentData> get listOrder;
   @override
   @JsonKey(ignore: true)
-  _$$_BillShipperStateCopyWith<_$_BillShipperState> get copyWith =>
+  _$$BillShipperStateImplCopyWith<_$BillShipperStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

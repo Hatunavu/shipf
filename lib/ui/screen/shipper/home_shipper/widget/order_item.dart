@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shipf/data/model/transit/transit_response.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
@@ -10,8 +12,16 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderItem extends StatelessWidget {
+  final Function? cancelTransit;
+  final Function? acceptTransit;
+  final TransitData? transit;
   final ShipmentStatus shipmentStatus;
-  const OrderItem({super.key, this.shipmentStatus = ShipmentStatus.neww});
+  const OrderItem(
+      {super.key,
+      this.shipmentStatus = ShipmentStatus.neww,
+      this.transit,
+      this.acceptTransit,
+      this.cancelTransit});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +52,16 @@ class OrderItem extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: Text('#SON84389',
+                  child: Text(
+                      shipmentStatus == ShipmentStatus.neww
+                          ? 'Mã đơn lấy: ${transit?.code}'
+                          : shipmentStatus == ShipmentStatus.delivering
+                              ? 'Mã chuyến lấy: ${transit?.code}'
+                              : 'Mã chuyến: ${transit?.code}',
                       style: textBody.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600))),
               Text(
-                'Chờ giao hàng',
+                transit?.status.display() ?? '',
                 style: textBottomBar.copyWith(
                     color: Colors.blueAccent, fontWeight: FontWeight.w500),
               ),
@@ -61,10 +76,13 @@ class OrderItem extends StatelessWidget {
                 size: textSize,
                 color: primaryColor,
               ),
-              HorizontalSpace(kDefaultPaddingWidthScreen / 2),
-              Text(
-                'Vu Truong Nam-0987654321',
-                style: textBody.copyWith(color: Colors.black),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingWidthScreen / 2),
+                child: Text(
+                  'Vu Truong Nam-0987654321',
+                  style: textBody.copyWith(color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -80,25 +98,50 @@ class OrderItem extends StatelessWidget {
               HorizontalSpace(kDefaultPaddingWidthScreen / 2),
               Expanded(
                 child: Text(
-                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội ',
+                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội',
                   style: textBody,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              IconButton(
+              HorizontalSpace(kDefaultPaddingWidthScreen),
+
+              // IconButton(
+              //   padding: EdgeInsets.symmetric(
+              //       vertical: kDefaultPaddingHeightScreen / 2,
+              //       horizontal: kDefaultPaddingWidthScreen),
+              //   constraints: const BoxConstraints(),
+              //   icon: const Icon(
+              //     Icons.info_outline,
+              //     color: primaryColor,
+              //   ),
+              //   onPressed: () {
+              //     ToastUtils.showNeutral('Tính năng đăng được phát triển');
+              //   },
+              // )
+            ],
+          ),
+          VerticalSpace(kDefaultPaddingHeightScreen / 2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Ionicons.browsers_outline,
+                size: textSize,
+                color: primaryColor,
+              ),
+              Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: kDefaultPaddingHeightScreen / 2,
-                    horizontal: kDefaultPaddingWidthScreen),
-                constraints: const BoxConstraints(),
-                icon: const Icon(
-                  Icons.info_outline,
-                  color: primaryColor,
+                    horizontal: kDefaultPaddingWidthScreen / 2),
+                child: Expanded(
+                  child: Text(
+                    transit?.note ?? '',
+                    style: textBody,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                onPressed: () {
-                  ToastUtils.showNeutral('Tính năng đăng được phát triển');
-                },
-              )
+              ),
             ],
           ),
           VerticalSpace(kDefaultPaddingHeightScreen / 2),
@@ -177,7 +220,7 @@ class OrderItem extends StatelessWidget {
             ),
           ),
           shipmentStatus == ShipmentStatus.neww
-              ? newAction()
+              ? newAction(context)
               : shipmentStatus == ShipmentStatus.delivering
                   ? deliveryAction()
                   : const SizedBox()
@@ -186,7 +229,7 @@ class OrderItem extends StatelessWidget {
     );
   }
 
-  Widget newAction() {
+  Widget newAction(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
           right: kDefaultPaddingWidthScreen,
@@ -195,21 +238,22 @@ class OrderItem extends StatelessWidget {
         children: [
           Expanded(
             child: PrimaryButton.grey(
-              label: 'Huỷ',
+              label: 'Huỷ Chuyến',
               defaultHeight: true,
               onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                confirmDialog(context,
+                    title: 'Bạn có muốn huỷ chuyến ${transit?.code} không?');
               },
             ),
           ),
           HorizontalSpace(kDefaultPaddingWidthScreen / 2),
           Expanded(
             child: PrimaryButton(
-              label: 'Nhận',
+              label: 'Nhận Chuyến',
               defaultHeight: true,
-              onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
-              },
+              onPressed: () => confirmDialog(context,
+                  title: 'Bạn có muốn nhận chuyến ${transit?.code} không?',
+                  isAccept: true),
             ),
           ),
         ],
@@ -246,5 +290,46 @@ class OrderItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void confirmDialog(BuildContext context,
+      {required String title, bool isAccept = false}) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text(
+                title,
+                textAlign: TextAlign.center,
+              ),
+              titlePadding: EdgeInsets.symmetric(
+                  vertical: kDefaultPaddingHeightScreen,
+                  horizontal: kDefaultPaddingWidthWidget),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: kDefaultPaddingHeightWidget,
+                  horizontal: kDefaultPaddingWidthScreen),
+              content: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: PrimaryButton.grey(
+                      label: 'Hủy',
+                      onPressed: () => context.router.pop(),
+                    ),
+                  ),
+                  HorizontalSpace(kDefaultPaddingWidthScreen),
+                  Expanded(
+                    flex: 1,
+                    child: PrimaryButton(
+                      onPressed: () {
+                        context.router.pop();
+                        isAccept ? acceptTransit!() : cancelTransit!();
+                      },
+                      label: 'Xác nhận',
+                    ),
+                  )
+                ],
+              ));
+        });
   }
 }

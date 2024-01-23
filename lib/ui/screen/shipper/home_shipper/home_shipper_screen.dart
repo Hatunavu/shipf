@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/statistic/statistic.dart';
+import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -39,19 +40,19 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
         content: 'Chuyển lấy',
         icon: AppPath.pick,
         onTap: () {
-          getIt<AppRouter>().push(const TripsPage());
+          getIt<AppRouter>().push(TransitsPage(type: LoadingType.pickup));
         }),
     HomeAction(
         content: 'Chuyến giao',
         icon: AppPath.deliver,
         onTap: () {
-          getIt<AppRouter>().push(const TripsPage());
+          getIt<AppRouter>().push(TransitsPage(type: LoadingType.delivery));
         }),
     HomeAction(
         content: 'Trung chuyển',
         icon: AppPath.transshipment,
         onTap: () {
-          getIt<AppRouter>().push(const TripsPage());
+          getIt<AppRouter>().push(TransitsPage(type: LoadingType.transit));
         }),
     HomeAction(
         content: 'Đơn lấy',

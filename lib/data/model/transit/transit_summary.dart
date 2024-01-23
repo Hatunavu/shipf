@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
-import 'package:shipf/enums/enum_shipment_status.dart';
 
 part 'transit_summary.g.dart';
 

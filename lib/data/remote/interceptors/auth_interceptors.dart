@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:shipf/enums/enum_role.dart';
-import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -10,9 +9,9 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 class AuthInterceptor extends Interceptor {
   // Don't need stream subscription cause everytime we request, we get token
   // from cubit state and apply it to the request's header
-  final AppCubit _appCubit;
+  final AppCubit appCubit;
 
-  AuthInterceptor(this._appCubit);
+  AuthInterceptor(this.appCubit);
 
   @override
   Future<void> onRequest(

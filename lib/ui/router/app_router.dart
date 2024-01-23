@@ -20,6 +20,9 @@ class AppRoutes {
   //shipper
   static const String homeShipperScreen = "/home_shipper";
   static const String orderList = "/order_list";
-  static const String trips = "/trips";
   static const String orderComplete = "/order_complete";
+  static const String transitDetail = "/transit_detail";
+
+  //transit
+  static const String transits = "/transits";
 }

@@ -20,7 +20,8 @@ import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/order_complete_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/order_list_screen.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/trips_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/screen/transit_detail/transit_detail_screen.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/transits_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -116,14 +117,23 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/trips/trips_screen.d
       path: AppRoutes.orderList,
     ),
     AutoRoute(
-      page: TripsScreen,
-      name: "TripsPage",
-      path: AppRoutes.trips,
-    ),
-    AutoRoute(
       page: OrderCompleteScreen,
       name: "OrderCompletePage",
       path: AppRoutes.orderComplete,
+    ),
+
+    //transits
+
+    AutoRoute(
+      page: TransitsScreen,
+      name: "TransitsPage",
+      path: AppRoutes.transits,
+    ),
+
+    AutoRoute(
+      page: TransitDetailScreen,
+      name: "TransitDetailPage",
+      path: AppRoutes.transitDetail,
     ),
   ],
 )

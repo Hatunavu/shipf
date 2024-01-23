@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'trips_state.dart';
+part of 'transit_detail_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TripsState {
+mixin _$TransitDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TripsStateCopyWith<TripsState> get copyWith =>
+  $TransitDetailStateCopyWith<TransitDetailState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TripsStateCopyWith<$Res> {
-  factory $TripsStateCopyWith(
-          TripsState value, $Res Function(TripsState) then) =
-      _$TripsStateCopyWithImpl<$Res, TripsState>;
+abstract class $TransitDetailStateCopyWith<$Res> {
+  factory $TransitDetailStateCopyWith(
+          TransitDetailState value, $Res Function(TransitDetailState) then) =
+      _$TransitDetailStateCopyWithImpl<$Res, TransitDetailState>;
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class _$TripsStateCopyWithImpl<$Res, $Val extends TripsState>
-    implements $TripsStateCopyWith<$Res> {
-  _$TripsStateCopyWithImpl(this._value, this._then);
+class _$TransitDetailStateCopyWithImpl<$Res, $Val extends TransitDetailState>
+    implements $TransitDetailStateCopyWith<$Res> {
+  _$TransitDetailStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +63,22 @@ class _$TripsStateCopyWithImpl<$Res, $Val extends TripsState>
 }
 
 /// @nodoc
-abstract class _$$TripsStateImplCopyWith<$Res>
-    implements $TripsStateCopyWith<$Res> {
-  factory _$$TripsStateImplCopyWith(
-          _$TripsStateImpl value, $Res Function(_$TripsStateImpl) then) =
-      __$$TripsStateImplCopyWithImpl<$Res>;
+abstract class _$$TransitDetailStateImplCopyWith<$Res>
+    implements $TransitDetailStateCopyWith<$Res> {
+  factory _$$TransitDetailStateImplCopyWith(_$TransitDetailStateImpl value,
+          $Res Function(_$TransitDetailStateImpl) then) =
+      __$$TransitDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$TripsStateImplCopyWithImpl<$Res>
-    extends _$TripsStateCopyWithImpl<$Res, _$TripsStateImpl>
-    implements _$$TripsStateImplCopyWith<$Res> {
-  __$$TripsStateImplCopyWithImpl(
-      _$TripsStateImpl _value, $Res Function(_$TripsStateImpl) _then)
+class __$$TransitDetailStateImplCopyWithImpl<$Res>
+    extends _$TransitDetailStateCopyWithImpl<$Res, _$TransitDetailStateImpl>
+    implements _$$TransitDetailStateImplCopyWith<$Res> {
+  __$$TransitDetailStateImplCopyWithImpl(_$TransitDetailStateImpl _value,
+      $Res Function(_$TransitDetailStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$TripsStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$TripsStateImpl(
+    return _then(_$TransitDetailStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$TripsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TripsStateImpl implements _TripsState {
-  const _$TripsStateImpl({required this.isLoading, this.error});
+class _$TransitDetailStateImpl implements _TransitDetailState {
+  const _$TransitDetailStateImpl({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -112,14 +112,14 @@ class _$TripsStateImpl implements _TripsState {
 
   @override
   String toString() {
-    return 'TripsState(isLoading: $isLoading, error: $error)';
+    return 'TransitDetailState(isLoading: $isLoading, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TripsStateImpl &&
+            other is _$TransitDetailStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,13 +131,15 @@ class _$TripsStateImpl implements _TripsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TripsStateImplCopyWith<_$TripsStateImpl> get copyWith =>
-      __$$TripsStateImplCopyWithImpl<_$TripsStateImpl>(this, _$identity);
+  _$$TransitDetailStateImplCopyWith<_$TransitDetailStateImpl> get copyWith =>
+      __$$TransitDetailStateImplCopyWithImpl<_$TransitDetailStateImpl>(
+          this, _$identity);
 }
 
-abstract class _TripsState implements TripsState {
-  const factory _TripsState(
-      {required final bool isLoading, final String? error}) = _$TripsStateImpl;
+abstract class _TransitDetailState implements TransitDetailState {
+  const factory _TransitDetailState(
+      {required final bool isLoading,
+      final String? error}) = _$TransitDetailStateImpl;
 
   @override
   bool get isLoading;
@@ -145,6 +147,6 @@ abstract class _TripsState implements TripsState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$TripsStateImplCopyWith<_$TripsStateImpl> get copyWith =>
+  _$$TransitDetailStateImplCopyWith<_$TransitDetailStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

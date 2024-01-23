@@ -1,4 +1,4 @@
-enum LoadingType { pickup, delivery, all }
+enum LoadingType { pickup, delivery, transit, all }
 
 extension EnumRole on LoadingType {
   String toJsonString() {
@@ -7,6 +7,8 @@ extension EnumRole on LoadingType {
         return 'PICKUP';
       case LoadingType.delivery:
         return "DELIVERY";
+      case LoadingType.transit:
+        return "TRANSIT";
       case LoadingType.all:
         return "ALL";
     }
@@ -18,6 +20,8 @@ extension EnumRole on LoadingType {
         return LoadingType.pickup;
       case 'DELIVERY':
         return LoadingType.delivery;
+      case 'TRANSIT':
+        return LoadingType.transit;
       case 'ALL':
         return LoadingType.all;
       default:
@@ -31,6 +35,8 @@ extension EnumRole on LoadingType {
         return "Đầu lấy";
       case LoadingType.delivery:
         return "Đầu giao";
+      case LoadingType.transit:
+        return '';
       case LoadingType.all:
         return "Cả hai";
     }
@@ -43,6 +49,8 @@ LoadingType stringToLoadingType(String type) {
       return LoadingType.pickup;
     case 'DELIVERY':
       return LoadingType.delivery;
+    case 'TRANSIT':
+      return LoadingType.transit;
     case 'ALL':
       return LoadingType.all;
     default:
@@ -56,6 +64,8 @@ String loadingTypeToString(LoadingType type) {
       return 'PICKUP';
     case LoadingType.delivery:
       return 'DELIVERY';
+    case LoadingType.transit:
+      return "TRANSIT";
     case LoadingType.all:
       return 'ALL';
   }

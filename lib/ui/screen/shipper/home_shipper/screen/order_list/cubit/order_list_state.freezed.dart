@@ -69,22 +69,22 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
 }
 
 /// @nodoc
-abstract class _$$OrderListStateImplCopyWith<$Res>
+abstract class _$$_OrderListStateCopyWith<$Res>
     implements $OrderListStateCopyWith<$Res> {
-  factory _$$OrderListStateImplCopyWith(_$OrderListStateImpl value,
-          $Res Function(_$OrderListStateImpl) then) =
-      __$$OrderListStateImplCopyWithImpl<$Res>;
+  factory _$$_OrderListStateCopyWith(
+          _$_OrderListState value, $Res Function(_$_OrderListState) then) =
+      __$$_OrderListStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
 }
 
 /// @nodoc
-class __$$OrderListStateImplCopyWithImpl<$Res>
-    extends _$OrderListStateCopyWithImpl<$Res, _$OrderListStateImpl>
-    implements _$$OrderListStateImplCopyWith<$Res> {
-  __$$OrderListStateImplCopyWithImpl(
-      _$OrderListStateImpl _value, $Res Function(_$OrderListStateImpl) _then)
+class __$$_OrderListStateCopyWithImpl<$Res>
+    extends _$OrderListStateCopyWithImpl<$Res, _$_OrderListState>
+    implements _$$_OrderListStateCopyWith<$Res> {
+  __$$_OrderListStateCopyWithImpl(
+      _$_OrderListState _value, $Res Function(_$_OrderListState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? listOrder = null,
   }) {
-    return _then(_$OrderListStateImpl(
+    return _then(_$_OrderListState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderListStateImpl implements _OrderListState {
-  const _$OrderListStateImpl(
+class _$_OrderListState implements _OrderListState {
+  const _$_OrderListState(
       {required this.isLoading,
       this.error,
       required final List<ShipmentData> listOrder})
@@ -138,10 +138,10 @@ class _$OrderListStateImpl implements _OrderListState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderListStateImpl &&
+            other is _$_OrderListState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -156,16 +156,15 @@ class _$OrderListStateImpl implements _OrderListState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
-      __$$OrderListStateImplCopyWithImpl<_$OrderListStateImpl>(
-          this, _$identity);
+  _$$_OrderListStateCopyWith<_$_OrderListState> get copyWith =>
+      __$$_OrderListStateCopyWithImpl<_$_OrderListState>(this, _$identity);
 }
 
 abstract class _OrderListState implements OrderListState {
   const factory _OrderListState(
       {required final bool isLoading,
       final String? error,
-      required final List<ShipmentData> listOrder}) = _$OrderListStateImpl;
+      required final List<ShipmentData> listOrder}) = _$_OrderListState;
 
   @override
   bool get isLoading;
@@ -175,6 +174,6 @@ abstract class _OrderListState implements OrderListState {
   List<ShipmentData> get listOrder;
   @override
   @JsonKey(ignore: true)
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
+  _$$_OrderListStateCopyWith<_$_OrderListState> get copyWith =>
       throw _privateConstructorUsedError;
 }

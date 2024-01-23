@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
 
@@ -43,6 +44,7 @@ class TransitData {
   final String doneAt;
   final String createdAt;
   final List<TransitShipper> transitShippers;
+  final List<ShipmentData> shipments;
   TransitData(
       {this.id = 0,
       this.operatorId = 0,
@@ -55,7 +57,8 @@ class TransitData {
       this.note = '',
       this.doneAt = '',
       this.createdAt = '',
-      this.transitShippers = const []});
+      this.transitShippers = const [],
+      this.shipments = const []});
 
   factory TransitData.fromJson(Map<String, dynamic> json) =>
       _$TransitDataFromJson(json);
@@ -140,4 +143,23 @@ class TransitMetaData {
   factory TransitMetaData.fromJson(Map<String, dynamic> json) =>
       _$TransitMetaDataFromJson(json);
   Map<String, dynamic> toJson() => _$TransitMetaDataToJson(this);
+}
+
+@JsonSerializable()
+class TransitDetail {
+  final String message;
+  final bool success;
+  final int status;
+  final TransitData? data;
+
+  TransitDetail({
+    this.message = '',
+    this.status = 0,
+    this.success = false,
+    this.data,
+  });
+
+  factory TransitDetail.fromJson(Map<String, dynamic> json) =>
+      _$TransitDetailFromJson(json);
+  Map<String, dynamic> toJson() => _$TransitDetailToJson(this);
 }

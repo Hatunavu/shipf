@@ -8,12 +8,14 @@ part of 'no_data_response.dart';
 
 NoDataResponse _$NoDataResponseFromJson(Map<String, dynamic> json) =>
     NoDataResponse(
-      message: json['message'] as String,
-      success: json['success'] as bool,
+      message: json['message'] as String? ?? '',
+      success: json['success'] as bool? ?? false,
+      status: json['status'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$NoDataResponseToJson(NoDataResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
       'success': instance.success,
+      'status': instance.status,
     };

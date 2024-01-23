@@ -49,6 +49,10 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
               ?.map((e) => TransitShipper.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      shipments: (json['shipments'] as List<dynamic>?)
+              ?.map((e) => ShipmentData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$TransitDataToJson(TransitData instance) =>
@@ -65,6 +69,7 @@ Map<String, dynamic> _$TransitDataToJson(TransitData instance) =>
       'doneAt': instance.doneAt,
       'createdAt': instance.createdAt,
       'transitShippers': instance.transitShippers,
+      'shipments': instance.shipments,
     };
 
 TransitShipper _$TransitShipperFromJson(Map<String, dynamic> json) =>
@@ -140,4 +145,22 @@ Map<String, dynamic> _$TransitMetaDataToJson(TransitMetaData instance) =>
       'totalPages': instance.totalPages,
       'page': instance.page,
       'size': instance.size,
+    };
+
+TransitDetail _$TransitDetailFromJson(Map<String, dynamic> json) =>
+    TransitDetail(
+      message: json['message'] as String? ?? '',
+      status: json['status'] as int? ?? 0,
+      success: json['success'] as bool? ?? false,
+      data: json['data'] == null
+          ? null
+          : TransitData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TransitDetailToJson(TransitDetail instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'success': instance.success,
+      'status': instance.status,
+      'data': instance.data,
     };

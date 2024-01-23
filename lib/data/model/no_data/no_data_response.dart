@@ -6,11 +6,9 @@ part 'no_data_response.g.dart';
 class NoDataResponse {
   final String message;
   final bool success;
+  final int status;
 
-  NoDataResponse({
-    required this.message,
-    required this.success,
-  });
+  NoDataResponse({this.message = '', this.success = false, this.status = 0});
 
   factory NoDataResponse.fromJson(Map<String, dynamic> json) =>
       _$NoDataResponseFromJson(json);

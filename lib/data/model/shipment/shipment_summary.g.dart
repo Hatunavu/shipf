@@ -33,6 +33,7 @@ ShipmentSummaryData _$ShipmentSummaryDataFromJson(Map<String, dynamic> json) =>
       shipmentStatus: json['shipmentStatus'] == null
           ? ShipmentStatus.neww
           : stringToShipmentStatus(json['shipmentStatus'] as String),
+      shipmentStatusName: json['shipmentStatusName'] as String? ?? '',
       totalElements: json['totalElements'] as int? ?? 0,
     );
 
@@ -40,5 +41,6 @@ Map<String, dynamic> _$ShipmentSummaryDataToJson(
         ShipmentSummaryData instance) =>
     <String, dynamic>{
       'shipmentStatus': shipmentStatusToString(instance.shipmentStatus),
+      'shipmentStatusName': instance.shipmentStatusName,
       'totalElements': instance.totalElements,
     };

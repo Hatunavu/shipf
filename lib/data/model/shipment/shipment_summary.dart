@@ -29,10 +29,13 @@ class ShipmentSummaryData {
       fromJson: stringToShipmentStatus,
       toJson: shipmentStatusToString)
   final ShipmentStatus shipmentStatus;
+  final String shipmentStatusName;
   final int totalElements;
 
   ShipmentSummaryData(
-      {this.shipmentStatus = ShipmentStatus.neww, this.totalElements = 0});
+      {this.shipmentStatus = ShipmentStatus.neww,
+      this.shipmentStatusName = '',
+      this.totalElements = 0});
 
   factory ShipmentSummaryData.fromJson(Map<String, dynamic> json) =>
       _$ShipmentSummaryDataFromJson(json);

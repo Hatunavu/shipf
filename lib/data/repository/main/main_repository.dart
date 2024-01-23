@@ -13,6 +13,8 @@ import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/model/shipment/shipment_summary.dart';
+import 'package:shipf/data/model/transit/transit_response.dart';
+import 'package:shipf/data/model/transit/transit_summary.dart';
 
 import 'endpoint.dart' as endpoint;
 
@@ -52,6 +54,9 @@ abstract class MainRepository {
 
   @DELETE(endpoint.deleteUser)
   Future<RegisterResponse> deleteUser();
+
+  @POST(endpoint.postDeviceToken)
+  Future<NoDataResponse> postDeviceToken();
 
   //addresss
   @GET(endpoint.getProvinces)
@@ -117,6 +122,25 @@ abstract class MainRepository {
 
   @GET(endpoint.getShipmentSummary)
   Future<ShipmentSummaryResponse> getShipmentSummary();
+
+  //transit
+  @GET(endpoint.getTransits)
+  Future<TransitResponse> getTransits({@Query('type') String? type});
+
+  @GET(endpoint.getTransitDetail)
+  Future<TransitDetail> getTransitDetail(
+      {@Path('transitId') required int transitId});
+
+  @GET(endpoint.getTransitSummary)
+  Future<TransitSummaryResponse> getTransitSummary();
+
+  @PUT(endpoint.acceptTransit)
+  Future<NoDataResponse> acceptTransit(
+      {@Path('transitId') required int transitId});
+
+  @PUT(endpoint.cancelTransit)
+  Future<NoDataResponse> cancelTransit(
+      {@Path('transitId') required int transitId});
 }
 
 extension ApiClientAWSS3 on MainRepository {

@@ -36,7 +36,7 @@ class ShipmentData {
   final int shipperId;
   final int currentShipmentStatusTrackingId;
   final String code;
-  final String name;
+  final String goodsName;
   final int quantity;
   final int length;
   final int width;
@@ -82,7 +82,7 @@ class ShipmentData {
       this.shipperId = 0,
       this.currentShipmentStatusTrackingId = 0,
       this.code = '',
-      this.name = '',
+      this.goodsName = '',
       this.quantity = 0,
       this.length = 0,
       this.width = 0,

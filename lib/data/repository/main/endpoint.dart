@@ -10,6 +10,7 @@ const registerCustomer = '/users/register-customer';
 const registerBusiness = '/users/register-business';
 const registerShipper = '/users/register-shipper';
 const deleteUser = '/users';
+const postDeviceToken = '/devices';
 
 //address
 const getProvinces = "/provinces";
@@ -29,3 +30,10 @@ const getUserInfo = '/users/information';
 //shipment
 const getShipments = '/shipments';
 const getShipmentSummary = '/shipments/get-summary';
+
+//transit
+const getTransits = '/transits';
+const getTransitDetail = '/transits/{transitId}';
+const getTransitSummary = '/transits/get-summary';
+const acceptTransit = '/transits/accept/{transitId}';
+const cancelTransit = '/transits/cancel/{transitId}';

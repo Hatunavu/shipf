@@ -36,7 +36,7 @@ ShipmentData _$ShipmentDataFromJson(Map<String, dynamic> json) => ShipmentData(
       currentShipmentStatusTrackingId:
           json['currentShipmentStatusTrackingId'] as int? ?? 0,
       code: json['code'] as String? ?? '',
-      name: json['name'] as String? ?? '',
+      goodsName: json['goodsName'] as String? ?? '',
       quantity: json['quantity'] as int? ?? 0,
       length: json['length'] as int? ?? 0,
       width: json['width'] as int? ?? 0,
@@ -93,7 +93,7 @@ Map<String, dynamic> _$ShipmentDataToJson(ShipmentData instance) =>
       'currentShipmentStatusTrackingId':
           instance.currentShipmentStatusTrackingId,
       'code': instance.code,
-      'name': instance.name,
+      'goodsName': instance.goodsName,
       'quantity': instance.quantity,
       'length': instance.length,
       'width': instance.width,

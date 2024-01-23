@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
+import 'package:shipf/ui/theme/text_style.dart';
 
 class TransitsScreen extends StatefulWidget {
   final LoadingType type;
@@ -55,23 +57,37 @@ class _TransitsScreenState extends State<TransitsScreen> {
               child: SingleChildScrollView(
                 child: state.isLoading
                     ? const OrderShimmer()
-                    : ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.listTransitData.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () =>
-                                context.router.push(TransitDetailPage()),
-                            child: OrderItem(
-                              cancelTransit: () => transitsCubit.cancelTransit(
-                                  transitId: state.listTransitData[index].id),
-                              acceptTransit: () => transitsCubit.acceptTransit(
-                                  transitId: state.listTransitData[index].id),
-                              transit: state.listTransitData[index],
-                            ),
-                          );
-                        }),
+                    : state.listTransitData.isEmpty
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 0.3.sh),
+                            child: Center(
+                                child: Text(
+                              'Không có chuyến',
+                              style: textHeading,
+                            )))
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.listTransitData.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () => context.router.push(
+                                    TransitDetailPage(
+                                        transitId:
+                                            state.listTransitData[index].id)),
+                                child: OrderItem(
+                                  cancelTransit: () =>
+                                      transitsCubit.cancelTransit(
+                                          transitId:
+                                              state.listTransitData[index].id),
+                                  acceptTransit: () =>
+                                      transitsCubit.acceptTransit(
+                                          transitId:
+                                              state.listTransitData[index].id),
+                                  transit: state.listTransitData[index],
+                                ),
+                              );
+                            }),
               ));
         },
       ),

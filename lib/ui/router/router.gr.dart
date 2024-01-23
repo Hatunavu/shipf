@@ -220,7 +220,7 @@ class AppRouter extends _i22.RootStackRouter {
         routeData: routeData,
         child: _i21.TransitDetailScreen(
           key: args.key,
-          type: args.type,
+          transitId: args.transitId,
         ),
       );
     },
@@ -796,13 +796,13 @@ class TransitsPageArgs {
 class TransitDetailPage extends _i22.PageRouteInfo<TransitDetailPageArgs> {
   TransitDetailPage({
     _i23.Key? key,
-    _i25.LoadingType type = _i25.LoadingType.pickup,
+    int transitId = 0,
   }) : super(
           TransitDetailPage.name,
           path: '/transit_detail',
           args: TransitDetailPageArgs(
             key: key,
-            type: type,
+            transitId: transitId,
           ),
         );
 
@@ -812,15 +812,15 @@ class TransitDetailPage extends _i22.PageRouteInfo<TransitDetailPageArgs> {
 class TransitDetailPageArgs {
   const TransitDetailPageArgs({
     this.key,
-    this.type = _i25.LoadingType.pickup,
+    this.transitId = 0,
   });
 
   final _i23.Key? key;
 
-  final _i25.LoadingType type;
+  final int transitId;
 
   @override
   String toString() {
-    return 'TransitDetailPageArgs{key: $key, type: $type}';
+    return 'TransitDetailPageArgs{key: $key, transitId: $transitId}';
   }
 }

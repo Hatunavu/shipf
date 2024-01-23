@@ -44,7 +44,7 @@ mixin ToastUtils {
         gravity: defaultPosition,
         timeInSecForIosWeb: defaultTimeinSecForIosWeb,
         backgroundColor: toastNeutral,
-        textColor: defaultNeutralTextColor,
+        textColor: defaultTextColor,
         fontSize: defaultFontSize);
   }
 }

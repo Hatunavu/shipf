@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransitDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  TransitData? get transitData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransitDetailStateCopyWith<TransitDetailState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $TransitDetailStateCopyWith<$Res> {
           TransitDetailState value, $Res Function(TransitDetailState) then) =
       _$TransitDetailStateCopyWithImpl<$Res, TransitDetailState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, TransitData? transitData});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$TransitDetailStateCopyWithImpl<$Res, $Val extends TransitDetailState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? transitData = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +60,10 @@ class _$TransitDetailStateCopyWithImpl<$Res, $Val extends TransitDetailState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      transitData: freezed == transitData
+          ? _value.transitData
+          : transitData // ignore: cast_nullable_to_non_nullable
+              as TransitData?,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$TransitDetailStateImplCopyWith<$Res>
       __$$TransitDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, TransitData? transitData});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$TransitDetailStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? transitData = freezed,
   }) {
     return _then(_$TransitDetailStateImpl(
       isLoading: null == isLoading
@@ -96,6 +103,10 @@ class __$$TransitDetailStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      transitData: freezed == transitData
+          ? _value.transitData
+          : transitData // ignore: cast_nullable_to_non_nullable
+              as TransitData?,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$TransitDetailStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TransitDetailStateImpl implements _TransitDetailState {
-  const _$TransitDetailStateImpl({required this.isLoading, this.error});
+  const _$TransitDetailStateImpl(
+      {required this.isLoading, this.error, this.transitData});
 
   @override
   final bool isLoading;
   @override
   final String? error;
+  @override
+  final TransitData? transitData;
 
   @override
   String toString() {
-    return 'TransitDetailState(isLoading: $isLoading, error: $error)';
+    return 'TransitDetailState(isLoading: $isLoading, error: $error, transitData: $transitData)';
   }
 
   @override
@@ -122,11 +136,13 @@ class _$TransitDetailStateImpl implements _TransitDetailState {
             other is _$TransitDetailStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.transitData, transitData) ||
+                other.transitData == transitData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error, transitData);
 
   @JsonKey(ignore: true)
   @override
@@ -139,12 +155,15 @@ class _$TransitDetailStateImpl implements _TransitDetailState {
 abstract class _TransitDetailState implements TransitDetailState {
   const factory _TransitDetailState(
       {required final bool isLoading,
-      final String? error}) = _$TransitDetailStateImpl;
+      final String? error,
+      final TransitData? transitData}) = _$TransitDetailStateImpl;
 
   @override
   bool get isLoading;
   @override
   String? get error;
+  @override
+  TransitData? get transitData;
   @override
   @JsonKey(ignore: true)
   _$$TransitDetailStateImplCopyWith<_$TransitDetailStateImpl> get copyWith =>

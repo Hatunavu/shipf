@@ -55,35 +55,40 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
           getIt<AppRouter>().push(TransitsPage(type: LoadingType.transit));
         }),
     HomeAction(
-        content: 'Đơn lấy',
-        icon: AppPath.application,
-        onTap: () {
-          getIt<AppRouter>().push(const OrderListPage());
-        }),
+      content: 'Đơn lấy',
+      icon: AppPath.application,
+      // onTap: () {
+      //   getIt<AppRouter>().push(const OrderListPage());
+      // }
+    ),
     HomeAction(
-        content: 'Đơn giao',
-        icon: AppPath.deliverOrder,
-        onTap: () {
-          getIt<AppRouter>().push(const OrderListPage());
-        }),
+      content: 'Đơn giao',
+      icon: AppPath.deliverOrder,
+      // onTap: () {
+      //   getIt<AppRouter>().push(const OrderListPage());
+      // }
+    ),
     HomeAction(
-        content: 'Chuyến hoàn',
-        icon: AppPath.returnTrip,
-        onTap: () {
-          getIt<AppRouter>().push(const OrderListPage());
-        }),
+      content: 'Chuyến hoàn',
+      icon: AppPath.returnTrip,
+      // onTap: () {
+      //   getIt<AppRouter>().push(const OrderListPage());
+      // }
+    ),
     HomeAction(
-        content: 'Đơn thất bại',
-        icon: AppPath.failed,
-        onTap: () {
-          getIt<AppRouter>().push(const OrderCompletePage());
-        }),
+      content: 'Đơn thất bại',
+      icon: AppPath.failed,
+      // onTap: () {
+      //   getIt<AppRouter>().push(const OrderCompletePage());
+      // }
+    ),
     HomeAction(
-        content: 'Đơn thành công',
-        icon: AppPath.success,
-        onTap: () {
-          getIt<AppRouter>().push(const OrderCompletePage());
-        }),
+      content: 'Đơn thành công',
+      icon: AppPath.success,
+      // onTap: () {
+      //   getIt<AppRouter>().push(const OrderCompletePage());
+      // }
+    ),
     HomeAction(content: 'Đối soát', icon: AppPath.transfer),
   ];
   late HomeShipperCubit homeShipperCubit;

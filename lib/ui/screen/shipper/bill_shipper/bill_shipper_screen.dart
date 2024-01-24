@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_cubit.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_state.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 
 class BillShipperScreen extends StatefulWidget {
@@ -26,9 +24,11 @@ class _BillShipperScreenState extends State<BillShipperScreen> {
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return const OrderItem(
-                      shipmentStatus: ShipmentStatus.successDelivery,
-                    );
+                    return null;
+
+                    // return const OrderItem(
+                    //   shipmentStatus: ShipmentStatus.successDelivery,
+                    // );
                   })
               // SingleChildScrollView(
               //   child: Column(

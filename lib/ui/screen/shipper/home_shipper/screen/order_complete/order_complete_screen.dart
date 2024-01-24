@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/cubit/order_complete_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_complete/cubit/order_complete_state.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 
 class OrderCompleteScreen extends StatefulWidget {
@@ -36,9 +34,11 @@ class _OrderCompleteScreenState extends State<OrderCompleteScreen> {
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return const OrderItem(
-                      shipmentStatus: ShipmentStatus.successDelivery,
-                    );
+                    return null;
+
+                    // return const OrderItem(
+                    //   shipmentStatus: ShipmentStatus.successDelivery,
+                    // );
                   }));
         },
       ),

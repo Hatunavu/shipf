@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
-import 'package:shipf/enums/enum_shipment_status.dart';
+import 'package:shipf/enums/enum_transit_status.dart';
 
 part 'transit_response.g.dart';
 
@@ -37,9 +37,9 @@ class TransitData {
   final LoadingType type;
   @JsonKey(
       name: 'status',
-      toJson: shipmentStatusToString,
-      fromJson: stringToShipmentStatus)
-  final ShipmentStatus status;
+      toJson: transitStatusToString,
+      fromJson: stringToTransitStatus)
+  final TransitStatus status;
   final String note;
   final String doneAt;
   final String createdAt;
@@ -53,7 +53,7 @@ class TransitData {
       this.toWarehouseId = 0,
       this.code = '',
       this.type = LoadingType.pickup,
-      this.status = ShipmentStatus.neww,
+      this.status = TransitStatus.neww,
       this.note = '',
       this.doneAt = '',
       this.createdAt = '',

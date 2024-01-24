@@ -40,8 +40,8 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
           ? LoadingType.pickup
           : stringToLoadingType(json['type'] as String),
       status: json['status'] == null
-          ? ShipmentStatus.neww
-          : stringToShipmentStatus(json['status'] as String),
+          ? TransitStatus.neww
+          : stringToTransitStatus(json['status'] as String),
       note: json['note'] as String? ?? '',
       doneAt: json['doneAt'] as String? ?? '',
       createdAt: json['createdAt'] as String? ?? '',
@@ -64,7 +64,7 @@ Map<String, dynamic> _$TransitDataToJson(TransitData instance) =>
       'toWarehouseId': instance.toWarehouseId,
       'code': instance.code,
       'type': loadingTypeToString(instance.type),
-      'status': shipmentStatusToString(instance.status),
+      'status': transitStatusToString(instance.status),
       'note': instance.note,
       'doneAt': instance.doneAt,
       'createdAt': instance.createdAt,

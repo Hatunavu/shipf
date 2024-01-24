@@ -271,13 +271,22 @@ class TransitItem extends StatelessWidget {
                   HorizontalSpace(kDefaultPaddingWidthScreen),
                   Expanded(
                     flex: 1,
-                    child: PrimaryButton(
-                      onPressed: () {
-                        context.router.pop();
-                        isAccept ? acceptTransit!() : cancelTransit!();
-                      },
-                      label: 'Xác nhận',
-                    ),
+                    child: isAccept
+                        ? PrimaryButton(
+                            onPressed: () {
+                              context.router.pop();
+                              acceptTransit!();
+                            },
+                            label: 'Xác nhận',
+                          )
+                        : PrimaryButton(
+                            onPressed: () {
+                              context.router.pop();
+                              cancelTransit!();
+                            },
+                            label: 'Xác nhận',
+                            backgroundColor: Colors.red,
+                          ),
                   )
                 ],
               ));

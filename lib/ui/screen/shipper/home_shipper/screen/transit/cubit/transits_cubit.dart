@@ -35,17 +35,19 @@ class TransitsCubit extends Cubit<TransitsState> {
     }
   }
 
-  Future<void> acceptTransit({required int transitId}) async {
+  Future<bool> acceptTransit({required int transitId}) async {
     try {
       emit(state.copyWith(isUpdating: true));
       await Future.delayed(Duration(seconds: 2));
       // await mainRepository.acceptTransit(transitId: transitId);
       ToastUtils.showSuccess('Nhận chuyến thành công');
       emit(state.copyWith(isUpdating: false));
+      return true;
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       ToastUtils.showSuccess('Nhận chuyến thất bại');
       emit(state.copyWith(isUpdating: false, error: errorMessage));
+      return false;
     }
   }
 }

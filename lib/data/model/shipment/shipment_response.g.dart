@@ -65,7 +65,9 @@ ShipmentData _$ShipmentDataFromJson(Map<String, dynamic> json) => ShipmentData(
       paymentTerm: json['paymentTerm'] == null
           ? PaymentType.freightPrepaid
           : stringToPaymentType(json['paymentTerm'] as String),
-      createdAt: json['createdAt'] as String? ?? '',
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       pickupAddress: json['pickupAddress'] == null
           ? null
           : ShipmentAddress.fromJson(
@@ -118,7 +120,7 @@ Map<String, dynamic> _$ShipmentDataToJson(ShipmentData instance) =>
       'deliveryLeadTime': instance.deliveryLeadTime,
       'source': sourceTypeToString(instance.source),
       'paymentTerm': paymentTypeToString(instance.paymentTerm),
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
       'pickupAddress': instance.pickupAddress,
       'deliveryAddress': instance.deliveryAddress,
       'currentShipmentStatusTracking': instance.currentShipmentStatusTracking,
@@ -160,7 +162,9 @@ ShipmentStatusTracking _$ShipmentStatusTrackingFromJson(
       updatedById: json['updatedById'] as int? ?? 0,
       shipmentStatusId: json['shipmentStatusId'] as int? ?? 0,
       note: json['note'] as String? ?? '',
-      createdAt: json['createdAt'] as String? ?? '',
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       shipmentStatus: json['shipmentStatus'] == null
           ? null
           : ShipmentShipmentStatus.fromJson(
@@ -175,7 +179,7 @@ Map<String, dynamic> _$ShipmentStatusTrackingToJson(
       'updatedById': instance.updatedById,
       'shipmentStatusId': instance.shipmentStatusId,
       'note': instance.note,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
       'shipmentStatus': instance.shipmentStatus,
     };
 

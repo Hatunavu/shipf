@@ -1,8 +1,10 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_payment_type.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_source_type.dart';
+import 'package:shipf/foundation/extension/date_formatting.dart';
 
 part 'shipment_response.g.dart';
 
@@ -67,7 +69,7 @@ class ShipmentData {
       toJson: paymentTypeToString,
       fromJson: stringToPaymentType)
   final PaymentType paymentTerm;
-  final String createdAt;
+  final DateTime? createdAt;
   final ShipmentAddress? pickupAddress;
   final ShipmentAddress? deliveryAddress;
   final ShipmentStatusTracking? currentShipmentStatusTracking;
@@ -107,13 +109,22 @@ class ShipmentData {
       this.deliveryLeadTime = 0,
       this.source = SourceType.form,
       this.paymentTerm = PaymentType.freightPrepaid,
-      this.createdAt = '',
+      this.createdAt,
       this.pickupAddress,
       this.deliveryAddress,
       this.currentShipmentStatusTracking});
 
   LoadingType? get loadingType {
     return loading != null ? stringToLoadingType(loading!) : null;
+  }
+
+  String get totalFee {
+    return NumberFormat.decimalPattern().format(totalCharge).toString();
+  }
+
+  String get createdTime {
+    if (createdAt == null) return '';
+    return DateFormatting(createdAt!).tohhmmddMMyyyy();
   }
 
   factory ShipmentData.fromJson(Map<String, dynamic> json) =>
@@ -161,7 +172,7 @@ class ShipmentStatusTracking {
   final int updatedById;
   final int shipmentStatusId;
   final String note;
-  final String createdAt;
+  final DateTime? createdAt;
   final ShipmentShipmentStatus? shipmentStatus;
 
   ShipmentStatusTracking(
@@ -170,7 +181,7 @@ class ShipmentStatusTracking {
       this.updatedById = 0,
       this.shipmentStatusId = 0,
       this.note = '',
-      this.createdAt = '',
+      this.createdAt,
       this.shipmentStatus});
 
   factory ShipmentStatusTracking.fromJson(Map<String, dynamic> json) =>

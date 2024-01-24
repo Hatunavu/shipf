@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'order_list_state.dart';
+part of 'shipments_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$OrderListState {
+mixin _$ShipmentsState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<ShipmentData> get listOrder => throw _privateConstructorUsedError;
+  List<ShipmentData> get shipments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OrderListStateCopyWith<OrderListState> get copyWith =>
+  $ShipmentsStateCopyWith<ShipmentsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderListStateCopyWith<$Res> {
-  factory $OrderListStateCopyWith(
-          OrderListState value, $Res Function(OrderListState) then) =
-      _$OrderListStateCopyWithImpl<$Res, OrderListState>;
+abstract class $ShipmentsStateCopyWith<$Res> {
+  factory $ShipmentsStateCopyWith(
+          ShipmentsState value, $Res Function(ShipmentsState) then) =
+      _$ShipmentsStateCopyWithImpl<$Res, ShipmentsState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
+  $Res call({bool isLoading, String? error, List<ShipmentData> shipments});
 }
 
 /// @nodoc
-class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
-    implements $OrderListStateCopyWith<$Res> {
-  _$OrderListStateCopyWithImpl(this._value, this._then);
+class _$ShipmentsStateCopyWithImpl<$Res, $Val extends ShipmentsState>
+    implements $ShipmentsStateCopyWith<$Res> {
+  _$ShipmentsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -49,7 +49,7 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
-    Object? listOrder = null,
+    Object? shipments = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -60,31 +60,31 @@ class _$OrderListStateCopyWithImpl<$Res, $Val extends OrderListState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      listOrder: null == listOrder
-          ? _value.listOrder
-          : listOrder // ignore: cast_nullable_to_non_nullable
+      shipments: null == shipments
+          ? _value.shipments
+          : shipments // ignore: cast_nullable_to_non_nullable
               as List<ShipmentData>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$OrderListStateImplCopyWith<$Res>
-    implements $OrderListStateCopyWith<$Res> {
-  factory _$$OrderListStateImplCopyWith(_$OrderListStateImpl value,
-          $Res Function(_$OrderListStateImpl) then) =
-      __$$OrderListStateImplCopyWithImpl<$Res>;
+abstract class _$$ShipmentsStateImplCopyWith<$Res>
+    implements $ShipmentsStateCopyWith<$Res> {
+  factory _$$ShipmentsStateImplCopyWith(_$ShipmentsStateImpl value,
+          $Res Function(_$ShipmentsStateImpl) then) =
+      __$$ShipmentsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
+  $Res call({bool isLoading, String? error, List<ShipmentData> shipments});
 }
 
 /// @nodoc
-class __$$OrderListStateImplCopyWithImpl<$Res>
-    extends _$OrderListStateCopyWithImpl<$Res, _$OrderListStateImpl>
-    implements _$$OrderListStateImplCopyWith<$Res> {
-  __$$OrderListStateImplCopyWithImpl(
-      _$OrderListStateImpl _value, $Res Function(_$OrderListStateImpl) _then)
+class __$$ShipmentsStateImplCopyWithImpl<$Res>
+    extends _$ShipmentsStateCopyWithImpl<$Res, _$ShipmentsStateImpl>
+    implements _$$ShipmentsStateImplCopyWith<$Res> {
+  __$$ShipmentsStateImplCopyWithImpl(
+      _$ShipmentsStateImpl _value, $Res Function(_$ShipmentsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,9 +92,9 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
-    Object? listOrder = null,
+    Object? shipments = null,
   }) {
-    return _then(_$OrderListStateImpl(
+    return _then(_$ShipmentsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -103,9 +103,9 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      listOrder: null == listOrder
-          ? _value._listOrder
-          : listOrder // ignore: cast_nullable_to_non_nullable
+      shipments: null == shipments
+          ? _value._shipments
+          : shipments // ignore: cast_nullable_to_non_nullable
               as List<ShipmentData>,
     ));
   }
@@ -113,68 +113,68 @@ class __$$OrderListStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderListStateImpl implements _OrderListState {
-  const _$OrderListStateImpl(
+class _$ShipmentsStateImpl implements _ShipmentsState {
+  const _$ShipmentsStateImpl(
       {required this.isLoading,
       this.error,
-      required final List<ShipmentData> listOrder})
-      : _listOrder = listOrder;
+      required final List<ShipmentData> shipments})
+      : _shipments = shipments;
 
   @override
   final bool isLoading;
   @override
   final String? error;
-  final List<ShipmentData> _listOrder;
+  final List<ShipmentData> _shipments;
   @override
-  List<ShipmentData> get listOrder {
-    if (_listOrder is EqualUnmodifiableListView) return _listOrder;
+  List<ShipmentData> get shipments {
+    if (_shipments is EqualUnmodifiableListView) return _shipments;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_listOrder);
+    return EqualUnmodifiableListView(_shipments);
   }
 
   @override
   String toString() {
-    return 'OrderListState(isLoading: $isLoading, error: $error, listOrder: $listOrder)';
+    return 'ShipmentsState(isLoading: $isLoading, error: $error, shipments: $shipments)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderListStateImpl &&
+            other is _$ShipmentsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
-                .equals(other._listOrder, _listOrder));
+                .equals(other._shipments, _shipments));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, error,
-      const DeepCollectionEquality().hash(_listOrder));
+      const DeepCollectionEquality().hash(_shipments));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
-      __$$OrderListStateImplCopyWithImpl<_$OrderListStateImpl>(
+  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
+      __$$ShipmentsStateImplCopyWithImpl<_$ShipmentsStateImpl>(
           this, _$identity);
 }
 
-abstract class _OrderListState implements OrderListState {
-  const factory _OrderListState(
+abstract class _ShipmentsState implements ShipmentsState {
+  const factory _ShipmentsState(
       {required final bool isLoading,
       final String? error,
-      required final List<ShipmentData> listOrder}) = _$OrderListStateImpl;
+      required final List<ShipmentData> shipments}) = _$ShipmentsStateImpl;
 
   @override
   bool get isLoading;
   @override
   String? get error;
   @override
-  List<ShipmentData> get listOrder;
+  List<ShipmentData> get shipments;
   @override
   @JsonKey(ignore: true)
-  _$$OrderListStateImplCopyWith<_$OrderListStateImpl> get copyWith =>
+  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -15,7 +15,8 @@ import 'package:auto_route/auto_route.dart' as _i22;
 import 'package:flutter/material.dart' as _i23;
 
 import '../../data/model/address/address.dart' as _i24;
-import '../../enums/enum_loading_type.dart' as _i25;
+import '../../enums/enum_loading_type.dart' as _i26;
+import '../../enums/enum_shipment_status.dart' as _i25;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i7;
 import '../screen/auth/login/login_screen.dart' as _i3;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i8;
@@ -36,7 +37,7 @@ import '../screen/main/welcome/welcome_screen.dart' as _i5;
 import '../screen/shipper/home_shipper/home_shipper_screen.dart' as _i17;
 import '../screen/shipper/home_shipper/screen/order_complete/order_complete_screen.dart'
     as _i19;
-import '../screen/shipper/home_shipper/screen/order_list/order_list_screen.dart'
+import '../screen/shipper/home_shipper/screen/shipment/shipments_screen.dart'
     as _i18;
 import '../screen/shipper/home_shipper/screen/transit/screen/transit_detail/transit_detail_screen.dart'
     as _i21;
@@ -190,10 +191,15 @@ class AppRouter extends _i22.RootStackRouter {
         child: _i17.HomeShipperScreen(key: args.key),
       );
     },
-    OrderListPage.name: (routeData) {
+    ShipmentsPage.name: (routeData) {
+      final args = routeData.argsAs<ShipmentsPageArgs>(
+          orElse: () => const ShipmentsPageArgs());
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.OrderListScreen(),
+        child: _i18.ShipmentsScreen(
+          key: args.key,
+          shipmentStatus: args.shipmentStatus,
+        ),
       );
     },
     OrderCompletePage.name: (routeData) {
@@ -297,8 +303,8 @@ class AppRouter extends _i22.RootStackRouter {
           path: '/home_shipper',
         ),
         _i22.RouteConfig(
-          OrderListPage.name,
-          path: '/order_list',
+          ShipmentsPage.name,
+          path: '/shipments',
         ),
         _i22.RouteConfig(
           OrderCompletePage.name,
@@ -734,15 +740,37 @@ class HomeShipperPageArgs {
 }
 
 /// generated route for
-/// [_i18.OrderListScreen]
-class OrderListPage extends _i22.PageRouteInfo<void> {
-  const OrderListPage()
-      : super(
-          OrderListPage.name,
-          path: '/order_list',
+/// [_i18.ShipmentsScreen]
+class ShipmentsPage extends _i22.PageRouteInfo<ShipmentsPageArgs> {
+  ShipmentsPage({
+    _i23.Key? key,
+    _i25.ShipmentStatus shipmentStatus = _i25.ShipmentStatus.pickingUp,
+  }) : super(
+          ShipmentsPage.name,
+          path: '/shipments',
+          args: ShipmentsPageArgs(
+            key: key,
+            shipmentStatus: shipmentStatus,
+          ),
         );
 
-  static const String name = 'OrderListPage';
+  static const String name = 'ShipmentsPage';
+}
+
+class ShipmentsPageArgs {
+  const ShipmentsPageArgs({
+    this.key,
+    this.shipmentStatus = _i25.ShipmentStatus.pickingUp,
+  });
+
+  final _i23.Key? key;
+
+  final _i25.ShipmentStatus shipmentStatus;
+
+  @override
+  String toString() {
+    return 'ShipmentsPageArgs{key: $key, shipmentStatus: $shipmentStatus}';
+  }
 }
 
 /// generated route for
@@ -762,7 +790,7 @@ class OrderCompletePage extends _i22.PageRouteInfo<void> {
 class TransitsPage extends _i22.PageRouteInfo<TransitsPageArgs> {
   TransitsPage({
     _i23.Key? key,
-    _i25.LoadingType type = _i25.LoadingType.pickup,
+    _i26.LoadingType type = _i26.LoadingType.pickup,
   }) : super(
           TransitsPage.name,
           path: '/transits',
@@ -778,12 +806,12 @@ class TransitsPage extends _i22.PageRouteInfo<TransitsPageArgs> {
 class TransitsPageArgs {
   const TransitsPageArgs({
     this.key,
-    this.type = _i25.LoadingType.pickup,
+    this.type = _i26.LoadingType.pickup,
   });
 
   final _i23.Key? key;
 
-  final _i25.LoadingType type;
+  final _i26.LoadingType type;
 
   @override
   String toString() {

@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_cubit.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/order_list/cubit/order_list_state.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_cubit.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_state.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/widget/shipment_item.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/theme/constant.dart';
 
-class OrderListScreen extends StatefulWidget {
-  const OrderListScreen({Key? key}) : super(key: key);
+class ShipmentsScreen extends StatefulWidget {
+  final ShipmentStatus shipmentStatus;
+  const ShipmentsScreen(
+      {Key? key, this.shipmentStatus = ShipmentStatus.pickingUp})
+      : super(key: key);
 
   @override
-  State<OrderListScreen> createState() => _OrderListScreenState();
+  State<ShipmentsScreen> createState() => _ShipmentsScreenState();
 }
 
-class _OrderListScreenState extends State<OrderListScreen> {
+class _ShipmentsScreenState extends State<ShipmentsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderListCubit()..getShipments(),
-      child: BlocConsumer<OrderListCubit, OrderListState>(
+      create: (context) => ShipmentsCubit()..getShipments(),
+      child: BlocConsumer<ShipmentsCubit, ShipmentsState>(
         listener: (context, state) {},
         builder: (context, state) {
           return BaseScreen(
@@ -35,17 +38,17 @@ class _OrderListScreenState extends State<OrderListScreen> {
                 ),
               ),
               child: SingleChildScrollView(
-                child: state.listOrder.isEmpty
+                child: state.shipments.isEmpty
                     ? const OrderShimmer()
                     : ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: 3,
+                        itemCount: state.shipments.length,
                         padding: EdgeInsets.only(
                             bottom: kDefaultPaddingHeightScreen),
                         itemBuilder: (context, index) {
-                          return const OrderItem(
-                            shipmentStatus: ShipmentStatus.delivering,
+                          return ShipmentItem(
+                            shipment: state.shipments[index],
                           );
                         }),
               ));

@@ -3,24 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/transit/transit_response.dart';
-import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_transit_status.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class OrderItem extends StatelessWidget {
+class TransitItem extends StatelessWidget {
   final Function? cancelTransit;
   final Function? acceptTransit;
-  final TransitData? transit;
-  final ShipmentStatus shipmentStatus;
-  const OrderItem(
+  final TransitData transit;
+  const TransitItem(
       {super.key,
-      this.shipmentStatus = ShipmentStatus.neww,
-      this.transit,
+      required this.transit,
       this.acceptTransit,
       this.cancelTransit});
 
@@ -53,16 +49,11 @@ class OrderItem extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: Text(
-                      shipmentStatus == ShipmentStatus.neww
-                          ? 'Mã đơn lấy: ${transit?.code}'
-                          : shipmentStatus == ShipmentStatus.delivering
-                              ? 'Mã chuyến lấy: ${transit?.code}'
-                              : 'Mã chuyến: ${transit?.code}',
+                  child: Text('Mã chuyến lấy: ${transit.code}',
                       style: textBody.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600))),
               Text(
-                transit?.status.display() ?? '',
+                transit.status.display(),
                 style: textBottomBar.copyWith(
                     color: Colors.blueAccent, fontWeight: FontWeight.w500),
               ),
@@ -136,7 +127,7 @@ class OrderItem extends StatelessWidget {
                     horizontal: kDefaultPaddingWidthScreen / 2),
                 child: Expanded(
                   child: Text(
-                    transit?.note ?? '',
+                    transit.note,
                     style: textBody,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -161,16 +152,12 @@ class OrderItem extends StatelessWidget {
                 ),
                 HorizontalSpace(kDefaultPaddingWidthScreen / 2),
                 Text(
-                  shipmentStatus == ShipmentStatus.neww
-                      ? 'Thời gian tạo: '
-                      : shipmentStatus == ShipmentStatus.delivering
-                          ? 'Hẹn giao: '
-                          : 'Hoàn thành: ',
+                  'Thời gian tạo: ',
                   style: textBottomBar.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '12h30-20/1',
+                  transit.createdTime,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: textBottomBar.copyWith(
@@ -179,28 +166,26 @@ class OrderItem extends StatelessWidget {
               ],
             ),
           ),
-          shipmentStatus == ShipmentStatus.neww
-              ? Padding(
-                  padding: EdgeInsets.only(
-                      right: kDefaultPaddingWidthScreen,
-                      top: kDefaultPaddingHeightScreen / 2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tổng đơn',
-                        style: primarySubTitleStyle.copyWith(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '10',
-                        style: textBody.copyWith(
-                            color: Colors.red, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+          Padding(
+            padding: EdgeInsets.only(
+                right: kDefaultPaddingWidthScreen,
+                top: kDefaultPaddingHeightScreen / 2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Tổng đơn',
+                  style: primarySubTitleStyle.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '10',
+                  style: textBody.copyWith(
+                      color: Colors.red, fontWeight: FontWeight.bold),
                 )
-              : const SizedBox(),
+              ],
+            ),
+          ),
           VerticalSpace(kDefaultPaddingHeightScreen / 2),
           Padding(
             padding: EdgeInsets.only(right: kDefaultPaddingWidthScreen),
@@ -220,17 +205,13 @@ class OrderItem extends StatelessWidget {
               ],
             ),
           ),
-          shipmentStatus == ShipmentStatus.neww
-              ? newAction(context)
-              : shipmentStatus == ShipmentStatus.delivering
-                  ? deliveryAction()
-                  : const SizedBox()
+          transitAction(context)
         ],
       ),
     );
   }
 
-  Widget newAction(BuildContext context) {
+  Widget transitAction(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
           right: kDefaultPaddingWidthScreen,
@@ -243,7 +224,7 @@ class OrderItem extends StatelessWidget {
               defaultHeight: true,
               onPressed: () {
                 confirmDialog(context,
-                    title: 'Bạn có muốn huỷ chuyến ${transit?.code} không?');
+                    title: 'Bạn có muốn huỷ chuyến ${transit.code} không?');
               },
             ),
           ),
@@ -253,39 +234,8 @@ class OrderItem extends StatelessWidget {
               label: 'Nhận Chuyến',
               defaultHeight: true,
               onPressed: () => confirmDialog(context,
-                  title: 'Bạn có muốn nhận chuyến ${transit?.code} không?',
+                  title: 'Bạn có muốn nhận chuyến ${transit.code} không?',
                   isAccept: true),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget deliveryAction() {
-    return Padding(
-      padding: EdgeInsets.only(
-          right: kDefaultPaddingWidthScreen,
-          top: kDefaultPaddingHeightScreen / 2),
-      child: Row(
-        children: [
-          Expanded(
-            child: PrimaryButton.outline(
-              label: 'Nhắn tin',
-              defaultHeight: true,
-              onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
-              },
-            ),
-          ),
-          HorizontalSpace(kDefaultPaddingWidthScreen / 2),
-          Expanded(
-            child: PrimaryButton.outline(
-              label: 'Cập nhật',
-              defaultHeight: true,
-              onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
-              },
             ),
           ),
         ],

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
-import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_state.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_item.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/widget/transit_item.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
@@ -70,22 +69,16 @@ class _TransitsScreenState extends State<TransitsScreen> {
                             shrinkWrap: true,
                             itemCount: state.listTransitData.length,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () => context.router.push(
-                                    TransitDetailPage(
+                              return TransitItem(
+                                cancelTransit: () =>
+                                    transitsCubit.cancelTransit(
                                         transitId:
-                                            state.listTransitData[index].id)),
-                                child: OrderItem(
-                                  cancelTransit: () =>
-                                      transitsCubit.cancelTransit(
-                                          transitId:
-                                              state.listTransitData[index].id),
-                                  acceptTransit: () =>
-                                      transitsCubit.acceptTransit(
-                                          transitId:
-                                              state.listTransitData[index].id),
-                                  transit: state.listTransitData[index],
-                                ),
+                                            state.listTransitData[index].id),
+                                acceptTransit: () =>
+                                    transitsCubit.acceptTransit(
+                                        transitId:
+                                            state.listTransitData[index].id),
+                                transit: state.listTransitData[index],
                               );
                             }),
               ));

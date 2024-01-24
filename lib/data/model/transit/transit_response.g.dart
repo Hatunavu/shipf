@@ -44,7 +44,9 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
           : stringToTransitStatus(json['status'] as String),
       note: json['note'] as String? ?? '',
       doneAt: json['doneAt'] as String? ?? '',
-      createdAt: json['createdAt'] as String? ?? '',
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       transitShippers: (json['transitShippers'] as List<dynamic>?)
               ?.map((e) => TransitShipper.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -67,7 +69,7 @@ Map<String, dynamic> _$TransitDataToJson(TransitData instance) =>
       'status': transitStatusToString(instance.status),
       'note': instance.note,
       'doneAt': instance.doneAt,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
       'transitShippers': instance.transitShippers,
       'shipments': instance.shipments,
     };
@@ -110,7 +112,9 @@ Shipper _$ShipperFromJson(Map<String, dynamic> json) => Shipper(
       termAndConditionAcceptedAt:
           json['termAndConditionAcceptedAt'] as String? ?? '',
       isActive: json['isActive'] as bool? ?? false,
-      createdAt: json['createdAt'] as String? ?? '',
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] as String? ?? '',
       deletedAt: json['deletedAt'] as String? ?? '',
     );
@@ -126,7 +130,7 @@ Map<String, dynamic> _$ShipperToJson(Shipper instance) => <String, dynamic>{
       'email': instance.email,
       'termAndConditionAcceptedAt': instance.termAndConditionAcceptedAt,
       'isActive': instance.isActive,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt,
       'deletedAt': instance.deletedAt,
     };

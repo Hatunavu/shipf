@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/statistic/statistic.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/injection.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -55,12 +56,12 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
           getIt<AppRouter>().push(TransitsPage(type: LoadingType.transit));
         }),
     HomeAction(
-      content: 'Đơn lấy',
-      icon: AppPath.application,
-      // onTap: () {
-      //   getIt<AppRouter>().push(const OrderListPage());
-      // }
-    ),
+        content: 'Đơn lấy',
+        icon: AppPath.application,
+        onTap: () {
+          getIt<AppRouter>()
+              .push(ShipmentsPage(shipmentStatus: ShipmentStatus.pickingUp));
+        }),
     HomeAction(
       content: 'Đơn giao',
       icon: AppPath.deliverOrder,

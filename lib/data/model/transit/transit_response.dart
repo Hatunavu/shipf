@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_transit_status.dart';
+import 'package:shipf/foundation/extension/date_formatting.dart';
 
 part 'transit_response.g.dart';
 
@@ -42,7 +43,7 @@ class TransitData {
   final TransitStatus status;
   final String note;
   final String doneAt;
-  final String createdAt;
+  final DateTime? createdAt;
   final List<TransitShipper> transitShippers;
   final List<ShipmentData> shipments;
   TransitData(
@@ -56,9 +57,14 @@ class TransitData {
       this.status = TransitStatus.neww,
       this.note = '',
       this.doneAt = '',
-      this.createdAt = '',
+      this.createdAt,
       this.transitShippers = const [],
       this.shipments = const []});
+
+  String get createdTime {
+    if (createdAt == null) return '';
+    return DateFormatting(createdAt!).tohhmmddMMyyyy();
+  }
 
   factory TransitData.fromJson(Map<String, dynamic> json) =>
       _$TransitDataFromJson(json);
@@ -103,7 +109,7 @@ class Shipper {
   final String email;
   final String termAndConditionAcceptedAt;
   final bool isActive;
-  final String createdAt;
+  final DateTime? createdAt;
   final String updatedAt;
   final String deletedAt;
 
@@ -118,7 +124,7 @@ class Shipper {
       this.email = '',
       this.termAndConditionAcceptedAt = '',
       this.isActive = false,
-      this.createdAt = '',
+      this.createdAt,
       this.updatedAt = '',
       this.deletedAt = ''});
 

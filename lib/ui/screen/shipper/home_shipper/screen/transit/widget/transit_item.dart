@@ -49,7 +49,7 @@ class TransitItem extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: Text('Mã chuyến lấy: ${transit.code}',
+                  child: Text('Mã chuyến: ${transit.code}',
                       style: textBody.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600))),
               Text(

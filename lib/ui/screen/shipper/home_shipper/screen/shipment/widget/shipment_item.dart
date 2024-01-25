@@ -126,10 +126,10 @@ class ShipmentItem extends StatelessWidget {
                 size: textSize,
                 color: primaryColor,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: kDefaultPaddingWidthScreen / 2),
-                child: Expanded(
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: kDefaultPaddingWidthScreen / 2),
                   child: Text(
                     shipment.note,
                     style: textBody,

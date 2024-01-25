@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
+import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_state.dart';
@@ -12,6 +13,9 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/widget/trans
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
+import 'package:shipf/ui/shared/widget/image_creator.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
+import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class TransitsScreen extends StatefulWidget {
@@ -61,12 +65,25 @@ class _TransitsScreenState extends State<TransitsScreen> {
                     ? const OrderShimmer()
                     : state.listTransitData.isEmpty
                         ? Padding(
-                            padding: EdgeInsets.only(top: 0.3.sh),
-                            child: Center(
-                                child: Text(
-                              'Không có chuyến',
-                              style: textHeading,
-                            )))
+                            padding: EdgeInsets.only(top: 0.2.sh),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(),
+                                SizedBox(
+                                    height: 0.2.sw,
+                                    width: 0.2.sw,
+                                    child: ImageCreator.assetImage(
+                                        imagePath: AppPath.pick,
+                                        color: darkTitleColor)),
+                                VerticalSpace(kDefaultPaddingHeightScreen),
+                                Text(
+                                  'Không có chuyến',
+                                  style: textHeading.copyWith(
+                                      color: darkTitleColor),
+                                ),
+                              ],
+                            ))
                         : ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,

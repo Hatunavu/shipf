@@ -122,10 +122,10 @@ class TransitItem extends StatelessWidget {
                 size: textSize,
                 color: primaryColor,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: kDefaultPaddingWidthScreen / 2),
-                child: Expanded(
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: kDefaultPaddingWidthScreen / 2),
                   child: Text(
                     transit.note,
                     style: textBody,

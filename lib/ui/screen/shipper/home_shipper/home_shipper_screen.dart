@@ -1,8 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shipf/data/model/statistic/statistic.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
@@ -16,26 +19,9 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-final List<Statistic> statistics = [
-  Statistic(content: 'Tổng bill', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Chờ lấy hàng', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Đơn thất bại', data: '0', color: '0xffff4554'),
-  Statistic(content: 'Chuyển hàng', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Chờ giao hàng', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Chuyển hoàn', data: '0', color: '0xffff4554'),
-  Statistic(content: 'Phát thành công', data: '0', color: '0xff00c3e3'),
-  Statistic(content: 'Chờ trung chuyển', data: '0', color: '0xffffd73a'),
-  Statistic(content: 'Đối soát', data: '0', color: '0xffff4554'),
-];
-
-class HomeShipperScreen extends StatefulWidget {
+class HomeShipperScreen extends StatelessWidget {
   HomeShipperScreen({Key? key}) : super(key: key);
 
-  @override
-  State<HomeShipperScreen> createState() => _HomeShipperScreenState();
-}
-
-class _HomeShipperScreenState extends State<HomeShipperScreen> {
   final List<HomeAction> actions = [
     HomeAction(
         content: 'Chuyển lấy',
@@ -105,73 +91,31 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
               onPressed: () {
                 context.router.push(NotificationPage());
               },
-              icon: Icon(Ionicons.notifications)),
+              icon: const Icon(Ionicons.notifications)),
           IconButton(
               onPressed: () {
                 context.router.push(SettingPage());
               },
-              icon: Icon(Ionicons.settings_outline))
+              icon: const Icon(Ionicons.settings_outline))
         ],
         title: const Text('ShipF'),
         centerTitle: false,
         automaticallyImplyLeading: false,
       ),
       body: BlocProvider(
-        create: (context) => HomeShipperCubit(),
+        create: (context) => HomeShipperCubit()..init(),
         child: BlocConsumer<HomeShipperCubit, HomeShipperState>(
           listener: (context, state) {},
           builder: (context, state) {
             homeShipperCubit = context.read<HomeShipperCubit>();
-            return action();
+            return action(state);
           },
         ),
       ),
     );
   }
 
-  Widget statistic() {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthScreen,
-          vertical: kDefaultPaddingHeightScreen),
-      shrinkWrap: true,
-      itemCount: statistics.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, childAspectRatio: 2),
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          // margin: EdgeInsets.only(
-          //     right: kDefaultPaddingWidthScreen,
-          //     bottom: kDefaultPaddingHeightScreen),
-          padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen),
-          decoration: BoxDecoration(
-              color: Color(int.parse(statistics[index].color)),
-              border: Border.all(color: Colors.white)
-              // borderRadius: BorderRadius.circular(defaultBorderRadius)
-              ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                statistics[index].content,
-                style: textBottomBar.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                statistics[index].data,
-                style: primarySubTitleStyle.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget action() {
+  Widget action(HomeShipperState state) {
     return GridView.builder(
       padding: EdgeInsets.only(
           left: kDefaultPaddingWidthScreen, top: kDefaultPaddingHeightScreen),
@@ -180,47 +124,60 @@ class _HomeShipperScreenState extends State<HomeShipperScreen> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, childAspectRatio: 2 / 3),
       itemBuilder: (BuildContext context, int index) {
-        return GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: actions[index].onTap ??
-              () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
-              },
-          child: Container(
-            margin: EdgeInsets.only(
-                right: kDefaultPaddingWidthScreen,
-                bottom: kDefaultPaddingHeightScreen),
-            decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(defaultBorderRadius)),
-            padding: EdgeInsets.symmetric(
-                vertical: kDefaultPaddingHeightScreen / 2,
-                horizontal: kDefaultPaddingWidthScreen / 2),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                    height: 0.15.sw,
-                    width: 0.15.sw,
-                    child: ImageCreator.assetImage(
-                        imagePath: actions[index].icon, color: Colors.white)),
-                Text(
-                  '100',
-                  overflow: TextOverflow.ellipsis,
-                  style: primaryHeaderTitleStyle.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+        return state.isLoading
+            ? Shimmer.fromColors(
+                baseColor: Colors.grey.withOpacity(0.4),
+                highlightColor: Colors.grey.withOpacity(0.1),
+                child: Container(
+                  margin: EdgeInsets.only(
+                      right: kDefaultPaddingWidthScreen,
+                      bottom: kDefaultPaddingHeightScreen),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
+                ))
+            : GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: actions[index].onTap ??
+                    () {
+                      ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                    },
+                child: Container(
+                  margin: EdgeInsets.only(
+                      right: kDefaultPaddingWidthScreen,
+                      bottom: kDefaultPaddingHeightScreen),
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
+                  padding: EdgeInsets.symmetric(
+                      vertical: kDefaultPaddingHeightScreen / 2,
+                      horizontal: kDefaultPaddingWidthScreen / 2),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height: 0.15.sw,
+                          width: 0.15.sw,
+                          child: ImageCreator.assetImage(
+                              imagePath: actions[index].icon,
+                              color: Colors.white)),
+                      Text(
+                        state.analysis[index].toString(),
+                        overflow: TextOverflow.ellipsis,
+                        style: primaryHeaderTitleStyle.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        actions[index].content,
+                        style: primarySubTitleStyle.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
                 ),
-                Text(
-                  actions[index].content,
-                  style: primarySubTitleStyle.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
-        );
+              );
       },
     );
   }

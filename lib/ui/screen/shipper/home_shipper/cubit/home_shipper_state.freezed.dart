@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeShipperState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<int> get analysis => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeShipperStateCopyWith<HomeShipperState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $HomeShipperStateCopyWith<$Res> {
           HomeShipperState value, $Res Function(HomeShipperState) then) =
       _$HomeShipperStateCopyWithImpl<$Res, HomeShipperState>;
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<int> analysis});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? analysis = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +60,10 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      analysis: null == analysis
+          ? _value.analysis
+          : analysis // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$HomeShipperStateImplCopyWith<$Res>
       __$$HomeShipperStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error});
+  $Res call({bool isLoading, String? error, List<int> analysis});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? error = freezed,
+    Object? analysis = null,
   }) {
     return _then(_$HomeShipperStateImpl(
       isLoading: null == isLoading
@@ -96,6 +103,10 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      analysis: null == analysis
+          ? _value._analysis
+          : analysis // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -103,16 +114,25 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeShipperStateImpl implements _HomeShipperState {
-  const _$HomeShipperStateImpl({required this.isLoading, this.error});
+  const _$HomeShipperStateImpl(
+      {required this.isLoading, this.error, required final List<int> analysis})
+      : _analysis = analysis;
 
   @override
   final bool isLoading;
   @override
   final String? error;
+  final List<int> _analysis;
+  @override
+  List<int> get analysis {
+    if (_analysis is EqualUnmodifiableListView) return _analysis;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_analysis);
+  }
 
   @override
   String toString() {
-    return 'HomeShipperState(isLoading: $isLoading, error: $error)';
+    return 'HomeShipperState(isLoading: $isLoading, error: $error, analysis: $analysis)';
   }
 
   @override
@@ -122,11 +142,13 @@ class _$HomeShipperStateImpl implements _HomeShipperState {
             other is _$HomeShipperStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality().equals(other._analysis, _analysis));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error,
+      const DeepCollectionEquality().hash(_analysis));
 
   @JsonKey(ignore: true)
   @override
@@ -139,12 +161,15 @@ class _$HomeShipperStateImpl implements _HomeShipperState {
 abstract class _HomeShipperState implements HomeShipperState {
   const factory _HomeShipperState(
       {required final bool isLoading,
-      final String? error}) = _$HomeShipperStateImpl;
+      final String? error,
+      required final List<int> analysis}) = _$HomeShipperStateImpl;
 
   @override
   bool get isLoading;
   @override
   String? get error;
+  @override
+  List<int> get analysis;
   @override
   @JsonKey(ignore: true)
   _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>

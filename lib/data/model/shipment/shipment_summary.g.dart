@@ -30,9 +30,9 @@ Map<String, dynamic> _$ShipmentSummaryResponseToJson(
 
 ShipmentSummaryData _$ShipmentSummaryDataFromJson(Map<String, dynamic> json) =>
     ShipmentSummaryData(
-      shipmentStatus: json['shipmentStatus'] == null
+      shipmentStatus: json['shipmentStatusCode'] == null
           ? ShipmentStatus.neww
-          : stringToShipmentStatus(json['shipmentStatus'] as String),
+          : stringToShipmentStatus(json['shipmentStatusCode'] as String),
       shipmentStatusName: json['shipmentStatusName'] as String? ?? '',
       totalElements: json['totalElements'] as int? ?? 0,
     );
@@ -40,7 +40,7 @@ ShipmentSummaryData _$ShipmentSummaryDataFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ShipmentSummaryDataToJson(
         ShipmentSummaryData instance) =>
     <String, dynamic>{
-      'shipmentStatus': shipmentStatusToString(instance.shipmentStatus),
+      'shipmentStatusCode': shipmentStatusToString(instance.shipmentStatus),
       'shipmentStatusName': instance.shipmentStatusName,
       'totalElements': instance.totalElements,
     };

@@ -25,7 +25,7 @@ class ShipmentSummaryResponse {
 @JsonSerializable()
 class ShipmentSummaryData {
   @JsonKey(
-      name: 'shipmentStatus',
+      name: 'shipmentStatusCode',
       fromJson: stringToShipmentStatus,
       toJson: shipmentStatusToString)
   final ShipmentStatus shipmentStatus;

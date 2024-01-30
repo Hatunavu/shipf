@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
+import 'package:shipf/enums/enum_shipment_update.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_cubit.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
@@ -12,16 +14,14 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class ShipmentItem extends StatelessWidget {
-  final Function? cancelshipment;
-  final Function? acceptshipment;
-  final ShipmentData shipment;
+  final ShipmentsCubit shipmentsCubit;
   final ShipmentStatus shipmentStatus;
+  final ShipmentData shipment;
 
   const ShipmentItem(
       {super.key,
+      required this.shipmentsCubit,
       required this.shipment,
-      this.acceptshipment,
-      this.cancelshipment,
       this.shipmentStatus = ShipmentStatus.pickingUp});
 
   @override
@@ -189,13 +189,14 @@ class ShipmentItem extends StatelessWidget {
               ],
             ),
           ),
-          deliveryAction()
+          deliveryAction(context, shipment: shipment)
         ],
       ),
     );
   }
 
-  Widget deliveryAction() {
+  Widget deliveryAction(BuildContext context,
+      {required ShipmentData shipment}) {
     return Padding(
       padding: EdgeInsets.only(
           right: kDefaultPaddingWidthScreen,
@@ -217,7 +218,7 @@ class ShipmentItem extends StatelessWidget {
               label: 'Cập nhật',
               defaultHeight: true,
               onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                updateShipmentStatus(context, shipmentCode: shipment.code);
               },
             ),
           ),
@@ -226,14 +227,17 @@ class ShipmentItem extends StatelessWidget {
     );
   }
 
-  void confirmDialog(BuildContext context,
-      {required String title, bool isAccept = false}) {
+  void updateShipmentStatus(BuildContext context,
+      {required String shipmentCode}) {
+    ShipmentUpdate? dropDownValue;
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
               title: Text(
-                title,
+                'Cập nhật trạng thái đơn hàng $shipmentCode',
                 textAlign: TextAlign.center,
               ),
               titlePadding: EdgeInsets.symmetric(
@@ -242,26 +246,72 @@ class ShipmentItem extends StatelessWidget {
               contentPadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightWidget,
                   horizontal: kDefaultPaddingWidthScreen),
-              content: Row(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: PrimaryButton.grey(
-                      label: 'Hủy',
-                      onPressed: () => context.router.pop(),
-                    ),
+                  const Text('Trạng thái'),
+                  VerticalSpace(kDefaultPaddingHeightScreen),
+                  StatefulBuilder(builder:
+                      (BuildContext context, StateSetter dropDownState) {
+                    return InputDecorator(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingWidthScreen),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(kDefaultBorderRadius)),
+                      ),
+                      child: DropdownButton(
+                        underline: const SizedBox(),
+                        isExpanded: true,
+                        value: dropDownValue,
+                        items: [
+                          ShipmentUpdate.pickedUp,
+                          ShipmentUpdate.faildPickup
+                        ].map((value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value.display()),
+                          );
+                        }).toList(),
+                        onChanged: (ShipmentUpdate? value) {
+                          dropDownState(() {
+                            dropDownValue = value;
+                          });
+                        },
+                      ),
+                    );
+                  }),
+                  VerticalSpace(kDefaultPaddingHeightWidget * 2),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: PrimaryButton.grey(
+                          label: 'Hủy',
+                          onPressed: () => context.router.pop(),
+                        ),
+                      ),
+                      HorizontalSpace(kDefaultPaddingWidthScreen),
+                      Expanded(
+                          flex: 1,
+                          child: PrimaryButton(
+                            onPressed: () {
+                              if (dropDownValue == null) {
+                                ToastUtils.showFail(
+                                    'Vui lòng chọn trạng thái cập nhật');
+                              } else {
+                                context.router.pop();
+                                shipmentsCubit.updateShipmentStatus(
+                                    shipmentUpdate: dropDownValue,
+                                    shipmentCode: shipmentCode);
+                              }
+                            },
+                            label: 'Xác nhận',
+                          ))
+                    ],
                   ),
-                  HorizontalSpace(kDefaultPaddingWidthScreen),
-                  Expanded(
-                    flex: 1,
-                    child: PrimaryButton(
-                      onPressed: () {
-                        context.router.pop();
-                        isAccept ? acceptshipment!() : cancelshipment!();
-                      },
-                      label: 'Xác nhận',
-                    ),
-                  )
                 ],
               ));
         });

@@ -6,10 +6,11 @@ part 'shipments_state.freezed.dart';
 @freezed
 class ShipmentsState with _$ShipmentsState {
   const factory ShipmentsState(
-      {required bool isLoading,
+      {required bool isFirstLoad,
+      required bool isLoading,
       String? error,
       required List<ShipmentData> shipments}) = _ShipmentsState;
 
-  factory ShipmentsState.initial() =>
-      const ShipmentsState(isLoading: false, error: "", shipments: []);
+  factory ShipmentsState.initial() => const ShipmentsState(
+      isFirstLoad: false, isLoading: false, error: "", shipments: []);
 }

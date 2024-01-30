@@ -240,6 +240,8 @@ class _SettingScreenState extends State<SettingScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
               title: Text(
                 title,
                 textAlign: TextAlign.center,

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ShipmentsState {
+  bool get isFirstLoad => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<ShipmentData> get shipments => throw _privateConstructorUsedError;
@@ -31,7 +32,11 @@ abstract class $ShipmentsStateCopyWith<$Res> {
           ShipmentsState value, $Res Function(ShipmentsState) then) =
       _$ShipmentsStateCopyWithImpl<$Res, ShipmentsState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> shipments});
+  $Res call(
+      {bool isFirstLoad,
+      bool isLoading,
+      String? error,
+      List<ShipmentData> shipments});
 }
 
 /// @nodoc
@@ -47,11 +52,16 @@ class _$ShipmentsStateCopyWithImpl<$Res, $Val extends ShipmentsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFirstLoad = null,
     Object? isLoading = null,
     Object? error = freezed,
     Object? shipments = null,
   }) {
     return _then(_value.copyWith(
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -76,7 +86,11 @@ abstract class _$$ShipmentsStateImplCopyWith<$Res>
       __$$ShipmentsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> shipments});
+  $Res call(
+      {bool isFirstLoad,
+      bool isLoading,
+      String? error,
+      List<ShipmentData> shipments});
 }
 
 /// @nodoc
@@ -90,11 +104,16 @@ class __$$ShipmentsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFirstLoad = null,
     Object? isLoading = null,
     Object? error = freezed,
     Object? shipments = null,
   }) {
     return _then(_$ShipmentsStateImpl(
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -115,11 +134,14 @@ class __$$ShipmentsStateImplCopyWithImpl<$Res>
 
 class _$ShipmentsStateImpl implements _ShipmentsState {
   const _$ShipmentsStateImpl(
-      {required this.isLoading,
+      {required this.isFirstLoad,
+      required this.isLoading,
       this.error,
       required final List<ShipmentData> shipments})
       : _shipments = shipments;
 
+  @override
+  final bool isFirstLoad;
   @override
   final bool isLoading;
   @override
@@ -134,7 +156,7 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
 
   @override
   String toString() {
-    return 'ShipmentsState(isLoading: $isLoading, error: $error, shipments: $shipments)';
+    return 'ShipmentsState(isFirstLoad: $isFirstLoad, isLoading: $isLoading, error: $error, shipments: $shipments)';
   }
 
   @override
@@ -142,6 +164,8 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShipmentsStateImpl &&
+            (identical(other.isFirstLoad, isFirstLoad) ||
+                other.isFirstLoad == isFirstLoad) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -150,7 +174,7 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error,
+  int get hashCode => Object.hash(runtimeType, isFirstLoad, isLoading, error,
       const DeepCollectionEquality().hash(_shipments));
 
   @JsonKey(ignore: true)
@@ -163,10 +187,13 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
 
 abstract class _ShipmentsState implements ShipmentsState {
   const factory _ShipmentsState(
-      {required final bool isLoading,
+      {required final bool isFirstLoad,
+      required final bool isLoading,
       final String? error,
       required final List<ShipmentData> shipments}) = _$ShipmentsStateImpl;
 
+  @override
+  bool get isFirstLoad;
   @override
   bool get isLoading;
   @override

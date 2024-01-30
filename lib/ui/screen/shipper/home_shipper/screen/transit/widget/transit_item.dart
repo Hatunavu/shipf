@@ -249,6 +249,8 @@ class TransitItem extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
               title: Text(
                 title,
                 textAlign: TextAlign.center,

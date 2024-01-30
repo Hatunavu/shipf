@@ -542,6 +542,30 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<NoDataResponse> updateShipmentStatus(
+      {required shipmentUpdateRequest}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = shipmentUpdateRequest.map((e) => e.toJson()).toList();
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<NoDataResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/shipments/update-shipment-status-trackings',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NoDataResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<TransitResponse> getTransits({type}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'type': type};

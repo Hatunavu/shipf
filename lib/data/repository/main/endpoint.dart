@@ -30,6 +30,7 @@ const getUserInfo = '/users/information';
 //shipment
 const getShipments = '/shipments';
 const getShipmentSummary = '/shipments/get-summary';
+const updateShipmentStatus = '/shipments/update-shipment-status-trackings';
 
 //transit
 const getTransits = '/transits';

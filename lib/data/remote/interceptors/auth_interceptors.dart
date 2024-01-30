@@ -25,11 +25,13 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
+    if (err.response?.statusCode == 401) {
       AccountServices().saveUserToken('');
       appCubit.updateRole(RoleType.logout);
       getIt<AppRouter>().push(MainPage());
       ToastUtils.showFail('Tài khoản đã hết hạn đăng nhập');
+    } else {
+      ToastUtils.showFail('Đã có lỗi xảy ra, vui lòng thử lại sau!');
     }
     super.onError(err, handler);
   }

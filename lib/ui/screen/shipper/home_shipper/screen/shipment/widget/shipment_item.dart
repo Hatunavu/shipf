@@ -218,7 +218,7 @@ class ShipmentItem extends StatelessWidget {
               label: 'Cập nhật',
               defaultHeight: true,
               onPressed: () {
-                updateShipmentStatus(context, shipmentCode: shipment.code);
+                updateShipmentStatus(context, shipment: shipment);
               },
             ),
           ),
@@ -228,7 +228,7 @@ class ShipmentItem extends StatelessWidget {
   }
 
   void updateShipmentStatus(BuildContext context,
-      {required String shipmentCode}) {
+      {required ShipmentData shipment}) {
     ShipmentUpdate? dropDownValue;
     showDialog(
         context: context,
@@ -237,7 +237,7 @@ class ShipmentItem extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
               title: Text(
-                'Cập nhật trạng thái đơn hàng $shipmentCode',
+                'Cập nhật trạng thái đơn hàng ${shipment.code}',
                 textAlign: TextAlign.center,
               ),
               titlePadding: EdgeInsets.symmetric(
@@ -305,7 +305,7 @@ class ShipmentItem extends StatelessWidget {
                                 context.router.pop();
                                 shipmentsCubit.updateShipmentStatus(
                                     shipmentUpdate: dropDownValue,
-                                    shipmentCode: shipmentCode);
+                                    shipmentId: shipment.id);
                               }
                             },
                             label: 'Xác nhận',

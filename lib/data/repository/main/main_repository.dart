@@ -13,6 +13,7 @@ import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/model/shipment/shipment_summary.dart';
+import 'package:shipf/data/model/shipment/shipment_update_request.dart';
 import 'package:shipf/data/model/transit/transit_response.dart';
 import 'package:shipf/data/model/transit/transit_summary.dart';
 
@@ -122,6 +123,10 @@ abstract class MainRepository {
 
   @GET(endpoint.getShipmentSummary)
   Future<ShipmentSummaryResponse> getShipmentSummary();
+
+  @PUT(endpoint.updateShipmentStatus)
+  Future<NoDataResponse> updateShipmentStatus(
+      {@Body() required List<ShipmentUpdateRequest> shipmentUpdateRequest});
 
   //transit
   @GET(endpoint.getTransits)

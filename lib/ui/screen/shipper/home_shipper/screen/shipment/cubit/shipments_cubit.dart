@@ -21,13 +21,17 @@ class ShipmentsCubit extends Cubit<ShipmentsState> {
   }
 
   Future<void> updateShipmentStatus(
-      {ShipmentUpdate? shipmentUpdate, required String shipmentCode}) async {
+      {ShipmentUpdate? shipmentUpdate, required int shipmentId}) async {
     try {
       emit(state.copyWith(isLoading: true));
       await Future.delayed(Duration(seconds: 2));
+      // await mainRepository.updateShipmentStatus(shipmentUpdateRequest: [
+      //   ShipmentUpdateRequest(
+      //       shipmentId: shipmentId, shipmentStatusCode: shipmentUpdate!)
+      // ]);
       final newShipments = [...state.shipments];
       final indexShipmentUpdate =
-          newShipments.indexWhere((element) => element.code == shipmentCode);
+          newShipments.indexWhere((element) => element.id == shipmentId);
       newShipments.removeAt(indexShipmentUpdate);
       ToastUtils.showSuccess('Cập nhật trạng thái đơn thành công');
       emit(state.copyWith(isLoading: false, shipments: newShipments));

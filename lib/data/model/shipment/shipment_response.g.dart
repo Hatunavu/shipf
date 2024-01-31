@@ -25,6 +25,24 @@ Map<String, dynamic> _$ShipmentResponseToJson(ShipmentResponse instance) =>
       'status': instance.status,
     };
 
+ShipmentDetail _$ShipmentDetailFromJson(Map<String, dynamic> json) =>
+    ShipmentDetail(
+      message: json['message'] as String? ?? '',
+      success: json['success'] as bool? ?? false,
+      status: json['status'] as int? ?? 0,
+      data: json['data'] == null
+          ? null
+          : ShipmentData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShipmentDetailToJson(ShipmentDetail instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+      'success': instance.success,
+      'status': instance.status,
+    };
+
 ShipmentData _$ShipmentDataFromJson(Map<String, dynamic> json) => ShipmentData(
       id: json['id'] as int? ?? 0,
       pickupAddressId: json['pickupAddressId'] as int? ?? 0,
@@ -130,8 +148,8 @@ ShipmentAddress _$ShipmentAddressFromJson(Map<String, dynamic> json) =>
     ShipmentAddress(
       id: json['id'] as int? ?? 0,
       customerId: json['customerId'] as int? ?? 0,
-      name: json['name'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
+      contactName: json['contactName'] as String? ?? '',
+      contactPhone: json['contactPhone'] as String? ?? '',
       isDefault: json['isDefault'] as bool? ?? false,
       provinceId: json['provinceId'] as int? ?? 0,
       districtId: json['districtId'] as int? ?? 0,
@@ -144,8 +162,8 @@ Map<String, dynamic> _$ShipmentAddressToJson(ShipmentAddress instance) =>
     <String, dynamic>{
       'id': instance.id,
       'customerId': instance.customerId,
-      'name': instance.name,
-      'phone': instance.phone,
+      'contactName': instance.contactName,
+      'contactPhone': instance.contactPhone,
       'isDefault': instance.isDefault,
       'provinceId': instance.provinceId,
       'districtId': instance.districtId,

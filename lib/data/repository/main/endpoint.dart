@@ -29,6 +29,7 @@ const getUserInfo = '/users/information';
 
 //shipment
 const getShipments = '/shipments';
+const getShipmentDetail = '/shipments/{shipmentId}';
 const getShipmentSummary = '/shipments/get-summary';
 const updateShipmentStatus = '/shipments/update-shipment-status-trackings';
 

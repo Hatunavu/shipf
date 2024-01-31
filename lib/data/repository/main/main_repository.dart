@@ -121,6 +121,9 @@ abstract class MainRepository {
     @Query('shipmentStatusCode') String? shipmentStatusCode,
   });
 
+  @GET(endpoint.getShipmentDetail)
+  Future<ShipmentDetail> getShipmentDetail({@Path('shipmentId') required int shipmentId});
+
   @GET(endpoint.getShipmentSummary)
   Future<ShipmentSummaryResponse> getShipmentSummary();
 

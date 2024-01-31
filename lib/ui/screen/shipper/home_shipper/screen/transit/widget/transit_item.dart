@@ -255,6 +255,8 @@ class TransitItem extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
               ),
+              insetPadding:EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddingWidthWidget) ,
               titlePadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightScreen,
                   horizontal: kDefaultPaddingWidthWidget),

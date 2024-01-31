@@ -79,11 +79,11 @@ class _$TransitsStateCopyWithImpl<$Res, $Val extends TransitsState>
 }
 
 /// @nodoc
-abstract class _$$TransitsStateImplCopyWith<$Res>
+abstract class _$$_TransitsStateCopyWith<$Res>
     implements $TransitsStateCopyWith<$Res> {
-  factory _$$TransitsStateImplCopyWith(
-          _$TransitsStateImpl value, $Res Function(_$TransitsStateImpl) then) =
-      __$$TransitsStateImplCopyWithImpl<$Res>;
+  factory _$$_TransitsStateCopyWith(
+          _$_TransitsState value, $Res Function(_$_TransitsState) then) =
+      __$$_TransitsStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$TransitsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TransitsStateImplCopyWithImpl<$Res>
-    extends _$TransitsStateCopyWithImpl<$Res, _$TransitsStateImpl>
-    implements _$$TransitsStateImplCopyWith<$Res> {
-  __$$TransitsStateImplCopyWithImpl(
-      _$TransitsStateImpl _value, $Res Function(_$TransitsStateImpl) _then)
+class __$$_TransitsStateCopyWithImpl<$Res>
+    extends _$TransitsStateCopyWithImpl<$Res, _$_TransitsState>
+    implements _$$_TransitsStateCopyWith<$Res> {
+  __$$_TransitsStateCopyWithImpl(
+      _$_TransitsState _value, $Res Function(_$_TransitsState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$TransitsStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? listTransitData = null,
   }) {
-    return _then(_$TransitsStateImpl(
+    return _then(_$_TransitsState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$TransitsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransitsStateImpl implements _TransitsState {
-  const _$TransitsStateImpl(
+class _$_TransitsState implements _TransitsState {
+  const _$_TransitsState(
       {required this.isLoading,
       required this.isUpdating,
       this.error,
@@ -160,10 +160,10 @@ class _$TransitsStateImpl implements _TransitsState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TransitsStateImpl &&
+            other is _$_TransitsState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isUpdating, isUpdating) ||
@@ -180,8 +180,8 @@ class _$TransitsStateImpl implements _TransitsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TransitsStateImplCopyWith<_$TransitsStateImpl> get copyWith =>
-      __$$TransitsStateImplCopyWithImpl<_$TransitsStateImpl>(this, _$identity);
+  _$$_TransitsStateCopyWith<_$_TransitsState> get copyWith =>
+      __$$_TransitsStateCopyWithImpl<_$_TransitsState>(this, _$identity);
 }
 
 abstract class _TransitsState implements TransitsState {
@@ -189,7 +189,7 @@ abstract class _TransitsState implements TransitsState {
       {required final bool isLoading,
       required final bool isUpdating,
       final String? error,
-      required final List<TransitData> listTransitData}) = _$TransitsStateImpl;
+      required final List<TransitData> listTransitData}) = _$_TransitsState;
 
   @override
   bool get isLoading;
@@ -201,6 +201,6 @@ abstract class _TransitsState implements TransitsState {
   List<TransitData> get listTransitData;
   @override
   @JsonKey(ignore: true)
-  _$$TransitsStateImplCopyWith<_$TransitsStateImpl> get copyWith =>
+  _$$_TransitsStateCopyWith<_$_TransitsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

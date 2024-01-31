@@ -79,11 +79,11 @@ class _$ShipmentsStateCopyWithImpl<$Res, $Val extends ShipmentsState>
 }
 
 /// @nodoc
-abstract class _$$ShipmentsStateImplCopyWith<$Res>
+abstract class _$$_ShipmentsStateCopyWith<$Res>
     implements $ShipmentsStateCopyWith<$Res> {
-  factory _$$ShipmentsStateImplCopyWith(_$ShipmentsStateImpl value,
-          $Res Function(_$ShipmentsStateImpl) then) =
-      __$$ShipmentsStateImplCopyWithImpl<$Res>;
+  factory _$$_ShipmentsStateCopyWith(
+          _$_ShipmentsState value, $Res Function(_$_ShipmentsState) then) =
+      __$$_ShipmentsStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$ShipmentsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ShipmentsStateImplCopyWithImpl<$Res>
-    extends _$ShipmentsStateCopyWithImpl<$Res, _$ShipmentsStateImpl>
-    implements _$$ShipmentsStateImplCopyWith<$Res> {
-  __$$ShipmentsStateImplCopyWithImpl(
-      _$ShipmentsStateImpl _value, $Res Function(_$ShipmentsStateImpl) _then)
+class __$$_ShipmentsStateCopyWithImpl<$Res>
+    extends _$ShipmentsStateCopyWithImpl<$Res, _$_ShipmentsState>
+    implements _$$_ShipmentsStateCopyWith<$Res> {
+  __$$_ShipmentsStateCopyWithImpl(
+      _$_ShipmentsState _value, $Res Function(_$_ShipmentsState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$ShipmentsStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? shipments = null,
   }) {
-    return _then(_$ShipmentsStateImpl(
+    return _then(_$_ShipmentsState(
       isFirstLoad: null == isFirstLoad
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$ShipmentsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShipmentsStateImpl implements _ShipmentsState {
-  const _$ShipmentsStateImpl(
+class _$_ShipmentsState implements _ShipmentsState {
+  const _$_ShipmentsState(
       {required this.isFirstLoad,
       required this.isLoading,
       this.error,
@@ -160,10 +160,10 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ShipmentsStateImpl &&
+            other is _$_ShipmentsState &&
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.isLoading, isLoading) ||
@@ -180,9 +180,8 @@ class _$ShipmentsStateImpl implements _ShipmentsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
-      __$$ShipmentsStateImplCopyWithImpl<_$ShipmentsStateImpl>(
-          this, _$identity);
+  _$$_ShipmentsStateCopyWith<_$_ShipmentsState> get copyWith =>
+      __$$_ShipmentsStateCopyWithImpl<_$_ShipmentsState>(this, _$identity);
 }
 
 abstract class _ShipmentsState implements ShipmentsState {
@@ -190,7 +189,7 @@ abstract class _ShipmentsState implements ShipmentsState {
       {required final bool isFirstLoad,
       required final bool isLoading,
       final String? error,
-      required final List<ShipmentData> shipments}) = _$ShipmentsStateImpl;
+      required final List<ShipmentData> shipments}) = _$_ShipmentsState;
 
   @override
   bool get isFirstLoad;
@@ -202,6 +201,6 @@ abstract class _ShipmentsState implements ShipmentsState {
   List<ShipmentData> get shipments;
   @override
   @JsonKey(ignore: true)
-  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
+  _$$_ShipmentsStateCopyWith<_$_ShipmentsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

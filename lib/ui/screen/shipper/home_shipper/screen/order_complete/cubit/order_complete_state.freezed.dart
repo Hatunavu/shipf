@@ -63,22 +63,22 @@ class _$OrderCompleteStateCopyWithImpl<$Res, $Val extends OrderCompleteState>
 }
 
 /// @nodoc
-abstract class _$$OrderCompleteStateImplCopyWith<$Res>
+abstract class _$$_OrderCompleteStateCopyWith<$Res>
     implements $OrderCompleteStateCopyWith<$Res> {
-  factory _$$OrderCompleteStateImplCopyWith(_$OrderCompleteStateImpl value,
-          $Res Function(_$OrderCompleteStateImpl) then) =
-      __$$OrderCompleteStateImplCopyWithImpl<$Res>;
+  factory _$$_OrderCompleteStateCopyWith(_$_OrderCompleteState value,
+          $Res Function(_$_OrderCompleteState) then) =
+      __$$_OrderCompleteStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$OrderCompleteStateImplCopyWithImpl<$Res>
-    extends _$OrderCompleteStateCopyWithImpl<$Res, _$OrderCompleteStateImpl>
-    implements _$$OrderCompleteStateImplCopyWith<$Res> {
-  __$$OrderCompleteStateImplCopyWithImpl(_$OrderCompleteStateImpl _value,
-      $Res Function(_$OrderCompleteStateImpl) _then)
+class __$$_OrderCompleteStateCopyWithImpl<$Res>
+    extends _$OrderCompleteStateCopyWithImpl<$Res, _$_OrderCompleteState>
+    implements _$$_OrderCompleteStateCopyWith<$Res> {
+  __$$_OrderCompleteStateCopyWithImpl(
+      _$_OrderCompleteState _value, $Res Function(_$_OrderCompleteState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$OrderCompleteStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$OrderCompleteStateImpl(
+    return _then(_$_OrderCompleteState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$OrderCompleteStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OrderCompleteStateImpl implements _OrderCompleteState {
-  const _$OrderCompleteStateImpl({required this.isLoading, this.error});
+class _$_OrderCompleteState implements _OrderCompleteState {
+  const _$_OrderCompleteState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$OrderCompleteStateImpl implements _OrderCompleteState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderCompleteStateImpl &&
+            other is _$_OrderCompleteState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,15 @@ class _$OrderCompleteStateImpl implements _OrderCompleteState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderCompleteStateImplCopyWith<_$OrderCompleteStateImpl> get copyWith =>
-      __$$OrderCompleteStateImplCopyWithImpl<_$OrderCompleteStateImpl>(
+  _$$_OrderCompleteStateCopyWith<_$_OrderCompleteState> get copyWith =>
+      __$$_OrderCompleteStateCopyWithImpl<_$_OrderCompleteState>(
           this, _$identity);
 }
 
 abstract class _OrderCompleteState implements OrderCompleteState {
   const factory _OrderCompleteState(
       {required final bool isLoading,
-      final String? error}) = _$OrderCompleteStateImpl;
+      final String? error}) = _$_OrderCompleteState;
 
   @override
   bool get isLoading;
@@ -147,6 +147,6 @@ abstract class _OrderCompleteState implements OrderCompleteState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$OrderCompleteStateImplCopyWith<_$OrderCompleteStateImpl> get copyWith =>
+  _$$_OrderCompleteStateCopyWith<_$_OrderCompleteState> get copyWith =>
       throw _privateConstructorUsedError;
 }

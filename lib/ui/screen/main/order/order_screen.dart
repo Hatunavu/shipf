@@ -10,14 +10,10 @@ import 'package:shipf/ui/screen/main/order/widget/order_fee_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_parcel_widget.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
 
-class OrderScreen extends StatefulWidget {
-  OrderScreen({Key? key}) : super(key: key);
+class OrderScreen extends StatelessWidget {
+  final int shipmentId;
+   OrderScreen({Key? key, this.shipmentId=0}) : super(key: key);
 
-  @override
-  State<OrderScreen> createState() => _OrderScreenState();
-}
-
-class _OrderScreenState extends State<OrderScreen> {
   final GlobalKey<FormState> addressformKey = GlobalKey<FormState>();
   final GlobalKey<FormState> parcelformKey = GlobalKey<FormState>();
 
@@ -27,7 +23,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderCubit()..init(),
+      create: (context) => OrderCubit()..init(shipmentId: shipmentId),
       child: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
           if (!state.isLoading) {

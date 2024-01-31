@@ -5,6 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_shipment_update.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_cubit.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
@@ -76,7 +77,7 @@ class ShipmentItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: kDefaultPaddingWidthScreen / 2),
                 child: Text(
-                  '${shipment.pickupAddress?.name}-${shipment.pickupAddress?.phone}',
+                  '${shipment.pickupAddress?.contactName}-${shipment.pickupAddress?.contactPhone}',
                   style: textBody.copyWith(color: Colors.black),
                 ),
               ),
@@ -208,7 +209,7 @@ class ShipmentItem extends StatelessWidget {
               label: 'Sửa đơn',
               defaultHeight: true,
               onPressed: () {
-                ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                context.router.push(OrderPage(shipmentId: shipment.id));
               },
             ),
           ),
@@ -229,7 +230,7 @@ class ShipmentItem extends StatelessWidget {
 
   void updateShipmentStatus(BuildContext context,
       {required ShipmentData shipment}) {
-    ShipmentUpdate? dropDownValue;
+    ShipmentUpdate dropDownValue = ShipmentUpdate.pickedUp;
     showDialog(
         context: context,
         builder: (context) {
@@ -268,16 +269,20 @@ class ShipmentItem extends StatelessWidget {
                         value: dropDownValue,
                         items: [
                           ShipmentUpdate.pickedUp,
-                          ShipmentUpdate.faildPickup
+                          ShipmentUpdate.failPickup
                         ].map((value) {
                           return DropdownMenuItem(
                             value: value,
-                            child: Text(value.display()),
+                            child: Row(
+                              children: [
+                                Text(value.display()),
+                              ],
+                            ),
                           );
                         }).toList(),
                         onChanged: (ShipmentUpdate? value) {
                           dropDownState(() {
-                            dropDownValue = value;
+                            dropDownValue = value ?? ShipmentUpdate.pickedUp;
                           });
                         },
                       ),

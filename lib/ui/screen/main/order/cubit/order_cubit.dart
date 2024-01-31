@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_order_type.dart';
@@ -16,28 +17,73 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 class OrderCubit extends Cubit<OrderState> {
   OrderCubit() : super(OrderState.initial());
 
-  Future init() async {
+  Future init({int shipmentId = 0}) async {
+    if (shipmentId == 0) {
+      emit(state.copyWith(isLoading: true, isFirstLoad: true));
+      await getProvinces();
+      emit(state.copyWith(
+        isLoading: false,
+        isFirstLoad: false,
+        senderNameController: TextEditingController(),
+        senderPhoneController: TextEditingController(),
+        senderAddressController: TextEditingController(),
+        receiverNameController: TextEditingController(),
+        receiverPhoneController: TextEditingController(),
+        receiverAddressController: TextEditingController(),
+        parcelNameController: TextEditingController(),
+        parcelPriceController: TextEditingController(text: '0'),
+        parcelAmountController: TextEditingController(text: '1'),
+        parcelWeightController: TextEditingController(text: '1'),
+        lengthController: TextEditingController(text: '0'),
+        widthController: TextEditingController(text: '0'),
+        heightController: TextEditingController(text: '0'),
+        codController: TextEditingController(text: '0'),
+        noteController: TextEditingController(),
+      ));
+    } else {
+      await initUpdate(shipmentId: shipmentId);
+    }
+  }
+
+  Future initUpdate({int shipmentId = 0}) async {
     emit(state.copyWith(isLoading: true, isFirstLoad: true));
+    final response =
+        await mainRepository.getShipmentDetail(shipmentId: shipmentId);
+    final ShipmentData shipment = response.data!;
     await getProvinces();
+
     emit(state.copyWith(
-      isLoading: false,
-      isFirstLoad: false,
-      senderNameController: TextEditingController(),
-      senderPhoneController: TextEditingController(),
-      senderAddressController: TextEditingController(),
-      receiverNameController: TextEditingController(),
-      receiverPhoneController: TextEditingController(),
-      receiverAddressController: TextEditingController(),
-      parcelNameController: TextEditingController(),
-      parcelPriceController: TextEditingController(text: '0'),
-      parcelAmountController: TextEditingController(text: '1'),
-      parcelWeightController: TextEditingController(text: '1'),
-      lengthController: TextEditingController(text: '0'),
-      widthController: TextEditingController(text: '0'),
-      heightController: TextEditingController(text: '0'),
-      codController: TextEditingController(text: '0'),
-      noteController: TextEditingController(),
-    ));
+        isLoading: false,
+        isFirstLoad: false,
+        senderNameController: TextEditingController(
+            text: shipment.pickupAddress?.contactName ?? ''),
+        senderPhoneController: TextEditingController(
+            text: shipment.pickupAddress?.contactPhone ?? ''),
+        senderAddressController:
+            TextEditingController(text: shipment.pickupAddress?.address ?? ''),
+        receiverNameController: TextEditingController(
+            text: shipment.deliveryAddress?.contactName ?? ''),
+        receiverPhoneController: TextEditingController(
+            text: shipment.deliveryAddress?.contactPhone ?? ''),
+        receiverAddressController: TextEditingController(
+            text: shipment.deliveryAddress?.address ?? ''),
+        parcelNameController: TextEditingController(text: shipment.goodsName),
+        parcelPriceController:
+            TextEditingController(text: shipment.declaredValue.toString()),
+        parcelAmountController:
+            TextEditingController(text: shipment.quantity.toString()),
+        parcelWeightController:
+            TextEditingController(text: shipment.netWeight.toString()),
+        lengthController:
+            TextEditingController(text: shipment.length.toString()),
+        widthController: TextEditingController(text: shipment.width.toString()),
+        heightController:
+            TextEditingController(text: shipment.height.toString()),
+        codController: TextEditingController(text: shipment.cod.toString()),
+        noteController: TextEditingController(text: shipment.note),
+        insurance: shipment.isInsured,
+        loadingType: shipment.loadingType,
+        paymentType: shipment.paymentTerm));
   }
 
   void updateStepOrder(StepOrderType stepOrderType) {

@@ -28,6 +28,22 @@ class ShipmentResponse {
 }
 
 @JsonSerializable()
+class ShipmentDetail {
+  final String message;
+  final ShipmentData? data;
+  final bool success;
+  final int status;
+
+  ShipmentDetail(
+      {this.message = '', this.success = false, this.status = 0, this.data});
+
+  factory ShipmentDetail.fromJson(Map<String, dynamic> json) =>
+      _$ShipmentDetailFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShipmentDetailToJson(this);
+}
+
+@JsonSerializable()
 class ShipmentData {
   final int id;
   final int pickupAddressId;
@@ -137,8 +153,8 @@ class ShipmentData {
 class ShipmentAddress {
   final int id;
   final int customerId;
-  final String name;
-  final String phone;
+  final String contactName;
+  final String contactPhone;
   final bool isDefault;
   final int provinceId;
   final int districtId;
@@ -149,8 +165,8 @@ class ShipmentAddress {
   ShipmentAddress({
     this.id = 0,
     this.customerId = 0,
-    this.name = '',
-    this.phone = '',
+    this.contactName = '',
+    this.contactPhone = '',
     this.isDefault = false,
     this.provinceId = 0,
     this.districtId = 0,

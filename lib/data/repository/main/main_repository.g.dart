@@ -519,6 +519,29 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<ShipmentDetail> getShipmentDetail({required shipmentId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ShipmentDetail>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/shipments/${shipmentId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShipmentDetail.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ShipmentSummaryResponse> getShipmentSummary() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

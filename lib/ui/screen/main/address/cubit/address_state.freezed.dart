@@ -69,22 +69,22 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
 }
 
 /// @nodoc
-abstract class _$$AddressStateImplCopyWith<$Res>
+abstract class _$$_AddressStateCopyWith<$Res>
     implements $AddressStateCopyWith<$Res> {
-  factory _$$AddressStateImplCopyWith(
-          _$AddressStateImpl value, $Res Function(_$AddressStateImpl) then) =
-      __$$AddressStateImplCopyWithImpl<$Res>;
+  factory _$$_AddressStateCopyWith(
+          _$_AddressState value, $Res Function(_$_AddressState) then) =
+      __$$_AddressStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error, List<AddressSavedData> addresses});
 }
 
 /// @nodoc
-class __$$AddressStateImplCopyWithImpl<$Res>
-    extends _$AddressStateCopyWithImpl<$Res, _$AddressStateImpl>
-    implements _$$AddressStateImplCopyWith<$Res> {
-  __$$AddressStateImplCopyWithImpl(
-      _$AddressStateImpl _value, $Res Function(_$AddressStateImpl) _then)
+class __$$_AddressStateCopyWithImpl<$Res>
+    extends _$AddressStateCopyWithImpl<$Res, _$_AddressState>
+    implements _$$_AddressStateCopyWith<$Res> {
+  __$$_AddressStateCopyWithImpl(
+      _$_AddressState _value, $Res Function(_$_AddressState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$AddressStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? addresses = null,
   }) {
-    return _then(_$AddressStateImpl(
+    return _then(_$_AddressState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$AddressStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddressStateImpl implements _AddressState {
-  const _$AddressStateImpl(
+class _$_AddressState implements _AddressState {
+  const _$_AddressState(
       {required this.isLoading,
       this.error,
       required final List<AddressSavedData> addresses})
@@ -138,10 +138,10 @@ class _$AddressStateImpl implements _AddressState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddressStateImpl &&
+            other is _$_AddressState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -156,15 +156,15 @@ class _$AddressStateImpl implements _AddressState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddressStateImplCopyWith<_$AddressStateImpl> get copyWith =>
-      __$$AddressStateImplCopyWithImpl<_$AddressStateImpl>(this, _$identity);
+  _$$_AddressStateCopyWith<_$_AddressState> get copyWith =>
+      __$$_AddressStateCopyWithImpl<_$_AddressState>(this, _$identity);
 }
 
 abstract class _AddressState implements AddressState {
   const factory _AddressState(
       {required final bool isLoading,
       final String? error,
-      required final List<AddressSavedData> addresses}) = _$AddressStateImpl;
+      required final List<AddressSavedData> addresses}) = _$_AddressState;
 
   @override
   bool get isLoading;
@@ -174,6 +174,6 @@ abstract class _AddressState implements AddressState {
   List<AddressSavedData> get addresses;
   @override
   @JsonKey(ignore: true)
-  _$$AddressStateImplCopyWith<_$AddressStateImpl> get copyWith =>
+  _$$_AddressStateCopyWith<_$_AddressState> get copyWith =>
       throw _privateConstructorUsedError;
 }

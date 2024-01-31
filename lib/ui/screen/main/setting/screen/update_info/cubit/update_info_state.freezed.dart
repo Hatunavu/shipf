@@ -63,22 +63,22 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
 }
 
 /// @nodoc
-abstract class _$$UpdateInfoStateImplCopyWith<$Res>
+abstract class _$$_UpdateInfoStateCopyWith<$Res>
     implements $UpdateInfoStateCopyWith<$Res> {
-  factory _$$UpdateInfoStateImplCopyWith(_$UpdateInfoStateImpl value,
-          $Res Function(_$UpdateInfoStateImpl) then) =
-      __$$UpdateInfoStateImplCopyWithImpl<$Res>;
+  factory _$$_UpdateInfoStateCopyWith(
+          _$_UpdateInfoState value, $Res Function(_$_UpdateInfoState) then) =
+      __$$_UpdateInfoStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$UpdateInfoStateImplCopyWithImpl<$Res>
-    extends _$UpdateInfoStateCopyWithImpl<$Res, _$UpdateInfoStateImpl>
-    implements _$$UpdateInfoStateImplCopyWith<$Res> {
-  __$$UpdateInfoStateImplCopyWithImpl(
-      _$UpdateInfoStateImpl _value, $Res Function(_$UpdateInfoStateImpl) _then)
+class __$$_UpdateInfoStateCopyWithImpl<$Res>
+    extends _$UpdateInfoStateCopyWithImpl<$Res, _$_UpdateInfoState>
+    implements _$$_UpdateInfoStateCopyWith<$Res> {
+  __$$_UpdateInfoStateCopyWithImpl(
+      _$_UpdateInfoState _value, $Res Function(_$_UpdateInfoState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$UpdateInfoStateImpl(
+    return _then(_$_UpdateInfoState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateInfoStateImpl implements _UpdateInfoState {
-  const _$UpdateInfoStateImpl({required this.isLoading, this.error});
+class _$_UpdateInfoState implements _UpdateInfoState {
+  const _$_UpdateInfoState({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateInfoStateImpl &&
+            other is _$_UpdateInfoState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,14 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
-      __$$UpdateInfoStateImplCopyWithImpl<_$UpdateInfoStateImpl>(
-          this, _$identity);
+  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
+      __$$_UpdateInfoStateCopyWithImpl<_$_UpdateInfoState>(this, _$identity);
 }
 
 abstract class _UpdateInfoState implements UpdateInfoState {
   const factory _UpdateInfoState(
       {required final bool isLoading,
-      final String? error}) = _$UpdateInfoStateImpl;
+      final String? error}) = _$_UpdateInfoState;
 
   @override
   bool get isLoading;
@@ -147,6 +146,6 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
+  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
       throw _privateConstructorUsedError;
 }

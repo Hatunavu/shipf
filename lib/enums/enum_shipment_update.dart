@@ -1,11 +1,11 @@
-enum ShipmentUpdate { pickedUp, faildPickup, successDelivery, failDelivery }
+enum ShipmentUpdate { pickedUp, failPickup, successDelivery, failDelivery }
 
 extension EnumRole on ShipmentUpdate {
   String toJsonString() {
     switch (this) {
       case ShipmentUpdate.pickedUp:
         return 'PICKED_UP';
-      case ShipmentUpdate.faildPickup:
+      case ShipmentUpdate.failPickup:
         return 'FAIL_PICKUP';
       case ShipmentUpdate.successDelivery:
         return 'SUCCESS_DELIVERY';
@@ -19,7 +19,7 @@ extension EnumRole on ShipmentUpdate {
       case 'PICKED_UP':
         return ShipmentUpdate.pickedUp;
       case 'FAIL_PICKUP':
-        return ShipmentUpdate.faildPickup;
+        return ShipmentUpdate.failPickup;
       case 'SUCCESS_DELIVERY':
         return ShipmentUpdate.successDelivery;
       case 'FAIL_DELIVERY':
@@ -33,7 +33,7 @@ extension EnumRole on ShipmentUpdate {
     switch (this) {
       case ShipmentUpdate.pickedUp:
         return 'Đã lấy hàng';
-      case ShipmentUpdate.faildPickup:
+      case ShipmentUpdate.failPickup:
         return 'Lấy hàng thất bại';
       case ShipmentUpdate.successDelivery:
         return 'Giao thành công';
@@ -48,7 +48,7 @@ ShipmentUpdate stringToShipmentUpdate(String type) {
     case 'PICKED_UP':
       return ShipmentUpdate.pickedUp;
     case 'FAIL_PICKUP':
-      return ShipmentUpdate.faildPickup;
+      return ShipmentUpdate.failPickup;
     case 'SUCCESS_DELIVERY':
       return ShipmentUpdate.successDelivery;
     case 'FAIL_DELIVERY':
@@ -62,7 +62,7 @@ String shipmentUpdateToString(ShipmentUpdate type) {
   switch (type) {
     case ShipmentUpdate.pickedUp:
       return 'PICKED_UP';
-    case ShipmentUpdate.faildPickup:
+    case ShipmentUpdate.failPickup:
       return 'FAIL_PICKUP';
     case ShipmentUpdate.successDelivery:
       return 'SUCCESS_DELIVERY';

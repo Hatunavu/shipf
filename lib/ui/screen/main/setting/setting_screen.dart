@@ -246,6 +246,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 title,
                 textAlign: TextAlign.center,
               ),
+              insetPadding:EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddingWidthWidget) ,
               titlePadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightScreen,
                   horizontal: kDefaultPaddingWidthWidget),
@@ -256,9 +258,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: PrimaryButton(
+                    child: PrimaryButton.grey(
                       label: 'Hủy',
-                      backgroundColor: greyText,
                       onPressed: () => context.router.pop(),
                     ),
                   ),

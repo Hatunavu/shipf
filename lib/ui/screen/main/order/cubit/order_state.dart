@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/enums/enum_payment_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
@@ -48,6 +49,7 @@ class OrderState with _$OrderState {
     AddressDataModel? provinceDeliver,
     AddressDataModel? districtDeliver,
     AddressDataModel? wardDeliver,
+    ShipmentData? shipment,
     //textfield
     TextEditingController? senderNameController,
     TextEditingController? senderPhoneController,

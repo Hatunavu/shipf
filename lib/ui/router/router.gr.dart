@@ -127,7 +127,10 @@ class AppRouter extends _i22.RootStackRouter {
           routeData.argsAs<OrderPageArgs>(orElse: () => const OrderPageArgs());
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i9.OrderScreen(key: args.key),
+        child: _i9.OrderScreen(
+          key: args.key,
+          shipmentId: args.shipmentId,
+        ),
       );
     },
     AddAddressPage.name: (routeData) {
@@ -547,24 +550,34 @@ class ResetPassPageArgs {
 /// generated route for
 /// [_i9.OrderScreen]
 class OrderPage extends _i22.PageRouteInfo<OrderPageArgs> {
-  OrderPage({_i23.Key? key})
-      : super(
+  OrderPage({
+    _i23.Key? key,
+    int shipmentId = 0,
+  }) : super(
           OrderPage.name,
           path: '/order',
-          args: OrderPageArgs(key: key),
+          args: OrderPageArgs(
+            key: key,
+            shipmentId: shipmentId,
+          ),
         );
 
   static const String name = 'OrderPage';
 }
 
 class OrderPageArgs {
-  const OrderPageArgs({this.key});
+  const OrderPageArgs({
+    this.key,
+    this.shipmentId = 0,
+  });
 
   final _i23.Key? key;
 
+  final int shipmentId;
+
   @override
   String toString() {
-    return 'OrderPageArgs{key: $key}';
+    return 'OrderPageArgs{key: $key, shipmentId: $shipmentId}';
   }
 }
 

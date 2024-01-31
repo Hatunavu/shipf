@@ -63,7 +63,7 @@ class ShipmentsScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Row(),
+                                Row(),
                                 SizedBox(
                                     height: 0.2.sw,
                                     width: 0.2.sw,

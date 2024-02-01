@@ -18,11 +18,13 @@ class OrderFeeWidget extends StatelessWidget {
   final OrderCubit cubit;
   final OrderState orderState;
   final int? shipmentId;
+  final Function()? onBack;
   const OrderFeeWidget(
       {super.key,
       required this.cubit,
       required this.orderState,
-      this.shipmentId});
+      this.shipmentId,
+      this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +142,12 @@ class OrderFeeWidget extends StatelessWidget {
                 : () async {
                     final bool success =
                         await cubit.createOrder(shipmentId: shipmentId);
-                    success
-                        ? context.router.push(const OrderSuccessPage())
-                        : null;
+                    if (success && shipmentId == null) {
+                      context.router.push(const OrderSuccessPage());
+                    } else if (success) {
+                      context.router.pop();
+                      onBack!.call();
+                    }
                   },
           ),
         ),

@@ -130,6 +130,7 @@ class AppRouter extends _i22.RootStackRouter {
         child: _i9.OrderScreen(
           key: args.key,
           shipmentId: args.shipmentId,
+          onBack: args.onBack,
         ),
       );
     },
@@ -553,12 +554,14 @@ class OrderPage extends _i22.PageRouteInfo<OrderPageArgs> {
   OrderPage({
     _i23.Key? key,
     int? shipmentId,
+    dynamic Function()? onBack,
   }) : super(
           OrderPage.name,
           path: '/order',
           args: OrderPageArgs(
             key: key,
             shipmentId: shipmentId,
+            onBack: onBack,
           ),
         );
 
@@ -569,15 +572,18 @@ class OrderPageArgs {
   const OrderPageArgs({
     this.key,
     this.shipmentId,
+    this.onBack,
   });
 
   final _i23.Key? key;
 
   final int? shipmentId;
 
+  final dynamic Function()? onBack;
+
   @override
   String toString() {
-    return 'OrderPageArgs{key: $key, shipmentId: $shipmentId}';
+    return 'OrderPageArgs{key: $key, shipmentId: $shipmentId, onBack: $onBack}';
   }
 }
 

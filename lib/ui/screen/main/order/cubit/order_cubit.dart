@@ -14,6 +14,7 @@ import 'package:shipf/enums/enum_source_type.dart';
 import 'package:shipf/enums/enum_step_order.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 
 class OrderCubit extends Cubit<OrderState> {
   OrderCubit() : super(OrderState.initial());
@@ -220,6 +221,7 @@ class OrderCubit extends Cubit<OrderState> {
       } else {
         await mainRepository.updateOrder(
             orderRequest: orderRequest, shipmentId: shipmentId);
+        ToastUtils.showSuccess('Cập nhật đơn thành công');
       }
       emit(state.copyWith(isLoading: false));
       return true;

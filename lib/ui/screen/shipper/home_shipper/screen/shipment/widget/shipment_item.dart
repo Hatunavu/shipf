@@ -209,7 +209,10 @@ class ShipmentItem extends StatelessWidget {
               label: 'Sửa đơn',
               defaultHeight: true,
               onPressed: () {
-                context.router.push(OrderPage(shipmentId: shipment.id));
+                context.router.push(OrderPage(
+                  shipmentId: shipment.id,
+                  onBack: () => shipmentsCubit.getShipments(),
+                ));
               },
             ),
           ),

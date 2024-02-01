@@ -12,7 +12,8 @@ import 'package:shipf/ui/shared/utils/functions.dart';
 
 class OrderScreen extends StatelessWidget {
   final int? shipmentId;
-  OrderScreen({Key? key, this.shipmentId}) : super(key: key);
+  final Function()? onBack;
+  OrderScreen({Key? key, this.shipmentId, this.onBack}) : super(key: key);
 
   final GlobalKey<FormState> addressformKey = GlobalKey<FormState>();
   final GlobalKey<FormState> parcelformKey = GlobalKey<FormState>();
@@ -59,6 +60,7 @@ class OrderScreen extends StatelessWidget {
                       cubit: orderCubit,
                       orderState: state,
                       shipmentId: shipmentId,
+                      onBack: onBack,
                     );
 
           return GestureDetector(

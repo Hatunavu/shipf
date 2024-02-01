@@ -9,12 +9,12 @@ class BillShipperCubit extends Cubit<BillShipperState> {
 
   Future<void> getShipments() async {
     try {
-      emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(isFirstLoad: true));
       final response = await mainRepository.getShipments();
-      emit(state.copyWith(isLoading: false, listOrder: response.data));
+      emit(state.copyWith(isFirstLoad: false, listOrder: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isLoading: false, error: errorMessage));
+      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
     }
   }
 }

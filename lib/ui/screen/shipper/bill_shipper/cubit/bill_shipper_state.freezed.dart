@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BillShipperState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFirstLoad => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<ShipmentData> get listOrder => throw _privateConstructorUsedError;
 
@@ -31,7 +32,11 @@ abstract class $BillShipperStateCopyWith<$Res> {
           BillShipperState value, $Res Function(BillShipperState) then) =
       _$BillShipperStateCopyWithImpl<$Res, BillShipperState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
+  $Res call(
+      {bool isLoading,
+      bool isFirstLoad,
+      String? error,
+      List<ShipmentData> listOrder});
 }
 
 /// @nodoc
@@ -48,6 +53,7 @@ class _$BillShipperStateCopyWithImpl<$Res, $Val extends BillShipperState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
     Object? error = freezed,
     Object? listOrder = null,
   }) {
@@ -55,6 +61,10 @@ class _$BillShipperStateCopyWithImpl<$Res, $Val extends BillShipperState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
               as bool,
       error: freezed == error
           ? _value.error
@@ -76,7 +86,11 @@ abstract class _$$_BillShipperStateCopyWith<$Res>
       __$$_BillShipperStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<ShipmentData> listOrder});
+  $Res call(
+      {bool isLoading,
+      bool isFirstLoad,
+      String? error,
+      List<ShipmentData> listOrder});
 }
 
 /// @nodoc
@@ -91,6 +105,7 @@ class __$$_BillShipperStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
     Object? error = freezed,
     Object? listOrder = null,
   }) {
@@ -98,6 +113,10 @@ class __$$_BillShipperStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
               as bool,
       error: freezed == error
           ? _value.error
@@ -116,12 +135,15 @@ class __$$_BillShipperStateCopyWithImpl<$Res>
 class _$_BillShipperState implements _BillShipperState {
   const _$_BillShipperState(
       {required this.isLoading,
+      required this.isFirstLoad,
       this.error,
       required final List<ShipmentData> listOrder})
       : _listOrder = listOrder;
 
   @override
   final bool isLoading;
+  @override
+  final bool isFirstLoad;
   @override
   final String? error;
   final List<ShipmentData> _listOrder;
@@ -134,7 +156,7 @@ class _$_BillShipperState implements _BillShipperState {
 
   @override
   String toString() {
-    return 'BillShipperState(isLoading: $isLoading, error: $error, listOrder: $listOrder)';
+    return 'BillShipperState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, listOrder: $listOrder)';
   }
 
   @override
@@ -144,13 +166,15 @@ class _$_BillShipperState implements _BillShipperState {
             other is _$_BillShipperState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFirstLoad, isFirstLoad) ||
+                other.isFirstLoad == isFirstLoad) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._listOrder, _listOrder));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error,
+  int get hashCode => Object.hash(runtimeType, isLoading, isFirstLoad, error,
       const DeepCollectionEquality().hash(_listOrder));
 
   @JsonKey(ignore: true)
@@ -163,11 +187,14 @@ class _$_BillShipperState implements _BillShipperState {
 abstract class _BillShipperState implements BillShipperState {
   const factory _BillShipperState(
       {required final bool isLoading,
+      required final bool isFirstLoad,
       final String? error,
       required final List<ShipmentData> listOrder}) = _$_BillShipperState;
 
   @override
   bool get isLoading;
+  @override
+  bool get isFirstLoad;
   @override
   String? get error;
   @override

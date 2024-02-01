@@ -1,29 +1,22 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/enums/enum_shipment_status.dart';
-import 'package:shipf/enums/enum_shipment_update.dart';
-import 'package:shipf/ui/router/router.gr.dart';
-import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_cubit.dart';
-import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class ShipmentItem extends StatelessWidget {
-  final ShipmentsCubit shipmentsCubit;
-  final ShipmentStatus shipmentStatus;
+class BillItem extends StatelessWidget {
+  final Function? cancelTransit;
+  final Function? acceptTransit;
   final ShipmentData shipment;
-
-  const ShipmentItem(
+  const BillItem(
       {super.key,
-      required this.shipmentsCubit,
-      required this.shipment,
-      this.shipmentStatus = ShipmentStatus.pickingUp});
+      this.acceptTransit,
+      this.cancelTransit,
+      required this.shipment});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +47,7 @@ class ShipmentItem extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                  child: Text('Mã đơn: ${shipment.code}',
+                  child: Text('Mã chuyến: ${shipment.code}',
                       style: textBody.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600))),
               Text(
@@ -79,7 +72,7 @@ class ShipmentItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: kDefaultPaddingWidthScreen / 2),
                 child: Text(
-                  '${shipment.pickupAddress?.contactName}-${shipment.pickupAddress?.contactPhone}',
+                  'Vu Truong Nam-0987654321',
                   style: textBody.copyWith(color: Colors.black),
                 ),
               ),
@@ -97,7 +90,7 @@ class ShipmentItem extends StatelessWidget {
               HorizontalSpace(kDefaultPaddingWidthScreen / 2),
               Expanded(
                 child: Text(
-                  shipment.pickupAddress?.fullAddress ?? '',
+                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội',
                   style: textBody,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -135,7 +128,7 @@ class ShipmentItem extends StatelessWidget {
                       horizontal: kDefaultPaddingWidthScreen / 2),
                   child: Text(
                     shipment.note,
-                    style: primarySubTitleStyle,
+                    style: textBody,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -185,145 +178,15 @@ class ShipmentItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  shipment.totalFee,
+                  '100.000đ',
                   style: textHeading.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )
               ],
             ),
           ),
-          deliveryAction(context, shipment: shipment)
         ],
       ),
     );
-  }
-
-  Widget deliveryAction(BuildContext context,
-      {required ShipmentData shipment}) {
-    return Padding(
-      padding: EdgeInsets.only(
-          right: kDefaultPaddingWidthScreen,
-          top: kDefaultPaddingHeightScreen / 2),
-      child: Row(
-        children: [
-          Expanded(
-            child: PrimaryButton.outline(
-              label: 'Sửa đơn',
-              defaultHeight: true,
-              onPressed: () {
-                context.router.push(OrderPage(
-                  shipmentId: shipment.id,
-                  onBack: () => shipmentsCubit.getShipments(),
-                ));
-              },
-            ),
-          ),
-          HorizontalSpace(kDefaultPaddingWidthScreen / 2),
-          Expanded(
-            child: PrimaryButton(
-              label: 'Cập nhật',
-              defaultHeight: true,
-              onPressed: () {
-                updateShipmentStatus(context, shipment: shipment);
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void updateShipmentStatus(BuildContext context,
-      {required ShipmentData shipment}) {
-    ShipmentUpdate dropDownValue = ShipmentUpdate.pickedUp;
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
-              title: Text(
-                'Cập nhật trạng thái đơn hàng ${shipment.code}',
-                textAlign: TextAlign.center,
-              ),
-              titlePadding: EdgeInsets.symmetric(
-                  vertical: kDefaultPaddingHeightScreen,
-                  horizontal: kDefaultPaddingWidthWidget),
-              contentPadding: EdgeInsets.symmetric(
-                  vertical: kDefaultPaddingHeightWidget,
-                  horizontal: kDefaultPaddingWidthScreen),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Trạng thái'),
-                  VerticalSpace(kDefaultPaddingHeightScreen),
-                  StatefulBuilder(builder:
-                      (BuildContext context, StateSetter dropDownState) {
-                    return InputDecorator(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingWidthScreen),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(kDefaultBorderRadius)),
-                      ),
-                      child: DropdownButton(
-                        underline: const SizedBox(),
-                        isExpanded: true,
-                        value: dropDownValue,
-                        items: [
-                          ShipmentUpdate.pickedUp,
-                          ShipmentUpdate.failPickup
-                        ].map((value) {
-                          return DropdownMenuItem(
-                            value: value,
-                            child: Row(
-                              children: [
-                                Text(value.display()),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (ShipmentUpdate? value) {
-                          dropDownState(() {
-                            dropDownValue = value ?? ShipmentUpdate.pickedUp;
-                          });
-                        },
-                      ),
-                    );
-                  }),
-                  VerticalSpace(kDefaultPaddingHeightWidget * 2),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryButton.grey(
-                          label: 'Hủy',
-                          onPressed: () => context.router.pop(),
-                        ),
-                      ),
-                      HorizontalSpace(kDefaultPaddingWidthScreen),
-                      Expanded(
-                          flex: 1,
-                          child: PrimaryButton(
-                            onPressed: () {
-                              if (dropDownValue == null) {
-                                ToastUtils.showFail(
-                                    'Vui lòng chọn trạng thái cập nhật');
-                              } else {
-                                context.router.pop();
-                                shipmentsCubit.updateShipmentStatus(
-                                    shipmentUpdate: dropDownValue,
-                                    shipmentId: shipment.id);
-                              }
-                            },
-                            label: 'Xác nhận',
-                          ))
-                    ],
-                  ),
-                ],
-              ));
-        });
   }
 }

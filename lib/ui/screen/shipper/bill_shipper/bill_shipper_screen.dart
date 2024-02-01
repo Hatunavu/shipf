@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_cubit.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/cubit/bill_shipper_state.dart';
+import 'package:shipf/ui/screen/shipper/bill_shipper/widget/bill_item.dart';
+import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/shared/widget/image_creator.dart';
+import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
+import 'package:shipf/ui/theme/constant.dart';
+import 'package:shipf/ui/theme/text_style.dart';
 
 class BillShipperScreen extends StatefulWidget {
   const BillShipperScreen({Key? key}) : super(key: key);
@@ -15,27 +23,48 @@ class _BillShipperScreenState extends State<BillShipperScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BillShipperCubit(),
+      create: (context) => BillShipperCubit()..getShipments(),
       child: BlocConsumer<BillShipperCubit, BillShipperState>(
         listener: (context, state) {},
         builder: (context, state) {
           return BaseScreen(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return null;
-
-                    // return const OrderItem(
-                    //   shipmentStatus: ShipmentStatus.successDelivery,
-                    // );
-                  })
-              // SingleChildScrollView(
-              //   child: Column(
-              //     children: [billList()],
-              //   ),
-              // ),
-              );
+            child: SingleChildScrollView(
+              child: state.isFirstLoad
+                  ? const OrderShimmer()
+                  : state.listOrder.isEmpty
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 0.2.sh),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(),
+                              SizedBox(
+                                  height: 0.2.sw,
+                                  width: 0.2.sw,
+                                  child: ImageCreator.assetImage(
+                                      imagePath: AppPath.pick,
+                                      color: darkTitleColor)),
+                              VerticalSpace(kDefaultPaddingHeightScreen),
+                              Text(
+                                'Không có đơn',
+                                style:
+                                    textHeading.copyWith(color: darkTitleColor),
+                              ),
+                            ],
+                          ))
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.listOrder.length,
+                          padding: EdgeInsets.only(
+                              bottom: kDefaultPaddingHeightScreen),
+                          itemBuilder: (context, index) {
+                            return BillItem(
+                              shipment: state.listOrder[index],
+                            );
+                          }),
+            ),
+          );
         },
       ),
     );

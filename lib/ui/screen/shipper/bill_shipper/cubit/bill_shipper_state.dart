@@ -7,9 +7,10 @@ part 'bill_shipper_state.freezed.dart';
 class BillShipperState with _$BillShipperState {
   const factory BillShipperState(
       {required bool isLoading,
+      required bool isFirstLoad,
       String? error,
       required List<ShipmentData> listOrder}) = _BillShipperState;
 
-  factory BillShipperState.initial() =>
-      const BillShipperState(isLoading: false, error: "", listOrder: []);
+  factory BillShipperState.initial() => const BillShipperState(
+      isLoading: false, isFirstLoad: false, error: "", listOrder: []);
 }

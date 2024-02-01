@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shipf/data/model/shipment/shipment_update_request.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_shipment_status.dart';
 import 'package:shipf/enums/enum_shipment_update.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipments_state.dart';
@@ -9,10 +11,12 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 class ShipmentsCubit extends Cubit<ShipmentsState> {
   ShipmentsCubit() : super(ShipmentsState.initial());
 
-  Future<void> getShipments() async {
+  Future<void> getShipments(
+      {ShipmentStatus shipmentStatus = ShipmentStatus.pickingUp}) async {
     try {
       emit(state.copyWith(isFirstLoad: true));
-      final response = await mainRepository.getShipments();
+      final response = await mainRepository.getShipments(
+          shipmentStatusCode: shipmentStatus.toJsonString());
       emit(state.copyWith(isFirstLoad: false, shipments: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
@@ -24,11 +28,10 @@ class ShipmentsCubit extends Cubit<ShipmentsState> {
       {ShipmentUpdate? shipmentUpdate, required int shipmentId}) async {
     try {
       emit(state.copyWith(isLoading: true));
-      await Future.delayed(Duration(seconds: 2));
-      // await mainRepository.updateShipmentStatus(shipmentUpdateRequest: [
-      //   ShipmentUpdateRequest(
-      //       shipmentId: shipmentId, shipmentStatusCode: shipmentUpdate!)
-      // ]);
+      await mainRepository.updateShipmentStatus(shipmentUpdateRequest: [
+        ShipmentUpdateRequest(
+            shipmentId: shipmentId, shipmentStatusCode: shipmentUpdate!)
+      ]);
       final newShipments = [...state.shipments];
       final indexShipmentUpdate =
           newShipments.indexWhere((element) => element.id == shipmentId);

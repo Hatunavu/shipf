@@ -94,6 +94,7 @@ abstract class MainRepository {
     @Query('loading') String? loading,
     @Query('isInsured') bool? isInsured,
     @Query('cod') int? cod,
+    @Query('shipmentId') int? shipmentId,
   });
 
   @POST(endpoint.createOrder)
@@ -122,7 +123,8 @@ abstract class MainRepository {
   });
 
   @GET(endpoint.getShipmentDetail)
-  Future<ShipmentDetail> getShipmentDetail({@Path('shipmentId') required int shipmentId});
+  Future<ShipmentDetail> getShipmentDetail(
+      {@Path('shipmentId') required int shipmentId});
 
   @GET(endpoint.getShipmentSummary)
   Future<ShipmentSummaryResponse> getShipmentSummary();

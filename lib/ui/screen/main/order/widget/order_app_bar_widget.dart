@@ -11,7 +11,8 @@ PreferredSizeWidget orderAppBar(BuildContext context,
     {required OrderState orderState,
     required OrderCubit orderCubit,
     required GlobalKey<FormState> addressformKey,
-    required GlobalKey<FormState> parcelformKey}) {
+    required GlobalKey<FormState> parcelformKey,
+    int? shipmentId}) {
   return AppBar(
     titleSpacing: 0,
     automaticallyImplyLeading: false,
@@ -73,7 +74,8 @@ PreferredSizeWidget orderAppBar(BuildContext context,
                       isActive: orderState.stepOrderType == StepOrderType.fee,
                       orderCubit: orderCubit,
                       parcelformKey: parcelformKey,
-                      addressformKey: addressformKey)
+                      addressformKey: addressformKey,
+                      shipmentId: shipmentId)
                 ],
               ),
             ),
@@ -89,7 +91,8 @@ Widget stepItem(
     bool isActive = false,
     required OrderCubit orderCubit,
     GlobalKey<FormState>? addressformKey,
-    GlobalKey<FormState>? parcelformKey}) {
+    GlobalKey<FormState>? parcelformKey,
+    int? shipmentId}) {
   return GestureDetector(
     behavior: HitTestBehavior.translucent,
     onTap: () async {
@@ -122,7 +125,7 @@ Widget stepItem(
           parcelformKey != null &&
           parcelformKey.currentState!.validate()) {
         orderCubit.updateStepOrder(stepOrderType);
-        await orderCubit.getService();
+        await orderCubit.getService(shipmentId: shipmentId);
       }
     },
     child: Column(

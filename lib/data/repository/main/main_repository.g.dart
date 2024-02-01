@@ -362,6 +362,7 @@ class _MainRepository implements MainRepository {
     loading,
     isInsured,
     cod,
+    shipmentId,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -381,6 +382,7 @@ class _MainRepository implements MainRepository {
       r'loading': loading,
       r'isInsured': isInsured,
       r'cod': cod,
+      r'shipmentId': shipmentId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

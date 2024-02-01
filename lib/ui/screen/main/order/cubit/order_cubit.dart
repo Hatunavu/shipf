@@ -18,8 +18,8 @@ import 'package:shipf/ui/screen/main/order/cubit/order_state.dart';
 class OrderCubit extends Cubit<OrderState> {
   OrderCubit() : super(OrderState.initial());
 
-  Future init({int shipmentId = 0}) async {
-    if (shipmentId == 0) {
+  Future init({int? shipmentId}) async {
+    if (shipmentId == null) {
       emit(state.copyWith(isLoading: true, isFirstLoad: true));
       await getProvinces();
       emit(state.copyWith(
@@ -99,6 +99,7 @@ class OrderCubit extends Cubit<OrderState> {
             shipment.loadingType == LoadingType.all,
         deliveryPoint: shipment.loadingType == LoadingType.delivery ||
             shipment.loadingType == LoadingType.all,
+        loadingType: shipment.loadingType,
         paymentType: shipment.paymentTerm));
   }
 
@@ -148,7 +149,7 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(insurance: !state.insurance));
   }
 
-  Future<void> getService() async {
+  Future<void> getService({int? shipmentId}) async {
     try {
       emit(state.copyWith(isGettingService: true, serviceSelected: null));
       final response = await mainRepository.getOrderService(
@@ -170,7 +171,8 @@ class OrderCubit extends Cubit<OrderState> {
               ? null
               : int.parse(state.codController!.text.replaceAll(',', '')),
           isInsured: state.insurance,
-          loading: state.loadingType?.toJsonString());
+          loading: state.loadingType?.toJsonString(),
+          shipmentId: shipmentId);
 
       emit(state.copyWith(
           isGettingService: false, orderServices: response.data));

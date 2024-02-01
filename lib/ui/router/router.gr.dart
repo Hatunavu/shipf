@@ -552,7 +552,7 @@ class ResetPassPageArgs {
 class OrderPage extends _i22.PageRouteInfo<OrderPageArgs> {
   OrderPage({
     _i23.Key? key,
-    int shipmentId = 0,
+    int? shipmentId,
   }) : super(
           OrderPage.name,
           path: '/order',
@@ -568,12 +568,12 @@ class OrderPage extends _i22.PageRouteInfo<OrderPageArgs> {
 class OrderPageArgs {
   const OrderPageArgs({
     this.key,
-    this.shipmentId = 0,
+    this.shipmentId,
   });
 
   final _i23.Key? key;
 
-  final int shipmentId;
+  final int? shipmentId;
 
   @override
   String toString() {

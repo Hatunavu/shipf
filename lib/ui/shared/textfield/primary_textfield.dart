@@ -124,7 +124,7 @@ class PrimaryTextField extends StatelessWidget {
                   controller: controller,
                   obscureText: isPass != null ? !isPass! : false,
                   style: primaryTitleStyle.copyWith(
-                      color: readOnly ? primaryColor : Colors.black,
+                      color: readOnly ? greyText : Colors.black,
                       height: 1.3,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal),

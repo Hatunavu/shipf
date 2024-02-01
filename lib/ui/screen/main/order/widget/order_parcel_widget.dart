@@ -18,11 +18,15 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderParcelWidget extends StatefulWidget {
   OrderCubit orderCubit;
+  final bool isUpdate;
 
   GlobalKey<FormState> parcelformKey;
 
   OrderParcelWidget(
-      {super.key, required this.orderCubit, required this.parcelformKey});
+      {super.key,
+      required this.orderCubit,
+      required this.parcelformKey,
+      this.isUpdate = false});
 
   @override
   State<OrderParcelWidget> createState() => _OrderParcelWidgetState();
@@ -119,6 +123,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               maxLines: 1,
               lengthLimit: 18,
               isValidate: false,
+              readOnly: widget.isUpdate,
             ),
           ],
         ),
@@ -206,7 +211,9 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => widget.orderCubit.updateLoadingType(),
+                  onTap: widget.isUpdate
+                      ? null
+                      : () => widget.orderCubit.updateLoadingType(),
                   child: Row(
                     children: [
                       Padding(
@@ -218,8 +225,10 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                           child: Checkbox(
                             activeColor: primaryColor,
                             value: widget.orderCubit.state.pickupPoint,
-                            onChanged: (value) =>
-                                widget.orderCubit..updateLoadingType(),
+                            onChanged: widget.isUpdate
+                                ? null
+                                : (value) =>
+                                    widget.orderCubit..updateLoadingType(),
                           ),
                         ),
                       ),
@@ -231,8 +240,10 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               Expanded(
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () =>
-                      widget.orderCubit.updateLoadingType(isPickup: false),
+                  onTap: widget.isUpdate
+                      ? null
+                      : () =>
+                          widget.orderCubit.updateLoadingType(isPickup: false),
                   child: Row(
                     children: [
                       Padding(
@@ -244,8 +255,10 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                           child: Checkbox(
                             activeColor: primaryColor,
                             value: widget.orderCubit.state.deliveryPoint,
-                            onChanged: (value) => widget.orderCubit
-                                .updateLoadingType(isPickup: false),
+                            onChanged: widget.isUpdate
+                                ? null
+                                : (value) => widget.orderCubit
+                                    .updateLoadingType(isPickup: false),
                           ),
                         ),
                       ),
@@ -313,12 +326,15 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                 isPrice: true,
                 isNumberKey: true,
                 isValidate: false,
+                readOnly: widget.isUpdate,
               ),
             ],
           ),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
-            onTap: () => widget.orderCubit.updateInsurance(),
+            onTap: widget.isUpdate
+                ? null
+                : () => widget.orderCubit.updateInsurance(),
             child: Padding(
               padding:
                   EdgeInsets.symmetric(vertical: kDefaultPaddingHeightWidget),
@@ -334,8 +350,9 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
                       child: Checkbox(
                         activeColor: primaryColor,
                         value: widget.orderCubit.state.insurance,
-                        onChanged: (value) =>
-                            widget.orderCubit.updateInsurance(),
+                        onChanged: widget.isUpdate
+                            ? null
+                            : (value) => widget.orderCubit.updateInsurance(),
                       ),
                     ),
                   ),

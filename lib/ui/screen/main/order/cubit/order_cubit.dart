@@ -255,7 +255,8 @@ class OrderCubit extends Cubit<OrderState> {
             wardDeliver: wards.data[indexWard],
             errorProvinceDeliver: '',
             errorDistrictDeliver: '',
-            errorWardDeliver: ''))
+            errorWardDeliver: '',
+            provinces: provincesData))
         : emit(state.copyWith(
             addressPick: address,
             isLoading: false,

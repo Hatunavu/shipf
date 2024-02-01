@@ -12,7 +12,7 @@ import 'package:shipf/ui/shared/utils/functions.dart';
 
 class OrderScreen extends StatelessWidget {
   final int shipmentId;
-   OrderScreen({Key? key, this.shipmentId=0}) : super(key: key);
+  OrderScreen({Key? key, this.shipmentId = 0}) : super(key: key);
 
   final GlobalKey<FormState> addressformKey = GlobalKey<FormState>();
   final GlobalKey<FormState> parcelformKey = GlobalKey<FormState>();
@@ -43,6 +43,7 @@ class OrderScreen extends StatelessWidget {
                   child: OrderAddressWidget(
                     orderCubit: orderCubit,
                     addressFormKey: addressformKey,
+                    isUpdate: shipmentId != 0,
                   ),
                 )
               : state.stepOrderType == StepOrderType.parcel
@@ -51,6 +52,7 @@ class OrderScreen extends StatelessWidget {
                       child: OrderParcelWidget(
                         orderCubit: orderCubit,
                         parcelformKey: parcelformKey,
+                        isUpdate: shipmentId != 0,
                       ),
                     )
                   : OrderFeeWidget(

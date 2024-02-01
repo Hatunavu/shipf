@@ -18,11 +18,15 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class OrderAddressWidget extends StatelessWidget {
   OrderCubit orderCubit;
+  final bool isUpdate;
 
   GlobalKey<FormState> addressFormKey;
 
   OrderAddressWidget(
-      {super.key, required this.orderCubit, required this.addressFormKey});
+      {super.key,
+      required this.orderCubit,
+      required this.addressFormKey,
+      this.isUpdate = false});
 
   @override
   Widget build(BuildContext context) {
@@ -84,35 +88,43 @@ class OrderAddressWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                type,
-                style: textHeading,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: kDefaultPaddingHeightScreen,
+                    top: kDefaultPaddingWidthWidget),
+                child: Text(
+                  type,
+                  style: textHeading,
+                ),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () => context.router.push(AddressPage(
-                  isDeliver: isDeliver,
-                  selectAddress: (address) async {
-                    await orderCubit.selectAddress(
-                        address: address, isDeliver: isDeliver);
-                    if (isDeliver) {
-                      nameController.text = address.name;
-                      phoneController.text = address.phone;
-                      addressController.text = address.address;
-                    } else {
-                      nameController.text = address.name;
-                      phoneController.text = address.phone;
-                      addressController.text = address.address;
-                    }
-                  },
-                )),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      bottom: kDefaultPaddingHeightScreen,
-                      top: kDefaultPaddingWidthWidget),
-                  child: Text(
-                    'Địa chỉ đã lưu',
-                    style: primaryTitleStyle.copyWith(color: primaryColor),
+              Visibility(
+                visible: !isUpdate,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => context.router.push(AddressPage(
+                    isDeliver: isDeliver,
+                    selectAddress: (address) async {
+                      await orderCubit.selectAddress(
+                          address: address, isDeliver: isDeliver);
+                      if (isDeliver) {
+                        nameController.text = address.name;
+                        phoneController.text = address.phone;
+                        addressController.text = address.address;
+                      } else {
+                        nameController.text = address.name;
+                        phoneController.text = address.phone;
+                        addressController.text = address.address;
+                      }
+                    },
+                  )),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        bottom: kDefaultPaddingHeightScreen,
+                        top: kDefaultPaddingWidthWidget),
+                    child: Text(
+                      'Địa chỉ đã lưu',
+                      style: primaryTitleStyle.copyWith(color: primaryColor),
+                    ),
                   ),
                 ),
               ),
@@ -127,11 +139,11 @@ class OrderAddressWidget extends StatelessWidget {
                   children: [
                     OrderLabelTextFieldWidget(label: text.full_name),
                     PrimaryTextField(
-                      label: '',
-                      controller: nameController,
-                      hintText: text.full_name,
-                      fieldRequire: text.full_name,
-                    ),
+                        label: '',
+                        controller: nameController,
+                        hintText: text.full_name,
+                        fieldRequire: text.full_name,
+                        readOnly: isUpdate && !isDeliver),
                   ],
                 ),
               ),
@@ -144,12 +156,12 @@ class OrderAddressWidget extends StatelessWidget {
                   children: [
                     OrderLabelTextFieldWidget(label: text.phone),
                     PrimaryTextField(
-                      label: '',
-                      controller: phoneController,
-                      hintText: text.phone,
-                      isPhone: true,
-                      showPrefixIcon: false,
-                    ),
+                        label: '',
+                        controller: phoneController,
+                        hintText: text.phone,
+                        isPhone: true,
+                        showPrefixIcon: false,
+                        readOnly: isUpdate && !isDeliver),
                   ],
                 ),
               )
@@ -185,6 +197,7 @@ class OrderAddressWidget extends StatelessWidget {
             hintText: text.address,
             isAddress: true,
             fieldRequire: text.address,
+            readOnly: isUpdate && !isDeliver,
           ),
         ],
       ),
@@ -204,6 +217,7 @@ class OrderAddressWidget extends StatelessWidget {
         OrderLabelTextFieldWidget(label: label),
         SelectAddressWidget(
           label: label,
+          readOnly: isUpdate && !isDeliver,
           isDistrict: isDistrict,
           isWard: isWard,
           isDeliver: isDeliver,

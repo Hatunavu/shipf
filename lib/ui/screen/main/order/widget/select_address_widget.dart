@@ -23,6 +23,7 @@ class SelectAddressWidget extends StatelessWidget {
   final String errorDistrict;
   final String errorWard;
   final String? Function(String?)? validator;
+  final bool readOnly;
 
   const SelectAddressWidget(
       {Key? key,
@@ -42,7 +43,8 @@ class SelectAddressWidget extends StatelessWidget {
       this.errorProvince = '',
       this.errorDistrict = '',
       this.errorWard = '',
-      this.validator})
+      this.validator,
+      this.readOnly = false})
       : super(key: key);
 
   Widget setupAlertDialogContainer() {
@@ -146,17 +148,19 @@ class SelectAddressWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          isWard
-              ? wards.isNotEmpty
-                  ? _modalButtonAddress(context)
-                  : null
-              : isDistrict
-                  ? districts.isNotEmpty
-                      ? _modalButtonAddress(context)
-                      : null
-                  : _modalButtonAddress(context);
-        },
+        onTap: readOnly
+            ? null
+            : () {
+                isWard
+                    ? wards.isNotEmpty
+                        ? _modalButtonAddress(context)
+                        : null
+                    : isDistrict
+                        ? districts.isNotEmpty
+                            ? _modalButtonAddress(context)
+                            : null
+                        : _modalButtonAddress(context);
+              },
         child: FormField(
           validator: validator,
           builder: (FormFieldState<String> state) {
@@ -214,15 +218,17 @@ class SelectAddressWidget extends StatelessWidget {
                               ? province!.name
                               : 'Chọn Tỉnh/Thành phố',
                   style: textBody.copyWith(
-                      color: isWard
-                          ? wards.isNotEmpty
-                              ? titleColor
-                              : borderColor
-                          : isDistrict
-                              ? districts.isNotEmpty
+                      color: readOnly
+                          ? greyText
+                          : isWard
+                              ? wards.isNotEmpty
                                   ? titleColor
                                   : borderColor
-                              : titleColor),
+                              : isDistrict
+                                  ? districts.isNotEmpty
+                                      ? titleColor
+                                      : borderColor
+                                  : titleColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ));

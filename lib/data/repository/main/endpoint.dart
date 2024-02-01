@@ -22,6 +22,7 @@ const getDeliveryAddresses = "/delivery-addresses";
 //order
 const getOrderService = '/price-lists/quote';
 const createOrder = '/shipments';
+const updateOrder = '/shipments/{shipmentId}';
 const updateOrderStatus = '/shipments/update-status-tracking/{orderId}';
 
 //account

@@ -58,6 +58,7 @@ class OrderScreen extends StatelessWidget {
                   : OrderFeeWidget(
                       cubit: orderCubit,
                       orderState: state,
+                      shipmentId: shipmentId,
                     );
 
           return GestureDetector(

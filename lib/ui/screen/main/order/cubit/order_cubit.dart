@@ -182,10 +182,10 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<bool> createOrder() async {
+  Future<bool> createOrder({int? shipmentId}) async {
     try {
       emit(state.copyWith(isLoading: true));
-      await mainRepository.createOrder(OrderRequest(
+      final OrderRequest orderRequest = OrderRequest(
           // pickupAddressId: 339,
           pickupProvinceId: state.province!.id,
           pickupDistrictId: state.district!.id,
@@ -214,7 +214,13 @@ class OrderCubit extends Cubit<OrderState> {
           isInsured: state.insurance,
           loading: state.loadingType?.toJsonString(),
           cod: int.parse(state.codController!.text.replaceAll(',', '')),
-          note: state.noteController?.text));
+          note: state.noteController?.text);
+      if (shipmentId == null) {
+        await mainRepository.createOrder(orderRequest);
+      } else {
+        await mainRepository.updateOrder(
+            orderRequest: orderRequest, shipmentId: shipmentId);
+      }
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {

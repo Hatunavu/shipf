@@ -100,6 +100,11 @@ abstract class MainRepository {
   @POST(endpoint.createOrder)
   Future<OrderResponse> createOrder(@Body() OrderRequest orderRequest);
 
+  @PUT(endpoint.updateOrder)
+  Future<OrderResponse> updateOrder(
+      {@Body() required OrderRequest orderRequest,
+      @Path('shipmentId') required int shipmentId});
+
   @PUT(endpoint.updateOrderStatus)
   Future<OrderResponse> updateOrderStatus(
       {@Path('orderId') required int orderId,

@@ -17,8 +17,12 @@ import 'package:shipf/ui/theme/text_style.dart';
 class OrderFeeWidget extends StatelessWidget {
   final OrderCubit cubit;
   final OrderState orderState;
+  final int? shipmentId;
   const OrderFeeWidget(
-      {super.key, required this.cubit, required this.orderState});
+      {super.key,
+      required this.cubit,
+      required this.orderState,
+      this.shipmentId});
 
   @override
   Widget build(BuildContext context) {
@@ -127,14 +131,15 @@ class OrderFeeWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
           child: PrimaryButton(
-            label: text.create_order,
+            label: shipmentId != null ? 'Cập nhật' : text.create_order,
             backgroundColor: orderState.serviceSelected != null
                 ? primaryColor
                 : Colors.grey[300],
             onPressed: orderState.serviceSelected == null
                 ? null
                 : () async {
-                    final bool success = await cubit.createOrder();
+                    final bool success =
+                        await cubit.createOrder(shipmentId: shipmentId);
                     success
                         ? context.router.push(const OrderSuccessPage())
                         : null;

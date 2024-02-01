@@ -135,7 +135,9 @@ class OrderFeeWidget extends StatelessWidget {
                 ? null
                 : () async {
                     final bool success = await cubit.createOrder();
-                    success ? context.router.push(OrderSuccessPage()) : null;
+                    success
+                        ? context.router.push(const OrderSuccessPage())
+                        : null;
                   },
           ),
         ),

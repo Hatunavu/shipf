@@ -133,7 +133,7 @@ class ShipmentItem extends StatelessWidget {
                       horizontal: kDefaultPaddingWidthScreen / 2),
                   child: Text(
                     shipment.note,
-                    style: textBody,
+                    style: primarySubTitleStyle,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

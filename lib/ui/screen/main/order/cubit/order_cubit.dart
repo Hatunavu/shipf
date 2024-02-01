@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
@@ -49,9 +50,17 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(isLoading: true, isFirstLoad: true));
     final response =
         await mainRepository.getShipmentDetail(shipmentId: shipmentId);
-    final ShipmentData shipment = response.data!;
-    await getProvinces();
 
+    final ShipmentData shipment = response.data!;
+    await selectAddress(
+        provinceId: shipment.pickupAddress?.provinceId,
+        districtId: shipment.pickupAddress?.districtId,
+        wardId: shipment.pickupAddress?.wardId);
+    await selectAddress(
+        provinceId: shipment.deliveryAddress?.provinceId,
+        districtId: shipment.deliveryAddress?.districtId,
+        wardId: shipment.deliveryAddress?.wardId,
+        isDeliver: true);
     emit(state.copyWith(
         isLoading: false,
         isFirstLoad: false,
@@ -68,8 +77,10 @@ class OrderCubit extends Cubit<OrderState> {
         receiverAddressController: TextEditingController(
             text: shipment.deliveryAddress?.address ?? ''),
         parcelNameController: TextEditingController(text: shipment.goodsName),
-        parcelPriceController:
-            TextEditingController(text: shipment.declaredValue.toString()),
+        parcelPriceController: TextEditingController(
+            text: NumberFormat.decimalPattern()
+                .format(shipment.declaredValue)
+                .toString()),
         parcelAmountController:
             TextEditingController(text: shipment.quantity.toString()),
         parcelWeightController:
@@ -79,10 +90,15 @@ class OrderCubit extends Cubit<OrderState> {
         widthController: TextEditingController(text: shipment.width.toString()),
         heightController:
             TextEditingController(text: shipment.height.toString()),
-        codController: TextEditingController(text: shipment.cod.toString()),
+        codController: TextEditingController(
+            text:
+                NumberFormat.decimalPattern().format(shipment.cod).toString()),
         noteController: TextEditingController(text: shipment.note),
         insurance: shipment.isInsured,
-        loadingType: shipment.loadingType,
+        pickupPoint: shipment.loadingType == LoadingType.pickup ||
+            shipment.loadingType == LoadingType.all,
+        deliveryPoint: shipment.loadingType == LoadingType.delivery ||
+            shipment.loadingType == LoadingType.all,
         paymentType: shipment.paymentTerm));
   }
 
@@ -206,25 +222,33 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  Future<void> selectAddress(AddressSavedData address,
-      {bool isDeliver = false}) async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> selectAddress(
+      {AddressSavedData? address,
+      int? provinceId,
+      int? districtId,
+      int? wardId,
+      bool isDeliver = false}) async {
+    address != null ? emit(state.copyWith(isLoading: true)) : null;
     //update province
-    final indexProvince = state.provinces
-        .indexWhere((element) => element.id == address.provinceId);
+    final provinces = await mainRepository.getProvinces();
+    final provincesData = address != null ? state.provinces : provinces.data;
+    final indexProvince = provincesData.indexWhere(
+        (element) => element.id == (address?.provinceId ?? provinceId));
     //update district
-    final districts = await mainRepository.getDistricts(address.provinceId);
-    final indexDistrict = districts.data
-        .indexWhere((element) => element.id == address.districtId);
+    final districts = await mainRepository
+        .getDistricts(address?.provinceId ?? provinceId ?? 0);
+    final indexDistrict = districts.data.indexWhere(
+        (element) => element.id == (address?.districtId ?? districtId));
     //update ward
-    final wards = await mainRepository.getWards(address.districtId);
-    final indexWard =
-        wards.data.indexWhere((element) => element.id == address.wardId);
+    final wards =
+        await mainRepository.getWards(address?.districtId ?? districtId ?? 0);
+    final indexWard = wards.data
+        .indexWhere((element) => element.id == (address?.wardId ?? wardId));
     isDeliver
         ? emit(state.copyWith(
             addressPick: address,
             isLoading: false,
-            provinceDeliver: state.provinces[indexProvince],
+            provinceDeliver: provincesData[indexProvince],
             districtsDeliver: districts.data,
             districtDeliver: districts.data[indexDistrict],
             wardsDeliver: wards.data,
@@ -235,7 +259,7 @@ class OrderCubit extends Cubit<OrderState> {
         : emit(state.copyWith(
             addressPick: address,
             isLoading: false,
-            province: state.provinces[indexProvince],
+            province: provincesData[indexProvince],
             districts: districts.data,
             district: districts.data[indexDistrict],
             wards: wards.data,

@@ -93,8 +93,8 @@ class OrderAddressWidget extends StatelessWidget {
                 onTap: () => context.router.push(AddressPage(
                   isDeliver: isDeliver,
                   selectAddress: (address) async {
-                    await orderCubit.selectAddress(address,
-                        isDeliver: isDeliver);
+                    await orderCubit.selectAddress(
+                        address: address, isDeliver: isDeliver);
                     if (isDeliver) {
                       nameController.text = address.name;
                       phoneController.text = address.phone;

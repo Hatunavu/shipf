@@ -72,7 +72,7 @@ class TransitItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: kDefaultPaddingWidthScreen / 2),
                 child: Text(
-                  'Vu Truong Nam-0987654321',
+                  'Vu Truong Nam-0987654321(H)',
                   style: textBody.copyWith(color: Colors.black),
                 ),
               ),
@@ -90,7 +90,7 @@ class TransitItem extends StatelessWidget {
               HorizontalSpace(kDefaultPaddingWidthScreen / 2),
               Expanded(
                 child: Text(
-                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội',
+                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội(H)',
                   style: textBody,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -179,7 +179,7 @@ class TransitItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '10',
+                  '10(H)',
                   style: textBody.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )
@@ -198,14 +198,16 @@ class TransitItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '100.000đ',
+                  '100.000đ(H)',
                   style: textHeading.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )
               ],
             ),
           ),
-          transitAction(context)
+          Visibility(
+              visible: transit.status == TransitStatus.neww,
+              child: transitAction(context))
         ],
       ),
     );
@@ -255,8 +257,8 @@ class TransitItem extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
               ),
-              insetPadding:EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthWidget) ,
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget),
               titlePadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightScreen,
                   horizontal: kDefaultPaddingWidthWidget),

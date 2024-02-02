@@ -157,7 +157,7 @@ class BillItem extends StatelessWidget {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  shipment.createdTime,
+                  shipment.updatedTime,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: textBottomBar.copyWith(

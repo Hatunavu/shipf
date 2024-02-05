@@ -35,6 +35,8 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
       carrierId: json['carrierId'] as int? ?? 0,
       fromWarehouseId: json['fromWarehouseId'] as int? ?? 0,
       toWarehouseId: json['toWarehouseId'] as int? ?? 0,
+      pickupZoneId: json['pickupZoneId'] as int? ?? 0,
+      deliveryZoneId: json['deliveryZoneId'] as int? ?? 0,
       code: json['code'] as String? ?? '',
       type: json['type'] == null
           ? LoadingType.pickup
@@ -43,6 +45,8 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
           ? TransitStatus.neww
           : stringToTransitStatus(json['status'] as String),
       note: json['note'] as String? ?? '',
+      totalShipments: json['totalShipments'] as int? ?? 0,
+      totalShipperCharge: json['totalShipperCharge'] as int? ?? 0,
       doneAt: json['doneAt'] as String? ?? '',
       createdAt: json['createdAt'] == null
           ? null
@@ -51,6 +55,18 @@ TransitData _$TransitDataFromJson(Map<String, dynamic> json) => TransitData(
               ?.map((e) => TransitShipper.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      pickupZone: json['pickupZone'] == null
+          ? null
+          : TransitDataZone.fromJson(
+              json['pickupZone'] as Map<String, dynamic>),
+      deliveryZone: json['deliveryZone'] == null
+          ? null
+          : TransitDataZone.fromJson(
+              json['deliveryZone'] as Map<String, dynamic>),
+      customer: json['customer'] == null
+          ? null
+          : TransitDataCustomer.fromJson(
+              json['customer'] as Map<String, dynamic>),
       shipments: (json['shipments'] as List<dynamic>?)
               ?.map((e) => ShipmentData.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -64,13 +80,20 @@ Map<String, dynamic> _$TransitDataToJson(TransitData instance) =>
       'carrierId': instance.carrierId,
       'fromWarehouseId': instance.fromWarehouseId,
       'toWarehouseId': instance.toWarehouseId,
+      'pickupZoneId': instance.pickupZoneId,
+      'deliveryZoneId': instance.deliveryZoneId,
       'code': instance.code,
       'type': loadingTypeToString(instance.type),
       'status': transitStatusToString(instance.status),
       'note': instance.note,
+      'totalShipments': instance.totalShipments,
+      'totalShipperCharge': instance.totalShipperCharge,
       'doneAt': instance.doneAt,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'pickupZone': instance.pickupZone,
+      'deliveryZone': instance.deliveryZone,
       'transitShippers': instance.transitShippers,
+      'customer': instance.customer,
       'shipments': instance.shipments,
     };
 
@@ -167,4 +190,74 @@ Map<String, dynamic> _$TransitDetailToJson(TransitDetail instance) =>
       'success': instance.success,
       'status': instance.status,
       'data': instance.data,
+    };
+
+TransitDataZone _$TransitDataZoneFromJson(Map<String, dynamic> json) =>
+    TransitDataZone(
+      id: json['id'] as int? ?? 0,
+      provinceId: json['provinceId'] as int? ?? 0,
+      districtId: json['districtId'] as int? ?? 0,
+      wardId: json['wardId'] as int? ?? 0,
+      fullAddress: json['fullAddress'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      type: json['type'] as String? ?? '',
+      isActive: json['isActive'] as bool? ?? false,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$TransitDataZoneToJson(TransitDataZone instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'provinceId': instance.provinceId,
+      'districtId': instance.districtId,
+      'wardId': instance.wardId,
+      'fullAddress': instance.fullAddress,
+      'code': instance.code,
+      'type': instance.type,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };
+
+TransitDataCustomer _$TransitDataCustomerFromJson(Map<String, dynamic> json) =>
+    TransitDataCustomer(
+      id: json['id'] as int? ?? 0,
+      userConfigId: json['userConfigId'] as int? ?? 0,
+      roleId: json['roleId'] as int? ?? 0,
+      parentId: json['parentId'] as int? ?? 0,
+      code: json['code'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      termAndConditionAcceptedAt:
+          json['termAndConditionAcceptedAt'] as String? ?? '',
+      isActive: json['isActive'] as bool? ?? false,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$TransitDataCustomerToJson(
+        TransitDataCustomer instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userConfigId': instance.userConfigId,
+      'roleId': instance.roleId,
+      'parentId': instance.parentId,
+      'code': instance.code,
+      'name': instance.name,
+      'phone': instance.phone,
+      'email': instance.email,
+      'termAndConditionAcceptedAt': instance.termAndConditionAcceptedAt,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };

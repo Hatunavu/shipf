@@ -185,7 +185,7 @@ class ShipmentItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  shipment.totalFee,
+                  '${shipment.totalFee}đ',
                   style: textHeading.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )

@@ -72,7 +72,7 @@ class TransitItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: kDefaultPaddingWidthScreen / 2),
                 child: Text(
-                  'Vu Truong Nam-0987654321',
+                  '${transit.customer?.name}-${transit.customer?.phone}',
                   style: textBody.copyWith(color: Colors.black),
                 ),
               ),
@@ -90,7 +90,9 @@ class TransitItem extends StatelessWidget {
               HorizontalSpace(kDefaultPaddingWidthScreen / 2),
               Expanded(
                 child: Text(
-                  '9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội',
+                  transit.pickupZone?.fullAddress ??
+                      transit.deliveryZone?.fullAddress ??
+                      '',
                   style: textBody,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -179,7 +181,7 @@ class TransitItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '10',
+                  transit.totalShipments.toString(),
                   style: textBody.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )
@@ -198,7 +200,7 @@ class TransitItem extends StatelessWidget {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '100.000đ',
+                  '${transit.totalFee}đ',
                   style: textHeading.copyWith(
                       color: Colors.red, fontWeight: FontWeight.bold),
                 )
@@ -255,8 +257,8 @@ class TransitItem extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
               ),
-              insetPadding:EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthWidget) ,
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget),
               titlePadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightScreen,
                   horizontal: kDefaultPaddingWidthWidget),

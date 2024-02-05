@@ -24,8 +24,7 @@ class TransitsCubit extends Cubit<TransitsState> {
   Future<void> cancelTransit({required int transitId}) async {
     try {
       emit(state.copyWith(isUpdating: true));
-      await Future.delayed(Duration(seconds: 2));
-      // await mainRepository.cancelTransit(transitId: transitId);
+      await mainRepository.cancelTransit(transitId: transitId);
       ToastUtils.showSuccess('Huỷ chuyến thành công');
       emit(state.copyWith(isUpdating: false));
     } on DioError catch (e) {
@@ -38,8 +37,7 @@ class TransitsCubit extends Cubit<TransitsState> {
   Future<bool> acceptTransit({required int transitId}) async {
     try {
       emit(state.copyWith(isUpdating: true));
-      await Future.delayed(Duration(seconds: 2));
-      // await mainRepository.acceptTransit(transitId: transitId);
+      await mainRepository.acceptTransit(transitId: transitId);
       ToastUtils.showSuccess('Nhận chuyến thành công');
       emit(state.copyWith(isUpdating: false));
       return true;

@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -18,22 +18,16 @@ import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class TransitsScreen extends StatefulWidget {
+class TransitsScreen extends StatelessWidget {
   final LoadingType type;
-  const TransitsScreen({Key? key, this.type = LoadingType.pickup})
-      : super(key: key);
+  TransitsScreen({Key? key, this.type = LoadingType.pickup}) : super(key: key);
 
-  @override
-  State<TransitsScreen> createState() => _TransitsScreenState();
-}
-
-class _TransitsScreenState extends State<TransitsScreen> {
   late TransitsCubit transitsCubit;
   bool isUpdating = false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TransitsCubit()..getTransits(widget.type),
+      create: (context) => TransitsCubit()..getTransits(type),
       child: BlocConsumer<TransitsCubit, TransitsState>(
         listener: (context, state) {
           if (!state.isUpdating) {
@@ -90,10 +84,12 @@ class _TransitsScreenState extends State<TransitsScreen> {
                             itemCount: state.listTransitData.length,
                             itemBuilder: (context, index) {
                               return TransitItem(
-                                cancelTransit: () =>
-                                    transitsCubit.cancelTransit(
+                                cancelTransit: () => transitsCubit
+                                    .cancelTransit(
                                         transitId:
-                                            state.listTransitData[index].id),
+                                            state.listTransitData[index].id)
+                                    .then((value) =>
+                                        transitsCubit.getTransits(type)),
                                 acceptTransit: () async {
                                   final bool success =
                                       await transitsCubit.acceptTransit(

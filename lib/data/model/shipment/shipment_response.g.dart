@@ -86,6 +86,9 @@ ShipmentData _$ShipmentDataFromJson(Map<String, dynamic> json) => ShipmentData(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
       pickupAddress: json['pickupAddress'] == null
           ? null
           : ShipmentAddress.fromJson(
@@ -139,6 +142,7 @@ Map<String, dynamic> _$ShipmentDataToJson(ShipmentData instance) =>
       'source': sourceTypeToString(instance.source),
       'paymentTerm': paymentTypeToString(instance.paymentTerm),
       'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       'pickupAddress': instance.pickupAddress,
       'deliveryAddress': instance.deliveryAddress,
       'currentShipmentStatusTracking': instance.currentShipmentStatusTracking,

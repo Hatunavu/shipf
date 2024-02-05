@@ -207,7 +207,9 @@ class TransitItem extends StatelessWidget {
               ],
             ),
           ),
-          transitAction(context)
+          Visibility(
+              visible: transit.status == TransitStatus.neww,
+              child: transitAction(context))
         ],
       ),
     );

@@ -10,7 +10,6 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/cubit/shipm
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -164,7 +163,7 @@ class ShipmentItem extends StatelessWidget {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  shipment.createdTime,
+                  shipment.updatedTime,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: textBottomBar.copyWith(
@@ -192,7 +191,11 @@ class ShipmentItem extends StatelessWidget {
               ],
             ),
           ),
-          deliveryAction(context, shipment: shipment)
+          Visibility(
+              visible: shipment
+                      .currentShipmentStatusTracking?.shipmentStatus?.code ==
+                  ShipmentStatus.neww,
+              child: deliveryAction(context, shipment: shipment))
         ],
       ),
     );
@@ -308,15 +311,10 @@ class ShipmentItem extends StatelessWidget {
                           flex: 1,
                           child: PrimaryButton(
                             onPressed: () {
-                              if (dropDownValue == null) {
-                                ToastUtils.showFail(
-                                    'Vui lòng chọn trạng thái cập nhật');
-                              } else {
-                                context.router.pop();
-                                shipmentsCubit.updateShipmentStatus(
-                                    shipmentUpdate: dropDownValue,
-                                    shipmentId: shipment.id);
-                              }
+                              context.router.pop();
+                              shipmentsCubit.updateShipmentStatus(
+                                  shipmentUpdate: dropDownValue,
+                                  shipmentId: shipment.id);
                             },
                             label: 'Xác nhận',
                           ))

@@ -86,6 +86,8 @@ class ShipmentData {
       fromJson: stringToPaymentType)
   final PaymentType paymentTerm;
   final DateTime? createdAt;
+  final DateTime? updatedAt;
+
   final ShipmentAddress? pickupAddress;
   final ShipmentAddress? deliveryAddress;
   final ShipmentStatusTracking? currentShipmentStatusTracking;
@@ -126,6 +128,7 @@ class ShipmentData {
       this.source = SourceType.form,
       this.paymentTerm = PaymentType.freightPrepaid,
       this.createdAt,
+      this.updatedAt,
       this.pickupAddress,
       this.deliveryAddress,
       this.currentShipmentStatusTracking});
@@ -138,9 +141,9 @@ class ShipmentData {
     return NumberFormat.decimalPattern().format(totalCharge).toString();
   }
 
-  String get createdTime {
-    if (createdAt == null) return '';
-    return DateFormatting(createdAt!).tohhmmddMMyyyy();
+  String get updatedTime {
+    if (updatedAt == null) return '';
+    return DateFormatting(updatedAt!).tohhmmddMMyyyy();
   }
 
   factory ShipmentData.fromJson(Map<String, dynamic> json) =>

@@ -116,69 +116,84 @@ class HomeShipperScreen extends StatelessWidget {
   }
 
   Widget action(HomeShipperState state) {
-    return GridView.builder(
-      padding: EdgeInsets.only(
-          left: kDefaultPaddingWidthScreen, top: kDefaultPaddingHeightScreen),
-      shrinkWrap: true,
-      itemCount: actions.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, childAspectRatio: 2 / 3),
-      itemBuilder: (BuildContext context, int index) {
-        return state.isLoading
-            ? Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.4),
-                highlightColor: Colors.grey.withOpacity(0.1),
-                child: Container(
-                  margin: EdgeInsets.only(
-                      right: kDefaultPaddingWidthScreen,
-                      bottom: kDefaultPaddingHeightScreen),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
-                ))
-            : GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: actions[index].onTap ??
-                    () {
-                      ToastUtils.showNeutral('Tính năng đăng được phát triển');
-                    },
-                child: Container(
-                  margin: EdgeInsets.only(
-                      right: kDefaultPaddingWidthScreen,
-                      bottom: kDefaultPaddingHeightScreen),
-                  decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(defaultBorderRadius)),
-                  padding: EdgeInsets.symmetric(
-                      vertical: kDefaultPaddingHeightScreen / 2,
-                      horizontal: kDefaultPaddingWidthScreen / 2),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: 0.15.sw,
-                          width: 0.15.sw,
-                          child: ImageCreator.assetImage(
-                              imagePath: actions[index].icon,
-                              color: Colors.white)),
-                      Text(
-                        state.analysis[index].toString(),
-                        overflow: TextOverflow.ellipsis,
-                        style: primaryHeaderTitleStyle.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+    return RefreshIndicator(
+      color: primaryColor,
+      onRefresh: () => homeShipperCubit.init(),
+      child: ListView(
+        children: [
+          GridView.builder(
+            physics: const ScrollPhysics(),
+            padding: EdgeInsets.only(
+                left: kDefaultPaddingWidthScreen,
+                top: kDefaultPaddingHeightScreen),
+            shrinkWrap: true,
+            itemCount: actions.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, childAspectRatio: 2 / 3),
+            itemBuilder: (BuildContext context, int index) {
+              return state.isLoading
+                  ? Shimmer.fromColors(
+                      baseColor: Colors.grey.withOpacity(0.4),
+                      highlightColor: Colors.grey.withOpacity(0.1),
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            right: kDefaultPaddingWidthScreen,
+                            bottom: kDefaultPaddingHeightScreen),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius)),
+                      ))
+                  : GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: actions[index].onTap ??
+                          () {
+                            ToastUtils.showNeutral(
+                                'Tính năng đăng được phát triển');
+                          },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            right: kDefaultPaddingWidthScreen,
+                            bottom: kDefaultPaddingHeightScreen),
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius)),
+                        padding: EdgeInsets.symmetric(
+                            vertical: kDefaultPaddingHeightScreen / 2,
+                            horizontal: kDefaultPaddingWidthScreen / 2),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                height: 0.15.sw,
+                                width: 0.15.sw,
+                                child: ImageCreator.assetImage(
+                                    imagePath: actions[index].icon,
+                                    color: Colors.white)),
+                            Text(
+                              state.analysis[index].toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: primaryHeaderTitleStyle.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              actions[index].content,
+                              style: primarySubTitleStyle.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
                       ),
-                      Text(
-                        actions[index].content,
-                        style: primarySubTitleStyle.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-                ),
-              );
-      },
+                    );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

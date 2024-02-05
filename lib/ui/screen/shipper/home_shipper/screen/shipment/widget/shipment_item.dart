@@ -194,7 +194,7 @@ class ShipmentItem extends StatelessWidget {
           Visibility(
               visible: shipment
                       .currentShipmentStatusTracking?.shipmentStatus?.code ==
-                  ShipmentStatus.neww,
+                  ShipmentStatus.pickingUp,
               child: deliveryAction(context, shipment: shipment))
         ],
       ),

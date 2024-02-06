@@ -162,11 +162,9 @@ class AppRouter extends _i22.RootStackRouter {
       );
     },
     NotificationPage.name: (routeData) {
-      final args = routeData.argsAs<NotificationPageArgs>(
-          orElse: () => const NotificationPageArgs());
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i13.NotificationScreen(key: args.key),
+        child: const _i13.NotificationScreen(),
       );
     },
     UpdateInfoPage.name: (routeData) {
@@ -676,26 +674,14 @@ class SettingPageArgs {
 
 /// generated route for
 /// [_i13.NotificationScreen]
-class NotificationPage extends _i22.PageRouteInfo<NotificationPageArgs> {
-  NotificationPage({_i23.Key? key})
+class NotificationPage extends _i22.PageRouteInfo<void> {
+  const NotificationPage()
       : super(
           NotificationPage.name,
           path: '/notification',
-          args: NotificationPageArgs(key: key),
         );
 
   static const String name = 'NotificationPage';
-}
-
-class NotificationPageArgs {
-  const NotificationPageArgs({this.key});
-
-  final _i23.Key? key;
-
-  @override
-  String toString() {
-    return 'NotificationPageArgs{key: $key}';
-  }
 }
 
 /// generated route for

@@ -7,8 +7,9 @@ class NotificationState with _$NotificationState {
   const factory NotificationState({
     required bool isLoading,
     String? error,
+    required String deviceToken,
   }) = _NotificationState;
 
   factory NotificationState.initial() =>
-      const NotificationState(isLoading: false, error: "");
+      const NotificationState(isLoading: false, error: "", deviceToken: '');
 }

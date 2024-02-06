@@ -10,8 +10,7 @@ class LoginState with _$LoginState {
     required bool isLogin,
     required String error,
     required bool showPass,
-    //test token
-    required String notificationToken,
+
   }) = _LoginState;
 
   factory LoginState.initial() => const LoginState(
@@ -19,6 +18,5 @@ class LoginState with _$LoginState {
       error: "",
       isAgreeTerms: true,
       isLogin: false,
-      showPass: false,
-      notificationToken: '');
+      showPass: false);
 }

@@ -41,8 +41,7 @@ class LoginScreen extends StatelessWidget {
         },
         child: BlocProvider(
           create: (context) =>
-              LoginCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>())
-                ..getNotificationToken(),
+              LoginCubit(getIt.get<MainRepository>(), getIt.get<AppCubit>()),
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (!state.isLoading) {
@@ -197,8 +196,6 @@ class LoginScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      //test token
-                                      SelectableText(state.notificationToken)
                                     ],
                                   ),
                                 )

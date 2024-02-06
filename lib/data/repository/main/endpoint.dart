@@ -40,3 +40,6 @@ const getTransitDetail = '/transits/{transitId}';
 const getTransitSummary = '/transits/get-summary';
 const acceptTransit = '/transits/accept/{transitId}';
 const cancelTransit = '/transits/cancel/{transitId}';
+
+//token
+const sendDeviceToken = '/device';

@@ -14,6 +14,7 @@ import 'package:shipf/data/model/order/order_service.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/model/shipment/shipment_summary.dart';
 import 'package:shipf/data/model/shipment/shipment_update_request.dart';
+import 'package:shipf/data/model/token/token_request.dart';
 import 'package:shipf/data/model/transit/transit_response.dart';
 import 'package:shipf/data/model/transit/transit_summary.dart';
 
@@ -156,6 +157,11 @@ abstract class MainRepository {
   @PUT(endpoint.cancelTransit)
   Future<NoDataResponse> cancelTransit(
       {@Path('transitId') required int transitId});
+
+  //token
+  @POST(endpoint.sendDeviceToken)
+  Future<NoDataResponse> sendDeviceToken(
+      {@Body() required TokenRequest tokenRequest});
 }
 
 extension ApiClientAWSS3 on MainRepository {

@@ -20,8 +20,7 @@ mixin _$LoginState {
   bool get isAgreeTerms => throw _privateConstructorUsedError;
   bool get isLogin => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
-  bool get showPass => throw _privateConstructorUsedError; //test token
-  String get notificationToken => throw _privateConstructorUsedError;
+  bool get showPass => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith =>
@@ -39,8 +38,7 @@ abstract class $LoginStateCopyWith<$Res> {
       bool isAgreeTerms,
       bool isLogin,
       String error,
-      bool showPass,
-      String notificationToken});
+      bool showPass});
 }
 
 /// @nodoc
@@ -61,7 +59,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? isLogin = null,
     Object? error = null,
     Object? showPass = null,
-    Object? notificationToken = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -84,10 +81,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.showPass
           : showPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      notificationToken: null == notificationToken
-          ? _value.notificationToken
-          : notificationToken // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -105,8 +98,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       bool isAgreeTerms,
       bool isLogin,
       String error,
-      bool showPass,
-      String notificationToken});
+      bool showPass});
 }
 
 /// @nodoc
@@ -125,7 +117,6 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? isLogin = null,
     Object? error = null,
     Object? showPass = null,
-    Object? notificationToken = null,
   }) {
     return _then(_$_LoginState(
       isLoading: null == isLoading
@@ -148,10 +139,6 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.showPass
           : showPass // ignore: cast_nullable_to_non_nullable
               as bool,
-      notificationToken: null == notificationToken
-          ? _value.notificationToken
-          : notificationToken // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -164,8 +151,7 @@ class _$_LoginState implements _LoginState {
       required this.isAgreeTerms,
       required this.isLogin,
       required this.error,
-      required this.showPass,
-      required this.notificationToken});
+      required this.showPass});
 
   @override
   final bool isLoading;
@@ -177,13 +163,10 @@ class _$_LoginState implements _LoginState {
   final String error;
   @override
   final bool showPass;
-//test token
-  @override
-  final String notificationToken;
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, isAgreeTerms: $isAgreeTerms, isLogin: $isLogin, error: $error, showPass: $showPass, notificationToken: $notificationToken)';
+    return 'LoginState(isLoading: $isLoading, isAgreeTerms: $isAgreeTerms, isLogin: $isLogin, error: $error, showPass: $showPass)';
   }
 
   @override
@@ -198,14 +181,12 @@ class _$_LoginState implements _LoginState {
             (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.showPass, showPass) ||
-                other.showPass == showPass) &&
-            (identical(other.notificationToken, notificationToken) ||
-                other.notificationToken == notificationToken));
+                other.showPass == showPass));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isAgreeTerms, isLogin,
-      error, showPass, notificationToken);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, isAgreeTerms, isLogin, error, showPass);
 
   @JsonKey(ignore: true)
   @override
@@ -220,8 +201,7 @@ abstract class _LoginState implements LoginState {
       required final bool isAgreeTerms,
       required final bool isLogin,
       required final String error,
-      required final bool showPass,
-      required final String notificationToken}) = _$_LoginState;
+      required final bool showPass}) = _$_LoginState;
 
   @override
   bool get isLoading;
@@ -233,8 +213,6 @@ abstract class _LoginState implements LoginState {
   String get error;
   @override
   bool get showPass;
-  @override //test token
-  String get notificationToken;
   @override
   @JsonKey(ignore: true)
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/data/model/auth/auth.dart';
+import 'package:shipf/data/model/token/token_request.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/ui/app_cubit.dart';
@@ -55,6 +56,9 @@ class LoginCubit extends Cubit<LoginState> {
           response.data?.user?.role?.roleType.toJsonString() ?? '');
       appCubit
           .updateRole(response.data?.user?.role?.roleType ?? RoleType.logout);
+      final notificationToken = await AccountServices().getNotificationToken();
+      await mainRepository.sendDeviceToken(
+          tokenRequest: TokenRequest(token: notificationToken));
       emit(state.copyWith(isLoading: false));
       return true;
     } on DioError catch (e) {
@@ -62,11 +66,5 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(isLoading: false, error: errorMessage));
       return false;
     }
-  }
-
-  //test token
-  Future getNotificationToken() async {
-    final notificationToken = await AccountServices().getNotificationToken();
-    emit(state.copyWith(notificationToken: notificationToken));
   }
 }

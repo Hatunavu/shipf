@@ -12,7 +12,7 @@ part of 'home_shipper_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HomeShipperState {
@@ -69,22 +69,22 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
 }
 
 /// @nodoc
-abstract class _$$_HomeShipperStateCopyWith<$Res>
+abstract class _$$HomeShipperStateImplCopyWith<$Res>
     implements $HomeShipperStateCopyWith<$Res> {
-  factory _$$_HomeShipperStateCopyWith(
-          _$_HomeShipperState value, $Res Function(_$_HomeShipperState) then) =
-      __$$_HomeShipperStateCopyWithImpl<$Res>;
+  factory _$$HomeShipperStateImplCopyWith(_$HomeShipperStateImpl value,
+          $Res Function(_$HomeShipperStateImpl) then) =
+      __$$HomeShipperStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error, List<int> analysis});
 }
 
 /// @nodoc
-class __$$_HomeShipperStateCopyWithImpl<$Res>
-    extends _$HomeShipperStateCopyWithImpl<$Res, _$_HomeShipperState>
-    implements _$$_HomeShipperStateCopyWith<$Res> {
-  __$$_HomeShipperStateCopyWithImpl(
-      _$_HomeShipperState _value, $Res Function(_$_HomeShipperState) _then)
+class __$$HomeShipperStateImplCopyWithImpl<$Res>
+    extends _$HomeShipperStateCopyWithImpl<$Res, _$HomeShipperStateImpl>
+    implements _$$HomeShipperStateImplCopyWith<$Res> {
+  __$$HomeShipperStateImplCopyWithImpl(_$HomeShipperStateImpl _value,
+      $Res Function(_$HomeShipperStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_HomeShipperStateCopyWithImpl<$Res>
     Object? error = freezed,
     Object? analysis = null,
   }) {
-    return _then(_$_HomeShipperState(
+    return _then(_$HomeShipperStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_HomeShipperStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeShipperState implements _HomeShipperState {
-  const _$_HomeShipperState(
+class _$HomeShipperStateImpl implements _HomeShipperState {
+  const _$HomeShipperStateImpl(
       {required this.isLoading, this.error, required final List<int> analysis})
       : _analysis = analysis;
 
@@ -136,10 +136,10 @@ class _$_HomeShipperState implements _HomeShipperState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomeShipperState &&
+            other is _$HomeShipperStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -153,15 +153,16 @@ class _$_HomeShipperState implements _HomeShipperState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
-      __$$_HomeShipperStateCopyWithImpl<_$_HomeShipperState>(this, _$identity);
+  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
+      __$$HomeShipperStateImplCopyWithImpl<_$HomeShipperStateImpl>(
+          this, _$identity);
 }
 
 abstract class _HomeShipperState implements HomeShipperState {
   const factory _HomeShipperState(
       {required final bool isLoading,
       final String? error,
-      required final List<int> analysis}) = _$_HomeShipperState;
+      required final List<int> analysis}) = _$HomeShipperStateImpl;
 
   @override
   bool get isLoading;
@@ -171,6 +172,6 @@ abstract class _HomeShipperState implements HomeShipperState {
   List<int> get analysis;
   @override
   @JsonKey(ignore: true)
-  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
+  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

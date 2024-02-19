@@ -12,7 +12,7 @@ part of 'home_customer_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HomeCustomerState {
@@ -63,22 +63,22 @@ class _$HomeCustomerStateCopyWithImpl<$Res, $Val extends HomeCustomerState>
 }
 
 /// @nodoc
-abstract class _$$_HomeCustomerStateCopyWith<$Res>
+abstract class _$$HomeCustomerStateImplCopyWith<$Res>
     implements $HomeCustomerStateCopyWith<$Res> {
-  factory _$$_HomeCustomerStateCopyWith(_$_HomeCustomerState value,
-          $Res Function(_$_HomeCustomerState) then) =
-      __$$_HomeCustomerStateCopyWithImpl<$Res>;
+  factory _$$HomeCustomerStateImplCopyWith(_$HomeCustomerStateImpl value,
+          $Res Function(_$HomeCustomerStateImpl) then) =
+      __$$HomeCustomerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading, String? error});
 }
 
 /// @nodoc
-class __$$_HomeCustomerStateCopyWithImpl<$Res>
-    extends _$HomeCustomerStateCopyWithImpl<$Res, _$_HomeCustomerState>
-    implements _$$_HomeCustomerStateCopyWith<$Res> {
-  __$$_HomeCustomerStateCopyWithImpl(
-      _$_HomeCustomerState _value, $Res Function(_$_HomeCustomerState) _then)
+class __$$HomeCustomerStateImplCopyWithImpl<$Res>
+    extends _$HomeCustomerStateCopyWithImpl<$Res, _$HomeCustomerStateImpl>
+    implements _$$HomeCustomerStateImplCopyWith<$Res> {
+  __$$HomeCustomerStateImplCopyWithImpl(_$HomeCustomerStateImpl _value,
+      $Res Function(_$HomeCustomerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_HomeCustomerStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(_$_HomeCustomerState(
+    return _then(_$HomeCustomerStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_HomeCustomerStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeCustomerState implements _HomeCustomerState {
-  const _$_HomeCustomerState({required this.isLoading, this.error});
+class _$HomeCustomerStateImpl implements _HomeCustomerState {
+  const _$HomeCustomerStateImpl({required this.isLoading, this.error});
 
   @override
   final bool isLoading;
@@ -116,10 +116,10 @@ class _$_HomeCustomerState implements _HomeCustomerState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomeCustomerState &&
+            other is _$HomeCustomerStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
@@ -131,15 +131,15 @@ class _$_HomeCustomerState implements _HomeCustomerState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomeCustomerStateCopyWith<_$_HomeCustomerState> get copyWith =>
-      __$$_HomeCustomerStateCopyWithImpl<_$_HomeCustomerState>(
+  _$$HomeCustomerStateImplCopyWith<_$HomeCustomerStateImpl> get copyWith =>
+      __$$HomeCustomerStateImplCopyWithImpl<_$HomeCustomerStateImpl>(
           this, _$identity);
 }
 
 abstract class _HomeCustomerState implements HomeCustomerState {
   const factory _HomeCustomerState(
       {required final bool isLoading,
-      final String? error}) = _$_HomeCustomerState;
+      final String? error}) = _$HomeCustomerStateImpl;
 
   @override
   bool get isLoading;
@@ -147,6 +147,6 @@ abstract class _HomeCustomerState implements HomeCustomerState {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_HomeCustomerStateCopyWith<_$_HomeCustomerState> get copyWith =>
+  _$$HomeCustomerStateImplCopyWith<_$HomeCustomerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

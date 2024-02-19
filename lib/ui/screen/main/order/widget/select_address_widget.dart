@@ -48,58 +48,69 @@ class SelectAddressWidget extends StatelessWidget {
       : super(key: key);
 
   Widget setupAlertDialogContainer() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: isWard
-          ? wards.length
-          : isDistrict
-              ? districts.length
-              : provinces.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          dense: true,
-          contentPadding: EdgeInsets.zero,
-          visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-          title: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              if (isWard) {
-                selectWard(index);
-              } else if (isDistrict) {
-                selectDistrict(index);
-              } else {
-                selectProvince(index);
-              }
-              Navigator.pop(context);
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthScreen,
-                  vertical: kDefaultPaddingHeightScreen),
-              child: Row(
-                children: [
-                  const Icon(
-                    Ionicons.location,
-                    color: primaryColor,
+    return Column(
+      children: [
+        searchAddress(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: isWard
+                  ? wards.length
+                  : isDistrict
+                      ? districts.length
+                      : provinces.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity:
+                      const VisualDensity(horizontal: 0, vertical: -4),
+                  title: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      if (isWard) {
+                        selectWard(index);
+                      } else if (isDistrict) {
+                        selectDistrict(index);
+                      } else {
+                        selectProvince(index);
+                      }
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddingWidthScreen,
+                          vertical: kDefaultPaddingHeightScreen),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Ionicons.location,
+                            color: primaryColor,
+                          ),
+                          SizedBox(
+                            width: kDefaultPaddingWidthScreen,
+                          ),
+                          Text(
+                              isWard
+                                  ? wards[index].name
+                                  : isDistrict
+                                      ? districts[index].name
+                                      : provinces[index].name,
+                              style: textBody.copyWith(
+                                color: titleColor,
+                              )),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    width: kDefaultPaddingWidthScreen,
-                  ),
-                  Text(
-                      isWard
-                          ? wards[index].name
-                          : isDistrict
-                              ? districts[index].name
-                              : provinces[index].name,
-                      style: textBody.copyWith(
-                        color: titleColor,
-                      )),
-                ],
-              ),
+                );
+              },
             ),
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 
@@ -138,7 +149,7 @@ class SelectAddressWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 0.5.sh, child: setupAlertDialogContainer()),
+            SizedBox(height: 0.55.sh, child: setupAlertDialogContainer()),
           ],
         );
       },
@@ -234,5 +245,47 @@ class SelectAddressWidget extends StatelessWidget {
                 ));
           },
         ));
+  }
+
+  Widget searchAddress() {
+    final TextEditingController controller = TextEditingController();
+    return Padding(
+      padding: EdgeInsets.all(kDefaultPaddingWidthScreen),
+      child: TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              Ionicons.search,
+              size: 18.sp,
+              color: primaryColor,
+            ),
+            suffixIcon: IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              icon: Icon(
+                Icons.close,
+                size: 18.sp,
+                color: greyText,
+              ),
+              onPressed: () {
+                controller.clear();
+              },
+            ),
+            labelStyle: primaryTitleStyle.copyWith(
+                color: primaryColor, fontWeight: FontWeight.w400),
+            floatingLabelStyle: primaryTitleStyle.copyWith(color: primaryColor),
+            contentPadding: EdgeInsets.only(
+                top: kDefaultPaddingHeightScreen,
+                bottom: kDefaultPaddingHeightScreen,
+                left: kDefaultPaddingWidthWidget,
+                right: kDefaultPaddingWidthWidget),
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: greyText),
+                borderRadius: BorderRadius.circular(secondaryBorderRadius)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: greyText),
+                borderRadius: BorderRadius.circular(secondaryBorderRadius)),
+          )),
+    );
   }
 }

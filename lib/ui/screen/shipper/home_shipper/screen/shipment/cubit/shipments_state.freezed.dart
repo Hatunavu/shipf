@@ -12,7 +12,7 @@ part of 'shipments_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ShipmentsState {
@@ -79,11 +79,11 @@ class _$ShipmentsStateCopyWithImpl<$Res, $Val extends ShipmentsState>
 }
 
 /// @nodoc
-abstract class _$$_ShipmentsStateCopyWith<$Res>
+abstract class _$$ShipmentsStateImplCopyWith<$Res>
     implements $ShipmentsStateCopyWith<$Res> {
-  factory _$$_ShipmentsStateCopyWith(
-          _$_ShipmentsState value, $Res Function(_$_ShipmentsState) then) =
-      __$$_ShipmentsStateCopyWithImpl<$Res>;
+  factory _$$ShipmentsStateImplCopyWith(_$ShipmentsStateImpl value,
+          $Res Function(_$ShipmentsStateImpl) then) =
+      __$$ShipmentsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_ShipmentsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ShipmentsStateCopyWithImpl<$Res>
-    extends _$ShipmentsStateCopyWithImpl<$Res, _$_ShipmentsState>
-    implements _$$_ShipmentsStateCopyWith<$Res> {
-  __$$_ShipmentsStateCopyWithImpl(
-      _$_ShipmentsState _value, $Res Function(_$_ShipmentsState) _then)
+class __$$ShipmentsStateImplCopyWithImpl<$Res>
+    extends _$ShipmentsStateCopyWithImpl<$Res, _$ShipmentsStateImpl>
+    implements _$$ShipmentsStateImplCopyWith<$Res> {
+  __$$ShipmentsStateImplCopyWithImpl(
+      _$ShipmentsStateImpl _value, $Res Function(_$ShipmentsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_ShipmentsStateCopyWithImpl<$Res>
     Object? error = freezed,
     Object? shipments = null,
   }) {
-    return _then(_$_ShipmentsState(
+    return _then(_$ShipmentsStateImpl(
       isFirstLoad: null == isFirstLoad
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_ShipmentsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShipmentsState implements _ShipmentsState {
-  const _$_ShipmentsState(
+class _$ShipmentsStateImpl implements _ShipmentsState {
+  const _$ShipmentsStateImpl(
       {required this.isFirstLoad,
       required this.isLoading,
       this.error,
@@ -160,10 +160,10 @@ class _$_ShipmentsState implements _ShipmentsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShipmentsState &&
+            other is _$ShipmentsStateImpl &&
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.isLoading, isLoading) ||
@@ -180,8 +180,9 @@ class _$_ShipmentsState implements _ShipmentsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShipmentsStateCopyWith<_$_ShipmentsState> get copyWith =>
-      __$$_ShipmentsStateCopyWithImpl<_$_ShipmentsState>(this, _$identity);
+  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
+      __$$ShipmentsStateImplCopyWithImpl<_$ShipmentsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _ShipmentsState implements ShipmentsState {
@@ -189,7 +190,7 @@ abstract class _ShipmentsState implements ShipmentsState {
       {required final bool isFirstLoad,
       required final bool isLoading,
       final String? error,
-      required final List<ShipmentData> shipments}) = _$_ShipmentsState;
+      required final List<ShipmentData> shipments}) = _$ShipmentsStateImpl;
 
   @override
   bool get isFirstLoad;
@@ -201,6 +202,6 @@ abstract class _ShipmentsState implements ShipmentsState {
   List<ShipmentData> get shipments;
   @override
   @JsonKey(ignore: true)
-  _$$_ShipmentsStateCopyWith<_$_ShipmentsState> get copyWith =>
+  _$$ShipmentsStateImplCopyWith<_$ShipmentsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

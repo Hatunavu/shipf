@@ -7,11 +7,11 @@ import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/auth/login/login_screen.dart';
-import 'package:shipf/ui/screen/customer/home_customer/home_customer_screen.dart';
 import 'package:shipf/ui/screen/main/feed/feed_screen.dart';
 import 'package:shipf/ui/screen/main/route/route_screen.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/bill_shipper_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
+import 'package:shipf/ui/screen/shipper/post/post_screen.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
@@ -33,7 +33,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   final _screenListCustomer = [
-    const HomeCustomerScreen(),
+    // const HomeCustomerScreen(),
+    const PostScreen(),
     RouteScreen(),
     RouteScreen(),
     RouteScreen()

@@ -11,6 +11,7 @@ import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/model/shipment/shipment_summary.dart';
 import 'package:shipf/data/model/shipment/shipment_update_request.dart';
@@ -162,6 +163,10 @@ abstract class MainRepository {
   @POST(endpoint.sendDeviceToken)
   Future<NoDataResponse> sendDeviceToken(
       {@Body() required TokenRequest tokenRequest});
+
+  //post
+  @GET(endpoint.getPost)
+  Future<PostResponse> getPost();
 }
 
 extension ApiClientAWSS3 on MainRepository {

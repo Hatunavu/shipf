@@ -27,4 +27,7 @@ class AppRoutes {
   //transit
   static const String transits = "/transits";
   static const String transitDetail = "/transit_detail";
+
+  //post
+  static const String postScreen = "/post";
 }

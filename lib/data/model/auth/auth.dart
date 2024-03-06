@@ -81,7 +81,7 @@ class LoginDataUser {
   final String email;
   final String code;
   final String phone;
-  final LoginDataUserRole? role;
+  final List<LoginDataUserRole> roles;
 
   LoginDataUser(
       {this.id = 0,
@@ -90,7 +90,7 @@ class LoginDataUser {
       this.email = '',
       this.code = '',
       this.phone = '',
-      this.role});
+      this.roles = const []});
 
   factory LoginDataUser.fromJson(Map<String, dynamic> json) =>
       _$LoginDataUserFromJson(json);

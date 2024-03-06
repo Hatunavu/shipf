@@ -81,9 +81,11 @@ LoginDataUser _$LoginDataUserFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? '',
       code: json['code'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
-      role: json['role'] == null
-          ? null
-          : LoginDataUserRole.fromJson(json['role'] as Map<String, dynamic>),
+      roles: (json['roles'] as List<dynamic>?)
+              ?.map(
+                  (e) => LoginDataUserRole.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$LoginDataUserToJson(LoginDataUser instance) =>
@@ -94,7 +96,7 @@ Map<String, dynamic> _$LoginDataUserToJson(LoginDataUser instance) =>
       'email': instance.email,
       'code': instance.code,
       'phone': instance.phone,
-      'role': instance.role,
+      'roles': instance.roles,
     };
 
 LoginDataUserRole _$LoginDataUserRoleFromJson(Map<String, dynamic> json) =>

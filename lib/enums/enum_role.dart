@@ -1,4 +1,4 @@
-enum RoleType { customer, shipper, business, logout }
+enum RoleType { customer, shipper, business, goodsOwner, logout }
 
 extension EnumRole on RoleType {
   String toJsonString() {
@@ -9,6 +9,8 @@ extension EnumRole on RoleType {
         return "SYSTEM_SHIPPER";
       case RoleType.business:
         return 'SYSTEM_BUSINESS';
+      case RoleType.goodsOwner:
+        return 'EXPRESS_GOOD_OWNER';
       case RoleType.logout:
         return "";
     }
@@ -22,6 +24,8 @@ extension EnumRole on RoleType {
         return RoleType.shipper;
       case 'SYSTEM_BUSINESS':
         return RoleType.business;
+      case 'EXPRESS_GOOD_OWNER':
+        return RoleType.goodsOwner;
       default:
         return RoleType.logout;
     }
@@ -35,6 +39,8 @@ extension EnumRole on RoleType {
         return "Shipper";
       case RoleType.business:
         return "Doanh nghiệp";
+      case RoleType.goodsOwner:
+        return 'Chủ hàng';
       case RoleType.logout:
         return "";
     }
@@ -49,6 +55,8 @@ RoleType stringToRoleType(String type) {
       return RoleType.shipper;
     case 'SYSTEM_BUSINESS':
       return RoleType.business;
+    case 'EXPRESS_GOOD_OWNER':
+      return RoleType.goodsOwner;
     default:
       return RoleType.logout;
   }
@@ -62,6 +70,8 @@ String roleTypeToString(RoleType type) {
       return 'SYSTEM_SHIPPER';
     case RoleType.business:
       return 'SYSTEM_BUSINESS';
+    case RoleType.goodsOwner:
+      return 'EXPRESS_GOOD_OWNER';
     case RoleType.logout:
       return "";
   }

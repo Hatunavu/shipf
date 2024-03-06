@@ -53,9 +53,9 @@ class LoginCubit extends Cubit<LoginState> {
       final response = await mainRepository.login(loginRequest);
       AccountServices().saveUserToken(response.data?.accessToken ?? '');
       AccountServices().saveAccountType(
-          response.data?.user?.role?.roleType.toJsonString() ?? '');
-      appCubit
-          .updateRole(response.data?.user?.role?.roleType ?? RoleType.logout);
+          response.data?.user?.roles.first.roleType.toJsonString() ?? '');
+      appCubit.updateRole(
+          response.data?.user?.roles.first.roleType ?? RoleType.logout);
       final notificationToken = await AccountServices().getNotificationToken();
       await mainRepository.sendDeviceToken(
           tokenRequest: TokenRequest(token: notificationToken));

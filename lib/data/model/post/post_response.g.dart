@@ -23,10 +23,14 @@ PostData _$PostDataFromJson(Map<String, dynamic> json) => PostData(
       contactPhone: json['contactPhone'] as String? ?? '',
       content: json['content'] as String? ?? '',
       weight: json['weight'] as int? ?? 0,
-      weightUnit: json['weightUnit'] as String? ?? '',
+      weightUnit: json['weightUnit'] == null
+          ? WeightUnitType.kg
+          : stringToWeightUnitType(json['weightUnit'] as String),
       tonnage: json['tonnage'] as String? ?? '',
       ownerId: json['ownerId'] as int? ?? 0,
-      status: json['status'] as String? ?? '',
+      status: json['status'] == null
+          ? PostStatusType.neww
+          : stringToPostStatusType(json['status'] as String),
       approvedAt: json['approvedAt'] == null
           ? null
           : DateTime.parse(json['approvedAt'] as String),
@@ -49,10 +53,10 @@ Map<String, dynamic> _$PostDataToJson(PostData instance) => <String, dynamic>{
       'contactPhone': instance.contactPhone,
       'content': instance.content,
       'weight': instance.weight,
-      'weightUnit': instance.weightUnit,
+      'weightUnit': weightUnitTypeToString(instance.weightUnit),
       'tonnage': instance.tonnage,
       'ownerId': instance.ownerId,
-      'status': instance.status,
+      'status': postStatusTypeToString(instance.status),
       'approvedAt': instance.approvedAt?.toIso8601String(),
       'rejectedAt': instance.rejectedAt?.toIso8601String(),
       'createdAt': instance.createdAt?.toIso8601String(),

@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
+import 'package:shipf/enums/enum_post_status.dart';
+import 'package:shipf/enums/enum_weight_unit.dart';
 
 part 'post_response.g.dart';
 
@@ -21,10 +23,18 @@ class PostData {
   final String contactPhone;
   final String content;
   final int weight;
-  final String weightUnit;
+  @JsonKey(
+      name: 'weightUnit',
+      toJson: weightUnitTypeToString,
+      fromJson: stringToWeightUnitType)
+  final WeightUnitType weightUnit;
   final String tonnage;
   final int ownerId;
-  final String status;
+  @JsonKey(
+      name: 'status',
+      toJson: postStatusTypeToString,
+      fromJson: stringToPostStatusType)
+  final PostStatusType status;
   final DateTime? approvedAt;
   final DateTime? rejectedAt;
   final DateTime? createdAt;
@@ -36,10 +46,10 @@ class PostData {
       this.contactPhone = '',
       this.content = '',
       this.weight = 0,
-      this.weightUnit = '',
+      this.weightUnit = WeightUnitType.kg,
       this.tonnage = '',
       this.ownerId = 0,
-      this.status = '',
+      this.status = PostStatusType.neww,
       this.approvedAt,
       this.rejectedAt,
       this.createdAt,

@@ -758,9 +758,34 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<PostResponse> getPost() async {
+  Future<PostResponse> getPost({
+    page,
+    size,
+    search,
+    orderKey,
+    orderBy,
+    fromDate,
+    toDate,
+    tonnage,
+    pickupProvinceIds,
+    deliveryProvinceIdstoDate,
+    status,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'size': size,
+      r'search': search,
+      r'orderKey': orderKey,
+      r'orderBy': orderBy,
+      r'fromDate': fromDate,
+      r'toDate': toDate,
+      r'tonnage': tonnage,
+      r'pickupProvinceIds': pickupProvinceIds,
+      r'deliveryProvinceIds': deliveryProvinceIdstoDate,
+      r'status': status,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

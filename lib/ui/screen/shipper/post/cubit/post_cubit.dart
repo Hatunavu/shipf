@@ -10,8 +10,8 @@ class PostCubit extends Cubit<PostState> {
   Future<void> getGoods() async {
     try {
       emit(state.copyWith(isFirstLoad: true));
-      await mainRepository.getPost();
-      emit(state.copyWith(isFirstLoad: false, goods: []));
+      final response = await mainRepository.getPost();
+      emit(state.copyWith(isFirstLoad: false, posts: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(isFirstLoad: false, error: errorMessage));

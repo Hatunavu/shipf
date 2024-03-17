@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shipf/data/model/post/post_response.dart';
 
 part 'post_state.freezed.dart';
 
@@ -8,9 +9,9 @@ class PostState with _$PostState {
     required bool isLoading,
     required bool isFirstLoad,
     String? error,
-    required List goods,
+    required List<PostData> posts,
   }) = _PostState;
 
   factory PostState.initial() => const PostState(
-      isLoading: false, error: "", isFirstLoad: false, goods: []);
+      isLoading: false, error: "", isFirstLoad: false, posts: []);
 }

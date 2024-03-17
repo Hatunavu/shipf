@@ -23,6 +23,7 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/shipment/shipments_s
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/screen/transit_detail/transit_detail_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/transits_screen.dart';
 import 'package:shipf/ui/screen/shipper/post/post_screen.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -136,11 +137,17 @@ import 'package:shipf/ui/screen/shipper/post/post_screen.dart';
       path: AppRoutes.transitDetail,
     ),
 
-    //find bill
+    //post
     AutoRoute(
       page: PostScreen,
       name: "PostPage",
       path: AppRoutes.postScreen,
+    ),
+
+    AutoRoute(
+      page: CreatePostScreen,
+      name: "CreatePostPage",
+      path: AppRoutes.createPostScreen,
     ),
   ],
 )

@@ -19,7 +19,7 @@ mixin _$PostState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isFirstLoad => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<dynamic> get goods => throw _privateConstructorUsedError;
+  List<PostData> get posts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostStateCopyWith<PostState> get copyWith =>
@@ -32,7 +32,7 @@ abstract class $PostStateCopyWith<$Res> {
       _$PostStateCopyWithImpl<$Res, PostState>;
   @useResult
   $Res call(
-      {bool isLoading, bool isFirstLoad, String? error, List<dynamic> goods});
+      {bool isLoading, bool isFirstLoad, String? error, List<PostData> posts});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
     Object? isLoading = null,
     Object? isFirstLoad = null,
     Object? error = freezed,
-    Object? goods = null,
+    Object? posts = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -66,10 +66,10 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      goods: null == goods
-          ? _value.goods
-          : goods // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      posts: null == posts
+          ? _value.posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<PostData>,
     ) as $Val);
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$PostStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, bool isFirstLoad, String? error, List<dynamic> goods});
+      {bool isLoading, bool isFirstLoad, String? error, List<PostData> posts});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$PostStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isFirstLoad = null,
     Object? error = freezed,
-    Object? goods = null,
+    Object? posts = null,
   }) {
     return _then(_$PostStateImpl(
       isLoading: null == isLoading
@@ -115,10 +115,10 @@ class __$$PostStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      goods: null == goods
-          ? _value._goods
-          : goods // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      posts: null == posts
+          ? _value._posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<PostData>,
     ));
   }
 }
@@ -130,8 +130,8 @@ class _$PostStateImpl implements _PostState {
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
-      required final List<dynamic> goods})
-      : _goods = goods;
+      required final List<PostData> posts})
+      : _posts = posts;
 
   @override
   final bool isLoading;
@@ -139,17 +139,17 @@ class _$PostStateImpl implements _PostState {
   final bool isFirstLoad;
   @override
   final String? error;
-  final List<dynamic> _goods;
+  final List<PostData> _posts;
   @override
-  List<dynamic> get goods {
-    if (_goods is EqualUnmodifiableListView) return _goods;
+  List<PostData> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_goods);
+    return EqualUnmodifiableListView(_posts);
   }
 
   @override
   String toString() {
-    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, goods: $goods)';
+    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts)';
   }
 
   @override
@@ -162,12 +162,12 @@ class _$PostStateImpl implements _PostState {
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other._goods, _goods));
+            const DeepCollectionEquality().equals(other._posts, _posts));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, isFirstLoad, error,
-      const DeepCollectionEquality().hash(_goods));
+      const DeepCollectionEquality().hash(_posts));
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +181,7 @@ abstract class _PostState implements PostState {
       {required final bool isLoading,
       required final bool isFirstLoad,
       final String? error,
-      required final List<dynamic> goods}) = _$PostStateImpl;
+      required final List<PostData> posts}) = _$PostStateImpl;
 
   @override
   bool get isLoading;
@@ -190,7 +190,7 @@ abstract class _PostState implements PostState {
   @override
   String? get error;
   @override
-  List<dynamic> get goods;
+  List<PostData> get posts;
   @override
   @JsonKey(ignore: true)
   _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>

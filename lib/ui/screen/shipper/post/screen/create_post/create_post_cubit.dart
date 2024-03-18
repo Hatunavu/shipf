@@ -21,12 +21,13 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-  Future<void> updateProvince(AddressDataModel province,
+  Future<void> updateProvince(List<AddressDataModel> provinces,
       {bool isDelivery = false}) async {
     if (isDelivery) {
-      emit(state.copyWith(provinceDeliver: province, errorProvinceDeliver: ''));
+      emit(state.copyWith(
+          selectedProvincesDeliver: provinces, errorProvinceDeliver: ''));
     } else {
-      emit(state.copyWith(province: province, errorProvince: ''));
+      emit(state.copyWith(selectedProvinces: provinces, errorProvince: ''));
     }
   }
 

@@ -12,7 +12,7 @@ part of 'create_post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreatePostState {
@@ -20,8 +20,10 @@ mixin _$CreatePostState {
   bool get isFirstLoad => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<AddressDataModel> get provinces => throw _privateConstructorUsedError;
-  AddressDataModel? get province => throw _privateConstructorUsedError;
-  AddressDataModel? get provinceDeliver => throw _privateConstructorUsedError;
+  List<AddressDataModel> get selectedProvinces =>
+      throw _privateConstructorUsedError;
+  List<AddressDataModel> get selectedProvincesDeliver =>
+      throw _privateConstructorUsedError;
   String get errorProvince => throw _privateConstructorUsedError;
   String get errorProvinceDeliver => throw _privateConstructorUsedError;
   WeightUnitType get unit => throw _privateConstructorUsedError;
@@ -43,8 +45,8 @@ abstract class $CreatePostStateCopyWith<$Res> {
       bool isFirstLoad,
       String? error,
       List<AddressDataModel> provinces,
-      AddressDataModel? province,
-      AddressDataModel? provinceDeliver,
+      List<AddressDataModel> selectedProvinces,
+      List<AddressDataModel> selectedProvincesDeliver,
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
@@ -68,8 +70,8 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
     Object? isFirstLoad = null,
     Object? error = freezed,
     Object? provinces = null,
-    Object? province = freezed,
-    Object? provinceDeliver = freezed,
+    Object? selectedProvinces = null,
+    Object? selectedProvincesDeliver = null,
     Object? errorProvince = null,
     Object? errorProvinceDeliver = null,
     Object? unit = null,
@@ -92,14 +94,14 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
           ? _value.provinces
           : provinces // ignore: cast_nullable_to_non_nullable
               as List<AddressDataModel>,
-      province: freezed == province
-          ? _value.province
-          : province // ignore: cast_nullable_to_non_nullable
-              as AddressDataModel?,
-      provinceDeliver: freezed == provinceDeliver
-          ? _value.provinceDeliver
-          : provinceDeliver // ignore: cast_nullable_to_non_nullable
-              as AddressDataModel?,
+      selectedProvinces: null == selectedProvinces
+          ? _value.selectedProvinces
+          : selectedProvinces // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      selectedProvincesDeliver: null == selectedProvincesDeliver
+          ? _value.selectedProvincesDeliver
+          : selectedProvincesDeliver // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -121,11 +123,11 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
 }
 
 /// @nodoc
-abstract class _$$_CreatePostStateCopyWith<$Res>
+abstract class _$$CreatePostStateImplCopyWith<$Res>
     implements $CreatePostStateCopyWith<$Res> {
-  factory _$$_CreatePostStateCopyWith(
-          _$_CreatePostState value, $Res Function(_$_CreatePostState) then) =
-      __$$_CreatePostStateCopyWithImpl<$Res>;
+  factory _$$CreatePostStateImplCopyWith(_$CreatePostStateImpl value,
+          $Res Function(_$CreatePostStateImpl) then) =
+      __$$CreatePostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -133,8 +135,8 @@ abstract class _$$_CreatePostStateCopyWith<$Res>
       bool isFirstLoad,
       String? error,
       List<AddressDataModel> provinces,
-      AddressDataModel? province,
-      AddressDataModel? provinceDeliver,
+      List<AddressDataModel> selectedProvinces,
+      List<AddressDataModel> selectedProvincesDeliver,
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
@@ -142,11 +144,11 @@ abstract class _$$_CreatePostStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreatePostStateCopyWithImpl<$Res>
-    extends _$CreatePostStateCopyWithImpl<$Res, _$_CreatePostState>
-    implements _$$_CreatePostStateCopyWith<$Res> {
-  __$$_CreatePostStateCopyWithImpl(
-      _$_CreatePostState _value, $Res Function(_$_CreatePostState) _then)
+class __$$CreatePostStateImplCopyWithImpl<$Res>
+    extends _$CreatePostStateCopyWithImpl<$Res, _$CreatePostStateImpl>
+    implements _$$CreatePostStateImplCopyWith<$Res> {
+  __$$CreatePostStateImplCopyWithImpl(
+      _$CreatePostStateImpl _value, $Res Function(_$CreatePostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -156,14 +158,14 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
     Object? isFirstLoad = null,
     Object? error = freezed,
     Object? provinces = null,
-    Object? province = freezed,
-    Object? provinceDeliver = freezed,
+    Object? selectedProvinces = null,
+    Object? selectedProvincesDeliver = null,
     Object? errorProvince = null,
     Object? errorProvinceDeliver = null,
     Object? unit = null,
     Object? tonnages = null,
   }) {
-    return _then(_$_CreatePostState(
+    return _then(_$CreatePostStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -180,14 +182,14 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
           ? _value._provinces
           : provinces // ignore: cast_nullable_to_non_nullable
               as List<AddressDataModel>,
-      province: freezed == province
-          ? _value.province
-          : province // ignore: cast_nullable_to_non_nullable
-              as AddressDataModel?,
-      provinceDeliver: freezed == provinceDeliver
-          ? _value.provinceDeliver
-          : provinceDeliver // ignore: cast_nullable_to_non_nullable
-              as AddressDataModel?,
+      selectedProvinces: null == selectedProvinces
+          ? _value._selectedProvinces
+          : selectedProvinces // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      selectedProvincesDeliver: null == selectedProvincesDeliver
+          ? _value._selectedProvincesDeliver
+          : selectedProvincesDeliver // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
       errorProvince: null == errorProvince
           ? _value.errorProvince
           : errorProvince // ignore: cast_nullable_to_non_nullable
@@ -210,19 +212,21 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreatePostState implements _CreatePostState {
-  const _$_CreatePostState(
+class _$CreatePostStateImpl implements _CreatePostState {
+  const _$CreatePostStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
       required final List<AddressDataModel> provinces,
-      this.province,
-      this.provinceDeliver,
+      required final List<AddressDataModel> selectedProvinces,
+      required final List<AddressDataModel> selectedProvincesDeliver,
       required this.errorProvince,
       required this.errorProvinceDeliver,
       required this.unit,
       required final List<TonnageType> tonnages})
       : _provinces = provinces,
+        _selectedProvinces = selectedProvinces,
+        _selectedProvincesDeliver = selectedProvincesDeliver,
         _tonnages = tonnages;
 
   @override
@@ -239,10 +243,24 @@ class _$_CreatePostState implements _CreatePostState {
     return EqualUnmodifiableListView(_provinces);
   }
 
+  final List<AddressDataModel> _selectedProvinces;
   @override
-  final AddressDataModel? province;
+  List<AddressDataModel> get selectedProvinces {
+    if (_selectedProvinces is EqualUnmodifiableListView)
+      return _selectedProvinces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedProvinces);
+  }
+
+  final List<AddressDataModel> _selectedProvincesDeliver;
   @override
-  final AddressDataModel? provinceDeliver;
+  List<AddressDataModel> get selectedProvincesDeliver {
+    if (_selectedProvincesDeliver is EqualUnmodifiableListView)
+      return _selectedProvincesDeliver;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedProvincesDeliver);
+  }
+
   @override
   final String errorProvince;
   @override
@@ -259,14 +277,14 @@ class _$_CreatePostState implements _CreatePostState {
 
   @override
   String toString() {
-    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, province: $province, provinceDeliver: $provinceDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnages: $tonnages)';
+    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnages: $tonnages)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreatePostState &&
+            other is _$CreatePostStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -274,10 +292,10 @@ class _$_CreatePostState implements _CreatePostState {
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._provinces, _provinces) &&
-            (identical(other.province, province) ||
-                other.province == province) &&
-            (identical(other.provinceDeliver, provinceDeliver) ||
-                other.provinceDeliver == provinceDeliver) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedProvinces, _selectedProvinces) &&
+            const DeepCollectionEquality().equals(
+                other._selectedProvincesDeliver, _selectedProvincesDeliver) &&
             (identical(other.errorProvince, errorProvince) ||
                 other.errorProvince == errorProvince) &&
             (identical(other.errorProvinceDeliver, errorProvinceDeliver) ||
@@ -293,8 +311,8 @@ class _$_CreatePostState implements _CreatePostState {
       isFirstLoad,
       error,
       const DeepCollectionEquality().hash(_provinces),
-      province,
-      provinceDeliver,
+      const DeepCollectionEquality().hash(_selectedProvinces),
+      const DeepCollectionEquality().hash(_selectedProvincesDeliver),
       errorProvince,
       errorProvinceDeliver,
       unit,
@@ -303,8 +321,9 @@ class _$_CreatePostState implements _CreatePostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
-      __$$_CreatePostStateCopyWithImpl<_$_CreatePostState>(this, _$identity);
+  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
+      __$$CreatePostStateImplCopyWithImpl<_$CreatePostStateImpl>(
+          this, _$identity);
 }
 
 abstract class _CreatePostState implements CreatePostState {
@@ -313,12 +332,12 @@ abstract class _CreatePostState implements CreatePostState {
       required final bool isFirstLoad,
       final String? error,
       required final List<AddressDataModel> provinces,
-      final AddressDataModel? province,
-      final AddressDataModel? provinceDeliver,
+      required final List<AddressDataModel> selectedProvinces,
+      required final List<AddressDataModel> selectedProvincesDeliver,
       required final String errorProvince,
       required final String errorProvinceDeliver,
       required final WeightUnitType unit,
-      required final List<TonnageType> tonnages}) = _$_CreatePostState;
+      required final List<TonnageType> tonnages}) = _$CreatePostStateImpl;
 
   @override
   bool get isLoading;
@@ -329,9 +348,9 @@ abstract class _CreatePostState implements CreatePostState {
   @override
   List<AddressDataModel> get provinces;
   @override
-  AddressDataModel? get province;
+  List<AddressDataModel> get selectedProvinces;
   @override
-  AddressDataModel? get provinceDeliver;
+  List<AddressDataModel> get selectedProvincesDeliver;
   @override
   String get errorProvince;
   @override
@@ -342,6 +361,6 @@ abstract class _CreatePostState implements CreatePostState {
   List<TonnageType> get tonnages;
   @override
   @JsonKey(ignore: true)
-  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
+  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

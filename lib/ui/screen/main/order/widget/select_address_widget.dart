@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -24,8 +26,11 @@ class SelectAddressWidget extends StatelessWidget {
   final String errorWard;
   final String? Function(String?)? validator;
   final bool readOnly;
+  final bool isMultiSelect;
+  final Function(List<AddressDataModel> provinces)? multiProvince;
+  final List<AddressDataModel> multiProvinces;
 
-  const SelectAddressWidget(
+  SelectAddressWidget(
       {Key? key,
       required this.label,
       this.isDistrict = false,
@@ -44,74 +49,104 @@ class SelectAddressWidget extends StatelessWidget {
       this.errorDistrict = '',
       this.errorWard = '',
       this.validator,
-      this.readOnly = false})
+      this.readOnly = false,
+      this.isMultiSelect = false,
+      this.multiProvince,
+      this.multiProvinces = const []})
       : super(key: key);
 
+  List<AddressDataModel> listSelect = [];
+
   Widget setupAlertDialogContainer() {
-    return Column(
-      children: [
-        searchAddress(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: isWard
-                  ? wards.length
-                  : isDistrict
-                      ? districts.length
-                      : provinces.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity:
-                      const VisualDensity(horizontal: 0, vertical: -4),
-                  title: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      if (isWard) {
-                        selectWard(index);
-                      } else if (isDistrict) {
-                        selectDistrict(index);
-                      } else {
-                        selectProvince(index);
-                      }
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: kDefaultPaddingWidthScreen,
-                          vertical: kDefaultPaddingHeightScreen),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Ionicons.location,
-                            color: primaryColor,
-                          ),
-                          SizedBox(
-                            width: kDefaultPaddingWidthScreen,
-                          ),
-                          Text(
-                              isWard
-                                  ? wards[index].name
-                                  : isDistrict
-                                      ? districts[index].name
-                                      : provinces[index].name,
-                              style: textBody.copyWith(
-                                color: titleColor,
-                              )),
-                        ],
+    listSelect = [...multiProvinces];
+    return StatefulBuilder(builder: (context, setState) {
+      return Column(
+        children: [
+          searchAddress(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: isWard
+                    ? wards.length
+                    : isDistrict
+                        ? districts.length
+                        : provinces.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity:
+                        const VisualDensity(horizontal: 0, vertical: -4),
+                    title: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        if (isMultiSelect) {
+                          setState(() {
+                            if (listSelect.contains(provinces[index])) {
+                              listSelect.remove(provinces[index]);
+                            } else {
+                              listSelect.add(provinces[index]);
+                            }
+                          });
+                        } else {
+                          if (isWard) {
+                            selectWard(index);
+                          } else if (isDistrict) {
+                            selectDistrict(index);
+                          } else {
+                            selectProvince(index);
+                          }
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingWidthScreen,
+                            vertical: kDefaultPaddingHeightScreen),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Ionicons.location,
+                                  color: primaryColor,
+                                ),
+                                SizedBox(
+                                  width: kDefaultPaddingWidthScreen,
+                                ),
+                                Text(
+                                    isWard
+                                        ? wards[index].name
+                                        : isDistrict
+                                            ? districts[index].name
+                                            : provinces[index].name,
+                                    style: textBody.copyWith(
+                                      color: titleColor,
+                                    )),
+                              ],
+                            ),
+                            Visibility(
+                              visible: listSelect.contains(provinces[index]),
+                              child: const Icon(
+                                Icons.done,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 
   void _modalButtonAddress(BuildContext context) {
@@ -135,17 +170,39 @@ class SelectAddressWidget extends StatelessWidget {
                     style: textHeading,
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: SizedBox(
-                    height: 50.h,
-                    width: 0.1.sw,
-                    child: const Icon(
-                      Icons.close,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SizedBox(
+                        height: 50.h,
+                        width: 0.1.sw,
+                        child: const Icon(
+                          Icons.close,
+                        ),
+                      ),
                     ),
-                  ),
+                    Visibility(
+                      visible: isMultiSelect,
+                      child: InkWell(
+                        onTap: () {
+                          multiProvince!(listSelect);
+                          Navigator.pop(context);
+                        },
+                        child: SizedBox(
+                          height: 50.h,
+                          width: 0.1.sw,
+                          child: const Icon(
+                            Icons.done,
+                            color: primaryColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -158,6 +215,8 @@ class SelectAddressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> stringList =
+        multiProvinces.map((province) => province.name).toList();
     return GestureDetector(
         onTap: readOnly
             ? null
@@ -206,7 +265,7 @@ class SelectAddressWidget extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(secondaryBorderRadius)),
                   contentPadding: EdgeInsets.symmetric(
-                      horizontal: kDefaultPaddingWidthWidget),
+                      horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius:
@@ -217,17 +276,21 @@ class SelectAddressWidget extends StatelessWidget {
                           BorderRadius.circular(secondaryBorderRadius)),
                 ),
                 child: Text(
-                  isWard
-                      ? ward != null
-                          ? ward!.name
-                          : 'Chọn Phường/Xã/Thị trấn'
-                      : isDistrict
-                          ? district != null
-                              ? district!.name
-                              : 'Chọn Quận/Huyện'
-                          : province != null
-                              ? province!.name
-                              : 'Chọn Tỉnh/Thành phố',
+                  isMultiSelect
+                      ? multiProvinces.isNotEmpty
+                          ? stringList.join(', ')
+                          : 'Chọn Tỉnh/Thành phố'
+                      : isWard
+                          ? ward != null
+                              ? ward!.name
+                              : 'Chọn Phường/Xã/Thị trấn'
+                          : isDistrict
+                              ? district != null
+                                  ? district!.name
+                                  : 'Chọn Quận/Huyện'
+                              : province != null
+                                  ? province!.name
+                                  : 'Chọn Tỉnh/Thành phố',
                   style: textBody.copyWith(
                       color: readOnly
                           ? greyText
@@ -240,7 +303,7 @@ class SelectAddressWidget extends StatelessWidget {
                                       ? titleColor
                                       : borderColor
                                   : titleColor),
-                  maxLines: 1,
+                  maxLines: 100,
                   overflow: TextOverflow.ellipsis,
                 ));
           },

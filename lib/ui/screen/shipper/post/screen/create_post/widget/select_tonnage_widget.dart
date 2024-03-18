@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -168,8 +170,8 @@ class SelectTonnageWidget extends StatelessWidget {
               filled: true,
               fillColor: backgroundTextField,
               labelStyle: textBody,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget),
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(secondaryBorderRadius)),
@@ -181,7 +183,6 @@ class SelectTonnageWidget extends StatelessWidget {
               tonnages.isEmpty ? 'Chọn loại xe' : stringList.join(', '),
               style: textBody.copyWith(color: titleColor),
               maxLines: 3,
-              overflow: TextOverflow.ellipsis,
             ));
       },
     ));

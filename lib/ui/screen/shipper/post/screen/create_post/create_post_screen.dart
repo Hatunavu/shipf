@@ -8,6 +8,8 @@ import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.
 import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_cubit.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_state.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_tonnage_widget.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_unit_widget.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
@@ -86,7 +88,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               width: kDefaultPaddingWidthWidget / 2,
                             ),
                             Expanded(
-                              child: parcelAmountWidget(controller: controller),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const OrderLabelTextFieldWidget(
+                                      label: 'Đơn vị'),
+                                  SelectUnitWidget(
+                                    unit: state.unit,
+                                    selectUnit: (unit) {
+                                      createPostCubit.updateUnit(unit);
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -101,18 +115,41 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ),
                         itemSelectLocation(
                             label: 'Tỉnh/Thành phố trả hàng', isDeliver: true),
+                        VerticalSpace(
+                          kDefaultPaddingHeightScreen,
+                        ),
+                        const OrderLabelTextFieldWidget(label: 'Loại xe'),
+                        SelectTonnageWidget(
+                          tonnages: state.tonnages,
+                          selectTonnages: (tonnages) {
+                            createPostCubit.updateTonnage(tonnages);
+                          },
+                        )
                       ],
                     ),
                   )),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kDefaultPaddingWidget),
-                    child: PrimaryButton(
-                      label: 'Đăng đơn',
-                      onPressed: () {
-                        ToastUtils.showNeutral(
-                            'Tính năng đăng được phát triển');
-                      },
+                    padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddingWidthScreen,
+                        vertical: kDefaultPaddingHeightScreen),
+                    child: Column(
+                      children: [
+                        PrimaryButton.outline(
+                          label: 'Lưu nháp',
+                          onPressed: () {
+                            ToastUtils.showNeutral(
+                                'Tính năng đăng được phát triển');
+                          },
+                        ),
+                        VerticalSpace(kDefaultPaddingHeightScreen),
+                        PrimaryButton(
+                          label: 'Đăng đơn',
+                          onPressed: () {
+                            ToastUtils.showNeutral(
+                                'Tính năng đăng được phát triển');
+                          },
+                        ),
+                      ],
                     ),
                   )
                 ],

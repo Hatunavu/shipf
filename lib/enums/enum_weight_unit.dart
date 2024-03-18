@@ -38,13 +38,13 @@ extension EnumWeightUnit on WeightUnitType {
       case WeightUnitType.kg:
         return "Kg";
       case WeightUnitType.ton:
-        return "Ton";
+        return "Tấn";
       case WeightUnitType.box:
-        return "Box";
+        return "Thùng";
       case WeightUnitType.cube:
-        return 'Cube';
+        return 'Khối';
       case WeightUnitType.package:
-        return "Package";
+        return "Kiện";
     }
   }
 }

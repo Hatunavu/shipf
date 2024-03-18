@@ -52,19 +52,19 @@ extension EnumTonnage on TonnageType {
   String display() {
     switch (this) {
       case TonnageType.one:
-        return "1.0";
+        return "1 tấn";
       case TonnageType.onePointFour:
-        return "1.4";
+        return "1.4 tấn";
       case TonnageType.onePointNine:
-        return "1.9";
+        return "1.9 tấn";
       case TonnageType.twoPointFive:
-        return '2.5';
+        return '2.5 tấn';
       case TonnageType.threePointFive:
-        return '3.5';
+        return '3.5 tấn';
       case TonnageType.five:
-        return '5.0';
+        return '5 tấn';
       case TonnageType.seven:
-        return '7.0';
+        return '7 tấn';
     }
   }
 }

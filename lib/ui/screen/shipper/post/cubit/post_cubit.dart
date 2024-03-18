@@ -7,7 +7,7 @@ import 'package:shipf/ui/screen/shipper/post/cubit/post_state.dart';
 class PostCubit extends Cubit<PostState> {
   PostCubit() : super(PostState.initial());
 
-  Future<void> getGoods() async {
+  Future<void> getPosts() async {
     try {
       emit(state.copyWith(isFirstLoad: true));
       final response = await mainRepository.getPost();

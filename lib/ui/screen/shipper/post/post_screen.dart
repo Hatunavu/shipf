@@ -23,7 +23,7 @@ class PostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostCubit()..getGoods(),
+      create: (context) => PostCubit()..getPosts(),
       child: BlocConsumer<PostCubit, PostState>(
         listener: (context, state) {},
         builder: (context, state) {

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
+import 'package:shipf/enums/enum_tonnage.dart';
+import 'package:shipf/enums/enum_weight_unit.dart';
 import 'package:shipf/foundation/constant.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_state.dart';
 
@@ -35,5 +37,17 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     } else {
       emit(state.copyWith(errorProvince: 'Vui lòng chọn Tỉnh/Thành phố'));
     }
+  }
+
+  Future<void> updateUnit(WeightUnitType unit) async {
+    emit(state.copyWith(unit: unit));
+  }
+
+  Future<void> updateTonnage(List<TonnageType> tonnages) async {
+    List<String> newList = tonnages.map((e) => e.toJsonString()).toList();
+    newList.sort((a, b) => a.compareTo(b));
+    List<TonnageType> newTonnages =
+        newList.map((e) => stringToTonnageType(e)).toList();
+    emit(state.copyWith(tonnages: newTonnages));
   }
 }

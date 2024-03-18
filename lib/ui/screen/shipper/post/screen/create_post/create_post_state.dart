@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/enums/enum_tonnage.dart';
+import 'package:shipf/enums/enum_weight_unit.dart';
 
 part 'create_post_state.freezed.dart';
 
@@ -14,6 +16,8 @@ class CreatePostState with _$CreatePostState {
     AddressDataModel? provinceDeliver,
     required String errorProvince,
     required String errorProvinceDeliver,
+    required WeightUnitType unit,
+    required List<TonnageType> tonnages,
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => const CreatePostState(
@@ -22,5 +26,7 @@ class CreatePostState with _$CreatePostState {
       error: "",
       provinces: [],
       errorProvince: '',
-      errorProvinceDeliver: '');
+      errorProvinceDeliver: '',
+      unit: WeightUnitType.ton,
+      tonnages: []);
 }

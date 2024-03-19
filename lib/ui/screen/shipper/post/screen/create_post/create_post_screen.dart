@@ -1,11 +1,11 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:shipf/enums/enum_post_status.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_cubit.dart';
@@ -149,9 +149,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                     const OrderLabelTextFieldWidget(
                                         label: 'Loại xe'),
                                     SelectTonnageWidget(
-                                      tonnages: state.tonnages,
-                                      selectTonnages: (tonnages) {
-                                        createPostCubit.updateTonnage(tonnages);
+                                      tonnage: state.tonnage,
+                                      selectTonnage: (tonnage) {
+                                        createPostCubit.updateTonnage(tonnage);
                                       },
                                     ),
                                   ],
@@ -167,20 +167,26 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   PrimaryButton.outline(
                                     label: 'Lưu nháp',
                                     onPressed: () {
-                                      ToastUtils.showNeutral(
-                                          'Tính năng đăng được phát triển');
-                                    },
-                                  ),
-                                  VerticalSpace(kDefaultPaddingHeightScreen),
-                                  PrimaryButton(
-                                    label: 'Đăng đơn',
-                                    onPressed: () {
                                       if (createPostFormKey.currentState!
                                               .validate() &&
                                           state.selectedProvinces.isNotEmpty &&
                                           state.selectedProvincesDeliver
                                               .isNotEmpty) {
-                                        log('done');
+                                        createPostCubit.createPost(
+                                            status: PostStatusType.draft);
+                                      }
+                                    },
+                                  ),
+                                  VerticalSpace(kDefaultPaddingHeightScreen),
+                                  PrimaryButton(
+                                    label: 'Đăng đơn',
+                                    onPressed: () async {
+                                      if (createPostFormKey.currentState!
+                                              .validate() &&
+                                          state.selectedProvinces.isNotEmpty &&
+                                          state.selectedProvincesDeliver
+                                              .isNotEmpty) {
+                                        createPostCubit.createPost();
                                       }
                                     },
                                   ),

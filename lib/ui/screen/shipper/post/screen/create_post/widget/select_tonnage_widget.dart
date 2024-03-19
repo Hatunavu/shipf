@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class SelectTonnageWidget extends StatelessWidget {
-  final Function(List<TonnageType> tonnages) selectTonnages;
-  List<TonnageType> tonnages;
-  SelectTonnageWidget(
-      {super.key, required this.selectTonnages, this.tonnages = const []});
+  // final Function(List<TonnageType> tonnages) selectTonnages;
+  final Function(TonnageType tonnage) selectTonnage;
+  TonnageType? tonnage;
+  SelectTonnageWidget({super.key, required this.selectTonnage, this.tonnage});
 
   final List<TonnageType> listTonnage = [
     TonnageType.one,
@@ -23,10 +24,10 @@ class SelectTonnageWidget extends StatelessWidget {
     TonnageType.seven
   ];
 
-  List<TonnageType> listSelect = [];
+  // List<TonnageType> listSelect = [];
 
   Widget setupAlertDialogContainer() {
-    listSelect = [...tonnages];
+    // listSelect = [...tonnages];
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
@@ -46,11 +47,13 @@ class SelectTonnageWidget extends StatelessWidget {
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
                         setState(() {
-                          if (listSelect.contains(listTonnage[index])) {
-                            listSelect.remove(listTonnage[index]);
-                          } else {
-                            listSelect.add(listTonnage[index]);
-                          }
+                          // if (listSelect.contains(listTonnage[index])) {
+                          //   listSelect.remove(listTonnage[index]);
+                          // } else {
+                          //   listSelect.add(listTonnage[index]);
+                          // }
+                          selectTonnage(listTonnage[index]);
+                          Navigator.pop(context);
                         });
                       },
                       child: Padding(
@@ -75,13 +78,13 @@ class SelectTonnageWidget extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Visibility(
-                              visible: listSelect.contains(listTonnage[index]),
-                              child: const Icon(
-                                Icons.done,
-                                color: primaryColor,
-                              ),
-                            ),
+                            // Visibility(
+                            //   visible: listSelect.contains(listTonnage[index]),
+                            //   child: const Icon(
+                            //     Icons.done,
+                            //     color: primaryColor,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -132,20 +135,20 @@ class SelectTonnageWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        selectTonnages(listSelect);
-                        Navigator.pop(context);
-                      },
-                      child: SizedBox(
-                        height: 50.h,
-                        width: 0.1.sw,
-                        child: const Icon(
-                          Icons.done,
-                          color: primaryColor,
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     selectTonnages(listSelect);
+                    //     Navigator.pop(context);
+                    //   },
+                    //   child: SizedBox(
+                    //     height: 50.h,
+                    //     width: 0.1.sw,
+                    //     child: const Icon(
+                    //       Icons.done,
+                    //       color: primaryColor,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
@@ -159,9 +162,10 @@ class SelectTonnageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> stringList =
-        tonnages.map((tonnage) => tonnage.display().split(', ').last).toList();
+    // List<String> stringList =
+    //     tonnages.map((tonnage) => tonnage.display().split(', ').last).toList();
     return GestureDetector(onTap: () {
+      unfocus(context);
       _modalButtonTonnage(context);
     }, child: FormField(
       builder: (FormFieldState<String> state) {
@@ -180,7 +184,7 @@ class SelectTonnageWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(secondaryBorderRadius)),
             ),
             child: Text(
-              tonnages.isEmpty ? 'Chọn loại xe' : stringList.join(', '),
+              tonnage == null ? 'Chọn loại xe' : tonnage!.display(),
               style: textBody.copyWith(color: titleColor),
               maxLines: 3,
             ));

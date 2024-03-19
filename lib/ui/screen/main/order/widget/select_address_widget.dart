@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -221,6 +222,7 @@ class SelectAddressWidget extends StatelessWidget {
         onTap: readOnly
             ? null
             : () {
+                unfocus(context);
                 isWard
                     ? wards.isNotEmpty
                         ? _modalButtonAddress(context)

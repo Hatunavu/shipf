@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/enums/enum_weight_unit.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -114,6 +115,7 @@ class SelectUnitWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(onTap: () {
+      unfocus(context);
       _modalButtonUnit(context);
     }, child: FormField(
       builder: (FormFieldState<String> state) {

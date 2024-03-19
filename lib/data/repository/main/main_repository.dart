@@ -11,6 +11,7 @@ import 'package:shipf/data/model/auth/auth.dart';
 import 'package:shipf/data/model/no_data/no_data_response.dart';
 import 'package:shipf/data/model/order/order.dart';
 import 'package:shipf/data/model/order/order_service.dart';
+import 'package:shipf/data/model/post/post_request.dart';
 import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/data/model/shipment/shipment_response.dart';
 import 'package:shipf/data/model/shipment/shipment_summary.dart';
@@ -179,6 +180,9 @@ abstract class MainRepository {
     @Query('deliveryProvinceIds') List<String>? deliveryProvinceIdstoDate,
     @Query('status') String? status,
   });
+
+  @POST(endpoint.createPost)
+  Future<NoDataResponse> createPost({@Body() required PostRequest postRequest});
 }
 
 extension ApiClientAWSS3 on MainRepository {

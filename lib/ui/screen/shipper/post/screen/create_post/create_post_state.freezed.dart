@@ -27,7 +27,7 @@ mixin _$CreatePostState {
   String get errorProvince => throw _privateConstructorUsedError;
   String get errorProvinceDeliver => throw _privateConstructorUsedError;
   WeightUnitType get unit => throw _privateConstructorUsedError;
-  List<TonnageType> get tonnages => throw _privateConstructorUsedError;
+  TonnageType? get tonnage => throw _privateConstructorUsedError;
   TextEditingController? get phoneController =>
       throw _privateConstructorUsedError;
   TextEditingController? get contentController =>
@@ -56,7 +56,7 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
-      List<TonnageType> tonnages,
+      TonnageType? tonnage,
       TextEditingController? phoneController,
       TextEditingController? contentController,
       TextEditingController? amountController});
@@ -84,7 +84,7 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
     Object? errorProvince = null,
     Object? errorProvinceDeliver = null,
     Object? unit = null,
-    Object? tonnages = null,
+    Object? tonnage = freezed,
     Object? phoneController = freezed,
     Object? contentController = freezed,
     Object? amountController = freezed,
@@ -126,10 +126,10 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as WeightUnitType,
-      tonnages: null == tonnages
-          ? _value.tonnages
-          : tonnages // ignore: cast_nullable_to_non_nullable
-              as List<TonnageType>,
+      tonnage: freezed == tonnage
+          ? _value.tonnage
+          : tonnage // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
       phoneController: freezed == phoneController
           ? _value.phoneController
           : phoneController // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ abstract class _$$_CreatePostStateCopyWith<$Res>
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
-      List<TonnageType> tonnages,
+      TonnageType? tonnage,
       TextEditingController? phoneController,
       TextEditingController? contentController,
       TextEditingController? amountController});
@@ -190,7 +190,7 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
     Object? errorProvince = null,
     Object? errorProvinceDeliver = null,
     Object? unit = null,
-    Object? tonnages = null,
+    Object? tonnage = freezed,
     Object? phoneController = freezed,
     Object? contentController = freezed,
     Object? amountController = freezed,
@@ -232,10 +232,10 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as WeightUnitType,
-      tonnages: null == tonnages
-          ? _value._tonnages
-          : tonnages // ignore: cast_nullable_to_non_nullable
-              as List<TonnageType>,
+      tonnage: freezed == tonnage
+          ? _value.tonnage
+          : tonnage // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
       phoneController: freezed == phoneController
           ? _value.phoneController
           : phoneController // ignore: cast_nullable_to_non_nullable
@@ -265,14 +265,13 @@ class _$_CreatePostState implements _CreatePostState {
       required this.errorProvince,
       required this.errorProvinceDeliver,
       required this.unit,
-      required final List<TonnageType> tonnages,
+      this.tonnage,
       this.phoneController,
       this.contentController,
       this.amountController})
       : _provinces = provinces,
         _selectedProvinces = selectedProvinces,
-        _selectedProvincesDeliver = selectedProvincesDeliver,
-        _tonnages = tonnages;
+        _selectedProvincesDeliver = selectedProvincesDeliver;
 
   @override
   final bool isLoading;
@@ -312,14 +311,8 @@ class _$_CreatePostState implements _CreatePostState {
   final String errorProvinceDeliver;
   @override
   final WeightUnitType unit;
-  final List<TonnageType> _tonnages;
   @override
-  List<TonnageType> get tonnages {
-    if (_tonnages is EqualUnmodifiableListView) return _tonnages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tonnages);
-  }
-
+  final TonnageType? tonnage;
   @override
   final TextEditingController? phoneController;
   @override
@@ -329,7 +322,7 @@ class _$_CreatePostState implements _CreatePostState {
 
   @override
   String toString() {
-    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnages: $tonnages, phoneController: $phoneController, contentController: $contentController, amountController: $amountController)';
+    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnage: $tonnage, phoneController: $phoneController, contentController: $contentController, amountController: $amountController)';
   }
 
   @override
@@ -353,7 +346,7 @@ class _$_CreatePostState implements _CreatePostState {
             (identical(other.errorProvinceDeliver, errorProvinceDeliver) ||
                 other.errorProvinceDeliver == errorProvinceDeliver) &&
             (identical(other.unit, unit) || other.unit == unit) &&
-            const DeepCollectionEquality().equals(other._tonnages, _tonnages) &&
+            (identical(other.tonnage, tonnage) || other.tonnage == tonnage) &&
             (identical(other.phoneController, phoneController) ||
                 other.phoneController == phoneController) &&
             (identical(other.contentController, contentController) ||
@@ -374,7 +367,7 @@ class _$_CreatePostState implements _CreatePostState {
       errorProvince,
       errorProvinceDeliver,
       unit,
-      const DeepCollectionEquality().hash(_tonnages),
+      tonnage,
       phoneController,
       contentController,
       amountController);
@@ -397,7 +390,7 @@ abstract class _CreatePostState implements CreatePostState {
       required final String errorProvince,
       required final String errorProvinceDeliver,
       required final WeightUnitType unit,
-      required final List<TonnageType> tonnages,
+      final TonnageType? tonnage,
       final TextEditingController? phoneController,
       final TextEditingController? contentController,
       final TextEditingController? amountController}) = _$_CreatePostState;
@@ -421,7 +414,7 @@ abstract class _CreatePostState implements CreatePostState {
   @override
   WeightUnitType get unit;
   @override
-  List<TonnageType> get tonnages;
+  TonnageType? get tonnage;
   @override
   TextEditingController? get phoneController;
   @override

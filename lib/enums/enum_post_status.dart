@@ -36,15 +36,15 @@ extension EnumPostStatus on PostStatusType {
   String display() {
     switch (this) {
       case PostStatusType.neww:
-        return 'New';
+        return 'Mới';
       case PostStatusType.draft:
-        return 'Draft';
+        return 'Nháp';
       case PostStatusType.pending:
-        return 'Pending';
+        return 'Đợi duyệt';
       case PostStatusType.approved:
-        return 'Approved';
+        return 'Đã duyệt';
       case PostStatusType.rejected:
-        return 'Rejected';
+        return 'Từ chối';
     }
   }
 }

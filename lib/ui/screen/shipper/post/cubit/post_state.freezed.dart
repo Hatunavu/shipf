@@ -12,7 +12,7 @@ part of 'post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PostState {
@@ -75,11 +75,10 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
 }
 
 /// @nodoc
-abstract class _$$PostStateImplCopyWith<$Res>
-    implements $PostStateCopyWith<$Res> {
-  factory _$$PostStateImplCopyWith(
-          _$PostStateImpl value, $Res Function(_$PostStateImpl) then) =
-      __$$PostStateImplCopyWithImpl<$Res>;
+abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
+  factory _$$_PostStateCopyWith(
+          _$_PostState value, $Res Function(_$_PostState) then) =
+      __$$_PostStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +86,11 @@ abstract class _$$PostStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PostStateImplCopyWithImpl<$Res>
-    extends _$PostStateCopyWithImpl<$Res, _$PostStateImpl>
-    implements _$$PostStateImplCopyWith<$Res> {
-  __$$PostStateImplCopyWithImpl(
-      _$PostStateImpl _value, $Res Function(_$PostStateImpl) _then)
+class __$$_PostStateCopyWithImpl<$Res>
+    extends _$PostStateCopyWithImpl<$Res, _$_PostState>
+    implements _$$_PostStateCopyWith<$Res> {
+  __$$_PostStateCopyWithImpl(
+      _$_PostState _value, $Res Function(_$_PostState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +101,7 @@ class __$$PostStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? posts = null,
   }) {
-    return _then(_$PostStateImpl(
+    return _then(_$_PostState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -125,8 +124,8 @@ class __$$PostStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PostStateImpl implements _PostState {
-  const _$PostStateImpl(
+class _$_PostState implements _PostState {
+  const _$_PostState(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -153,10 +152,10 @@ class _$PostStateImpl implements _PostState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostStateImpl &&
+            other is _$_PostState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -172,8 +171,8 @@ class _$PostStateImpl implements _PostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
-      __$$PostStateImplCopyWithImpl<_$PostStateImpl>(this, _$identity);
+  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
+      __$$_PostStateCopyWithImpl<_$_PostState>(this, _$identity);
 }
 
 abstract class _PostState implements PostState {
@@ -181,7 +180,7 @@ abstract class _PostState implements PostState {
       {required final bool isLoading,
       required final bool isFirstLoad,
       final String? error,
-      required final List<PostData> posts}) = _$PostStateImpl;
+      required final List<PostData> posts}) = _$_PostState;
 
   @override
   bool get isLoading;
@@ -193,6 +192,6 @@ abstract class _PostState implements PostState {
   List<PostData> get posts;
   @override
   @JsonKey(ignore: true)
-  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
+  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
       throw _privateConstructorUsedError;
 }

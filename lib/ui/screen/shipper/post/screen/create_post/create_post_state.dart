@@ -18,21 +18,21 @@ class CreatePostState with _$CreatePostState {
     required String errorProvince,
     required String errorProvinceDeliver,
     required WeightUnitType unit,
-    required List<TonnageType> tonnages,
+    TonnageType? tonnage,
     TextEditingController? phoneController,
     TextEditingController? contentController,
     TextEditingController? amountController,
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => const CreatePostState(
-      isLoading: false,
-      isFirstLoad: false,
-      error: "",
-      provinces: [],
-      selectedProvinces: [],
-      selectedProvincesDeliver: [],
-      errorProvince: '',
-      errorProvinceDeliver: '',
-      unit: WeightUnitType.ton,
-      tonnages: []);
+        isLoading: false,
+        isFirstLoad: false,
+        error: "",
+        provinces: [],
+        selectedProvinces: [],
+        selectedProvincesDeliver: [],
+        errorProvince: '',
+        errorProvinceDeliver: '',
+        unit: WeightUnitType.ton,
+      );
 }

@@ -46,3 +46,4 @@ const sendDeviceToken = '/device';
 
 //post
 const getPost = '/express/post';
+const createPost = '/express/post';

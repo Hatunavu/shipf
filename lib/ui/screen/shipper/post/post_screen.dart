@@ -8,7 +8,6 @@ import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/screen/shipper/post/cubit/post_cubit.dart';
 import 'package:shipf/ui/screen/shipper/post/cubit/post_state.dart';
-import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
@@ -27,7 +26,27 @@ class PostScreen extends StatelessWidget {
       child: BlocConsumer<PostCubit, PostState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return BaseScreen(
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              backgroundColor: primaryColor,
+              elevation: 0,
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      context.router.push(NotificationPage());
+                    },
+                    icon: const Icon(Ionicons.notifications)),
+                IconButton(
+                    onPressed: () {
+                      context.router.push(SettingPage());
+                    },
+                    icon: const Icon(Ionicons.settings_outline))
+              ],
+              title: const Text('ShipF'),
+              centerTitle: false,
+              automaticallyImplyLeading: false,
+            ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 context.router.push(const CreatePostPage());
@@ -36,7 +55,7 @@ class PostScreen extends StatelessWidget {
               backgroundColor: primaryColor,
               child: const Icon(Icons.add),
             ),
-            child: SingleChildScrollView(
+            body: SingleChildScrollView(
               child: state.isFirstLoad
                   ? const OrderShimmer()
                   : state.posts.isEmpty

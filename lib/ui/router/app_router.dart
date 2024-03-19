@@ -31,4 +31,5 @@ class AppRoutes {
   //post
   static const String postScreen = "/post";
   static const String createPostScreen = "/create_post";
+  static const String userPostScreen = "/user_post";
 }

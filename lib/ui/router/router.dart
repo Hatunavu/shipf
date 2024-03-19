@@ -15,6 +15,7 @@ import 'package:shipf/ui/screen/main/notifications/notification_screen.dart';
 import 'package:shipf/ui/screen/main/order/order_screen.dart';
 import 'package:shipf/ui/screen/main/order/screens/order_success_screen.dart';
 import 'package:shipf/ui/screen/main/setting/screen/update_info/update_info_screen.dart';
+import 'package:shipf/ui/screen/main/setting/screen/user_post/user_post_screen.dart';
 import 'package:shipf/ui/screen/main/setting/setting_screen.dart';
 import 'package:shipf/ui/screen/main/welcome/welcome_screen.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/home_shipper_screen.dart';
@@ -148,6 +149,12 @@ import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_scre
       page: CreatePostScreen,
       name: "CreatePostPage",
       path: AppRoutes.createPostScreen,
+    ),
+
+    AutoRoute(
+      page: UserPostScreen,
+      name: "UserPostPage",
+      path: AppRoutes.userPostScreen,
     ),
   ],
 )

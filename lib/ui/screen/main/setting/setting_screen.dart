@@ -31,6 +31,7 @@ class _SettingScreenState extends State<SettingScreen> {
   final List<String> settings = [
     'Đổi mật khẩu',
     'Sổ địa chỉ',
+    'Tìm xe',
     'Chính sách và điều khoản'
   ];
   bool isLoading = false;
@@ -162,7 +163,10 @@ class _SettingScreenState extends State<SettingScreen> {
             return GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
-                  ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                  index == 2
+                      ? context.router.push(UserPostPage())
+                      : ToastUtils.showNeutral(
+                          'Tính năng đăng được phát triển');
                 },
                 child: settingItem(settings[index]));
           },
@@ -246,8 +250,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 title,
                 textAlign: TextAlign.center,
               ),
-              insetPadding:EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthWidget) ,
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthWidget),
               titlePadding: EdgeInsets.symmetric(
                   vertical: kDefaultPaddingHeightScreen,
                   horizontal: kDefaultPaddingWidthWidget),

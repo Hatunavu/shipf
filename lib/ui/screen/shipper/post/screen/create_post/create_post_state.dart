@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
@@ -18,6 +19,9 @@ class CreatePostState with _$CreatePostState {
     required String errorProvinceDeliver,
     required WeightUnitType unit,
     required List<TonnageType> tonnages,
+    TextEditingController? phoneController,
+    TextEditingController? contentController,
+    TextEditingController? amountController,
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => const CreatePostState(

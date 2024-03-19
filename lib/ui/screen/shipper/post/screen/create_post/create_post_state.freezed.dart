@@ -12,7 +12,7 @@ part of 'create_post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CreatePostState {
@@ -28,6 +28,12 @@ mixin _$CreatePostState {
   String get errorProvinceDeliver => throw _privateConstructorUsedError;
   WeightUnitType get unit => throw _privateConstructorUsedError;
   List<TonnageType> get tonnages => throw _privateConstructorUsedError;
+  TextEditingController? get phoneController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get contentController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get amountController =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreatePostStateCopyWith<CreatePostState> get copyWith =>
@@ -50,7 +56,10 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
-      List<TonnageType> tonnages});
+      List<TonnageType> tonnages,
+      TextEditingController? phoneController,
+      TextEditingController? contentController,
+      TextEditingController? amountController});
 }
 
 /// @nodoc
@@ -76,6 +85,9 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
     Object? errorProvinceDeliver = null,
     Object? unit = null,
     Object? tonnages = null,
+    Object? phoneController = freezed,
+    Object? contentController = freezed,
+    Object? amountController = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -118,16 +130,28 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
           ? _value.tonnages
           : tonnages // ignore: cast_nullable_to_non_nullable
               as List<TonnageType>,
+      phoneController: freezed == phoneController
+          ? _value.phoneController
+          : phoneController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      contentController: freezed == contentController
+          ? _value.contentController
+          : contentController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      amountController: freezed == amountController
+          ? _value.amountController
+          : amountController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$CreatePostStateImplCopyWith<$Res>
+abstract class _$$_CreatePostStateCopyWith<$Res>
     implements $CreatePostStateCopyWith<$Res> {
-  factory _$$CreatePostStateImplCopyWith(_$CreatePostStateImpl value,
-          $Res Function(_$CreatePostStateImpl) then) =
-      __$$CreatePostStateImplCopyWithImpl<$Res>;
+  factory _$$_CreatePostStateCopyWith(
+          _$_CreatePostState value, $Res Function(_$_CreatePostState) then) =
+      __$$_CreatePostStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -140,15 +164,18 @@ abstract class _$$CreatePostStateImplCopyWith<$Res>
       String errorProvince,
       String errorProvinceDeliver,
       WeightUnitType unit,
-      List<TonnageType> tonnages});
+      List<TonnageType> tonnages,
+      TextEditingController? phoneController,
+      TextEditingController? contentController,
+      TextEditingController? amountController});
 }
 
 /// @nodoc
-class __$$CreatePostStateImplCopyWithImpl<$Res>
-    extends _$CreatePostStateCopyWithImpl<$Res, _$CreatePostStateImpl>
-    implements _$$CreatePostStateImplCopyWith<$Res> {
-  __$$CreatePostStateImplCopyWithImpl(
-      _$CreatePostStateImpl _value, $Res Function(_$CreatePostStateImpl) _then)
+class __$$_CreatePostStateCopyWithImpl<$Res>
+    extends _$CreatePostStateCopyWithImpl<$Res, _$_CreatePostState>
+    implements _$$_CreatePostStateCopyWith<$Res> {
+  __$$_CreatePostStateCopyWithImpl(
+      _$_CreatePostState _value, $Res Function(_$_CreatePostState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -164,8 +191,11 @@ class __$$CreatePostStateImplCopyWithImpl<$Res>
     Object? errorProvinceDeliver = null,
     Object? unit = null,
     Object? tonnages = null,
+    Object? phoneController = freezed,
+    Object? contentController = freezed,
+    Object? amountController = freezed,
   }) {
-    return _then(_$CreatePostStateImpl(
+    return _then(_$_CreatePostState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -206,14 +236,26 @@ class __$$CreatePostStateImplCopyWithImpl<$Res>
           ? _value._tonnages
           : tonnages // ignore: cast_nullable_to_non_nullable
               as List<TonnageType>,
+      phoneController: freezed == phoneController
+          ? _value.phoneController
+          : phoneController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      contentController: freezed == contentController
+          ? _value.contentController
+          : contentController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      amountController: freezed == amountController
+          ? _value.amountController
+          : amountController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$CreatePostStateImpl implements _CreatePostState {
-  const _$CreatePostStateImpl(
+class _$_CreatePostState implements _CreatePostState {
+  const _$_CreatePostState(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -223,7 +265,10 @@ class _$CreatePostStateImpl implements _CreatePostState {
       required this.errorProvince,
       required this.errorProvinceDeliver,
       required this.unit,
-      required final List<TonnageType> tonnages})
+      required final List<TonnageType> tonnages,
+      this.phoneController,
+      this.contentController,
+      this.amountController})
       : _provinces = provinces,
         _selectedProvinces = selectedProvinces,
         _selectedProvincesDeliver = selectedProvincesDeliver,
@@ -276,15 +321,22 @@ class _$CreatePostStateImpl implements _CreatePostState {
   }
 
   @override
+  final TextEditingController? phoneController;
+  @override
+  final TextEditingController? contentController;
+  @override
+  final TextEditingController? amountController;
+
+  @override
   String toString() {
-    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnages: $tonnages)';
+    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnages: $tonnages, phoneController: $phoneController, contentController: $contentController, amountController: $amountController)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreatePostStateImpl &&
+            other is _$_CreatePostState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -301,7 +353,13 @@ class _$CreatePostStateImpl implements _CreatePostState {
             (identical(other.errorProvinceDeliver, errorProvinceDeliver) ||
                 other.errorProvinceDeliver == errorProvinceDeliver) &&
             (identical(other.unit, unit) || other.unit == unit) &&
-            const DeepCollectionEquality().equals(other._tonnages, _tonnages));
+            const DeepCollectionEquality().equals(other._tonnages, _tonnages) &&
+            (identical(other.phoneController, phoneController) ||
+                other.phoneController == phoneController) &&
+            (identical(other.contentController, contentController) ||
+                other.contentController == contentController) &&
+            (identical(other.amountController, amountController) ||
+                other.amountController == amountController));
   }
 
   @override
@@ -316,14 +374,16 @@ class _$CreatePostStateImpl implements _CreatePostState {
       errorProvince,
       errorProvinceDeliver,
       unit,
-      const DeepCollectionEquality().hash(_tonnages));
+      const DeepCollectionEquality().hash(_tonnages),
+      phoneController,
+      contentController,
+      amountController);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
-      __$$CreatePostStateImplCopyWithImpl<_$CreatePostStateImpl>(
-          this, _$identity);
+  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
+      __$$_CreatePostStateCopyWithImpl<_$_CreatePostState>(this, _$identity);
 }
 
 abstract class _CreatePostState implements CreatePostState {
@@ -337,7 +397,10 @@ abstract class _CreatePostState implements CreatePostState {
       required final String errorProvince,
       required final String errorProvinceDeliver,
       required final WeightUnitType unit,
-      required final List<TonnageType> tonnages}) = _$CreatePostStateImpl;
+      required final List<TonnageType> tonnages,
+      final TextEditingController? phoneController,
+      final TextEditingController? contentController,
+      final TextEditingController? amountController}) = _$_CreatePostState;
 
   @override
   bool get isLoading;
@@ -360,7 +423,13 @@ abstract class _CreatePostState implements CreatePostState {
   @override
   List<TonnageType> get tonnages;
   @override
+  TextEditingController? get phoneController;
+  @override
+  TextEditingController? get contentController;
+  @override
+  TextEditingController? get amountController;
+  @override
   @JsonKey(ignore: true)
-  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
+  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
       throw _privateConstructorUsedError;
 }

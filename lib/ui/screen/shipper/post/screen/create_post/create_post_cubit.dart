@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shipf/data/model/address/address.dart';
-import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
 import 'package:shipf/enums/enum_weight_unit.dart';
 import 'package:shipf/foundation/constant.dart';
@@ -10,15 +9,23 @@ import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_stat
 class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit() : super(CreatePostState.initial());
 
+  Future init() async {
+    emit(state.copyWith(isLoading: true, isFirstLoad: true));
+    await getProvinces();
+    emit(state.copyWith(
+      isLoading: false,
+      isFirstLoad: false,
+      phoneController: TextEditingController(),
+      contentController: TextEditingController(),
+      amountController: TextEditingController(text: '1'),
+    ));
+  }
+
   Future<void> getProvinces() async {
-    try {
-      emit(state.copyWith(isFirstLoad: true));
-      final response = await mainRepository.getProvinces();
-      emit(state.copyWith(isFirstLoad: false, provinces: response.data));
-    } on DioError catch (e) {
-      final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
-    }
+    final response = await mainRepository.getProvinces();
+    emit(state.copyWith(
+      provinces: response.data,
+    ));
   }
 
   Future<void> updateProvince(List<AddressDataModel> provinces,

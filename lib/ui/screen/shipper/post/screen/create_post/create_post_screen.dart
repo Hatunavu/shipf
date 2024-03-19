@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,12 +28,10 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController contentController = TextEditingController();
-  TextEditingController amountController = TextEditingController(text: '1');
-
+  final GlobalKey<FormState> createPostFormKey = GlobalKey<FormState>();
   late CreatePostCubit createPostCubit;
   late int currentValue;
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,11 +39,21 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         unfocus(context);
       },
       child: BlocProvider(
-        create: (context) => CreatePostCubit()..getProvinces(),
+        create: (context) => CreatePostCubit()..init(),
         child: BlocConsumer<CreatePostCubit, CreatePostState>(
           listener: (context, state) {},
           builder: (context, state) {
             createPostCubit = context.read<CreatePostCubit>();
+            if (!state.isLoading) {
+              isLoading == true ? context.router.pop() : null;
+              isLoading = false;
+            }
+            if (state.isLoading) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                loadingShowDialog(context);
+                isLoading = true;
+              });
+            }
             return BaseScreen(
                 title: 'Đăng đơn tìm xe',
                 leading: InkWell(
@@ -54,118 +65,131 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     color: Colors.black,
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Expanded(
-                        child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingWidthWidget,
-                            vertical: kDefaultPaddingHeightScreen),
+                child: state.isFirstLoad
+                    ? const SizedBox()
+                    : Form(
+                        key: createPostFormKey,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const OrderLabelTextFieldWidget(
-                                label: 'Số điện thoại'),
-                            PrimaryTextField(
-                              label: '',
-                              controller: phoneController,
-                              hintText: '',
-                              isPhone: true,
-                              showPrefixIcon: false,
-                            ),
-                            VerticalSpace(
-                              kDefaultPaddingHeightScreen,
-                            ),
-                            const OrderLabelTextFieldWidget(
-                                label: 'Mô tả chi tiết nhu cầu tìm xe'),
-                            PrimaryTextField(
-                              label: '',
-                              controller: contentController,
-                              hintText: '',
-                              fieldRequire: 'mô tả',
-                            ),
-                            VerticalSpace(
-                              kDefaultPaddingHeightScreen,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: parcelAmountWidget(
-                                        controller: amountController)),
-                                SizedBox(
-                                  width: kDefaultPaddingWidthWidget / 2,
+                            Expanded(
+                                child: SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: kDefaultPaddingWidthWidget,
+                                    vertical: kDefaultPaddingHeightScreen),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const OrderLabelTextFieldWidget(
+                                        label: 'Số điện thoại'),
+                                    PrimaryTextField(
+                                      label: '',
+                                      controller: state.phoneController!,
+                                      hintText: '',
+                                      isPhone: true,
+                                      showPrefixIcon: false,
+                                    ),
+                                    VerticalSpace(
+                                      kDefaultPaddingHeightScreen,
+                                    ),
+                                    const OrderLabelTextFieldWidget(
+                                        label: 'Mô tả chi tiết nhu cầu tìm xe'),
+                                    PrimaryTextField(
+                                      label: '',
+                                      controller: state.contentController!,
+                                      hintText: '',
+                                      fieldRequire: 'mô tả',
+                                    ),
+                                    VerticalSpace(
+                                      kDefaultPaddingHeightScreen,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: parcelAmountWidget(
+                                                controller:
+                                                    state.amountController!)),
+                                        SizedBox(
+                                          width: kDefaultPaddingWidthWidget / 2,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const OrderLabelTextFieldWidget(
+                                                  label: 'Đơn vị'),
+                                              SelectUnitWidget(
+                                                unit: state.unit,
+                                                selectUnit: (unit) {
+                                                  createPostCubit
+                                                      .updateUnit(unit);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    VerticalSpace(
+                                      kDefaultPaddingHeightScreen,
+                                    ),
+                                    itemSelectLocation(
+                                      label: 'Tỉnh/Thành phố bốc hàng',
+                                    ),
+                                    VerticalSpace(
+                                      kDefaultPaddingHeightScreen,
+                                    ),
+                                    itemSelectLocation(
+                                        label: 'Tỉnh/Thành phố trả hàng',
+                                        isDeliver: true),
+                                    VerticalSpace(
+                                      kDefaultPaddingHeightScreen,
+                                    ),
+                                    const OrderLabelTextFieldWidget(
+                                        label: 'Loại xe'),
+                                    SelectTonnageWidget(
+                                      tonnages: state.tonnages,
+                                      selectTonnages: (tonnages) {
+                                        createPostCubit.updateTonnage(tonnages);
+                                      },
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const OrderLabelTextFieldWidget(
-                                          label: 'Đơn vị'),
-                                      SelectUnitWidget(
-                                        unit: state.unit,
-                                        selectUnit: (unit) {
-                                          createPostCubit.updateUnit(unit);
-                                        },
-                                      ),
-                                    ],
+                              ),
+                            )),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: kDefaultPaddingWidthScreen,
+                                  vertical: kDefaultPaddingHeightScreen),
+                              child: Column(
+                                children: [
+                                  PrimaryButton.outline(
+                                    label: 'Lưu nháp',
+                                    onPressed: () {
+                                      ToastUtils.showNeutral(
+                                          'Tính năng đăng được phát triển');
+                                    },
                                   ),
-                                ),
-                              ],
-                            ),
-                            VerticalSpace(
-                              kDefaultPaddingHeightScreen,
-                            ),
-                            itemSelectLocation(
-                              label: 'Tỉnh/Thành phố bốc hàng',
-                            ),
-                            VerticalSpace(
-                              kDefaultPaddingHeightScreen,
-                            ),
-                            itemSelectLocation(
-                                label: 'Tỉnh/Thành phố trả hàng',
-                                isDeliver: true),
-                            VerticalSpace(
-                              kDefaultPaddingHeightScreen,
-                            ),
-                            const OrderLabelTextFieldWidget(label: 'Loại xe'),
-                            SelectTonnageWidget(
-                              tonnages: state.tonnages,
-                              selectTonnages: (tonnages) {
-                                createPostCubit.updateTonnage(tonnages);
-                              },
-                            ),
+                                  VerticalSpace(kDefaultPaddingHeightScreen),
+                                  PrimaryButton(
+                                    label: 'Đăng đơn',
+                                    onPressed: () {
+                                      if (createPostFormKey.currentState!
+                                              .validate() &&
+                                          state.selectedProvinces.isNotEmpty &&
+                                          state.selectedProvincesDeliver
+                                              .isNotEmpty) {
+                                        log('done');
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                    )),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: kDefaultPaddingWidthScreen,
-                          vertical: kDefaultPaddingHeightScreen),
-                      child: Column(
-                        children: [
-                          PrimaryButton.outline(
-                            label: 'Lưu nháp',
-                            onPressed: () {
-                              ToastUtils.showNeutral(
-                                  'Tính năng đăng được phát triển');
-                            },
-                          ),
-                          VerticalSpace(kDefaultPaddingHeightScreen),
-                          PrimaryButton(
-                            label: 'Đăng đơn',
-                            onPressed: () {
-                              ToastUtils.showNeutral(
-                                  'Tính năng đăng được phát triển');
-                            },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ));
+                      ));
           },
         ),
       ),

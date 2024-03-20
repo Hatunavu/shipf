@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum PostStatusType { neww, draft, pending, approved, rejected }
 
 extension EnumPostStatus on PostStatusType {
@@ -45,6 +47,21 @@ extension EnumPostStatus on PostStatusType {
         return 'Đã duyệt';
       case PostStatusType.rejected:
         return 'Từ chối';
+    }
+  }
+
+  Color color() {
+    switch (this) {
+      case PostStatusType.neww:
+        return Colors.blue;
+      case PostStatusType.draft:
+        return Colors.grey;
+      case PostStatusType.pending:
+        return Colors.orange;
+      case PostStatusType.approved:
+        return Colors.green;
+      case PostStatusType.rejected:
+        return Colors.red;
     }
   }
 }

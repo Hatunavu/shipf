@@ -5,11 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:shipf/enums/enum_post_status.dart';
-import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
-import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_cubit.dart';
-import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_state.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/cubit/create_post_cubit.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/cubit/create_post_state.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_tonnage_widget.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_unit_widget.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
@@ -17,7 +16,6 @@ import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 
 class CreatePostScreen extends StatefulWidget {

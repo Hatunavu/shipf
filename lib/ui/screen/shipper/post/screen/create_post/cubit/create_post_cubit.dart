@@ -8,7 +8,7 @@ import 'package:shipf/enums/enum_post_status.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
 import 'package:shipf/enums/enum_weight_unit.dart';
 import 'package:shipf/foundation/constant.dart';
-import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_state.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/create_post/cubit/create_post_state.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 
 class CreatePostCubit extends Cubit<CreatePostState> {

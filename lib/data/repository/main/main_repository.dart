@@ -183,6 +183,21 @@ abstract class MainRepository {
 
   @POST(endpoint.createPost)
   Future<NoDataResponse> createPost({@Body() required PostRequest postRequest});
+
+  @GET(endpoint.getPostSaved)
+  Future<PostResponse> getPostSaved({
+    @Query('page') int? page,
+    @Query('size') int? size,
+    @Query('search') String? search,
+    @Query('orderKey') String? orderKey,
+    @Query('orderBy') String? orderBy,
+    @Query('fromDate') String? fromDate,
+    @Query('toDate') String? toDate,
+    @Query('tonnage') String? tonnage,
+    @Query('pickupProvinceIds') List<String>? pickupProvinceIds,
+    @Query('deliveryProvinceIds') List<String>? deliveryProvinceIdstoDate,
+    @Query('status') String? status,
+  });
 }
 
 extension ApiClientAWSS3 on MainRepository {

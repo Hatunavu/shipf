@@ -829,6 +829,54 @@ class _MainRepository implements MainRepository {
     return value;
   }
 
+  @override
+  Future<PostResponse> getPostSaved({
+    page,
+    size,
+    search,
+    orderKey,
+    orderBy,
+    fromDate,
+    toDate,
+    tonnage,
+    pickupProvinceIds,
+    deliveryProvinceIdstoDate,
+    status,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'size': size,
+      r'search': search,
+      r'orderKey': orderKey,
+      r'orderBy': orderBy,
+      r'fromDate': fromDate,
+      r'toDate': toDate,
+      r'tonnage': tonnage,
+      r'pickupProvinceIds': pickupProvinceIds,
+      r'deliveryProvinceIds': deliveryProvinceIdstoDate,
+      r'status': status,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<PostResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/express/post/saved',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PostResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -8,11 +8,14 @@ import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/setting/screen/user_post/cubit/user_post_cubit.dart';
 import 'package:shipf/ui/screen/main/setting/screen/user_post/cubit/user_post_state.dart';
+import 'package:shipf/ui/screen/main/setting/screen/user_post/widget/user_post_item.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
+import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
+import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -24,7 +27,7 @@ class UserPostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserPostCubit()..getPosts(),
+      create: (context) => UserPostCubit()..getPostSaved(),
       child: BlocConsumer<UserPostCubit, UserPostState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -81,7 +84,28 @@ class UserPostScreen extends StatelessWidget {
                                 ),
                               ],
                             ))
-                        : Center(child: Text("Tính năng đang được phát triển")),
+                        : Column(
+                            children: [
+                              ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 10,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: kDefaultPaddingHeightScreen),
+                                  itemBuilder: (context, index) {
+                                    return UserPostItem();
+                                  }),
+                              PrimaryButton(
+                                label: 'Xem thêm',
+                                maxWidth: 0.3.sw,
+                                onPressed: () {
+                                  ToastUtils.showNeutral(
+                                      'Tính năng đăng được phát triển');
+                                },
+                              ),
+                              VerticalSpace(kDefaultPaddingHeightScreen)
+                            ],
+                          ),
               ));
         },
       ),

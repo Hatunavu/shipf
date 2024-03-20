@@ -8,10 +8,10 @@ import 'package:shipf/ui/screen/main/setting/screen/user_post/cubit/user_post_st
 class UserPostCubit extends Cubit<UserPostState> {
   UserPostCubit() : super(UserPostState.initial());
 
-  Future<void> getPosts() async {
+  Future<void> getPostSaved() async {
     try {
       emit(state.copyWith(isFirstLoad: true));
-      final response = await mainRepository.getPost(
+      final response = await mainRepository.getPostSaved(
           status: PostStatusType.draft.toJsonString());
       emit(state.copyWith(isFirstLoad: false, posts: response.data));
     } on DioError catch (e) {

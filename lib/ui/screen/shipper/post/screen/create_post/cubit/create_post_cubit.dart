@@ -61,7 +61,11 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     // newList.sort((a, b) => a.compareTo(b));
     // List<TonnageType> newTonnages =
     //     newList.map((e) => stringToTonnageType(e)).toList();
-    emit(state.copyWith(tonnage: tonnage));
+    emit(state.copyWith(tonnage: tonnage, errorTonnage: ''));
+  }
+
+  Future<void> updateTonnageError() async {
+    emit(state.copyWith(errorTonnage: 'Vui lòng chọn loại xe'));
   }
 
   Future<void> createPost({PostStatusType status = PostStatusType.neww}) async {

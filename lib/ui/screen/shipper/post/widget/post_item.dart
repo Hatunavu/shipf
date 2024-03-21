@@ -9,6 +9,7 @@ import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostItem extends StatelessWidget {
   final PostData postData;
@@ -125,6 +126,7 @@ class PostItem extends StatelessWidget {
               children: [
                 Expanded(
                     child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: () {
                     ToastUtils.showNeutral('Tính năng đăng được phát triển');
                   },
@@ -149,6 +151,7 @@ class PostItem extends StatelessWidget {
                 )),
                 Expanded(
                     child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: () {
                     ToastUtils.showNeutral('Tính năng đăng được phát triển');
                   },
@@ -174,17 +177,15 @@ class PostItem extends StatelessWidget {
                 )),
                 Expanded(
                     child: GestureDetector(
-                  onTap: () {
-                    // final Uri emailLaunchUri = Uri(
-                    //   scheme: 'tel',
-                    //   path: '0987654321',
-                    //   queryParameters: <String, String>{
-                    //     'body': Uri.encodeComponent(
-                    //         'Example Subject & Symbols are allowed!'),
-                    //   },
-                    // );
-                    // launchUrl(emailLaunchUri);
-                    ToastUtils.showNeutral('Tính năng đăng được phát triển');
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () async {
+                    final url = Uri.parse('tel:${postData.contactPhone}');
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(url);
+                    } else {
+                      ToastUtils.showFail(
+                          'Đã có lỗi xảy ra, vui lòng thử lại sau!');
+                    }
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(

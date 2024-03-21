@@ -34,6 +34,7 @@ mixin _$CreatePostState {
       throw _privateConstructorUsedError;
   TextEditingController? get amountController =>
       throw _privateConstructorUsedError;
+  String get errorTonnage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreatePostStateCopyWith<CreatePostState> get copyWith =>
@@ -59,7 +60,8 @@ abstract class $CreatePostStateCopyWith<$Res> {
       TonnageType? tonnage,
       TextEditingController? phoneController,
       TextEditingController? contentController,
-      TextEditingController? amountController});
+      TextEditingController? amountController,
+      String errorTonnage});
 }
 
 /// @nodoc
@@ -88,6 +90,7 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
     Object? phoneController = freezed,
     Object? contentController = freezed,
     Object? amountController = freezed,
+    Object? errorTonnage = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -142,6 +145,10 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
           ? _value.amountController
           : amountController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      errorTonnage: null == errorTonnage
+          ? _value.errorTonnage
+          : errorTonnage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -167,7 +174,8 @@ abstract class _$$_CreatePostStateCopyWith<$Res>
       TonnageType? tonnage,
       TextEditingController? phoneController,
       TextEditingController? contentController,
-      TextEditingController? amountController});
+      TextEditingController? amountController,
+      String errorTonnage});
 }
 
 /// @nodoc
@@ -194,6 +202,7 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
     Object? phoneController = freezed,
     Object? contentController = freezed,
     Object? amountController = freezed,
+    Object? errorTonnage = null,
   }) {
     return _then(_$_CreatePostState(
       isLoading: null == isLoading
@@ -248,6 +257,10 @@ class __$$_CreatePostStateCopyWithImpl<$Res>
           ? _value.amountController
           : amountController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      errorTonnage: null == errorTonnage
+          ? _value.errorTonnage
+          : errorTonnage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -268,7 +281,8 @@ class _$_CreatePostState implements _CreatePostState {
       this.tonnage,
       this.phoneController,
       this.contentController,
-      this.amountController})
+      this.amountController,
+      required this.errorTonnage})
       : _provinces = provinces,
         _selectedProvinces = selectedProvinces,
         _selectedProvincesDeliver = selectedProvincesDeliver;
@@ -319,10 +333,12 @@ class _$_CreatePostState implements _CreatePostState {
   final TextEditingController? contentController;
   @override
   final TextEditingController? amountController;
+  @override
+  final String errorTonnage;
 
   @override
   String toString() {
-    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnage: $tonnage, phoneController: $phoneController, contentController: $contentController, amountController: $amountController)';
+    return 'CreatePostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, unit: $unit, tonnage: $tonnage, phoneController: $phoneController, contentController: $contentController, amountController: $amountController, errorTonnage: $errorTonnage)';
   }
 
   @override
@@ -352,7 +368,9 @@ class _$_CreatePostState implements _CreatePostState {
             (identical(other.contentController, contentController) ||
                 other.contentController == contentController) &&
             (identical(other.amountController, amountController) ||
-                other.amountController == amountController));
+                other.amountController == amountController) &&
+            (identical(other.errorTonnage, errorTonnage) ||
+                other.errorTonnage == errorTonnage));
   }
 
   @override
@@ -370,7 +388,8 @@ class _$_CreatePostState implements _CreatePostState {
       tonnage,
       phoneController,
       contentController,
-      amountController);
+      amountController,
+      errorTonnage);
 
   @JsonKey(ignore: true)
   @override
@@ -393,7 +412,8 @@ abstract class _CreatePostState implements CreatePostState {
       final TonnageType? tonnage,
       final TextEditingController? phoneController,
       final TextEditingController? contentController,
-      final TextEditingController? amountController}) = _$_CreatePostState;
+      final TextEditingController? amountController,
+      required final String errorTonnage}) = _$_CreatePostState;
 
   @override
   bool get isLoading;
@@ -421,6 +441,8 @@ abstract class _CreatePostState implements CreatePostState {
   TextEditingController? get contentController;
   @override
   TextEditingController? get amountController;
+  @override
+  String get errorTonnage;
   @override
   @JsonKey(ignore: true)
   _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>

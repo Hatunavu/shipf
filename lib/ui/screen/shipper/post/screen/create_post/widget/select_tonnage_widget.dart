@@ -12,7 +12,14 @@ class SelectTonnageWidget extends StatelessWidget {
   // final Function(List<TonnageType> tonnages) selectTonnages;
   final Function(TonnageType tonnage) selectTonnage;
   TonnageType? tonnage;
-  SelectTonnageWidget({super.key, required this.selectTonnage, this.tonnage});
+  final String errorText;
+  final String? Function(String?)? validator;
+  SelectTonnageWidget(
+      {super.key,
+      required this.selectTonnage,
+      this.tonnage,
+      this.errorText = '',
+      this.validator});
 
   final List<TonnageType> listTonnage = [
     TonnageType.one,
@@ -164,31 +171,46 @@ class SelectTonnageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // List<String> stringList =
     //     tonnages.map((tonnage) => tonnage.display().split(', ').last).toList();
-    return GestureDetector(onTap: () {
-      unfocus(context);
-      _modalButtonTonnage(context);
-    }, child: FormField(
-      builder: (FormFieldState<String> state) {
-        return InputDecorator(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: backgroundTextField,
-              labelStyle: textBody,
-              contentPadding: EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(secondaryBorderRadius)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(secondaryBorderRadius)),
-            ),
-            child: Text(
-              tonnage == null ? 'Chọn loại xe' : tonnage!.display(),
-              style: textBody.copyWith(color: titleColor),
-              maxLines: 3,
-            ));
-      },
-    ));
+    return GestureDetector(
+        onTap: () {
+          unfocus(context);
+          _modalButtonTonnage(context);
+        },
+        child: FormField(
+          validator: validator,
+          builder: (FormFieldState<String> state) {
+            return InputDecorator(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: backgroundTextField,
+                  labelStyle: textBody,
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal: kDefaultPaddingWidthWidget, vertical: 5.h),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius:
+                          BorderRadius.circular(secondaryBorderRadius)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius:
+                          BorderRadius.circular(secondaryBorderRadius)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius:
+                          BorderRadius.circular(secondaryBorderRadius)),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius:
+                          BorderRadius.circular(secondaryBorderRadius)),
+                  errorText: errorText.isNotEmpty ? errorText : null,
+                  errorStyle: TextStyle(fontSize: 10.sp, color: Colors.red),
+                ),
+                child: Text(
+                  tonnage == null ? 'Chọn loại xe' : tonnage!.display(),
+                  style: textBody.copyWith(color: titleColor),
+                  maxLines: 3,
+                ));
+          },
+        ));
   }
 }

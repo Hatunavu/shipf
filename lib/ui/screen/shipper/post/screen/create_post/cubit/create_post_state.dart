@@ -22,17 +22,18 @@ class CreatePostState with _$CreatePostState {
     TextEditingController? phoneController,
     TextEditingController? contentController,
     TextEditingController? amountController,
+    required String errorTonnage,
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => const CreatePostState(
-        isLoading: false,
-        isFirstLoad: false,
-        error: "",
-        provinces: [],
-        selectedProvinces: [],
-        selectedProvincesDeliver: [],
-        errorProvince: '',
-        errorProvinceDeliver: '',
-        unit: WeightUnitType.ton,
-      );
+      isLoading: false,
+      isFirstLoad: false,
+      error: "",
+      provinces: [],
+      selectedProvinces: [],
+      selectedProvincesDeliver: [],
+      errorProvince: '',
+      errorProvinceDeliver: '',
+      unit: WeightUnitType.ton,
+      errorTonnage: '');
 }

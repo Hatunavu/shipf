@@ -151,6 +151,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                       selectTonnage: (tonnage) {
                                         createPostCubit.updateTonnage(tonnage);
                                       },
+                                      errorText:
+                                          createPostCubit.state.errorTonnage,
+                                      validator: (_) {
+                                        if (createPostCubit.state.tonnage ==
+                                            null) {
+                                          createPostCubit.updateTonnageError();
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ],
                                 ),
@@ -183,7 +192,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                               .validate() &&
                                           state.selectedProvinces.isNotEmpty &&
                                           state.selectedProvincesDeliver
-                                              .isNotEmpty) {
+                                              .isNotEmpty &&
+                                          state.tonnage != null) {
                                         createPostCubit.createPost();
                                       }
                                     },

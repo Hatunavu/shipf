@@ -20,6 +20,8 @@ mixin _$PostState {
   bool get isFirstLoad => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<PostData> get posts => throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
+  bool get hasReachedEnd => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostStateCopyWith<PostState> get copyWith =>
@@ -32,7 +34,12 @@ abstract class $PostStateCopyWith<$Res> {
       _$PostStateCopyWithImpl<$Res, PostState>;
   @useResult
   $Res call(
-      {bool isLoading, bool isFirstLoad, String? error, List<PostData> posts});
+      {bool isLoading,
+      bool isFirstLoad,
+      String? error,
+      List<PostData> posts,
+      int page,
+      bool hasReachedEnd});
 }
 
 /// @nodoc
@@ -52,6 +59,8 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
     Object? isFirstLoad = null,
     Object? error = freezed,
     Object? posts = null,
+    Object? page = null,
+    Object? hasReachedEnd = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -70,6 +79,14 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<PostData>,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +99,12 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {bool isLoading, bool isFirstLoad, String? error, List<PostData> posts});
+      {bool isLoading,
+      bool isFirstLoad,
+      String? error,
+      List<PostData> posts,
+      int page,
+      bool hasReachedEnd});
 }
 
 /// @nodoc
@@ -100,6 +122,8 @@ class __$$_PostStateCopyWithImpl<$Res>
     Object? isFirstLoad = null,
     Object? error = freezed,
     Object? posts = null,
+    Object? page = null,
+    Object? hasReachedEnd = null,
   }) {
     return _then(_$_PostState(
       isLoading: null == isLoading
@@ -118,6 +142,14 @@ class __$$_PostStateCopyWithImpl<$Res>
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<PostData>,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -129,7 +161,9 @@ class _$_PostState implements _PostState {
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
-      required final List<PostData> posts})
+      required final List<PostData> posts,
+      required this.page,
+      required this.hasReachedEnd})
       : _posts = posts;
 
   @override
@@ -147,8 +181,13 @@ class _$_PostState implements _PostState {
   }
 
   @override
+  final int page;
+  @override
+  final bool hasReachedEnd;
+
+  @override
   String toString() {
-    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts)';
+    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts, page: $page, hasReachedEnd: $hasReachedEnd)';
   }
 
   @override
@@ -161,12 +200,15 @@ class _$_PostState implements _PostState {
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other._posts, _posts));
+            const DeepCollectionEquality().equals(other._posts, _posts) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasReachedEnd, hasReachedEnd) ||
+                other.hasReachedEnd == hasReachedEnd));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, isFirstLoad, error,
-      const DeepCollectionEquality().hash(_posts));
+      const DeepCollectionEquality().hash(_posts), page, hasReachedEnd);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +222,9 @@ abstract class _PostState implements PostState {
       {required final bool isLoading,
       required final bool isFirstLoad,
       final String? error,
-      required final List<PostData> posts}) = _$_PostState;
+      required final List<PostData> posts,
+      required final int page,
+      required final bool hasReachedEnd}) = _$_PostState;
 
   @override
   bool get isLoading;
@@ -190,6 +234,10 @@ abstract class _PostState implements PostState {
   String? get error;
   @override
   List<PostData> get posts;
+  @override
+  int get page;
+  @override
+  bool get hasReachedEnd;
   @override
   @JsonKey(ignore: true)
   _$$_PostStateCopyWith<_$_PostState> get copyWith =>

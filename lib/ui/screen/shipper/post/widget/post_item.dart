@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
@@ -10,14 +11,15 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class PostItem extends StatelessWidget {
-  PostItem({super.key});
-  var tags = [
-    "Hà Nội",
-    "Bắc Ninh",
-  ];
+  final PostData postData;
+  PostItem({super.key, required this.postData});
 
   @override
   Widget build(BuildContext context) {
+    final tags = [
+      ...postData.pickupProvinces.map((e) => e.name).toList(),
+      ...postData.deliveryProvinces.map((e) => e.name).toList(),
+    ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen)
           .copyWith(bottom: kDefaultPaddingHeightScreen),
@@ -62,8 +64,9 @@ class PostItem extends StatelessWidget {
                         'Nguyen Van A',
                         style: primaryTitleStyle,
                       ),
+                      VerticalSpace(3.h),
                       Text(
-                        '8/3 20:00',
+                        postData.createdTime,
                         style: primarySubTitleStyle,
                       )
                     ],
@@ -117,7 +120,7 @@ class PostItem extends StatelessWidget {
               }).toList(),
             ),
             VerticalSpace(kDefaultPaddingHeightScreen),
-            Text('abc'),
+            Text(postData.content),
             Row(
               children: [
                 Expanded(

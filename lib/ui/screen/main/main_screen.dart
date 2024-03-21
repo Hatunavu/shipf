@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final _screenListCustomer = [
     // const HomeCustomerScreen(),
-    const PostScreen(),
+    PostScreen(),
     RouteScreen(),
     RouteScreen(),
     RouteScreen()

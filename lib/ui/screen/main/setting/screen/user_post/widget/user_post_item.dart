@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/enums/enum_post_status.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
@@ -9,22 +10,22 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class UserPostItem extends StatelessWidget {
-  final PostStatusType postStatus;
-  UserPostItem({super.key, this.postStatus = PostStatusType.approved});
-  var tags = [
-    "Hà Nội",
-    "Bắc Ninh",
-  ];
+  final PostData postData;
+  UserPostItem({super.key, required this.postData});
 
   @override
   Widget build(BuildContext context) {
+    final tags = [
+      ...postData.pickupProvinces.map((e) => e.name).toList(),
+      ...postData.deliveryProvinces.map((e) => e.name).toList(),
+    ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen)
           .copyWith(bottom: kDefaultPaddingHeightScreen),
       padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen)
           .copyWith(top: kDefaultPaddingWidthScreen),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.lerp(postData.status.color(), Colors.white, 0.9),
           borderRadius: BorderRadius.circular(defaultBorderRadius),
           boxShadow: [
             BoxShadow(
@@ -46,22 +47,22 @@ class UserPostItem extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            postStatus.display(),
+                            postData.status.display(),
                             style: primaryTitleStyle.copyWith(
-                                color: postStatus.color()),
+                                color: postData.status.color()),
                           ),
                         ],
                       ),
                       VerticalSpace(3.h),
                       Text(
-                        '8/3 20:00',
+                        postData.createdTime,
                         style: primarySubTitleStyle,
                       )
                     ],
                   ),
                 ),
                 Visibility(
-                  visible: postStatus == PostStatusType.approved,
+                  visible: postData.status == PostStatusType.neww,
                   child: Row(
                     children: [
                       GestureDetector(
@@ -117,7 +118,7 @@ class UserPostItem extends StatelessWidget {
               }).toList(),
             ),
             VerticalSpace(kDefaultPaddingHeightScreen),
-            Text('abc'),
+            Text(postData.content),
             Row(
               children: [
                 Expanded(
@@ -132,14 +133,14 @@ class UserPostItem extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(
-                          postStatus == PostStatusType.pending
+                          postData.status == PostStatusType.draft
                               ? Ionicons.pencil_outline
                               : Ionicons.copy_outline,
                           size: 12.sp,
                         ),
                         HorizontalSpace(2.w),
                         Text(
-                          postStatus == PostStatusType.pending
+                          postData.status == PostStatusType.draft
                               ? 'Sửa'
                               : 'Sao chép',
                           style: primarySubTitleStyle,

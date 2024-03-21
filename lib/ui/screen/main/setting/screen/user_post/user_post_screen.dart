@@ -11,11 +11,9 @@ import 'package:shipf/ui/screen/main/setting/screen/user_post/cubit/user_post_st
 import 'package:shipf/ui/screen/main/setting/screen/user_post/widget/user_post_item.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
-import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
@@ -23,6 +21,7 @@ class UserPostScreen extends StatelessWidget {
   UserPostScreen({super.key});
 
   bool isLoading = false;
+  late UserPostCubit userPostCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +30,7 @@ class UserPostScreen extends StatelessWidget {
       child: BlocConsumer<UserPostCubit, UserPostState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (!state.isLoading) {
-            isLoading == true ? context.router.pop() : null;
-            isLoading = false;
-          }
-          if (state.isLoading) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              loadingShowDialog(context);
-              isLoading = true;
-            });
-          }
+          userPostCubit = context.read<UserPostCubit>();
           return BaseScreen(
               title: 'Tìm xe',
               floatingActionButton: FloatingActionButton(
@@ -89,19 +79,31 @@ class UserPostScreen extends StatelessWidget {
                               ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: 10,
+                                  itemCount: state.posts.length,
                                   padding: EdgeInsets.symmetric(
                                       vertical: kDefaultPaddingHeightScreen),
                                   itemBuilder: (context, index) {
-                                    return UserPostItem();
+                                    return UserPostItem(
+                                      postData: state.posts[index],
+                                    );
                                   }),
-                              PrimaryButton(
-                                label: 'Xem thêm',
-                                maxWidth: 0.3.sw,
-                                onPressed: () {
-                                  ToastUtils.showNeutral(
-                                      'Tính năng đăng được phát triển');
-                                },
+                              Visibility(
+                                visible: !state.hasReachedEnd,
+                                child: state.isLoading
+                                    ? SizedBox(
+                                        height: 30.w,
+                                        width: 30.w,
+                                        child: const CircularProgressIndicator(
+                                          color: primaryColor,
+                                        ),
+                                      )
+                                    : PrimaryButton(
+                                        label: 'Xem thêm',
+                                        maxWidth: 0.3.sw,
+                                        onPressed: () {
+                                          userPostCubit.seeMorePosts();
+                                        },
+                                      ),
                               ),
                               VerticalSpace(kDefaultPaddingHeightScreen)
                             ],

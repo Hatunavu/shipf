@@ -237,9 +237,11 @@ class AppRouter extends _i25.RootStackRouter {
       );
     },
     PostPage.name: (routeData) {
+      final args =
+          routeData.argsAs<PostPageArgs>(orElse: () => const PostPageArgs());
       return _i25.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.PostScreen(),
+        child: _i22.PostScreen(key: args.key),
       );
     },
     CreatePostPage.name: (routeData) {
@@ -896,14 +898,26 @@ class TransitDetailPageArgs {
 
 /// generated route for
 /// [_i22.PostScreen]
-class PostPage extends _i25.PageRouteInfo<void> {
-  const PostPage()
+class PostPage extends _i25.PageRouteInfo<PostPageArgs> {
+  PostPage({_i26.Key? key})
       : super(
           PostPage.name,
           path: '/post',
+          args: PostPageArgs(key: key),
         );
 
   static const String name = 'PostPage';
+}
+
+class PostPageArgs {
+  const PostPageArgs({this.key});
+
+  final _i26.Key? key;
+
+  @override
+  String toString() {
+    return 'PostPageArgs{key: $key}';
+  }
 }
 
 /// generated route for

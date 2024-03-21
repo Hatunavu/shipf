@@ -12,12 +12,13 @@ import 'package:shipf/ui/screen/shipper/post/widget/post_item.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/image_creator.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class PostScreen extends StatelessWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  PostScreen({Key? key}) : super(key: key);
+
+  late PostCubit postCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class PostScreen extends StatelessWidget {
       child: BlocConsumer<PostCubit, PostState>(
         listener: (context, state) {},
         builder: (context, state) {
+          postCubit = context.read<PostCubit>();
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -84,19 +86,31 @@ class PostScreen extends StatelessWidget {
                             ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: 10,
+                                itemCount: state.posts.length,
                                 padding: EdgeInsets.symmetric(
                                     vertical: kDefaultPaddingHeightScreen),
                                 itemBuilder: (context, index) {
-                                  return PostItem();
+                                  return PostItem(
+                                    postData: state.posts[index],
+                                  );
                                 }),
-                            PrimaryButton(
-                              label: 'Xem thêm',
-                              maxWidth: 0.3.sw,
-                              onPressed: () {
-                                ToastUtils.showNeutral(
-                                    'Tính năng đăng được phát triển');
-                              },
+                            Visibility(
+                              visible: !state.hasReachedEnd,
+                              child: state.isLoading
+                                  ? SizedBox(
+                                      height: 30.w,
+                                      width: 30.w,
+                                      child: const CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    )
+                                  : PrimaryButton(
+                                      label: 'Xem thêm',
+                                      maxWidth: 0.3.sw,
+                                      onPressed: () {
+                                        postCubit.seeMorePosts();
+                                      },
+                                    ),
                             ),
                             VerticalSpace(kDefaultPaddingHeightScreen)
                           ],

@@ -49,11 +49,8 @@ class PostItem extends StatelessWidget {
                     decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: ImageCreator.imageWithPlaceHolder(
-                        url:
-                            "https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(20).webp",
-                        placeHolderAssetUri: AppPath.placeholderAvatar,
-                        maxHeight: 400,
+                      child: ImageCreator.assetImage(
+                        imagePath: AppPath.placeholderAvatar,
                         fit: BoxFit.cover,
                       ),
                     )),
@@ -62,7 +59,7 @@ class PostItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nguyen Van A',
+                        postData.owner?.name ?? '',
                         style: primaryTitleStyle,
                       ),
                       VerticalSpace(3.h),

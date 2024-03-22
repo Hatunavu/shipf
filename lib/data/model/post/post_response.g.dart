@@ -64,6 +64,9 @@ PostData _$PostDataFromJson(Map<String, dynamic> json) => PostData(
               ?.map((e) => AddressDataModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      owner: json['owner'] == null
+          ? null
+          : Shipper.fromJson(json['owner'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PostDataToJson(PostData instance) => <String, dynamic>{
@@ -82,6 +85,7 @@ Map<String, dynamic> _$PostDataToJson(PostData instance) => <String, dynamic>{
       'deletedAt': instance.deletedAt?.toIso8601String(),
       'pickupProvinces': instance.pickupProvinces,
       'deliveryProvinces': instance.deliveryProvinces,
+      'owner': instance.owner,
     };
 
 PostMetaData _$PostMetaDataFromJson(Map<String, dynamic> json) => PostMetaData(

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shipf/data/model/address/address.dart';
+import 'package:shipf/data/model/transit/transit_response.dart';
 import 'package:shipf/enums/enum_post_status.dart';
 import 'package:shipf/enums/enum_weight_unit.dart';
 import 'package:shipf/foundation/extension/date_formatting.dart';
@@ -52,6 +53,7 @@ class PostData {
   final DateTime? deletedAt;
   final List<AddressDataModel> pickupProvinces;
   final List<AddressDataModel> deliveryProvinces;
+  final Shipper? owner;
 
   PostData(
       {this.id = 0,
@@ -68,7 +70,8 @@ class PostData {
       this.updatedAt,
       this.deletedAt,
       this.pickupProvinces = const [],
-      this.deliveryProvinces = const []});
+      this.deliveryProvinces = const [],
+      this.owner});
 
   String get createdTime {
     if (createdAt == null) return '';

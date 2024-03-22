@@ -11,12 +11,12 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i25;
-import 'package:flutter/material.dart' as _i26;
+import 'package:auto_route/auto_route.dart' as _i26;
+import 'package:flutter/material.dart' as _i27;
 
-import '../../data/model/address/address.dart' as _i27;
-import '../../enums/enum_loading_type.dart' as _i29;
-import '../../enums/enum_shipment_status.dart' as _i28;
+import '../../data/model/address/address.dart' as _i28;
+import '../../enums/enum_loading_type.dart' as _i30;
+import '../../enums/enum_shipment_status.dart' as _i29;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i7;
 import '../screen/auth/login/login_screen.dart' as _i3;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i8;
@@ -47,17 +47,19 @@ import '../screen/shipper/home_shipper/screen/transit/transits_screen.dart'
 import '../screen/shipper/post/post_screen.dart' as _i22;
 import '../screen/shipper/post/screen/create_post/create_post_screen.dart'
     as _i23;
+import '../screen/shipper/post/screen/search_post/search_post_screen.dart'
+    as _i25;
 
-class AppRouter extends _i25.RootStackRouter {
-  AppRouter([_i26.GlobalKey<_i26.NavigatorState>? navigatorKey])
+class AppRouter extends _i26.RootStackRouter {
+  AppRouter([_i27.GlobalKey<_i27.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i25.PageFactory> pagesMap = {
+  final Map<String, _i26.PageFactory> pagesMap = {
     MainPage.name: (routeData) {
       final args =
           routeData.argsAs<MainPageArgs>(orElse: () => const MainPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i1.MainScreen(
           key: args.key,
@@ -66,7 +68,7 @@ class AppRouter extends _i25.RootStackRouter {
       );
     },
     SplashPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.SplashScreen(),
       );
@@ -74,7 +76,7 @@ class AppRouter extends _i25.RootStackRouter {
     LoginPage.name: (routeData) {
       final args =
           routeData.argsAs<LoginPageArgs>(orElse: () => const LoginPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.LoginScreen(key: args.key),
       );
@@ -82,20 +84,20 @@ class AppRouter extends _i25.RootStackRouter {
     SignupPage.name: (routeData) {
       final args = routeData.argsAs<SignupPageArgs>(
           orElse: () => const SignupPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i4.SignupScreen(key: args.key),
       );
     },
     WelcomePage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.WelcomeScreen(),
       );
     },
     VerifyPage.name: (routeData) {
       final args = routeData.argsAs<VerifyPageArgs>();
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.VerifyScreen(
           key: args.key,
@@ -107,7 +109,7 @@ class AppRouter extends _i25.RootStackRouter {
     },
     EnterPassPage.name: (routeData) {
       final args = routeData.argsAs<EnterPassPageArgs>();
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.EnterPassScreen(
           key: args.key,
@@ -117,7 +119,7 @@ class AppRouter extends _i25.RootStackRouter {
     },
     ResetPassPage.name: (routeData) {
       final args = routeData.argsAs<ResetPassPageArgs>();
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.ResetPassScreen(
           key: args.key,
@@ -129,7 +131,7 @@ class AppRouter extends _i25.RootStackRouter {
     OrderPage.name: (routeData) {
       final args =
           routeData.argsAs<OrderPageArgs>(orElse: () => const OrderPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.OrderScreen(
           key: args.key,
@@ -141,14 +143,14 @@ class AppRouter extends _i25.RootStackRouter {
     AddAddressPage.name: (routeData) {
       final args = routeData.argsAs<AddAddressPageArgs>(
           orElse: () => const AddAddressPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i10.AddAddressScreen(key: args.key),
       );
     },
     AddressPage.name: (routeData) {
       final args = routeData.argsAs<AddressPageArgs>();
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i11.AddressScreen(
           key: args.key,
@@ -160,31 +162,31 @@ class AppRouter extends _i25.RootStackRouter {
     SettingPage.name: (routeData) {
       final args = routeData.argsAs<SettingPageArgs>(
           orElse: () => const SettingPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i12.SettingScreen(key: args.key),
       );
     },
     NotificationPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i13.NotificationScreen(),
       );
     },
     UpdateInfoPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.UpdateInfoScreen(),
       );
     },
     OrderSuccessPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.OrderSuccessScreen(),
       );
     },
     HomeCustomerPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i16.HomeCustomerScreen(),
       );
@@ -192,7 +194,7 @@ class AppRouter extends _i25.RootStackRouter {
     HomeShipperPage.name: (routeData) {
       final args = routeData.argsAs<HomeShipperPageArgs>(
           orElse: () => const HomeShipperPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i17.HomeShipperScreen(key: args.key),
       );
@@ -200,7 +202,7 @@ class AppRouter extends _i25.RootStackRouter {
     ShipmentsPage.name: (routeData) {
       final args = routeData.argsAs<ShipmentsPageArgs>(
           orElse: () => const ShipmentsPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i18.ShipmentsScreen(
           key: args.key,
@@ -209,7 +211,7 @@ class AppRouter extends _i25.RootStackRouter {
       );
     },
     OrderCompletePage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i19.OrderCompleteScreen(),
       );
@@ -217,7 +219,7 @@ class AppRouter extends _i25.RootStackRouter {
     TransitsPage.name: (routeData) {
       final args = routeData.argsAs<TransitsPageArgs>(
           orElse: () => const TransitsPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i20.TransitsScreen(
           key: args.key,
@@ -228,7 +230,7 @@ class AppRouter extends _i25.RootStackRouter {
     TransitDetailPage.name: (routeData) {
       final args = routeData.argsAs<TransitDetailPageArgs>(
           orElse: () => const TransitDetailPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i21.TransitDetailScreen(
           key: args.key,
@@ -239,13 +241,13 @@ class AppRouter extends _i25.RootStackRouter {
     PostPage.name: (routeData) {
       final args =
           routeData.argsAs<PostPageArgs>(orElse: () => const PostPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i22.PostScreen(key: args.key),
       );
     },
     CreatePostPage.name: (routeData) {
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i23.CreatePostScreen(),
       );
@@ -253,119 +255,129 @@ class AppRouter extends _i25.RootStackRouter {
     UserPostPage.name: (routeData) {
       final args = routeData.argsAs<UserPostPageArgs>(
           orElse: () => const UserPostPageArgs());
-      return _i25.MaterialPageX<dynamic>(
+      return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i24.UserPostScreen(key: args.key),
+      );
+    },
+    SearchPostPage.name: (routeData) {
+      return _i26.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i25.SearchPostScreen(),
       );
     },
   };
 
   @override
-  List<_i25.RouteConfig> get routes => [
-        _i25.RouteConfig(
+  List<_i26.RouteConfig> get routes => [
+        _i26.RouteConfig(
           MainPage.name,
           path: '/main',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           SplashPage.name,
           path: '/',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           LoginPage.name,
           path: '/login',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           SignupPage.name,
           path: '/signup',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           WelcomePage.name,
           path: '/welcome',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           VerifyPage.name,
           path: '/verify',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           EnterPassPage.name,
           path: '/enter_pass',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           ResetPassPage.name,
           path: '/reset_pass',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           OrderPage.name,
           path: '/order',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           AddAddressPage.name,
           path: '/add_address',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           AddressPage.name,
           path: '/address',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           SettingPage.name,
           path: '/setting',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           NotificationPage.name,
           path: '/notification',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           UpdateInfoPage.name,
           path: '/update_info',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           OrderSuccessPage.name,
           path: '/order_success',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           HomeCustomerPage.name,
           path: '/home_customer',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           HomeShipperPage.name,
           path: '/home_shipper',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           ShipmentsPage.name,
           path: '/shipments',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           OrderCompletePage.name,
           path: '/order_complete',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           TransitsPage.name,
           path: '/transits',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           TransitDetailPage.name,
           path: '/transit_detail',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           PostPage.name,
           path: '/post',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           CreatePostPage.name,
           path: '/create_post',
         ),
-        _i25.RouteConfig(
+        _i26.RouteConfig(
           UserPostPage.name,
           path: '/user_post',
+        ),
+        _i26.RouteConfig(
+          SearchPostPage.name,
+          path: '/search_post',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.MainScreen]
-class MainPage extends _i25.PageRouteInfo<MainPageArgs> {
+class MainPage extends _i26.PageRouteInfo<MainPageArgs> {
   MainPage({
-    _i26.Key? key,
+    _i27.Key? key,
     int tabIndex = 0,
   }) : super(
           MainPage.name,
@@ -385,7 +397,7 @@ class MainPageArgs {
     this.tabIndex = 0,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final int tabIndex;
 
@@ -397,7 +409,7 @@ class MainPageArgs {
 
 /// generated route for
 /// [_i2.SplashScreen]
-class SplashPage extends _i25.PageRouteInfo<void> {
+class SplashPage extends _i26.PageRouteInfo<void> {
   const SplashPage()
       : super(
           SplashPage.name,
@@ -409,8 +421,8 @@ class SplashPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginScreen]
-class LoginPage extends _i25.PageRouteInfo<LoginPageArgs> {
-  LoginPage({_i26.Key? key})
+class LoginPage extends _i26.PageRouteInfo<LoginPageArgs> {
+  LoginPage({_i27.Key? key})
       : super(
           LoginPage.name,
           path: '/login',
@@ -423,7 +435,7 @@ class LoginPage extends _i25.PageRouteInfo<LoginPageArgs> {
 class LoginPageArgs {
   const LoginPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -433,8 +445,8 @@ class LoginPageArgs {
 
 /// generated route for
 /// [_i4.SignupScreen]
-class SignupPage extends _i25.PageRouteInfo<SignupPageArgs> {
-  SignupPage({_i26.Key? key})
+class SignupPage extends _i26.PageRouteInfo<SignupPageArgs> {
+  SignupPage({_i27.Key? key})
       : super(
           SignupPage.name,
           path: '/signup',
@@ -447,7 +459,7 @@ class SignupPage extends _i25.PageRouteInfo<SignupPageArgs> {
 class SignupPageArgs {
   const SignupPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -457,7 +469,7 @@ class SignupPageArgs {
 
 /// generated route for
 /// [_i5.WelcomeScreen]
-class WelcomePage extends _i25.PageRouteInfo<void> {
+class WelcomePage extends _i26.PageRouteInfo<void> {
   const WelcomePage()
       : super(
           WelcomePage.name,
@@ -469,9 +481,9 @@ class WelcomePage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.VerifyScreen]
-class VerifyPage extends _i25.PageRouteInfo<VerifyPageArgs> {
+class VerifyPage extends _i26.PageRouteInfo<VerifyPageArgs> {
   VerifyPage({
-    _i26.Key? key,
+    _i27.Key? key,
     required String email,
     bool isSignup = false,
     bool isForgotPass = false,
@@ -497,7 +509,7 @@ class VerifyPageArgs {
     this.isForgotPass = false,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final String email;
 
@@ -513,9 +525,9 @@ class VerifyPageArgs {
 
 /// generated route for
 /// [_i7.EnterPassScreen]
-class EnterPassPage extends _i25.PageRouteInfo<EnterPassPageArgs> {
+class EnterPassPage extends _i26.PageRouteInfo<EnterPassPageArgs> {
   EnterPassPage({
-    _i26.Key? key,
+    _i27.Key? key,
     required String phone,
   }) : super(
           EnterPassPage.name,
@@ -535,7 +547,7 @@ class EnterPassPageArgs {
     required this.phone,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final String phone;
 
@@ -547,9 +559,9 @@ class EnterPassPageArgs {
 
 /// generated route for
 /// [_i8.ResetPassScreen]
-class ResetPassPage extends _i25.PageRouteInfo<ResetPassPageArgs> {
+class ResetPassPage extends _i26.PageRouteInfo<ResetPassPageArgs> {
   ResetPassPage({
-    _i26.Key? key,
+    _i27.Key? key,
     required String phone,
     bool isSignup = false,
   }) : super(
@@ -572,7 +584,7 @@ class ResetPassPageArgs {
     this.isSignup = false,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final String phone;
 
@@ -586,9 +598,9 @@ class ResetPassPageArgs {
 
 /// generated route for
 /// [_i9.OrderScreen]
-class OrderPage extends _i25.PageRouteInfo<OrderPageArgs> {
+class OrderPage extends _i26.PageRouteInfo<OrderPageArgs> {
   OrderPage({
-    _i26.Key? key,
+    _i27.Key? key,
     int? shipmentId,
     dynamic Function()? onBack,
   }) : super(
@@ -611,7 +623,7 @@ class OrderPageArgs {
     this.onBack,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final int? shipmentId;
 
@@ -625,8 +637,8 @@ class OrderPageArgs {
 
 /// generated route for
 /// [_i10.AddAddressScreen]
-class AddAddressPage extends _i25.PageRouteInfo<AddAddressPageArgs> {
-  AddAddressPage({_i26.Key? key})
+class AddAddressPage extends _i26.PageRouteInfo<AddAddressPageArgs> {
+  AddAddressPage({_i27.Key? key})
       : super(
           AddAddressPage.name,
           path: '/add_address',
@@ -639,7 +651,7 @@ class AddAddressPage extends _i25.PageRouteInfo<AddAddressPageArgs> {
 class AddAddressPageArgs {
   const AddAddressPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -649,10 +661,10 @@ class AddAddressPageArgs {
 
 /// generated route for
 /// [_i11.AddressScreen]
-class AddressPage extends _i25.PageRouteInfo<AddressPageArgs> {
+class AddressPage extends _i26.PageRouteInfo<AddressPageArgs> {
   AddressPage({
-    _i26.Key? key,
-    required dynamic Function(_i27.AddressSavedData) selectAddress,
+    _i27.Key? key,
+    required dynamic Function(_i28.AddressSavedData) selectAddress,
     bool isDeliver = false,
   }) : super(
           AddressPage.name,
@@ -674,9 +686,9 @@ class AddressPageArgs {
     this.isDeliver = false,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
-  final dynamic Function(_i27.AddressSavedData) selectAddress;
+  final dynamic Function(_i28.AddressSavedData) selectAddress;
 
   final bool isDeliver;
 
@@ -688,8 +700,8 @@ class AddressPageArgs {
 
 /// generated route for
 /// [_i12.SettingScreen]
-class SettingPage extends _i25.PageRouteInfo<SettingPageArgs> {
-  SettingPage({_i26.Key? key})
+class SettingPage extends _i26.PageRouteInfo<SettingPageArgs> {
+  SettingPage({_i27.Key? key})
       : super(
           SettingPage.name,
           path: '/setting',
@@ -702,7 +714,7 @@ class SettingPage extends _i25.PageRouteInfo<SettingPageArgs> {
 class SettingPageArgs {
   const SettingPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -712,7 +724,7 @@ class SettingPageArgs {
 
 /// generated route for
 /// [_i13.NotificationScreen]
-class NotificationPage extends _i25.PageRouteInfo<void> {
+class NotificationPage extends _i26.PageRouteInfo<void> {
   const NotificationPage()
       : super(
           NotificationPage.name,
@@ -724,7 +736,7 @@ class NotificationPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.UpdateInfoScreen]
-class UpdateInfoPage extends _i25.PageRouteInfo<void> {
+class UpdateInfoPage extends _i26.PageRouteInfo<void> {
   const UpdateInfoPage()
       : super(
           UpdateInfoPage.name,
@@ -736,7 +748,7 @@ class UpdateInfoPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.OrderSuccessScreen]
-class OrderSuccessPage extends _i25.PageRouteInfo<void> {
+class OrderSuccessPage extends _i26.PageRouteInfo<void> {
   const OrderSuccessPage()
       : super(
           OrderSuccessPage.name,
@@ -748,7 +760,7 @@ class OrderSuccessPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.HomeCustomerScreen]
-class HomeCustomerPage extends _i25.PageRouteInfo<void> {
+class HomeCustomerPage extends _i26.PageRouteInfo<void> {
   const HomeCustomerPage()
       : super(
           HomeCustomerPage.name,
@@ -760,8 +772,8 @@ class HomeCustomerPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.HomeShipperScreen]
-class HomeShipperPage extends _i25.PageRouteInfo<HomeShipperPageArgs> {
-  HomeShipperPage({_i26.Key? key})
+class HomeShipperPage extends _i26.PageRouteInfo<HomeShipperPageArgs> {
+  HomeShipperPage({_i27.Key? key})
       : super(
           HomeShipperPage.name,
           path: '/home_shipper',
@@ -774,7 +786,7 @@ class HomeShipperPage extends _i25.PageRouteInfo<HomeShipperPageArgs> {
 class HomeShipperPageArgs {
   const HomeShipperPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -784,10 +796,10 @@ class HomeShipperPageArgs {
 
 /// generated route for
 /// [_i18.ShipmentsScreen]
-class ShipmentsPage extends _i25.PageRouteInfo<ShipmentsPageArgs> {
+class ShipmentsPage extends _i26.PageRouteInfo<ShipmentsPageArgs> {
   ShipmentsPage({
-    _i26.Key? key,
-    _i28.ShipmentStatus shipmentStatus = _i28.ShipmentStatus.pickingUp,
+    _i27.Key? key,
+    _i29.ShipmentStatus shipmentStatus = _i29.ShipmentStatus.pickingUp,
   }) : super(
           ShipmentsPage.name,
           path: '/shipments',
@@ -803,12 +815,12 @@ class ShipmentsPage extends _i25.PageRouteInfo<ShipmentsPageArgs> {
 class ShipmentsPageArgs {
   const ShipmentsPageArgs({
     this.key,
-    this.shipmentStatus = _i28.ShipmentStatus.pickingUp,
+    this.shipmentStatus = _i29.ShipmentStatus.pickingUp,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
-  final _i28.ShipmentStatus shipmentStatus;
+  final _i29.ShipmentStatus shipmentStatus;
 
   @override
   String toString() {
@@ -818,7 +830,7 @@ class ShipmentsPageArgs {
 
 /// generated route for
 /// [_i19.OrderCompleteScreen]
-class OrderCompletePage extends _i25.PageRouteInfo<void> {
+class OrderCompletePage extends _i26.PageRouteInfo<void> {
   const OrderCompletePage()
       : super(
           OrderCompletePage.name,
@@ -830,10 +842,10 @@ class OrderCompletePage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.TransitsScreen]
-class TransitsPage extends _i25.PageRouteInfo<TransitsPageArgs> {
+class TransitsPage extends _i26.PageRouteInfo<TransitsPageArgs> {
   TransitsPage({
-    _i26.Key? key,
-    _i29.LoadingType type = _i29.LoadingType.pickup,
+    _i27.Key? key,
+    _i30.LoadingType type = _i30.LoadingType.pickup,
   }) : super(
           TransitsPage.name,
           path: '/transits',
@@ -849,12 +861,12 @@ class TransitsPage extends _i25.PageRouteInfo<TransitsPageArgs> {
 class TransitsPageArgs {
   const TransitsPageArgs({
     this.key,
-    this.type = _i29.LoadingType.pickup,
+    this.type = _i30.LoadingType.pickup,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
-  final _i29.LoadingType type;
+  final _i30.LoadingType type;
 
   @override
   String toString() {
@@ -864,9 +876,9 @@ class TransitsPageArgs {
 
 /// generated route for
 /// [_i21.TransitDetailScreen]
-class TransitDetailPage extends _i25.PageRouteInfo<TransitDetailPageArgs> {
+class TransitDetailPage extends _i26.PageRouteInfo<TransitDetailPageArgs> {
   TransitDetailPage({
-    _i26.Key? key,
+    _i27.Key? key,
     int transitId = 0,
   }) : super(
           TransitDetailPage.name,
@@ -886,7 +898,7 @@ class TransitDetailPageArgs {
     this.transitId = 0,
   });
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   final int transitId;
 
@@ -898,8 +910,8 @@ class TransitDetailPageArgs {
 
 /// generated route for
 /// [_i22.PostScreen]
-class PostPage extends _i25.PageRouteInfo<PostPageArgs> {
-  PostPage({_i26.Key? key})
+class PostPage extends _i26.PageRouteInfo<PostPageArgs> {
+  PostPage({_i27.Key? key})
       : super(
           PostPage.name,
           path: '/post',
@@ -912,7 +924,7 @@ class PostPage extends _i25.PageRouteInfo<PostPageArgs> {
 class PostPageArgs {
   const PostPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
@@ -922,7 +934,7 @@ class PostPageArgs {
 
 /// generated route for
 /// [_i23.CreatePostScreen]
-class CreatePostPage extends _i25.PageRouteInfo<void> {
+class CreatePostPage extends _i26.PageRouteInfo<void> {
   const CreatePostPage()
       : super(
           CreatePostPage.name,
@@ -934,8 +946,8 @@ class CreatePostPage extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i24.UserPostScreen]
-class UserPostPage extends _i25.PageRouteInfo<UserPostPageArgs> {
-  UserPostPage({_i26.Key? key})
+class UserPostPage extends _i26.PageRouteInfo<UserPostPageArgs> {
+  UserPostPage({_i27.Key? key})
       : super(
           UserPostPage.name,
           path: '/user_post',
@@ -948,10 +960,22 @@ class UserPostPage extends _i25.PageRouteInfo<UserPostPageArgs> {
 class UserPostPageArgs {
   const UserPostPageArgs({this.key});
 
-  final _i26.Key? key;
+  final _i27.Key? key;
 
   @override
   String toString() {
     return 'UserPostPageArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [_i25.SearchPostScreen]
+class SearchPostPage extends _i26.PageRouteInfo<void> {
+  const SearchPostPage()
+      : super(
+          SearchPostPage.name,
+          path: '/search_post',
+        );
+
+  static const String name = 'SearchPostPage';
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/ui/router/router.gr.dart';
@@ -49,13 +50,41 @@ class PostScreen extends StatelessWidget {
               centerTitle: false,
               automaticallyImplyLeading: false,
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                context.router.push(const CreatePostPage());
-              },
+            floatingActionButton: SpeedDial(
               elevation: 0,
               backgroundColor: primaryColor,
               child: const Icon(Icons.add),
+              activeIcon: Icons.close,
+              children: [
+                SpeedDialChild(
+                    backgroundColor: primaryColor,
+                    elevation: 0,
+                    label: 'Tìm xe',
+                    labelBackgroundColor: primaryColor,
+                    labelStyle:
+                        primarySubTitleStyle.copyWith(color: Colors.white),
+                    child: const Icon(
+                      Icons.edit_outlined,
+                      color: Colors.white,
+                    ),
+                    onTap: () {
+                      context.router.push(const CreatePostPage());
+                    }),
+                SpeedDialChild(
+                    backgroundColor: primaryColor,
+                    elevation: 0,
+                    label: 'Lọc',
+                    labelBackgroundColor: primaryColor,
+                    labelStyle:
+                        primarySubTitleStyle.copyWith(color: Colors.white),
+                    child: const Icon(
+                      Icons.filter_alt_outlined,
+                      color: Colors.white,
+                    ),
+                    onTap: () {
+                      context.router.push(const SearchPostPage());
+                    }),
+              ],
             ),
             body: SingleChildScrollView(
               child: state.isFirstLoad

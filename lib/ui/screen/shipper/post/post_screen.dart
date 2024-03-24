@@ -69,7 +69,11 @@ class PostScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onTap: () {
-                      context.router.push(const CreatePostPage());
+                      context.router.push(CreatePostPage(
+                        callBack: (post) {
+                          postCubit.addPost(post);
+                        },
+                      ));
                     }),
                 SpeedDialChild(
                     backgroundColor: primaryColor,

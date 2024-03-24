@@ -199,6 +199,10 @@ abstract class MainRepository {
     @Query('deliveryProvinceIds') List<String>? deliveryProvinceIdstoDate,
     @Query('status') String? status,
   });
+
+  @PUT(endpoint.updatePost)
+  Future<NoDataResponse> updatePost(
+      {@Path('id') required int id, @Body() required PostRequest postRequest});
 }
 
 extension ApiClientAWSS3 on MainRepository {

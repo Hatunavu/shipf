@@ -51,7 +51,7 @@ class UserPostScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onTap: () {
-                        context.router.push(const CreatePostPage());
+                        context.router.push(CreatePostPage());
                       }),
                   SpeedDialChild(
                       backgroundColor: primaryColor,

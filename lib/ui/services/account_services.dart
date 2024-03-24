@@ -8,6 +8,7 @@ class AccountServices {
   final _accountLanguage = "accountLanguage";
   final _isFirstLoad = "_firstLoad";
   final _notificationToken = "notificationToken";
+  final _username = "username";
 
   Future<String> getUserToken() async => await _box.getString(_tokenKey) ?? "";
   Future<String> getUserId() async => await _box.getString(_userIdKey) ?? "";
@@ -20,6 +21,7 @@ class AccountServices {
 
   Future<String> getNotificationToken() async =>
       await _box.getString(_notificationToken) ?? "";
+  Future<String> getUsername() async => await _box.getString(_username) ?? "";
 
   saveUserToken(String token) => _box.setString(_tokenKey, token);
   saveUserId(String userId) => _box.setString(_userIdKey, userId);
@@ -28,4 +30,5 @@ class AccountServices {
   saveIsFirstLoad(bool status) => _box.setBool(_isFirstLoad, status);
   saveNotificationToken(String token) =>
       _box.setString(_notificationToken, token);
+  saveUsername(String username) => _box.setString(_username, username);
 }

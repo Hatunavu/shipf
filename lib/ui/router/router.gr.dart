@@ -15,9 +15,10 @@ import 'package:auto_route/auto_route.dart' as _i26;
 import 'package:flutter/material.dart' as _i27;
 
 import '../../data/model/address/address.dart' as _i28;
+import '../../data/model/post/post_response.dart' as _i31;
 import '../../enums/enum_loading_type.dart' as _i30;
 import '../../enums/enum_shipment_status.dart' as _i29;
-import '../../enums/enum_tonnage.dart' as _i31;
+import '../../enums/enum_tonnage.dart' as _i32;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i7;
 import '../screen/auth/login/login_screen.dart' as _i3;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i8;
@@ -248,9 +249,15 @@ class AppRouter extends _i26.RootStackRouter {
       );
     },
     CreatePostPage.name: (routeData) {
+      final args = routeData.argsAs<CreatePostPageArgs>(
+          orElse: () => const CreatePostPageArgs());
       return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i23.CreatePostScreen(),
+        child: _i23.CreatePostScreen(
+          key: args.key,
+          postData: args.postData,
+          callBack: args.callBack,
+        ),
       );
     },
     UserPostPage.name: (routeData) {
@@ -943,14 +950,41 @@ class PostPageArgs {
 
 /// generated route for
 /// [_i23.CreatePostScreen]
-class CreatePostPage extends _i26.PageRouteInfo<void> {
-  const CreatePostPage()
-      : super(
+class CreatePostPage extends _i26.PageRouteInfo<CreatePostPageArgs> {
+  CreatePostPage({
+    _i27.Key? key,
+    _i31.PostData? postData,
+    dynamic Function(_i31.PostData)? callBack,
+  }) : super(
           CreatePostPage.name,
           path: '/create_post',
+          args: CreatePostPageArgs(
+            key: key,
+            postData: postData,
+            callBack: callBack,
+          ),
         );
 
   static const String name = 'CreatePostPage';
+}
+
+class CreatePostPageArgs {
+  const CreatePostPageArgs({
+    this.key,
+    this.postData,
+    this.callBack,
+  });
+
+  final _i27.Key? key;
+
+  final _i31.PostData? postData;
+
+  final dynamic Function(_i31.PostData)? callBack;
+
+  @override
+  String toString() {
+    return 'CreatePostPageArgs{key: $key, postData: $postData, callBack: $callBack}';
+  }
 }
 
 /// generated route for
@@ -985,9 +1019,9 @@ class SearchPostPage extends _i26.PageRouteInfo<SearchPostPageArgs> {
     dynamic Function({
       List<_i28.AddressDataModel>? provinces,
       List<_i28.AddressDataModel>? provincesDelivery,
-      _i31.TonnageType? tonnage,
+      _i32.TonnageType? tonnage,
     })? callBack,
-    _i31.TonnageType? tonnage,
+    _i32.TonnageType? tonnage,
     List<_i28.AddressDataModel> provinces = const [],
     List<_i28.AddressDataModel> provincesDelivery = const [],
   }) : super(
@@ -1019,10 +1053,10 @@ class SearchPostPageArgs {
   final dynamic Function({
     List<_i28.AddressDataModel>? provinces,
     List<_i28.AddressDataModel>? provincesDelivery,
-    _i31.TonnageType? tonnage,
+    _i32.TonnageType? tonnage,
   })? callBack;
 
-  final _i31.TonnageType? tonnage;
+  final _i32.TonnageType? tonnage;
 
   final List<_i28.AddressDataModel> provinces;
 

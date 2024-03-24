@@ -1,17 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/enums/enum_post_status.dart';
+import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/shared/widget/space/horizontal_space.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
-import 'package:shipf/ui/shared/widget/toast_util.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class UserPostItem extends StatelessWidget {
   final PostData postData;
-  UserPostItem({super.key, required this.postData});
+  const UserPostItem({super.key, required this.postData});
 
   @override
   Widget build(BuildContext context) {
@@ -61,43 +62,6 @@ class UserPostItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                Visibility(
-                  visible: postData.status == PostStatusType.neww,
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          ToastUtils.showNeutral(
-                              'Tính năng đăng được phát triển');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kDefaultPaddingWidthScreen,
-                              vertical: kDefaultPaddingHeightScreen),
-                          child: Icon(
-                            Icons.share,
-                            size: 16.sp,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          ToastUtils.showNeutral(
-                              'Tính năng đăng được phát triển');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kDefaultPaddingWidthScreen,
-                              vertical: kDefaultPaddingHeightScreen),
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 16.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
             VerticalSpace(kDefaultPaddingHeightScreen / 2),
@@ -119,37 +83,39 @@ class UserPostItem extends StatelessWidget {
             ),
             VerticalSpace(kDefaultPaddingHeightScreen),
             Text(postData.content),
-            Row(
-              children: [
-                Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    ToastUtils.showNeutral('Tính năng đăng được phát triển');
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: kDefaultPaddingHeightScreen,
+            postData.status == PostStatusType.draft
+                ? const SizedBox()
+                : VerticalSpace(kDefaultPaddingHeightScreen),
+            Visibility(
+              visible: postData.status == PostStatusType.draft,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      context.router.push(CreatePostPage(postData: postData));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: kDefaultPaddingHeightScreen,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Ionicons.pencil_outline,
+                            size: 12.sp,
+                          ),
+                          HorizontalSpace(2.w),
+                          Text(
+                            'Sửa',
+                            style: primarySubTitleStyle,
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          postData.status == PostStatusType.draft
-                              ? Ionicons.pencil_outline
-                              : Ionicons.copy_outline,
-                          size: 12.sp,
-                        ),
-                        HorizontalSpace(2.w),
-                        Text(
-                          postData.status == PostStatusType.draft
-                              ? 'Sửa'
-                              : 'Sao chép',
-                          style: primarySubTitleStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              ],
+                  )),
+                ],
+              ),
             )
           ]),
     );

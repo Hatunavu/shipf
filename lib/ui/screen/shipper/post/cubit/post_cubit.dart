@@ -67,4 +67,9 @@ class PostCubit extends Cubit<PostState> {
       emit(state.copyWith(isLoading: false, error: errorMessage));
     }
   }
+
+  Future<void> addPost(PostData postData) async {
+    final List<PostData> newList = [postData, ...state.posts];
+    emit(state.copyWith(posts: newList));
+  }
 }

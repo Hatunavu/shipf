@@ -48,3 +48,4 @@ const sendDeviceToken = '/device';
 const getPost = '/express/post';
 const createPost = '/express/post';
 const getPostSaved = '/express/post/saved';
+const updatePost = '/express/post/{id}';

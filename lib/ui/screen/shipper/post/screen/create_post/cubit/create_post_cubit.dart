@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/data/model/post/post_request.dart';
+import 'package:shipf/data/model/post/post_response.dart';
 import 'package:shipf/data/repository/main/main_repository.dart';
 import 'package:shipf/enums/enum_post_status.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
@@ -14,16 +16,25 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit() : super(CreatePostState.initial());
 
-  Future init() async {
+  Future init({PostData? postData}) async {
     emit(state.copyWith(isLoading: true, isFirstLoad: true));
     await getProvinces();
     emit(state.copyWith(
-      isLoading: false,
-      isFirstLoad: false,
-      phoneController: TextEditingController(),
-      contentController: TextEditingController(),
-      amountController: TextEditingController(text: '1'),
-    ));
+        isLoading: false,
+        isFirstLoad: false,
+        phoneController: TextEditingController(text: postData?.contactPhone),
+        contentController: TextEditingController(text: postData?.content),
+        amountController: TextEditingController(
+            text: NumberFormat.decimalPattern().format(int.parse(
+                postData?.weight.toString().replaceAll(',', '') == null
+                    ? '1'
+                    : postData!.weight.toString().replaceAll(',', '')))),
+        unit: postData?.weightUnit ?? WeightUnitType.ton,
+        selectedProvinces: postData?.pickupProvinces ?? [],
+        selectedProvincesDeliver: postData?.deliveryProvinces ?? [],
+        tonnage: postData?.tonnage == null
+            ? null
+            : stringToTonnageType(postData!.tonnage)));
   }
 
   Future<void> getProvinces() async {
@@ -98,7 +109,45 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           selectedProvincesDeliver: []));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
+      emit(state.copyWith(
+          isFirstLoad: false, isLoading: false, error: errorMessage));
+    }
+  }
+
+  Future<void> updatePost(
+      {required int id, PostStatusType status = PostStatusType.neww}) async {
+    try {
+      emit(state.copyWith(isLoading: true));
+      await mainRepository.updatePost(
+          id: id,
+          postRequest: PostRequest(
+              contactPhone: state.phoneController!.text,
+              content: state.contentController!.text,
+              weight:
+                  int.parse(state.amountController!.text.replaceAll(',', '')),
+              weightUnit: state.unit,
+              pickupProvinceIds:
+                  state.selectedProvinces.map((e) => e.id).toList(),
+              deliveryProvinceIds:
+                  state.selectedProvincesDeliver.map((e) => e.id).toList(),
+              tonnage: state.tonnage!.toJsonString(),
+              status: status));
+      status == PostStatusType.draft
+          ? ToastUtils.showSuccess('Lưu nháp thành công')
+          : ToastUtils.showSuccess('Đăng đơn thành công');
+
+      emit(state.copyWith(
+          isLoading: false,
+          phoneController: TextEditingController(),
+          contentController: TextEditingController(),
+          amountController: TextEditingController(text: '1'),
+          tonnage: null,
+          selectedProvinces: [],
+          selectedProvincesDeliver: []));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(
+          isFirstLoad: false, isLoading: false, error: errorMessage));
     }
   }
 }

@@ -62,7 +62,7 @@ class SelectAddressWidget extends StatelessWidget {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
-          searchAddress(),
+          // searchAddress(),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(

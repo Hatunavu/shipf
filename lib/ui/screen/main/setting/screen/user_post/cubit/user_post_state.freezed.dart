@@ -22,6 +22,11 @@ mixin _$UserPostState {
   List<PostData> get posts => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   bool get hasReachedEnd => throw _privateConstructorUsedError;
+  TonnageType? get tonnageSearch => throw _privateConstructorUsedError;
+  List<AddressDataModel> get provincesSearch =>
+      throw _privateConstructorUsedError;
+  List<AddressDataModel> get provincesDeliverySearch =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPostStateCopyWith<UserPostState> get copyWith =>
@@ -40,7 +45,10 @@ abstract class $UserPostStateCopyWith<$Res> {
       String? error,
       List<PostData> posts,
       int page,
-      bool hasReachedEnd});
+      bool hasReachedEnd,
+      TonnageType? tonnageSearch,
+      List<AddressDataModel> provincesSearch,
+      List<AddressDataModel> provincesDeliverySearch});
 }
 
 /// @nodoc
@@ -62,6 +70,9 @@ class _$UserPostStateCopyWithImpl<$Res, $Val extends UserPostState>
     Object? posts = null,
     Object? page = null,
     Object? hasReachedEnd = null,
+    Object? tonnageSearch = freezed,
+    Object? provincesSearch = null,
+    Object? provincesDeliverySearch = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -88,6 +99,18 @@ class _$UserPostStateCopyWithImpl<$Res, $Val extends UserPostState>
           ? _value.hasReachedEnd
           : hasReachedEnd // ignore: cast_nullable_to_non_nullable
               as bool,
+      tonnageSearch: freezed == tonnageSearch
+          ? _value.tonnageSearch
+          : tonnageSearch // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
+      provincesSearch: null == provincesSearch
+          ? _value.provincesSearch
+          : provincesSearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      provincesDeliverySearch: null == provincesDeliverySearch
+          ? _value.provincesDeliverySearch
+          : provincesDeliverySearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
     ) as $Val);
   }
 }
@@ -106,7 +129,10 @@ abstract class _$$UserPostStateImplCopyWith<$Res>
       String? error,
       List<PostData> posts,
       int page,
-      bool hasReachedEnd});
+      bool hasReachedEnd,
+      TonnageType? tonnageSearch,
+      List<AddressDataModel> provincesSearch,
+      List<AddressDataModel> provincesDeliverySearch});
 }
 
 /// @nodoc
@@ -126,6 +152,9 @@ class __$$UserPostStateImplCopyWithImpl<$Res>
     Object? posts = null,
     Object? page = null,
     Object? hasReachedEnd = null,
+    Object? tonnageSearch = freezed,
+    Object? provincesSearch = null,
+    Object? provincesDeliverySearch = null,
   }) {
     return _then(_$UserPostStateImpl(
       isLoading: null == isLoading
@@ -152,6 +181,18 @@ class __$$UserPostStateImplCopyWithImpl<$Res>
           ? _value.hasReachedEnd
           : hasReachedEnd // ignore: cast_nullable_to_non_nullable
               as bool,
+      tonnageSearch: freezed == tonnageSearch
+          ? _value.tonnageSearch
+          : tonnageSearch // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
+      provincesSearch: null == provincesSearch
+          ? _value._provincesSearch
+          : provincesSearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      provincesDeliverySearch: null == provincesDeliverySearch
+          ? _value._provincesDeliverySearch
+          : provincesDeliverySearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
     ));
   }
 }
@@ -165,8 +206,13 @@ class _$UserPostStateImpl implements _UserPostState {
       this.error,
       required final List<PostData> posts,
       required this.page,
-      required this.hasReachedEnd})
-      : _posts = posts;
+      required this.hasReachedEnd,
+      this.tonnageSearch,
+      required final List<AddressDataModel> provincesSearch,
+      required final List<AddressDataModel> provincesDeliverySearch})
+      : _posts = posts,
+        _provincesSearch = provincesSearch,
+        _provincesDeliverySearch = provincesDeliverySearch;
 
   @override
   final bool isLoading;
@@ -186,10 +232,28 @@ class _$UserPostStateImpl implements _UserPostState {
   final int page;
   @override
   final bool hasReachedEnd;
+  @override
+  final TonnageType? tonnageSearch;
+  final List<AddressDataModel> _provincesSearch;
+  @override
+  List<AddressDataModel> get provincesSearch {
+    if (_provincesSearch is EqualUnmodifiableListView) return _provincesSearch;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_provincesSearch);
+  }
+
+  final List<AddressDataModel> _provincesDeliverySearch;
+  @override
+  List<AddressDataModel> get provincesDeliverySearch {
+    if (_provincesDeliverySearch is EqualUnmodifiableListView)
+      return _provincesDeliverySearch;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_provincesDeliverySearch);
+  }
 
   @override
   String toString() {
-    return 'UserPostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts, page: $page, hasReachedEnd: $hasReachedEnd)';
+    return 'UserPostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts, page: $page, hasReachedEnd: $hasReachedEnd, tonnageSearch: $tonnageSearch, provincesSearch: $provincesSearch, provincesDeliverySearch: $provincesDeliverySearch)';
   }
 
   @override
@@ -205,12 +269,27 @@ class _$UserPostStateImpl implements _UserPostState {
             const DeepCollectionEquality().equals(other._posts, _posts) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasReachedEnd, hasReachedEnd) ||
-                other.hasReachedEnd == hasReachedEnd));
+                other.hasReachedEnd == hasReachedEnd) &&
+            (identical(other.tonnageSearch, tonnageSearch) ||
+                other.tonnageSearch == tonnageSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._provincesSearch, _provincesSearch) &&
+            const DeepCollectionEquality().equals(
+                other._provincesDeliverySearch, _provincesDeliverySearch));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isFirstLoad, error,
-      const DeepCollectionEquality().hash(_posts), page, hasReachedEnd);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isFirstLoad,
+      error,
+      const DeepCollectionEquality().hash(_posts),
+      page,
+      hasReachedEnd,
+      tonnageSearch,
+      const DeepCollectionEquality().hash(_provincesSearch),
+      const DeepCollectionEquality().hash(_provincesDeliverySearch));
 
   @JsonKey(ignore: true)
   @override
@@ -221,12 +300,16 @@ class _$UserPostStateImpl implements _UserPostState {
 
 abstract class _UserPostState implements UserPostState {
   const factory _UserPostState(
-      {required final bool isLoading,
-      required final bool isFirstLoad,
-      final String? error,
-      required final List<PostData> posts,
-      required final int page,
-      required final bool hasReachedEnd}) = _$UserPostStateImpl;
+          {required final bool isLoading,
+          required final bool isFirstLoad,
+          final String? error,
+          required final List<PostData> posts,
+          required final int page,
+          required final bool hasReachedEnd,
+          final TonnageType? tonnageSearch,
+          required final List<AddressDataModel> provincesSearch,
+          required final List<AddressDataModel> provincesDeliverySearch}) =
+      _$UserPostStateImpl;
 
   @override
   bool get isLoading;
@@ -240,6 +323,12 @@ abstract class _UserPostState implements UserPostState {
   int get page;
   @override
   bool get hasReachedEnd;
+  @override
+  TonnageType? get tonnageSearch;
+  @override
+  List<AddressDataModel> get provincesSearch;
+  @override
+  List<AddressDataModel> get provincesDeliverySearch;
   @override
   @JsonKey(ignore: true)
   _$$UserPostStateImplCopyWith<_$UserPostStateImpl> get copyWith =>

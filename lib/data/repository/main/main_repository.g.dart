@@ -770,6 +770,7 @@ class _MainRepository implements MainRepository {
     pickupProvinceIds,
     deliveryProvinceIds,
     status,
+    isOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -784,6 +785,7 @@ class _MainRepository implements MainRepository {
       r'pickupProvinceIds': pickupProvinceIds,
       r'deliveryProvinceIds': deliveryProvinceIds,
       r'status': status,
+      r'isOwner': isOwner,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

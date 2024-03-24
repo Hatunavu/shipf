@@ -179,6 +179,7 @@ abstract class MainRepository {
     @Query('pickupProvinceIds') List<String>? pickupProvinceIds,
     @Query('deliveryProvinceIds') List<String>? deliveryProvinceIds,
     @Query('status') String? status,
+    @Query('isOwner') bool? isOwner,
   });
 
   @POST(endpoint.createPost)

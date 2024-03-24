@@ -98,63 +98,72 @@ class PostScreen extends StatelessWidget {
               ],
               child: const Icon(Icons.add),
             ),
-            body: SingleChildScrollView(
-              child: state.isFirstLoad
-                  ? const OrderShimmer()
-                  : state.posts.isEmpty
-                      ? Padding(
-                          padding: EdgeInsets.only(top: 0.2.sh),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                  height: 0.2.sw,
-                                  width: 0.2.sw,
-                                  child: ImageCreator.assetImage(
-                                      imagePath: AppPath.pick,
-                                      color: darkTitleColor)),
-                              VerticalSpace(kDefaultPaddingHeightScreen),
-                              Text(
-                                'Không có đơn',
-                                style:
-                                    textHeading.copyWith(color: darkTitleColor),
-                              ),
-                            ],
-                          ))
-                      : Column(
-                          children: [
-                            ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: state.posts.length,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPaddingHeightScreen),
-                                itemBuilder: (context, index) {
-                                  return PostItem(
-                                    postData: state.posts[index],
-                                  );
-                                }),
-                            Visibility(
-                              visible: !state.hasReachedEnd,
-                              child: state.isLoading
-                                  ? SizedBox(
-                                      height: 30.w,
-                                      width: 30.w,
-                                      child: const CircularProgressIndicator(
-                                        color: primaryColor,
-                                      ),
-                                    )
-                                  : PrimaryButton(
-                                      label: 'Xem thêm',
-                                      maxWidth: 0.3.sw,
-                                      onPressed: () {
-                                        postCubit.seeMorePosts();
-                                      },
-                                    ),
+            body: RefreshIndicator(
+              color: primaryColor,
+              onRefresh: () => postCubit.getPosts(),
+              child: ListView(
+                children: [
+                  state.isFirstLoad
+                      ? const OrderShimmer()
+                      : state.posts.isEmpty
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 0.2.sh),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(),
+                                  SizedBox(
+                                      height: 0.2.sw,
+                                      width: 0.2.sw,
+                                      child: ImageCreator.assetImage(
+                                          imagePath: AppPath.pick,
+                                          color: darkTitleColor)),
+                                  VerticalSpace(kDefaultPaddingHeightScreen),
+                                  Text(
+                                    'Không có đơn',
+                                    style: textHeading.copyWith(
+                                        color: darkTitleColor),
+                                  ),
+                                ],
+                              ))
+                          : Column(
+                              children: [
+                                ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: state.posts.length,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: kDefaultPaddingHeightScreen),
+                                    itemBuilder: (context, index) {
+                                      return PostItem(
+                                        postData: state.posts[index],
+                                      );
+                                    }),
+                                Visibility(
+                                  visible: !state.hasReachedEnd,
+                                  child: state.isLoading
+                                      ? SizedBox(
+                                          height: 30.w,
+                                          width: 30.w,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: primaryColor,
+                                          ),
+                                        )
+                                      : PrimaryButton(
+                                          label: 'Xem thêm',
+                                          maxWidth: 0.3.sw,
+                                          onPressed: () {
+                                            postCubit.seeMorePosts();
+                                          },
+                                        ),
+                                ),
+                                VerticalSpace(kDefaultPaddingHeightScreen)
+                              ],
                             ),
-                            VerticalSpace(kDefaultPaddingHeightScreen)
-                          ],
-                        ),
+                ],
+              ),
             ),
           );
         },

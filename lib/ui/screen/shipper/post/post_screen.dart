@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +55,6 @@ class PostScreen extends StatelessWidget {
             floatingActionButton: SpeedDial(
               elevation: 0,
               backgroundColor: primaryColor,
-              child: const Icon(Icons.add),
               activeIcon: Icons.close,
               children: [
                 SpeedDialChild(
@@ -73,7 +74,7 @@ class PostScreen extends StatelessWidget {
                 SpeedDialChild(
                     backgroundColor: primaryColor,
                     elevation: 0,
-                    label: 'Lọc',
+                    label: 'Lọc đơn',
                     labelBackgroundColor: primaryColor,
                     labelStyle:
                         primarySubTitleStyle.copyWith(color: Colors.white),
@@ -82,9 +83,20 @@ class PostScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onTap: () {
-                      context.router.push(const SearchPostPage());
+                      context.router.push(SearchPostPage(
+                        tonnage: state.tonnageSearch,
+                        provinces: state.provincesSearch,
+                        provincesDelivery: state.provincesDeliverySearch,
+                        callBack: ({provinces, provincesDelivery, tonnage}) {
+                          postCubit.getPosts(
+                              provinces: provinces ?? [],
+                              provincesDelivery: provincesDelivery ?? [],
+                              tonnage: tonnage);
+                        },
+                      ));
                     }),
               ],
+              child: const Icon(Icons.add),
             ),
             body: SingleChildScrollView(
               child: state.isFirstLoad
@@ -95,7 +107,6 @@ class PostScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(),
                               SizedBox(
                                   height: 0.2.sw,
                                   width: 0.2.sw,

@@ -177,7 +177,7 @@ abstract class MainRepository {
     @Query('toDate') String? toDate,
     @Query('tonnage') String? tonnage,
     @Query('pickupProvinceIds') List<String>? pickupProvinceIds,
-    @Query('deliveryProvinceIds') List<String>? deliveryProvinceIdstoDate,
+    @Query('deliveryProvinceIds') List<String>? deliveryProvinceIds,
     @Query('status') String? status,
   });
 

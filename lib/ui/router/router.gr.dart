@@ -17,6 +17,7 @@ import 'package:flutter/material.dart' as _i27;
 import '../../data/model/address/address.dart' as _i28;
 import '../../enums/enum_loading_type.dart' as _i30;
 import '../../enums/enum_shipment_status.dart' as _i29;
+import '../../enums/enum_tonnage.dart' as _i31;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i7;
 import '../screen/auth/login/login_screen.dart' as _i3;
 import '../screen/auth/reset_pass/reset_pass_screen.dart' as _i8;
@@ -261,9 +262,17 @@ class AppRouter extends _i26.RootStackRouter {
       );
     },
     SearchPostPage.name: (routeData) {
+      final args = routeData.argsAs<SearchPostPageArgs>(
+          orElse: () => const SearchPostPageArgs());
       return _i26.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i25.SearchPostScreen(),
+        child: _i25.SearchPostScreen(
+          key: args.key,
+          callBack: args.callBack,
+          tonnage: args.tonnage,
+          provinces: args.provinces,
+          provincesDelivery: args.provincesDelivery,
+        ),
       );
     },
   };
@@ -970,12 +979,57 @@ class UserPostPageArgs {
 
 /// generated route for
 /// [_i25.SearchPostScreen]
-class SearchPostPage extends _i26.PageRouteInfo<void> {
-  const SearchPostPage()
-      : super(
+class SearchPostPage extends _i26.PageRouteInfo<SearchPostPageArgs> {
+  SearchPostPage({
+    _i27.Key? key,
+    dynamic Function({
+      List<_i28.AddressDataModel>? provinces,
+      List<_i28.AddressDataModel>? provincesDelivery,
+      _i31.TonnageType? tonnage,
+    })? callBack,
+    _i31.TonnageType? tonnage,
+    List<_i28.AddressDataModel> provinces = const [],
+    List<_i28.AddressDataModel> provincesDelivery = const [],
+  }) : super(
           SearchPostPage.name,
           path: '/search_post',
+          args: SearchPostPageArgs(
+            key: key,
+            callBack: callBack,
+            tonnage: tonnage,
+            provinces: provinces,
+            provincesDelivery: provincesDelivery,
+          ),
         );
 
   static const String name = 'SearchPostPage';
+}
+
+class SearchPostPageArgs {
+  const SearchPostPageArgs({
+    this.key,
+    this.callBack,
+    this.tonnage,
+    this.provinces = const [],
+    this.provincesDelivery = const [],
+  });
+
+  final _i27.Key? key;
+
+  final dynamic Function({
+    List<_i28.AddressDataModel>? provinces,
+    List<_i28.AddressDataModel>? provincesDelivery,
+    _i31.TonnageType? tonnage,
+  })? callBack;
+
+  final _i31.TonnageType? tonnage;
+
+  final List<_i28.AddressDataModel> provinces;
+
+  final List<_i28.AddressDataModel> provincesDelivery;
+
+  @override
+  String toString() {
+    return 'SearchPostPageArgs{key: $key, callBack: $callBack, tonnage: $tonnage, provinces: $provinces, provincesDelivery: $provincesDelivery}';
+  }
 }

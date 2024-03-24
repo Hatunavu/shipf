@@ -12,7 +12,7 @@ part of 'post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PostState {
@@ -22,6 +22,11 @@ mixin _$PostState {
   List<PostData> get posts => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   bool get hasReachedEnd => throw _privateConstructorUsedError;
+  TonnageType? get tonnageSearch => throw _privateConstructorUsedError;
+  List<AddressDataModel> get provincesSearch =>
+      throw _privateConstructorUsedError;
+  List<AddressDataModel> get provincesDeliverySearch =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostStateCopyWith<PostState> get copyWith =>
@@ -39,7 +44,10 @@ abstract class $PostStateCopyWith<$Res> {
       String? error,
       List<PostData> posts,
       int page,
-      bool hasReachedEnd});
+      bool hasReachedEnd,
+      TonnageType? tonnageSearch,
+      List<AddressDataModel> provincesSearch,
+      List<AddressDataModel> provincesDeliverySearch});
 }
 
 /// @nodoc
@@ -61,6 +69,9 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
     Object? posts = null,
     Object? page = null,
     Object? hasReachedEnd = null,
+    Object? tonnageSearch = freezed,
+    Object? provincesSearch = null,
+    Object? provincesDeliverySearch = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -87,15 +98,28 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
           ? _value.hasReachedEnd
           : hasReachedEnd // ignore: cast_nullable_to_non_nullable
               as bool,
+      tonnageSearch: freezed == tonnageSearch
+          ? _value.tonnageSearch
+          : tonnageSearch // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
+      provincesSearch: null == provincesSearch
+          ? _value.provincesSearch
+          : provincesSearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      provincesDeliverySearch: null == provincesDeliverySearch
+          ? _value.provincesDeliverySearch
+          : provincesDeliverySearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
-  factory _$$_PostStateCopyWith(
-          _$_PostState value, $Res Function(_$_PostState) then) =
-      __$$_PostStateCopyWithImpl<$Res>;
+abstract class _$$PostStateImplCopyWith<$Res>
+    implements $PostStateCopyWith<$Res> {
+  factory _$$PostStateImplCopyWith(
+          _$PostStateImpl value, $Res Function(_$PostStateImpl) then) =
+      __$$PostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,15 +128,18 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
       String? error,
       List<PostData> posts,
       int page,
-      bool hasReachedEnd});
+      bool hasReachedEnd,
+      TonnageType? tonnageSearch,
+      List<AddressDataModel> provincesSearch,
+      List<AddressDataModel> provincesDeliverySearch});
 }
 
 /// @nodoc
-class __$$_PostStateCopyWithImpl<$Res>
-    extends _$PostStateCopyWithImpl<$Res, _$_PostState>
-    implements _$$_PostStateCopyWith<$Res> {
-  __$$_PostStateCopyWithImpl(
-      _$_PostState _value, $Res Function(_$_PostState) _then)
+class __$$PostStateImplCopyWithImpl<$Res>
+    extends _$PostStateCopyWithImpl<$Res, _$PostStateImpl>
+    implements _$$PostStateImplCopyWith<$Res> {
+  __$$PostStateImplCopyWithImpl(
+      _$PostStateImpl _value, $Res Function(_$PostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,8 +151,11 @@ class __$$_PostStateCopyWithImpl<$Res>
     Object? posts = null,
     Object? page = null,
     Object? hasReachedEnd = null,
+    Object? tonnageSearch = freezed,
+    Object? provincesSearch = null,
+    Object? provincesDeliverySearch = null,
   }) {
-    return _then(_$_PostState(
+    return _then(_$PostStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -150,21 +180,38 @@ class __$$_PostStateCopyWithImpl<$Res>
           ? _value.hasReachedEnd
           : hasReachedEnd // ignore: cast_nullable_to_non_nullable
               as bool,
+      tonnageSearch: freezed == tonnageSearch
+          ? _value.tonnageSearch
+          : tonnageSearch // ignore: cast_nullable_to_non_nullable
+              as TonnageType?,
+      provincesSearch: null == provincesSearch
+          ? _value._provincesSearch
+          : provincesSearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
+      provincesDeliverySearch: null == provincesDeliverySearch
+          ? _value._provincesDeliverySearch
+          : provincesDeliverySearch // ignore: cast_nullable_to_non_nullable
+              as List<AddressDataModel>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PostState implements _PostState {
-  const _$_PostState(
+class _$PostStateImpl implements _PostState {
+  const _$PostStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
       required final List<PostData> posts,
       required this.page,
-      required this.hasReachedEnd})
-      : _posts = posts;
+      required this.hasReachedEnd,
+      this.tonnageSearch,
+      required final List<AddressDataModel> provincesSearch,
+      required final List<AddressDataModel> provincesDeliverySearch})
+      : _posts = posts,
+        _provincesSearch = provincesSearch,
+        _provincesDeliverySearch = provincesDeliverySearch;
 
   @override
   final bool isLoading;
@@ -184,17 +231,35 @@ class _$_PostState implements _PostState {
   final int page;
   @override
   final bool hasReachedEnd;
-
   @override
-  String toString() {
-    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts, page: $page, hasReachedEnd: $hasReachedEnd)';
+  final TonnageType? tonnageSearch;
+  final List<AddressDataModel> _provincesSearch;
+  @override
+  List<AddressDataModel> get provincesSearch {
+    if (_provincesSearch is EqualUnmodifiableListView) return _provincesSearch;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_provincesSearch);
+  }
+
+  final List<AddressDataModel> _provincesDeliverySearch;
+  @override
+  List<AddressDataModel> get provincesDeliverySearch {
+    if (_provincesDeliverySearch is EqualUnmodifiableListView)
+      return _provincesDeliverySearch;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_provincesDeliverySearch);
   }
 
   @override
-  bool operator ==(dynamic other) {
+  String toString() {
+    return 'PostState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, posts: $posts, page: $page, hasReachedEnd: $hasReachedEnd, tonnageSearch: $tonnageSearch, provincesSearch: $provincesSearch, provincesDeliverySearch: $provincesDeliverySearch)';
+  }
+
+  @override
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostState &&
+            other is _$PostStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -203,28 +268,47 @@ class _$_PostState implements _PostState {
             const DeepCollectionEquality().equals(other._posts, _posts) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasReachedEnd, hasReachedEnd) ||
-                other.hasReachedEnd == hasReachedEnd));
+                other.hasReachedEnd == hasReachedEnd) &&
+            (identical(other.tonnageSearch, tonnageSearch) ||
+                other.tonnageSearch == tonnageSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._provincesSearch, _provincesSearch) &&
+            const DeepCollectionEquality().equals(
+                other._provincesDeliverySearch, _provincesDeliverySearch));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isFirstLoad, error,
-      const DeepCollectionEquality().hash(_posts), page, hasReachedEnd);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isFirstLoad,
+      error,
+      const DeepCollectionEquality().hash(_posts),
+      page,
+      hasReachedEnd,
+      tonnageSearch,
+      const DeepCollectionEquality().hash(_provincesSearch),
+      const DeepCollectionEquality().hash(_provincesDeliverySearch));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
-      __$$_PostStateCopyWithImpl<_$_PostState>(this, _$identity);
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
+      __$$PostStateImplCopyWithImpl<_$PostStateImpl>(this, _$identity);
 }
 
 abstract class _PostState implements PostState {
   const factory _PostState(
-      {required final bool isLoading,
-      required final bool isFirstLoad,
-      final String? error,
-      required final List<PostData> posts,
-      required final int page,
-      required final bool hasReachedEnd}) = _$_PostState;
+          {required final bool isLoading,
+          required final bool isFirstLoad,
+          final String? error,
+          required final List<PostData> posts,
+          required final int page,
+          required final bool hasReachedEnd,
+          final TonnageType? tonnageSearch,
+          required final List<AddressDataModel> provincesSearch,
+          required final List<AddressDataModel> provincesDeliverySearch}) =
+      _$PostStateImpl;
 
   @override
   bool get isLoading;
@@ -239,7 +323,13 @@ abstract class _PostState implements PostState {
   @override
   bool get hasReachedEnd;
   @override
+  TonnageType? get tonnageSearch;
+  @override
+  List<AddressDataModel> get provincesSearch;
+  @override
+  List<AddressDataModel> get provincesDeliverySearch;
+  @override
   @JsonKey(ignore: true)
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

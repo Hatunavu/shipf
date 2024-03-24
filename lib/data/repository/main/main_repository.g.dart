@@ -768,7 +768,7 @@ class _MainRepository implements MainRepository {
     toDate,
     tonnage,
     pickupProvinceIds,
-    deliveryProvinceIdstoDate,
+    deliveryProvinceIds,
     status,
   }) async {
     const _extra = <String, dynamic>{};
@@ -782,7 +782,7 @@ class _MainRepository implements MainRepository {
       r'toDate': toDate,
       r'tonnage': tonnage,
       r'pickupProvinceIds': pickupProvinceIds,
-      r'deliveryProvinceIds': deliveryProvinceIdstoDate,
+      r'deliveryProvinceIds': deliveryProvinceIds,
       r'status': status,
     };
     queryParameters.removeWhere((k, v) => v == null);

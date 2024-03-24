@@ -12,7 +12,7 @@ part of 'transits_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TransitsState {
@@ -79,11 +79,11 @@ class _$TransitsStateCopyWithImpl<$Res, $Val extends TransitsState>
 }
 
 /// @nodoc
-abstract class _$$_TransitsStateCopyWith<$Res>
+abstract class _$$TransitsStateImplCopyWith<$Res>
     implements $TransitsStateCopyWith<$Res> {
-  factory _$$_TransitsStateCopyWith(
-          _$_TransitsState value, $Res Function(_$_TransitsState) then) =
-      __$$_TransitsStateCopyWithImpl<$Res>;
+  factory _$$TransitsStateImplCopyWith(
+          _$TransitsStateImpl value, $Res Function(_$TransitsStateImpl) then) =
+      __$$TransitsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_TransitsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransitsStateCopyWithImpl<$Res>
-    extends _$TransitsStateCopyWithImpl<$Res, _$_TransitsState>
-    implements _$$_TransitsStateCopyWith<$Res> {
-  __$$_TransitsStateCopyWithImpl(
-      _$_TransitsState _value, $Res Function(_$_TransitsState) _then)
+class __$$TransitsStateImplCopyWithImpl<$Res>
+    extends _$TransitsStateCopyWithImpl<$Res, _$TransitsStateImpl>
+    implements _$$TransitsStateImplCopyWith<$Res> {
+  __$$TransitsStateImplCopyWithImpl(
+      _$TransitsStateImpl _value, $Res Function(_$TransitsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_TransitsStateCopyWithImpl<$Res>
     Object? error = freezed,
     Object? listTransitData = null,
   }) {
-    return _then(_$_TransitsState(
+    return _then(_$TransitsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_TransitsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TransitsState implements _TransitsState {
-  const _$_TransitsState(
+class _$TransitsStateImpl implements _TransitsState {
+  const _$TransitsStateImpl(
       {required this.isLoading,
       required this.isUpdating,
       this.error,
@@ -160,10 +160,10 @@ class _$_TransitsState implements _TransitsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransitsState &&
+            other is _$TransitsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isUpdating, isUpdating) ||
@@ -180,8 +180,8 @@ class _$_TransitsState implements _TransitsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransitsStateCopyWith<_$_TransitsState> get copyWith =>
-      __$$_TransitsStateCopyWithImpl<_$_TransitsState>(this, _$identity);
+  _$$TransitsStateImplCopyWith<_$TransitsStateImpl> get copyWith =>
+      __$$TransitsStateImplCopyWithImpl<_$TransitsStateImpl>(this, _$identity);
 }
 
 abstract class _TransitsState implements TransitsState {
@@ -189,7 +189,7 @@ abstract class _TransitsState implements TransitsState {
       {required final bool isLoading,
       required final bool isUpdating,
       final String? error,
-      required final List<TransitData> listTransitData}) = _$_TransitsState;
+      required final List<TransitData> listTransitData}) = _$TransitsStateImpl;
 
   @override
   bool get isLoading;
@@ -201,6 +201,6 @@ abstract class _TransitsState implements TransitsState {
   List<TransitData> get listTransitData;
   @override
   @JsonKey(ignore: true)
-  _$$_TransitsStateCopyWith<_$_TransitsState> get copyWith =>
+  _$$TransitsStateImplCopyWith<_$TransitsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

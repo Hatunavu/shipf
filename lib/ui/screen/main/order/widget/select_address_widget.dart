@@ -59,7 +59,6 @@ class SelectAddressWidget extends StatelessWidget {
   List<AddressDataModel> listSelect = [];
 
   Widget setupAlertDialogContainer() {
-    listSelect = [...multiProvinces];
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
@@ -85,8 +84,12 @@ class SelectAddressWidget extends StatelessWidget {
                       onTap: () {
                         if (isMultiSelect) {
                           setState(() {
-                            if (listSelect.contains(provinces[index])) {
-                              listSelect.remove(provinces[index]);
+                            if (listSelect
+                                .map((e) => e.id)
+                                .toList()
+                                .contains(provinces[index].id)) {
+                              listSelect.removeWhere(
+                                  (e) => e.id == provinces[index].id);
                             } else {
                               listSelect.add(provinces[index]);
                             }
@@ -130,7 +133,10 @@ class SelectAddressWidget extends StatelessWidget {
                               ],
                             ),
                             Visibility(
-                              visible: listSelect.contains(provinces[index]),
+                              visible: listSelect
+                                  .map((e) => e.id)
+                                  .toList()
+                                  .contains(provinces[index].id),
                               child: const Icon(
                                 Icons.done,
                                 color: primaryColor,
@@ -216,6 +222,7 @@ class SelectAddressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    listSelect = [...multiProvinces];
     List<String> stringList =
         multiProvinces.map((province) => province.name).toList();
     return GestureDetector(

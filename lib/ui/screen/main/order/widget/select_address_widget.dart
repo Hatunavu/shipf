@@ -8,7 +8,7 @@ import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class SelectAddressWidget extends StatelessWidget {
+class SelectAddressWidget extends StatefulWidget {
   final String label;
   final bool isDistrict;
   final bool isWard;
@@ -56,7 +56,22 @@ class SelectAddressWidget extends StatelessWidget {
       this.multiProvinces = const []})
       : super(key: key);
 
+  @override
+  State<SelectAddressWidget> createState() => _SelectAddressWidgetState();
+}
+
+class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   List<AddressDataModel> listSelect = [];
+
+  final TextEditingController controller = TextEditingController();
+
+  List<AddressDataModel> results = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    results = [...widget.provinces];
+    super.initState();
+  }
 
   Widget setupAlertDialogContainer() {
     return StatefulBuilder(builder: (context, setState) {
@@ -68,11 +83,11 @@ class SelectAddressWidget extends StatelessWidget {
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: isWard
-                    ? wards.length
-                    : isDistrict
-                        ? districts.length
-                        : provinces.length,
+                itemCount: widget.isWard
+                    ? widget.wards.length
+                    : widget.isDistrict
+                        ? widget.districts.length
+                        : results.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     dense: true,
@@ -82,25 +97,25 @@ class SelectAddressWidget extends StatelessWidget {
                     title: GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        if (isMultiSelect) {
+                        if (widget.isMultiSelect) {
                           setState(() {
                             if (listSelect
                                 .map((e) => e.id)
                                 .toList()
-                                .contains(provinces[index].id)) {
+                                .contains(results[index].id)) {
                               listSelect.removeWhere(
-                                  (e) => e.id == provinces[index].id);
+                                  (e) => e.id == results[index].id);
                             } else {
-                              listSelect.add(provinces[index]);
+                              listSelect.add(results[index]);
                             }
                           });
                         } else {
-                          if (isWard) {
-                            selectWard(index);
-                          } else if (isDistrict) {
-                            selectDistrict(index);
+                          if (widget.isWard) {
+                            widget.selectWard(index);
+                          } else if (widget.isDistrict) {
+                            widget.selectDistrict(index);
                           } else {
-                            selectProvince(index);
+                            widget.selectProvince(index);
                           }
                           Navigator.pop(context);
                         }
@@ -122,11 +137,11 @@ class SelectAddressWidget extends StatelessWidget {
                                   width: kDefaultPaddingWidthScreen,
                                 ),
                                 Text(
-                                    isWard
-                                        ? wards[index].name
-                                        : isDistrict
-                                            ? districts[index].name
-                                            : provinces[index].name,
+                                    widget.isWard
+                                        ? widget.wards[index].name
+                                        : widget.isDistrict
+                                            ? widget.districts[index].name
+                                            : results[index].name,
                                     style: textBody.copyWith(
                                       color: titleColor,
                                     )),
@@ -136,7 +151,7 @@ class SelectAddressWidget extends StatelessWidget {
                               visible: listSelect
                                   .map((e) => e.id)
                                   .toList()
-                                  .contains(provinces[index].id),
+                                  .contains(results[index].id),
                               child: const Icon(
                                 Icons.done,
                                 color: primaryColor,
@@ -173,7 +188,7 @@ class SelectAddressWidget extends StatelessWidget {
                   width: 1.sw,
                   color: backgroundTextField,
                   child: Text(
-                    label,
+                    widget.label,
                     style: textHeading,
                   ),
                 ),
@@ -193,10 +208,10 @@ class SelectAddressWidget extends StatelessWidget {
                       ),
                     ),
                     Visibility(
-                      visible: isMultiSelect,
+                      visible: widget.isMultiSelect,
                       child: InkWell(
                         onTap: () {
-                          multiProvince!(listSelect);
+                          widget.multiProvince!(listSelect);
                           Navigator.pop(context);
                         },
                         child: SizedBox(
@@ -222,26 +237,26 @@ class SelectAddressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    listSelect = [...multiProvinces];
+    listSelect = [...widget.multiProvinces];
     List<String> stringList =
-        multiProvinces.map((province) => province.name).toList();
+        widget.multiProvinces.map((province) => province.name).toList();
     return GestureDetector(
-        onTap: readOnly
+        onTap: widget.readOnly
             ? null
             : () {
                 unfocus(context);
-                isWard
-                    ? wards.isNotEmpty
+                widget.isWard
+                    ? widget.wards.isNotEmpty
                         ? _modalButtonAddress(context)
                         : null
-                    : isDistrict
-                        ? districts.isNotEmpty
+                    : widget.isDistrict
+                        ? widget.districts.isNotEmpty
                             ? _modalButtonAddress(context)
                             : null
                         : _modalButtonAddress(context);
               },
         child: FormField(
-          validator: validator,
+          validator: widget.validator,
           builder: (FormFieldState<String> state) {
             return InputDecorator(
                 decoration: InputDecoration(
@@ -254,16 +269,16 @@ class SelectAddressWidget extends StatelessWidget {
                   floatingLabelStyle: textBody.copyWith(
                     color: Colors.grey,
                   ),
-                  errorText: isWard
-                      ? errorWard.isNotEmpty
-                          ? errorWard
+                  errorText: widget.isWard
+                      ? widget.errorWard.isNotEmpty
+                          ? widget.errorWard
                           : null
-                      : isDistrict
-                          ? errorDistrict.isNotEmpty
-                              ? errorDistrict
+                      : widget.isDistrict
+                          ? widget.errorDistrict.isNotEmpty
+                              ? widget.errorDistrict
                               : null
-                          : errorProvince.isNotEmpty
-                              ? errorProvince
+                          : widget.errorProvince.isNotEmpty
+                              ? widget.errorProvince
                               : null,
                   errorBorder: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.red),
@@ -285,30 +300,30 @@ class SelectAddressWidget extends StatelessWidget {
                           BorderRadius.circular(secondaryBorderRadius)),
                 ),
                 child: Text(
-                  isMultiSelect
-                      ? multiProvinces.isNotEmpty
+                  widget.isMultiSelect
+                      ? widget.multiProvinces.isNotEmpty
                           ? stringList.join(', ')
                           : 'Chọn Tỉnh/Thành phố'
-                      : isWard
-                          ? ward != null
-                              ? ward!.name
+                      : widget.isWard
+                          ? widget.ward != null
+                              ? widget.ward!.name
                               : 'Chọn Phường/Xã/Thị trấn'
-                          : isDistrict
-                              ? district != null
-                                  ? district!.name
+                          : widget.isDistrict
+                              ? widget.district != null
+                                  ? widget.district!.name
                                   : 'Chọn Quận/Huyện'
-                              : province != null
-                                  ? province!.name
+                              : widget.province != null
+                                  ? widget.province!.name
                                   : 'Chọn Tỉnh/Thành phố',
                   style: textBody.copyWith(
-                      color: readOnly
+                      color: widget.readOnly
                           ? greyText
-                          : isWard
-                              ? wards.isNotEmpty
+                          : widget.isWard
+                              ? widget.wards.isNotEmpty
                                   ? titleColor
                                   : borderColor
-                              : isDistrict
-                                  ? districts.isNotEmpty
+                              : widget.isDistrict
+                                  ? widget.districts.isNotEmpty
                                       ? titleColor
                                       : borderColor
                                   : titleColor),
@@ -320,10 +335,19 @@ class SelectAddressWidget extends StatelessWidget {
   }
 
   Widget searchAddress() {
-    final TextEditingController controller = TextEditingController();
     return Padding(
       padding: EdgeInsets.all(kDefaultPaddingWidthScreen),
       child: TextFormField(
+          onChanged: (value) {
+            results.clear();
+            for (var province in widget.provinces) {
+              if (province.name.toLowerCase().contains(value.toLowerCase())) {
+                setState(() {
+                  results.add(province);
+                });
+              }
+            }
+          },
           controller: controller,
           decoration: InputDecoration(
             prefixIcon: Icon(
@@ -340,6 +364,9 @@ class SelectAddressWidget extends StatelessWidget {
                 color: greyText,
               ),
               onPressed: () {
+                setState(() {
+                  results = [...widget.provinces];
+                });
                 controller.clear();
               },
             ),

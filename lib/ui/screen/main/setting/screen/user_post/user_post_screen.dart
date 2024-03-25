@@ -132,6 +132,7 @@ class UserPostScreen extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return UserPostItem(
                                           postData: state.posts[index],
+                                          userPostCubit: userPostCubit,
                                         );
                                       }),
                                   Visibility(

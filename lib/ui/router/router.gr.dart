@@ -954,7 +954,7 @@ class CreatePostPage extends _i26.PageRouteInfo<CreatePostPageArgs> {
   CreatePostPage({
     _i27.Key? key,
     _i31.PostData? postData,
-    dynamic Function(_i31.PostData)? callBack,
+    dynamic Function()? callBack,
   }) : super(
           CreatePostPage.name,
           path: '/create_post',
@@ -979,7 +979,7 @@ class CreatePostPageArgs {
 
   final _i31.PostData? postData;
 
-  final dynamic Function(_i31.PostData)? callBack;
+  final dynamic Function()? callBack;
 
   @override
   String toString() {

@@ -70,8 +70,8 @@ class PostScreen extends StatelessWidget {
                     ),
                     onTap: () {
                       context.router.push(CreatePostPage(
-                        callBack: (post) {
-                          postCubit.addPost(post);
+                        callBack: () {
+                          postCubit.getPosts();
                         },
                       ));
                     }),

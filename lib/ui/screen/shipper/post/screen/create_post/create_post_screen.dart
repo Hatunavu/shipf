@@ -5,9 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:shipf/data/model/post/post_response.dart';
-import 'package:shipf/data/model/transit/transit_response.dart';
 import 'package:shipf/enums/enum_post_status.dart';
-import 'package:shipf/enums/enum_tonnage.dart';
 import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.dart';
 import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/cubit/create_post_cubit.dart';
@@ -24,7 +22,7 @@ import 'package:shipf/ui/theme/constant.dart';
 
 class CreatePostScreen extends StatefulWidget {
   final PostData? postData;
-  final Function(PostData postData)? callBack;
+  final Function()? callBack;
 
   const CreatePostScreen({Key? key, this.postData, this.callBack})
       : super(key: key);
@@ -181,19 +179,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 children: [
                                   PrimaryButton.outline(
                                     label: 'Lưu nháp',
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if (createPostFormKey.currentState!
                                               .validate() &&
                                           state.selectedProvinces.isNotEmpty &&
                                           state.selectedProvincesDeliver
                                               .isNotEmpty) {
                                         widget.postData != null
-                                            ? createPostCubit.updatePost(
+                                            ? await createPostCubit.updatePost(
                                                 id: widget.postData!.id,
                                                 status: PostStatusType.draft)
-                                            : createPostCubit.createPost(
+                                            : await createPostCubit.createPost(
                                                 status: PostStatusType.draft);
                                         context.router.pop();
+                                        widget.callBack!.call();
                                       }
                                     },
                                   ),
@@ -214,31 +213,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                                 id: widget.postData!.id,
                                               )
                                             : await createPostCubit
-                                                .createPost()
-                                                .then((value) =>
-                                                    widget.callBack!(PostData(
-                                                      createdAt: DateTime.now(),
-                                                      owner: Shipper(
-                                                          name: username),
-                                                      contactPhone: state
-                                                          .phoneController!
-                                                          .text,
-                                                      content: state
-                                                          .contentController!
-                                                          .text,
-                                                      weight: int.parse(state
-                                                          .amountController!
-                                                          .text
-                                                          .replaceAll(',', '')),
-                                                      weightUnit: state.unit,
-                                                      pickupProvinces: state
-                                                          .selectedProvinces,
-                                                      deliveryProvinces: state
-                                                          .selectedProvincesDeliver,
-                                                      tonnage: state.tonnage!
-                                                          .display(),
-                                                    )));
+                                                .createPost();
                                         context.router.pop();
+                                        widget.callBack!.call();
                                       }
                                     },
                                   ),

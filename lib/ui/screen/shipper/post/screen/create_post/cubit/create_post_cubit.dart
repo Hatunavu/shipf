@@ -100,13 +100,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           : ToastUtils.showSuccess('Đăng đơn thành công');
 
       emit(state.copyWith(
-          isLoading: false,
-          phoneController: TextEditingController(),
-          contentController: TextEditingController(),
-          amountController: TextEditingController(text: '1'),
-          tonnage: null,
-          selectedProvinces: [],
-          selectedProvincesDeliver: []));
+        isLoading: false,
+      ));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(

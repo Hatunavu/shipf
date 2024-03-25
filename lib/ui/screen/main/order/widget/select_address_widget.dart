@@ -62,14 +62,14 @@ class SelectAddressWidget extends StatefulWidget {
 
 class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   List<AddressDataModel> listSelect = [];
-
-  final TextEditingController controller = TextEditingController();
-
+  late TextEditingController controller;
   List<AddressDataModel> results = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     results = [...widget.provinces];
+    // listSelect = [...widget.multiProvinces];
+    controller = TextEditingController();
     super.initState();
   }
 
@@ -77,7 +77,28 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
-          // searchAddress(),
+          // searchAddress(
+          //   clearSearch: () {
+          //     setState(() {
+          //       results = [...widget.provinces];
+          //     });
+          //     controller.clear();
+          //   },
+          //   onChanged: (value) {
+          //     setState(() {
+          //       results.clear();
+          //       for (var province in widget.provinces) {
+          //         if (province.name
+          //             .toLowerCase()
+          //             .contains(value.toLowerCase())) {
+          //           setState(() {
+          //             results.add(province);
+          //           });
+          //         }
+          //       }
+          //     });
+          //   },
+          // ),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(
@@ -97,6 +118,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                     title: GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
+                        unfocus(context);
                         if (widget.isMultiSelect) {
                           setState(() {
                             if (listSelect
@@ -171,7 +193,9 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     });
   }
 
-  void _modalButtonAddress(BuildContext context) {
+  void _modalButtonAddress(
+    BuildContext context,
+  ) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -197,6 +221,8 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                   children: [
                     InkWell(
                       onTap: () {
+                        // listSelect = [...widget.multiProvinces];
+                        setState(() {});
                         Navigator.pop(context);
                       },
                       child: SizedBox(
@@ -212,6 +238,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                       child: InkWell(
                         onTap: () {
                           widget.multiProvince!(listSelect);
+                          // setState(() {});
                           Navigator.pop(context);
                         },
                         child: SizedBox(
@@ -253,7 +280,9 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                         ? widget.districts.isNotEmpty
                             ? _modalButtonAddress(context)
                             : null
-                        : _modalButtonAddress(context);
+                        : _modalButtonAddress(
+                            context,
+                          );
               },
         child: FormField(
           validator: widget.validator,
@@ -334,20 +363,11 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
         ));
   }
 
-  Widget searchAddress() {
+  Widget searchAddress({Function(String)? onChanged, Function()? clearSearch}) {
     return Padding(
       padding: EdgeInsets.all(kDefaultPaddingWidthScreen),
       child: TextFormField(
-          onChanged: (value) {
-            results.clear();
-            for (var province in widget.provinces) {
-              if (province.name.toLowerCase().contains(value.toLowerCase())) {
-                setState(() {
-                  results.add(province);
-                });
-              }
-            }
-          },
+          onChanged: onChanged,
           controller: controller,
           decoration: InputDecoration(
             prefixIcon: Icon(
@@ -363,12 +383,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                 size: 18.sp,
                 color: greyText,
               ),
-              onPressed: () {
-                setState(() {
-                  results = [...widget.provinces];
-                });
-                controller.clear();
-              },
+              onPressed: clearSearch,
             ),
             labelStyle: primaryTitleStyle.copyWith(
                 color: primaryColor, fontWeight: FontWeight.w400),

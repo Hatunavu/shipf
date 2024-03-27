@@ -76,7 +76,7 @@ class HomeShipperScreen extends StatelessWidget {
       //   getIt<AppRouter>().push(const OrderCompletePage());
       // }
     ),
-    HomeAction(content: 'Đối soát', icon: AppPath.transfer),
+    // HomeAction(content: 'Đối soát', icon: AppPath.transfer),
   ];
   late HomeShipperCubit homeShipperCubit;
   @override

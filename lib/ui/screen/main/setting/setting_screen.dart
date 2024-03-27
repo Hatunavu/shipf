@@ -6,6 +6,7 @@ import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_cubit.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_state.dart';
@@ -28,17 +29,26 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final List<String> settings = [
+  final List<String> settingsCustomer = [
     'Đổi mật khẩu',
     'Sổ địa chỉ',
     'Tìm xe',
     'Chính sách và điều khoản'
   ];
+
+  final List<String> settings = [
+    'Đổi mật khẩu',
+    'Sổ địa chỉ',
+    'Chính sách và điều khoản'
+  ];
   bool isLoading = false;
   late SettingCubit cubit;
+  late RoleType? role;
 
   @override
   Widget build(BuildContext context) {
+    role = context.read<AppCubit>().state.role;
+
     return BlocProvider(
       create: (context) => SettingCubit()..getUserInfo(),
       child: BlocConsumer<SettingCubit, SettingState>(
@@ -168,7 +178,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       : ToastUtils.showNeutral(
                           'Tính năng đăng được phát triển');
                 },
-                child: settingItem(settings[index]));
+                child: settingItem(role == RoleType.customer
+                    ? settingsCustomer[index]
+                    : settings[index]));
           },
           separatorBuilder: (context, index) {
             return Padding(
@@ -179,7 +191,9 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             );
           },
-          itemCount: settings.length),
+          itemCount: role == RoleType.customer
+              ? settingsCustomer.length
+              : settings.length),
     );
   }
 

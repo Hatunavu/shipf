@@ -7,6 +7,7 @@ import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/auth/login/login_screen.dart';
+import 'package:shipf/ui/screen/customer/home_customer/home_customer_screen.dart';
 import 'package:shipf/ui/screen/main/feed/feed_screen.dart';
 import 'package:shipf/ui/screen/main/route/route_screen.dart';
 import 'package:shipf/ui/screen/shipper/bill_shipper/bill_shipper_screen.dart';
@@ -33,17 +34,16 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   final _screenListCustomer = [
-    // const HomeCustomerScreen(),
+    const HomeCustomerScreen(),
+    RouteScreen(),
+    RouteScreen(),
     PostScreen(),
-    RouteScreen(),
-    RouteScreen(),
-    RouteScreen()
   ];
   final _screenListShipper = [
     HomeShipperScreen(),
     FeedScreen(),
     const BillShipperScreen(),
-    RouteScreen()
+    PostScreen(),
   ];
 
   final _screenListlogout = [
@@ -240,13 +240,13 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                tabIndex == 3 ? Ionicons.location : Ionicons.location_outline,
+                tabIndex == 3 ? Ionicons.search : Ionicons.search_outline,
                 size: 20.sp,
                 color: primaryColor,
               ),
               VerticalSpace(2.h),
               Text(
-                'Cước',
+                'Tìm hàng',
                 style: textBottomBar,
               )
             ],
@@ -342,13 +342,13 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                tabIndex == 3 ? Ionicons.location : Ionicons.location_outline,
+                tabIndex == 3 ? Ionicons.search : Ionicons.search_outline,
                 size: 20.sp,
                 color: primaryColor,
               ),
               VerticalSpace(2.h),
               Text(
-                'Lộ Trình',
+                'Tìm hàng',
                 style: textBottomBar,
               )
             ],

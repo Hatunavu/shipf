@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
+import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/widget/order_shimmer.dart';
 import 'package:shipf/ui/screen/shipper/post/cubit/post_cubit.dart';
@@ -25,6 +26,8 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RoleType? role = context.read<AppCubit>().state.role;
+
     return BlocProvider(
       create: (context) => PostCubit()..getPosts(),
       child: BlocConsumer<PostCubit, PostState>(
@@ -33,75 +36,73 @@ class PostScreen extends StatelessWidget {
           postCubit = context.read<PostCubit>();
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: primaryColor,
-              elevation: 0,
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      context.router.push(NotificationPage());
-                    },
-                    icon: const Icon(Ionicons.notifications)),
-                IconButton(
-                    onPressed: () {
-                      context.router.push(SettingPage());
-                    },
-                    icon: const Icon(Ionicons.settings_outline))
-              ],
-              title: const Text('ShipF'),
-              centerTitle: false,
-              automaticallyImplyLeading: false,
-            ),
-            floatingActionButton: SpeedDial(
-              elevation: 0,
-              backgroundColor: primaryColor,
-              activeIcon: Icons.close,
-              children: [
-                SpeedDialChild(
-                    backgroundColor: primaryColor,
+            floatingActionButton: role != RoleType.customer
+                ? FloatingActionButton(
                     elevation: 0,
-                    label: 'Tìm xe',
-                    labelBackgroundColor: primaryColor,
-                    labelStyle:
-                        primarySubTitleStyle.copyWith(color: Colors.white),
-                    child: const Icon(
-                      Icons.edit_outlined,
-                      color: Colors.white,
-                    ),
-                    onTap: () {
-                      context.router.push(CreatePostPage(
-                        callBack: () {
-                          postCubit.getPosts();
-                        },
-                      ));
-                    }),
-                SpeedDialChild(
                     backgroundColor: primaryColor,
+                    child: const Icon(Icons.filter_alt_outlined),
+                    onPressed: () => context.router.push(SearchPostPage(
+                          tonnage: state.tonnageSearch,
+                          provinces: state.provincesSearch,
+                          provincesDelivery: state.provincesDeliverySearch,
+                          callBack: ({provinces, provincesDelivery, tonnage}) {
+                            postCubit.getPosts(
+                                provinces: provinces ?? [],
+                                provincesDelivery: provincesDelivery ?? [],
+                                tonnage: tonnage);
+                          },
+                        )))
+                : SpeedDial(
                     elevation: 0,
-                    label: 'Lọc đơn',
-                    labelBackgroundColor: primaryColor,
-                    labelStyle:
-                        primarySubTitleStyle.copyWith(color: Colors.white),
-                    child: const Icon(
-                      Icons.filter_alt_outlined,
-                      color: Colors.white,
-                    ),
-                    onTap: () {
-                      context.router.push(SearchPostPage(
-                        tonnage: state.tonnageSearch,
-                        provinces: state.provincesSearch,
-                        provincesDelivery: state.provincesDeliverySearch,
-                        callBack: ({provinces, provincesDelivery, tonnage}) {
-                          postCubit.getPosts(
-                              provinces: provinces ?? [],
-                              provincesDelivery: provincesDelivery ?? [],
-                              tonnage: tonnage);
-                        },
-                      ));
-                    }),
-              ],
-              child: const Icon(Icons.add),
-            ),
+                    backgroundColor: primaryColor,
+                    activeIcon: Icons.close,
+                    children: [
+                      SpeedDialChild(
+                          backgroundColor: primaryColor,
+                          elevation: 0,
+                          label: 'Tìm xe',
+                          labelBackgroundColor: primaryColor,
+                          labelStyle: primarySubTitleStyle.copyWith(
+                              color: Colors.white),
+                          child: const Icon(
+                            Icons.edit_outlined,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            context.router.push(CreatePostPage(
+                              callBack: () {
+                                postCubit.getPosts();
+                              },
+                            ));
+                          }),
+                      SpeedDialChild(
+                          backgroundColor: primaryColor,
+                          elevation: 0,
+                          label: 'Lọc đơn',
+                          labelBackgroundColor: primaryColor,
+                          labelStyle: primarySubTitleStyle.copyWith(
+                              color: Colors.white),
+                          child: const Icon(
+                            Icons.filter_alt_outlined,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            context.router.push(SearchPostPage(
+                              tonnage: state.tonnageSearch,
+                              provinces: state.provincesSearch,
+                              provincesDelivery: state.provincesDeliverySearch,
+                              callBack: (
+                                  {provinces, provincesDelivery, tonnage}) {
+                                postCubit.getPosts(
+                                    provinces: provinces ?? [],
+                                    provincesDelivery: provincesDelivery ?? [],
+                                    tonnage: tonnage);
+                              },
+                            ));
+                          }),
+                    ],
+                    child: const Icon(Icons.add),
+                  ),
             body: RefreshIndicator(
               color: primaryColor,
               onRefresh: () => postCubit.getPosts(),

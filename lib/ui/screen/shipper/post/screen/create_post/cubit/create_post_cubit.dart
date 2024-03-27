@@ -17,24 +17,30 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit() : super(CreatePostState.initial());
 
   Future init({PostData? postData}) async {
-    emit(state.copyWith(isLoading: true, isFirstLoad: true));
-    await getProvinces();
-    emit(state.copyWith(
-        isLoading: false,
-        isFirstLoad: false,
-        phoneController: TextEditingController(text: postData?.contactPhone),
-        contentController: TextEditingController(text: postData?.content),
-        amountController: TextEditingController(
-            text: NumberFormat.decimalPattern().format(int.parse(
-                postData?.weight.toString().replaceAll(',', '') == null
-                    ? '1'
-                    : postData!.weight.toString().replaceAll(',', '')))),
-        unit: postData?.weightUnit ?? WeightUnitType.ton,
-        selectedProvinces: postData?.pickupProvinces ?? [],
-        selectedProvincesDeliver: postData?.deliveryProvinces ?? [],
-        tonnage: postData?.tonnage == null
-            ? null
-            : stringToTonnageType(postData!.tonnage)));
+    try {
+      emit(state.copyWith(isLoading: true, isFirstLoad: true));
+      await getProvinces();
+      emit(state.copyWith(
+          isLoading: false,
+          isFirstLoad: false,
+          phoneController: TextEditingController(text: postData?.contactPhone),
+          contentController: TextEditingController(text: postData?.content),
+          amountController: TextEditingController(
+              text: NumberFormat.decimalPattern().format(int.parse(
+                  postData?.weight.toString().replaceAll(',', '') == null
+                      ? '1'
+                      : postData!.weight.toString().replaceAll(',', '')))),
+          unit: postData?.weightUnit ?? WeightUnitType.ton,
+          selectedProvinces: postData?.pickupProvinces ?? [],
+          selectedProvincesDeliver: postData?.deliveryProvinces ?? [],
+          tonnage: postData?.tonnage == null
+              ? null
+              : stringToTonnageType(postData!.tonnage)));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(
+          isLoading: false, isFirstLoad: false, error: errorMessage));
+    }
   }
 
   Future<void> getProvinces() async {

@@ -11,6 +11,7 @@ import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_to
 import 'package:shipf/ui/screen/shipper/post/screen/search_post/cubit/search_post_cubit.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/search_post/cubit/search_post_state.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
+import 'package:shipf/ui/shared/utils/functions.dart';
 import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
@@ -31,6 +32,7 @@ class SearchPostScreen extends StatelessWidget {
       this.provincesDelivery = const []})
       : super(key: key);
   late SearchPostCubit searchPostCubit;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,16 @@ class SearchPostScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           searchPostCubit = context.read<SearchPostCubit>();
+          if (!state.isLoading) {
+            isLoading == true ? context.router.pop() : null;
+            isLoading = false;
+          }
+          if (state.isLoading) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              loadingShowDialog(context);
+              isLoading = true;
+            });
+          }
           return BaseScreen(
               title: 'Lọc đơn',
               leading: InkWell(
@@ -55,72 +67,77 @@ class SearchPostScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                      child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kDefaultPaddingWidthWidget,
-                        vertical: kDefaultPaddingHeightScreen,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const OrderLabelTextFieldWidget(label: 'Loại xe'),
-                          SelectTonnageWidget(
-                            tonnage: state.tonnage,
-                            selectTonnage: (tonnage) {
-                              searchPostCubit.updateTonnage(tonnage: tonnage);
-                            },
-                          ),
-                          VerticalSpace(
-                            kDefaultPaddingHeightScreen,
-                          ),
-                          itemSelectLocation(
-                            label: 'Tỉnh/Thành phố bốc hàng',
-                          ),
-                          VerticalSpace(
-                            kDefaultPaddingHeightScreen,
-                          ),
-                          itemSelectLocation(
-                              label: 'Tỉnh/Thành phố trả hàng', isDeliver: true)
-                        ],
-                      ),
-                    ),
-                  )),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kDefaultPaddingWidthScreen,
-                        vertical: kDefaultPaddingHeightScreen),
-                    child: Column(
+              child: state.isFirstLoad
+                  ? const SizedBox()
+                  : Column(
                       children: [
-                        PrimaryButton.outline(
-                          label: 'Xoá lọc',
-                          onPressed: () {
-                            searchPostCubit.updateProvince([]);
-                            searchPostCubit
-                                .updateProvince([], isDelivery: true);
-                            searchPostCubit.updateTonnage();
-                          },
-                        ),
-                        VerticalSpace(kDefaultPaddingHeightScreen),
-                        PrimaryButton(
-                          label: 'Lọc đơn',
-                          onPressed: () {
-                            callBack!(
-                                provinces: state.selectedProvinces,
-                                provincesDelivery:
-                                    state.selectedProvincesDeliver,
-                                tonnage: state.tonnage);
-                            context.router.pop();
-                          },
-                        ),
+                        Expanded(
+                            child: SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: kDefaultPaddingWidthWidget,
+                              vertical: kDefaultPaddingHeightScreen,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const OrderLabelTextFieldWidget(
+                                    label: 'Loại xe'),
+                                SelectTonnageWidget(
+                                  tonnage: state.tonnage,
+                                  selectTonnage: (tonnage) {
+                                    searchPostCubit.updateTonnage(
+                                        tonnage: tonnage);
+                                  },
+                                ),
+                                VerticalSpace(
+                                  kDefaultPaddingHeightScreen,
+                                ),
+                                itemSelectLocation(
+                                  label: 'Tỉnh/Thành phố bốc hàng',
+                                ),
+                                VerticalSpace(
+                                  kDefaultPaddingHeightScreen,
+                                ),
+                                itemSelectLocation(
+                                    label: 'Tỉnh/Thành phố trả hàng',
+                                    isDeliver: true)
+                              ],
+                            ),
+                          ),
+                        )),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: kDefaultPaddingWidthScreen,
+                              vertical: kDefaultPaddingHeightScreen),
+                          child: Column(
+                            children: [
+                              PrimaryButton.outline(
+                                label: 'Xoá lọc',
+                                onPressed: () {
+                                  searchPostCubit.updateProvince([]);
+                                  searchPostCubit
+                                      .updateProvince([], isDelivery: true);
+                                  searchPostCubit.updateTonnage();
+                                },
+                              ),
+                              VerticalSpace(kDefaultPaddingHeightScreen),
+                              PrimaryButton(
+                                label: 'Lọc đơn',
+                                onPressed: () {
+                                  callBack!(
+                                      provinces: state.selectedProvinces,
+                                      provincesDelivery:
+                                          state.selectedProvincesDeliver,
+                                      tonnage: state.tonnage);
+                                  context.router.pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        )
                       ],
-                    ),
-                  )
-                ],
-              ));
+                    ));
         },
       ),
     );

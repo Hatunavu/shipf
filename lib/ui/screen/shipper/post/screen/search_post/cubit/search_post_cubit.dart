@@ -14,16 +14,18 @@ class SearchPostCubit extends Cubit<SearchPostState> {
       List<AddressDataModel> selectedProvinces = const [],
       List<AddressDataModel> selectedProvincesDeliver = const []}) async {
     try {
-      emit(state.copyWith(isFirstLoad: true));
+      emit(state.copyWith(isLoading: true, isFirstLoad: true));
       await getProvinces();
       emit(state.copyWith(
+          isLoading: false,
           isFirstLoad: false,
           tonnage: tonnage,
           selectedProvinces: selectedProvinces,
           selectedProvincesDeliver: selectedProvincesDeliver));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
+      emit(state.copyWith(
+          isLoading: false, isFirstLoad: false, error: errorMessage));
     }
   }
 

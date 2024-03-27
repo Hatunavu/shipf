@@ -16,7 +16,7 @@ import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
-class OrderAddressWidget extends StatelessWidget {
+class OrderAddressWidget extends StatefulWidget {
   OrderCubit orderCubit;
   final bool isUpdate;
 
@@ -29,6 +29,11 @@ class OrderAddressWidget extends StatelessWidget {
       this.isUpdate = false});
 
   @override
+  State<OrderAddressWidget> createState() => _OrderAddressWidgetState();
+}
+
+class _OrderAddressWidgetState extends State<OrderAddressWidget> {
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -37,32 +42,34 @@ class OrderAddressWidget extends StatelessWidget {
         children: [
           address(context,
               type: text.sending_place,
-              nameController: orderCubit.state.senderNameController!,
-              phoneController: orderCubit.state.senderPhoneController!,
-              addressController: orderCubit.state.senderAddressController!),
+              nameController: widget.orderCubit.state.senderNameController!,
+              phoneController: widget.orderCubit.state.senderPhoneController!,
+              addressController:
+                  widget.orderCubit.state.senderAddressController!),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
             color: backgroundColor,
           ),
           address(context,
               type: text.recipients,
-              nameController: orderCubit.state.receiverNameController!,
-              phoneController: orderCubit.state.receiverPhoneController!,
-              addressController: orderCubit.state.receiverAddressController!,
+              nameController: widget.orderCubit.state.receiverNameController!,
+              phoneController: widget.orderCubit.state.receiverPhoneController!,
+              addressController:
+                  widget.orderCubit.state.receiverAddressController!,
               isDeliver: true),
           Padding(
             padding: EdgeInsets.all(kDefaultPaddingWidthWidget),
             child: PrimaryButton(
               label: text.continuee,
               onPressed: () {
-                if (addressFormKey.currentState!.validate() &&
-                    orderCubit.state.province != null &&
-                    orderCubit.state.district != null &&
-                    orderCubit.state.ward != null &&
-                    orderCubit.state.provinceDeliver != null &&
-                    orderCubit.state.districtDeliver != null &&
-                    orderCubit.state.wardDeliver != null) {
-                  orderCubit.updateStepOrder(StepOrderType.parcel);
+                if (widget.addressFormKey.currentState!.validate() &&
+                    widget.orderCubit.state.province != null &&
+                    widget.orderCubit.state.district != null &&
+                    widget.orderCubit.state.ward != null &&
+                    widget.orderCubit.state.provinceDeliver != null &&
+                    widget.orderCubit.state.districtDeliver != null &&
+                    widget.orderCubit.state.wardDeliver != null) {
+                  widget.orderCubit.updateStepOrder(StepOrderType.parcel);
                 }
               },
             ),
@@ -99,13 +106,13 @@ class OrderAddressWidget extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: !isUpdate,
+                visible: !widget.isUpdate,
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () => context.router.push(AddressPage(
                     isDeliver: isDeliver,
                     selectAddress: (address) async {
-                      await orderCubit.selectAddress(
+                      await widget.orderCubit.selectAddress(
                           address: address, isDeliver: isDeliver);
                       if (isDeliver) {
                         nameController.text = address.name;
@@ -144,7 +151,7 @@ class OrderAddressWidget extends StatelessWidget {
                         controller: nameController,
                         hintText: text.full_name,
                         fieldRequire: text.full_name,
-                        readOnly: isUpdate && !isDeliver),
+                        readOnly: widget.isUpdate && !isDeliver),
                   ],
                 ),
               ),
@@ -162,7 +169,7 @@ class OrderAddressWidget extends StatelessWidget {
                         hintText: text.phone,
                         isPhone: true,
                         showPrefixIcon: false,
-                        readOnly: isUpdate && !isDeliver),
+                        readOnly: widget.isUpdate && !isDeliver),
                   ],
                 ),
               )
@@ -175,8 +182,8 @@ class OrderAddressWidget extends StatelessWidget {
             label: text.city,
             isDeliver: isDeliver,
             addressData: isDeliver
-                ? orderCubit.state.addressDeliver
-                : orderCubit.state.addressPick,
+                ? widget.orderCubit.state.addressDeliver
+                : widget.orderCubit.state.addressPick,
           ),
           VerticalSpace(
             kDefaultPaddingHeightScreen,
@@ -198,7 +205,7 @@ class OrderAddressWidget extends StatelessWidget {
             hintText: text.address,
             isAddress: true,
             fieldRequire: text.address,
-            readOnly: isUpdate && !isDeliver,
+            readOnly: widget.isUpdate && !isDeliver,
           ),
         ],
       ),
@@ -218,82 +225,89 @@ class OrderAddressWidget extends StatelessWidget {
         OrderLabelTextFieldWidget(label: label),
         SelectAddressWidget(
           label: label,
-          readOnly: isUpdate && !isDeliver,
+          readOnly: widget.isUpdate && !isDeliver,
           isDistrict: isDistrict,
           isWard: isWard,
           isDeliver: isDeliver,
-          provinces: orderCubit.state.provinces,
+          provinces: widget.orderCubit.state.provinces,
           districts: isDeliver
-              ? orderCubit.state.districtsDeliver
-              : orderCubit.state.districts,
+              ? widget.orderCubit.state.districtsDeliver
+              : widget.orderCubit.state.districts,
           wards: isDeliver
-              ? orderCubit.state.wardsDeliver
-              : orderCubit.state.wards,
+              ? widget.orderCubit.state.wardsDeliver
+              : widget.orderCubit.state.wards,
           province: isDeliver
-              ? orderCubit.state.provinceDeliver
-              : orderCubit.state.province,
+              ? widget.orderCubit.state.provinceDeliver
+              : widget.orderCubit.state.province,
           district: isDeliver
-              ? orderCubit.state.districtDeliver
-              : orderCubit.state.district,
-          ward:
-              isDeliver ? orderCubit.state.wardDeliver : orderCubit.state.ward,
+              ? widget.orderCubit.state.districtDeliver
+              : widget.orderCubit.state.district,
+          ward: isDeliver
+              ? widget.orderCubit.state.wardDeliver
+              : widget.orderCubit.state.ward,
           errorProvince: isDeliver
-              ? orderCubit.state.errorProvinceDeliver
-              : orderCubit.state.errorProvince,
+              ? widget.orderCubit.state.errorProvinceDeliver
+              : widget.orderCubit.state.errorProvince,
           errorDistrict: isDeliver
-              ? orderCubit.state.errorDistrictDeliver
-              : orderCubit.state.errorDistrict,
+              ? widget.orderCubit.state.errorDistrictDeliver
+              : widget.orderCubit.state.errorDistrict,
           errorWard: isDeliver
-              ? orderCubit.state.errorWardDeliver
-              : orderCubit.state.errorWard,
+              ? widget.orderCubit.state.errorWardDeliver
+              : widget.orderCubit.state.errorWard,
           selectProvince: (index) {
             if (isDeliver) {
-              orderCubit.getDistrictsDeliver(
-                  provinceId: orderCubit.state.provinces[index].id);
-              orderCubit
-                  .updateProvinceDeliver(orderCubit.state.provinces[index]);
+              widget.orderCubit.getDistrictsDeliver(
+                  provinceId: widget.orderCubit.state.provinces[index].id);
+              widget.orderCubit.updateProvinceDeliver(
+                  widget.orderCubit.state.provinces[index]);
             } else {
-              orderCubit.getDistricts(
-                provinceId: orderCubit.state.provinces[index].id,
+              widget.orderCubit.getDistricts(
+                provinceId: widget.orderCubit.state.provinces[index].id,
               );
-              orderCubit.updateProvince(orderCubit.state.provinces[index]);
+              widget.orderCubit
+                  .updateProvince(widget.orderCubit.state.provinces[index]);
             }
+            setState(() {});
           },
           selectDistrict: (index) {
             if (isDeliver) {
-              orderCubit.getWardsDeliver(
-                  districtId: orderCubit.state.districtsDeliver[index].id);
-              orderCubit.updateDistrictDeliver(
-                  orderCubit.state.districtsDeliver[index]);
+              widget.orderCubit.getWardsDeliver(
+                  districtId:
+                      widget.orderCubit.state.districtsDeliver[index].id);
+              widget.orderCubit.updateDistrictDeliver(
+                  widget.orderCubit.state.districtsDeliver[index]);
             } else {
-              orderCubit.getWards(
-                  districtId: orderCubit.state.districts[index].id);
-              orderCubit.updateDistrict(orderCubit.state.districts[index]);
+              widget.orderCubit.getWards(
+                  districtId: widget.orderCubit.state.districts[index].id);
+              widget.orderCubit
+                  .updateDistrict(widget.orderCubit.state.districts[index]);
             }
           },
           selectWard: (index) {
             isDeliver
-                ? orderCubit
-                    .updateWardDeliver(orderCubit.state.wardsDeliver[index])
-                : orderCubit.updateWard(orderCubit.state.wards[index]);
+                ? widget.orderCubit.updateWardDeliver(
+                    widget.orderCubit.state.wardsDeliver[index])
+                : widget.orderCubit
+                    .updateWard(widget.orderCubit.state.wards[index]);
           },
           validator: (_) {
             if (isDeliver) {
-              if (isWard && orderCubit.state.wardDeliver == null) {
-                orderCubit.updateWardDeliverError();
+              if (isWard && widget.orderCubit.state.wardDeliver == null) {
+                widget.orderCubit.updateWardDeliverError();
               } else if (isDistrict &&
-                  orderCubit.state.districtDeliver == null) {
-                orderCubit.updateDistrictDeliverError();
-              } else if (orderCubit.state.provinceDeliver == null) {
-                orderCubit.updateProvinceDeliverError();
+                  widget.orderCubit.state.districtDeliver == null) {
+                widget.orderCubit.updateDistrictDeliverError();
+              } else if (widget.orderCubit.state.provinceDeliver == null) {
+                widget.orderCubit.updateProvinceDeliverError();
               }
             } else {
-              if (isWard && orderCubit.state.ward == null) {
-                orderCubit.updateWardError();
-              } else if (isDistrict && orderCubit.state.district == null) {
-                orderCubit.updateDistrictError();
-              } else if (orderCubit.state.province == null) {
-                orderCubit.updateProvinceError();
+              if (isWard && widget.orderCubit.state.ward == null) {
+                widget.orderCubit.updateWardError();
+              } else if (isDistrict &&
+                  widget.orderCubit.state.district == null) {
+                widget.orderCubit.updateDistrictError();
+              } else if (widget.orderCubit.state.province == null) {
+                widget.orderCubit.updateProvinceError();
               }
             }
             return null;

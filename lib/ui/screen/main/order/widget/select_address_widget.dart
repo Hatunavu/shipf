@@ -63,11 +63,14 @@ class SelectAddressWidget extends StatefulWidget {
 class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   List<AddressDataModel> listSelect = [];
   late TextEditingController controller;
-  List<AddressDataModel> results = [];
+  List<AddressDataModel> resultProvinces = [];
+  List<AddressDataModel> resultDistricts = [];
+  List<AddressDataModel> resultWards = [];
 
   @override
   void initState() {
-    results = [...widget.provinces];
+    resultProvinces = [...widget.provinces];
+
     // listSelect = [...widget.multiProvinces];
     controller = TextEditingController();
     super.initState();
@@ -77,38 +80,62 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
-          // searchAddress(
-          //   clearSearch: () {
-          //     setState(() {
-          //       results = [...widget.provinces];
-          //     });
-          //     controller.clear();
-          //   },
-          //   onChanged: (value) {
-          //     setState(() {
-          //       results.clear();
-          //       for (var province in widget.provinces) {
-          //         if (province.name
-          //             .toLowerCase()
-          //             .contains(value.toLowerCase())) {
-          //           setState(() {
-          //             results.add(province);
-          //           });
-          //         }
-          //       }
-          //     });
-          //   },
-          // ),
+          searchAddress(
+            clearSearch: () {
+              setState(() {
+                resultProvinces = [...widget.provinces];
+                resultDistricts = [...widget.districts];
+                resultWards = [...widget.wards];
+              });
+              controller.clear();
+            },
+            onChanged: (value) {
+              setState(() {
+                resultProvinces.clear();
+                resultDistricts.clear();
+                resultWards.clear();
+                if (widget.isWard) {
+                  for (var ward in widget.wards) {
+                    if (ward.name.toLowerCase().contains(value.toLowerCase())) {
+                      setState(() {
+                        resultWards.add(ward);
+                      });
+                    }
+                  }
+                } else if (widget.isDistrict) {
+                  for (var district in widget.districts) {
+                    if (district.name
+                        .toLowerCase()
+                        .contains(value.toLowerCase())) {
+                      setState(() {
+                        resultDistricts.add(district);
+                      });
+                    }
+                  }
+                } else {
+                  for (var province in widget.provinces) {
+                    if (province.name
+                        .toLowerCase()
+                        .contains(value.toLowerCase())) {
+                      setState(() {
+                        resultProvinces.add(province);
+                      });
+                    }
+                  }
+                }
+              });
+            },
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: widget.isWard
-                    ? widget.wards.length
+                    ? resultWards.length
                     : widget.isDistrict
-                        ? widget.districts.length
-                        : results.length,
+                        ? resultDistricts.length
+                        : resultProvinces.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     dense: true,
@@ -124,14 +151,18 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                             if (listSelect
                                 .map((e) => e.id)
                                 .toList()
-                                .contains(results[index].id)) {
+                                .contains(resultProvinces[index].id)) {
                               listSelect.removeWhere(
-                                  (e) => e.id == results[index].id);
+                                  (e) => e.id == resultProvinces[index].id);
                             } else {
-                              listSelect.add(results[index]);
+                              listSelect.add(resultProvinces[index]);
                             }
                           });
                         } else {
+                          controller.clear();
+                          resultProvinces = [...widget.provinces];
+                          resultDistricts = [...widget.districts];
+                          resultWards = [...widget.wards];
                           if (widget.isWard) {
                             widget.selectWard(index);
                           } else if (widget.isDistrict) {
@@ -160,20 +191,21 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                                 ),
                                 Text(
                                     widget.isWard
-                                        ? widget.wards[index].name
+                                        ? resultWards[index].name
                                         : widget.isDistrict
-                                            ? widget.districts[index].name
-                                            : results[index].name,
+                                            ? resultDistricts[index].name
+                                            : resultProvinces[index].name,
                                     style: textBody.copyWith(
                                       color: titleColor,
                                     )),
                               ],
                             ),
                             Visibility(
-                              visible: listSelect
-                                  .map((e) => e.id)
-                                  .toList()
-                                  .contains(results[index].id),
+                              visible: widget.isMultiSelect &&
+                                  listSelect
+                                      .map((e) => e.id)
+                                      .toList()
+                                      .contains(resultProvinces[index].id),
                               child: const Icon(
                                 Icons.done,
                                 color: primaryColor,
@@ -197,6 +229,7 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
     BuildContext context,
   ) {
     showModalBottomSheet(
+      isDismissible: false,
       isScrollControlled: true,
       context: context,
       backgroundColor: Colors.white,
@@ -221,8 +254,11 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                   children: [
                     InkWell(
                       onTap: () {
+                        controller.clear();
                         // listSelect = [...widget.multiProvinces];
-                        setState(() {});
+                        setState(() {
+                          resultProvinces = [...widget.provinces];
+                        });
                         Navigator.pop(context);
                       },
                       child: SizedBox(
@@ -237,8 +273,11 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                       visible: widget.isMultiSelect,
                       child: InkWell(
                         onTap: () {
+                          controller.clear();
                           widget.multiProvince!(listSelect);
-                          // setState(() {});
+                          setState(() {
+                            resultProvinces = [...widget.provinces];
+                          });
                           Navigator.pop(context);
                         },
                         child: SizedBox(
@@ -265,6 +304,8 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
   @override
   Widget build(BuildContext context) {
     listSelect = [...widget.multiProvinces];
+    resultDistricts = [...widget.districts];
+    resultWards = [...widget.wards];
     List<String> stringList =
         widget.multiProvinces.map((province) => province.name).toList();
     return GestureDetector(
@@ -273,11 +314,11 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
             : () {
                 unfocus(context);
                 widget.isWard
-                    ? widget.wards.isNotEmpty
+                    ? resultWards.isNotEmpty
                         ? _modalButtonAddress(context)
                         : null
                     : widget.isDistrict
-                        ? widget.districts.isNotEmpty
+                        ? resultDistricts.isNotEmpty
                             ? _modalButtonAddress(context)
                             : null
                         : _modalButtonAddress(
@@ -348,11 +389,11 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                       color: widget.readOnly
                           ? greyText
                           : widget.isWard
-                              ? widget.wards.isNotEmpty
+                              ? resultWards.isNotEmpty
                                   ? titleColor
                                   : borderColor
                               : widget.isDistrict
-                                  ? widget.districts.isNotEmpty
+                                  ? resultDistricts.isNotEmpty
                                       ? titleColor
                                       : borderColor
                                   : titleColor),

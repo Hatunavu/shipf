@@ -72,6 +72,7 @@ class SelectUnitWidget extends StatelessWidget {
 
   void _modalButtonUnit(BuildContext context) {
     showModalBottomSheet(
+      isDismissible: false,
       isScrollControlled: true,
       context: context,
       backgroundColor: Colors.white,

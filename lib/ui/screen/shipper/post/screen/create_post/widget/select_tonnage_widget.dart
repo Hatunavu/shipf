@@ -108,6 +108,7 @@ class SelectTonnageWidget extends StatelessWidget {
 
   void _modalButtonTonnage(BuildContext context) {
     showModalBottomSheet(
+      isDismissible: false,
       isScrollControlled: true,
       context: context,
       backgroundColor: Colors.white,

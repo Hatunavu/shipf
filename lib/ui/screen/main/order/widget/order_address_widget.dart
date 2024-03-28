@@ -115,12 +115,12 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
                       await widget.orderCubit.selectAddress(
                           address: address, isDeliver: isDeliver);
                       if (isDeliver) {
-                        nameController.text = address.name;
-                        phoneController.text = address.phone;
+                        nameController.text = address.contactName;
+                        phoneController.text = address.contactPhone;
                         addressController.text = address.address;
                       } else {
-                        nameController.text = address.name;
-                        phoneController.text = address.phone;
+                        nameController.text = address.contactName;
+                        phoneController.text = address.contactPhone;
                         addressController.text = address.address;
                       }
                     },

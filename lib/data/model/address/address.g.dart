@@ -68,30 +68,32 @@ Map<String, dynamic> _$AddressSavedToJson(AddressSaved instance) =>
 
 AddressSavedData _$AddressSavedDataFromJson(Map<String, dynamic> json) =>
     AddressSavedData(
-      isActive: json['isActive'] as bool? ?? false,
       id: json['id'] as int? ?? 0,
       customerId: json['customerId'] as int? ?? 0,
-      name: json['name'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
-      isDefault: json['isDefault'] as bool? ?? false,
       provinceId: json['provinceId'] as int? ?? 0,
       districtId: json['districtId'] as int? ?? 0,
       wardId: json['wardId'] as int? ?? 0,
       address: json['address'] as String? ?? '',
       fullAddress: json['fullAddress'] as String? ?? '',
+      contactName: json['contactName'] as String? ?? '',
+      contactPhone: json['contactPhone'] as String? ?? '',
+      type: json['type'] == null
+          ? LoadingType.pickup
+          : stringToLoadingType(json['type'] as String),
+      isDefault: json['isDefault'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$AddressSavedDataToJson(AddressSavedData instance) =>
     <String, dynamic>{
-      'isActive': instance.isActive,
       'id': instance.id,
       'customerId': instance.customerId,
-      'name': instance.name,
-      'phone': instance.phone,
-      'isDefault': instance.isDefault,
       'provinceId': instance.provinceId,
       'districtId': instance.districtId,
       'wardId': instance.wardId,
       'address': instance.address,
       'fullAddress': instance.fullAddress,
+      'contactName': instance.contactName,
+      'contactPhone': instance.contactPhone,
+      'type': loadingTypeToString(instance.type),
+      'isDefault': instance.isDefault,
     };

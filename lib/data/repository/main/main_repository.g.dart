@@ -323,9 +323,9 @@ class _MainRepository implements MainRepository {
   }
 
   @override
-  Future<AddressSaved> getPickupAddresses() async {
+  Future<AddressSaved> getAddresses({required type}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'type': type};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -336,30 +336,7 @@ class _MainRepository implements MainRepository {
     )
             .compose(
               _dio.options,
-              '/pickup-addresses',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AddressSaved.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<AddressSaved> getDeliveryAddresses() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AddressSaved>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/delivery-addresses',
+              '/customer-addresses',
               queryParameters: queryParameters,
               data: _data,
             )

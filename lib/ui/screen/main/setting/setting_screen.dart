@@ -6,6 +6,7 @@ import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/enums/enum_role.dart';
 import 'package:shipf/foundation/app_path.dart';
 import 'package:shipf/foundation/constant.dart';
+import 'package:shipf/injection.dart';
 import 'package:shipf/ui/app_cubit.dart';
 import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/main/setting/cubit/setting_cubit.dart';
@@ -44,6 +45,15 @@ class _SettingScreenState extends State<SettingScreen> {
   bool isLoading = false;
   late SettingCubit cubit;
   late RoleType? role;
+
+  List<Function()> actionSettingsCustomer = [
+    () => {ToastUtils.showNeutral('Tính năng đăng được phát triển')},
+    () => getIt<AppRouter>().push(AddressPage(
+          selectAddress: (p0) {},
+        )),
+    () => getIt<AppRouter>().push(UserPostPage()),
+    () => {ToastUtils.showNeutral('Tính năng đăng được phát triển')},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -172,12 +182,12 @@ class _SettingScreenState extends State<SettingScreen> {
           itemBuilder: (context, index) {
             return GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  index == 2
-                      ? context.router.push(UserPostPage())
-                      : ToastUtils.showNeutral(
-                          'Tính năng đăng được phát triển');
-                },
+                onTap: role == RoleType.customer
+                    ? actionSettingsCustomer[index]
+                    : () {
+                        ToastUtils.showNeutral(
+                            'Tính năng đăng được phát triển');
+                      },
                 child: settingItem(role == RoleType.customer
                     ? settingsCustomer[index]
                     : settings[index]));

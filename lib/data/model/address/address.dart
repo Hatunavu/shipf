@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shipf/enums/enum_loading_type.dart';
 
 part 'address.g.dart';
 
@@ -61,30 +62,33 @@ class AddressSaved {
 
 @JsonSerializable()
 class AddressSavedData {
-  final bool isActive;
   final int id;
   final int customerId;
-  final String name;
-  final String phone;
-  final bool isDefault;
   final int provinceId;
   final int districtId;
   final int wardId;
   final String address;
   final String fullAddress;
+  final String contactName;
+  final String contactPhone;
+  @JsonKey(
+      name: 'type', toJson: loadingTypeToString, fromJson: stringToLoadingType)
+  final LoadingType type;
+  final bool isDefault;
 
-  AddressSavedData(
-      {this.isActive = false,
-      this.id = 0,
-      this.customerId = 0,
-      this.name = '',
-      this.phone = '',
-      this.isDefault = false,
-      this.provinceId = 0,
-      this.districtId = 0,
-      this.wardId = 0,
-      this.address = '',
-      this.fullAddress = ''});
+  AddressSavedData({
+    this.id = 0,
+    this.customerId = 0,
+    this.provinceId = 0,
+    this.districtId = 0,
+    this.wardId = 0,
+    this.address = '',
+    this.fullAddress = '',
+    this.contactName = '',
+    this.contactPhone = '',
+    this.type = LoadingType.pickup,
+    this.isDefault = false,
+  });
   factory AddressSavedData.fromJson(Map<String, dynamic> json) =>
       _$AddressSavedDataFromJson(json);
 

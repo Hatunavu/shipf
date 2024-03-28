@@ -19,6 +19,8 @@ const getDistricts = "/districts/get-by-province-id/{provinceId}";
 const getWards = "/wards/get-by-district-id/{districtId}";
 const getPickupAddresses = "/pickup-addresses";
 const getDeliveryAddresses = "/delivery-addresses";
+const getAddresses = "/customer-addresses";
+
 
 //order
 const getOrderService = '/price-lists/quote';

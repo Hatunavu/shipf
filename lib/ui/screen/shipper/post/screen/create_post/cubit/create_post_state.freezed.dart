@@ -12,7 +12,7 @@ part of 'create_post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CreatePostState {
@@ -154,11 +154,11 @@ class _$CreatePostStateCopyWithImpl<$Res, $Val extends CreatePostState>
 }
 
 /// @nodoc
-abstract class _$$CreatePostStateImplCopyWith<$Res>
+abstract class _$$_CreatePostStateCopyWith<$Res>
     implements $CreatePostStateCopyWith<$Res> {
-  factory _$$CreatePostStateImplCopyWith(_$CreatePostStateImpl value,
-          $Res Function(_$CreatePostStateImpl) then) =
-      __$$CreatePostStateImplCopyWithImpl<$Res>;
+  factory _$$_CreatePostStateCopyWith(
+          _$_CreatePostState value, $Res Function(_$_CreatePostState) then) =
+      __$$_CreatePostStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -179,11 +179,11 @@ abstract class _$$CreatePostStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CreatePostStateImplCopyWithImpl<$Res>
-    extends _$CreatePostStateCopyWithImpl<$Res, _$CreatePostStateImpl>
-    implements _$$CreatePostStateImplCopyWith<$Res> {
-  __$$CreatePostStateImplCopyWithImpl(
-      _$CreatePostStateImpl _value, $Res Function(_$CreatePostStateImpl) _then)
+class __$$_CreatePostStateCopyWithImpl<$Res>
+    extends _$CreatePostStateCopyWithImpl<$Res, _$_CreatePostState>
+    implements _$$_CreatePostStateCopyWith<$Res> {
+  __$$_CreatePostStateCopyWithImpl(
+      _$_CreatePostState _value, $Res Function(_$_CreatePostState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -204,7 +204,7 @@ class __$$CreatePostStateImplCopyWithImpl<$Res>
     Object? amountController = freezed,
     Object? errorTonnage = null,
   }) {
-    return _then(_$CreatePostStateImpl(
+    return _then(_$_CreatePostState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -267,8 +267,8 @@ class __$$CreatePostStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CreatePostStateImpl implements _CreatePostState {
-  const _$CreatePostStateImpl(
+class _$_CreatePostState implements _CreatePostState {
+  const _$_CreatePostState(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -342,10 +342,10 @@ class _$CreatePostStateImpl implements _CreatePostState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreatePostStateImpl &&
+            other is _$_CreatePostState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -394,9 +394,8 @@ class _$CreatePostStateImpl implements _CreatePostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
-      __$$CreatePostStateImplCopyWithImpl<_$CreatePostStateImpl>(
-          this, _$identity);
+  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
+      __$$_CreatePostStateCopyWithImpl<_$_CreatePostState>(this, _$identity);
 }
 
 abstract class _CreatePostState implements CreatePostState {
@@ -414,7 +413,7 @@ abstract class _CreatePostState implements CreatePostState {
       final TextEditingController? phoneController,
       final TextEditingController? contentController,
       final TextEditingController? amountController,
-      required final String errorTonnage}) = _$CreatePostStateImpl;
+      required final String errorTonnage}) = _$_CreatePostState;
 
   @override
   bool get isLoading;
@@ -446,6 +445,6 @@ abstract class _CreatePostState implements CreatePostState {
   String get errorTonnage;
   @override
   @JsonKey(ignore: true)
-  _$$CreatePostStateImplCopyWith<_$CreatePostStateImpl> get copyWith =>
+  _$$_CreatePostStateCopyWith<_$_CreatePostState> get copyWith =>
       throw _privateConstructorUsedError;
 }

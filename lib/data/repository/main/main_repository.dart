@@ -76,11 +76,14 @@ abstract class MainRepository {
   @GET(endpoint.getWards)
   Future<AddressModel> getWards(@Path('districtId') int districtId);
 
-  @GET(endpoint.getPickupAddresses)
-  Future<AddressSaved> getPickupAddresses();
+  // @GET(endpoint.getPickupAddresses)
+  // Future<AddressSaved> getPickupAddresses();
 
-  @GET(endpoint.getDeliveryAddresses)
-  Future<AddressSaved> getDeliveryAddresses();
+  // @GET(endpoint.getDeliveryAddresses)
+  // Future<AddressSaved> getDeliveryAddresses();
+
+  @GET(endpoint.getAddresses)
+  Future<AddressSaved> getAddresses({@Query('type') required String type});
 
   //order
   @GET(endpoint.getOrderService)

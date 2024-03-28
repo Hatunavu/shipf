@@ -128,7 +128,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       children: [
                         Flexible(
                           child: Text(
-                            address.name,
+                            address.contactName,
                             style: primaryTitleStyle,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -137,7 +137,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           padding:
                               EdgeInsets.only(left: kDefaultPaddingWidthWidget),
                           child: Text(
-                            address.phone,
+                            address.contactPhone,
                             style: textBody.copyWith(color: greyText),
                           ),
                         )

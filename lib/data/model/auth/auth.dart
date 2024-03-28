@@ -153,3 +153,20 @@ class RegisterResponse {
 
   Map<String, dynamic> toJson() => _$RegisterResponseToJson(this);
 }
+
+//forget password
+@JsonSerializable()
+class ForgetPassRequest {
+  final String phone;
+  final String password;
+
+  ForgetPassRequest({
+    this.phone = '',
+    this.password = '',
+  });
+
+  factory ForgetPassRequest.fromJson(Map<String, dynamic> json) =>
+      _$ForgetPassRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ForgetPassRequestToJson(this);
+}

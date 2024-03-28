@@ -130,8 +130,28 @@ class LoginScreen extends StatelessWidget {
                                         callBack: () => cubit.updateError(''),
                                         showPass: () => cubit.showPass(),
                                       ),
-                                      SizedBox(
-                                        height: kDefaultPaddingHeightWidget,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                            behavior:
+                                                HitTestBehavior.translucent,
+                                            onTap: () => context.router
+                                                .push(ForgetPassPage()),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical:
+                                                      kDefaultPaddingHeightWidget),
+                                              child: Text(
+                                                'Quên mật khẩu?',
+                                                style:
+                                                    primaryTitleStyle.copyWith(
+                                                        color: primaryColor),
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
                                       PrimaryButton(
                                         backgroundColor: state.isAgreeTerms

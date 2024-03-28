@@ -11,6 +11,7 @@ const registerBusiness = '/users/register-business';
 const registerShipper = '/users/register-shipper';
 const deleteUser = '/users';
 const postDeviceToken = '/devices';
+const forgetPass = '/authentication/forgot-password';
 
 //address
 const getProvinces = "/provinces";

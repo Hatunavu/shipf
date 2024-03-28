@@ -62,6 +62,10 @@ abstract class MainRepository {
   @POST(endpoint.postDeviceToken)
   Future<NoDataResponse> postDeviceToken();
 
+  @POST(endpoint.forgetPass)
+  Future<NoDataResponse> forgetPass(
+      @Body() ForgetPassRequest forgetPassRequest);
+
   //addresss
   @GET(endpoint.getProvinces)
   Future<AddressModel> getProvinces();

@@ -230,6 +230,30 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<NoDataResponse> forgetPass(forgetPassRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(forgetPassRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<NoDataResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/authentication/forgot-password',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NoDataResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AddressModel> getProvinces() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

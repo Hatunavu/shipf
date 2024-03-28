@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:shipf/ui/router/app_router.dart';
+import 'package:shipf/ui/screen/auth/forget_pass/forget_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/login/enter_pass/enter_pass_screen.dart';
 import 'package:shipf/ui/screen/auth/login/login_screen.dart';
 import 'package:shipf/ui/screen/auth/reset_pass/reset_pass_screen.dart';
@@ -66,6 +67,11 @@ import 'package:shipf/ui/screen/shipper/post/screen/search_post/search_post_scre
       page: ResetPassScreen,
       name: "ResetPassPage",
       path: AppRoutes.resetPassScreen,
+    ),
+    AutoRoute(
+      page: ForgetPassScreen,
+      name: "ForgetPassPage",
+      path: AppRoutes.forgetPassScreen,
     ),
     AutoRoute(
       page: OrderScreen,

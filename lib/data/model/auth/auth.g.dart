@@ -147,3 +147,15 @@ Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>
       'status': instance.status,
       'message': instance.message,
     };
+
+ForgetPassRequest _$ForgetPassRequestFromJson(Map<String, dynamic> json) =>
+    ForgetPassRequest(
+      phone: json['phone'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ForgetPassRequestToJson(ForgetPassRequest instance) =>
+    <String, dynamic>{
+      'phone': instance.phone,
+      'password': instance.password,
+    };

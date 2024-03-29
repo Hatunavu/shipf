@@ -289,10 +289,10 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   Future<List<AddressDataModel>> getDistricts({
-    required int provinceId,
+    required AddressDataModel province,
   }) async {
     emit(state.copyWith(isLoading: true));
-    final response = await mainRepository.getDistricts(provinceId);
+    final response = await mainRepository.getDistricts(province.id);
     emit(state.copyWith(
         isLoading: false,
         districts: response.data,
@@ -302,9 +302,10 @@ class OrderCubit extends Cubit<OrderState> {
     return response.data;
   }
 
-  Future<List<AddressDataModel>> getWards({required int districtId}) async {
+  Future<List<AddressDataModel>> getWards(
+      {required AddressDataModel district}) async {
     emit(state.copyWith(isLoading: true, isLoadingWard: true));
-    final response = await mainRepository.getWards(districtId);
+    final response = await mainRepository.getWards(district.id);
     emit(state.copyWith(
         isLoading: false,
         wards: response.data,
@@ -340,10 +341,10 @@ class OrderCubit extends Cubit<OrderState> {
   //deliver
 
   Future<List<AddressDataModel>> getDistrictsDeliver({
-    required int provinceId,
+    required AddressDataModel province,
   }) async {
     emit(state.copyWith(isLoading: true, isLoadingDistrict: true));
-    final response = await mainRepository.getDistricts(provinceId);
+    final response = await mainRepository.getDistricts(province.id);
     emit(state.copyWith(
         isLoading: false,
         districtsDeliver: response.data,
@@ -355,9 +356,9 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   Future<List<AddressDataModel>> getWardsDeliver(
-      {required int districtId}) async {
+      {required AddressDataModel district}) async {
     emit(state.copyWith(isLoading: true));
-    final response = await mainRepository.getWards(districtId);
+    final response = await mainRepository.getWards(district.id);
     emit(state.copyWith(
         isLoading: false,
         wardsDeliver: response.data,

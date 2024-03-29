@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -13,9 +15,9 @@ class SelectAddressWidget extends StatefulWidget {
   final bool isDistrict;
   final bool isWard;
   final bool isDeliver;
-  final Function(int index) selectProvince;
-  final Function(int index) selectDistrict;
-  final Function(int index) selectWard;
+  final Function(AddressDataModel province) selectProvince;
+  final Function(AddressDataModel district) selectDistrict;
+  final Function(AddressDataModel ward) selectWard;
   final List<AddressDataModel> provinces;
   final List<AddressDataModel> districts;
   final List<AddressDataModel> wards;
@@ -159,17 +161,18 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                             }
                           });
                         } else {
+                          if (widget.isWard) {
+                            widget.selectWard(resultWards[index]);
+                          } else if (widget.isDistrict) {
+                            widget.selectDistrict(resultDistricts[index]);
+                          } else {
+                            widget.selectProvince(resultProvinces[index]);
+                            log(resultProvinces[index].name);
+                          }
                           controller.clear();
                           resultProvinces = [...widget.provinces];
                           resultDistricts = [...widget.districts];
                           resultWards = [...widget.wards];
-                          if (widget.isWard) {
-                            widget.selectWard(index);
-                          } else if (widget.isDistrict) {
-                            widget.selectDistrict(index);
-                          } else {
-                            widget.selectProvince(index);
-                          }
                           Navigator.pop(context);
                         }
                       },

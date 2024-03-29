@@ -254,41 +254,31 @@ class _OrderAddressWidgetState extends State<OrderAddressWidget> {
           errorWard: isDeliver
               ? widget.orderCubit.state.errorWardDeliver
               : widget.orderCubit.state.errorWard,
-          selectProvince: (index) {
+          selectProvince: (province) {
             if (isDeliver) {
-              widget.orderCubit.getDistrictsDeliver(
-                  provinceId: widget.orderCubit.state.provinces[index].id);
-              widget.orderCubit.updateProvinceDeliver(
-                  widget.orderCubit.state.provinces[index]);
+              widget.orderCubit.getDistrictsDeliver(province: province);
+              widget.orderCubit.updateProvinceDeliver(province);
             } else {
               widget.orderCubit.getDistricts(
-                provinceId: widget.orderCubit.state.provinces[index].id,
+                province: province,
               );
-              widget.orderCubit
-                  .updateProvince(widget.orderCubit.state.provinces[index]);
+              widget.orderCubit.updateProvince(province);
             }
             setState(() {});
           },
-          selectDistrict: (index) {
+          selectDistrict: (district) {
             if (isDeliver) {
-              widget.orderCubit.getWardsDeliver(
-                  districtId:
-                      widget.orderCubit.state.districtsDeliver[index].id);
-              widget.orderCubit.updateDistrictDeliver(
-                  widget.orderCubit.state.districtsDeliver[index]);
+              widget.orderCubit.getWardsDeliver(district: district);
+              widget.orderCubit.updateDistrictDeliver(district);
             } else {
-              widget.orderCubit.getWards(
-                  districtId: widget.orderCubit.state.districts[index].id);
-              widget.orderCubit
-                  .updateDistrict(widget.orderCubit.state.districts[index]);
+              widget.orderCubit.getWards(district: district);
+              widget.orderCubit.updateDistrict(district);
             }
           },
-          selectWard: (index) {
+          selectWard: (ward) {
             isDeliver
-                ? widget.orderCubit.updateWardDeliver(
-                    widget.orderCubit.state.wardsDeliver[index])
-                : widget.orderCubit
-                    .updateWard(widget.orderCubit.state.wards[index]);
+                ? widget.orderCubit.updateWardDeliver(ward)
+                : widget.orderCubit.updateWard(ward);
           },
           validator: (_) {
             if (isDeliver) {

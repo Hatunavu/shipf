@@ -12,7 +12,7 @@ part of 'user_post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserPostState {
@@ -116,11 +116,11 @@ class _$UserPostStateCopyWithImpl<$Res, $Val extends UserPostState>
 }
 
 /// @nodoc
-abstract class _$$_UserPostStateCopyWith<$Res>
+abstract class _$$UserPostStateImplCopyWith<$Res>
     implements $UserPostStateCopyWith<$Res> {
-  factory _$$_UserPostStateCopyWith(
-          _$_UserPostState value, $Res Function(_$_UserPostState) then) =
-      __$$_UserPostStateCopyWithImpl<$Res>;
+  factory _$$UserPostStateImplCopyWith(
+          _$UserPostStateImpl value, $Res Function(_$UserPostStateImpl) then) =
+      __$$UserPostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -136,11 +136,11 @@ abstract class _$$_UserPostStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserPostStateCopyWithImpl<$Res>
-    extends _$UserPostStateCopyWithImpl<$Res, _$_UserPostState>
-    implements _$$_UserPostStateCopyWith<$Res> {
-  __$$_UserPostStateCopyWithImpl(
-      _$_UserPostState _value, $Res Function(_$_UserPostState) _then)
+class __$$UserPostStateImplCopyWithImpl<$Res>
+    extends _$UserPostStateCopyWithImpl<$Res, _$UserPostStateImpl>
+    implements _$$UserPostStateImplCopyWith<$Res> {
+  __$$UserPostStateImplCopyWithImpl(
+      _$UserPostStateImpl _value, $Res Function(_$UserPostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -156,7 +156,7 @@ class __$$_UserPostStateCopyWithImpl<$Res>
     Object? provincesSearch = null,
     Object? provincesDeliverySearch = null,
   }) {
-    return _then(_$_UserPostState(
+    return _then(_$UserPostStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -199,8 +199,8 @@ class __$$_UserPostStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserPostState implements _UserPostState {
-  const _$_UserPostState(
+class _$UserPostStateImpl implements _UserPostState {
+  const _$UserPostStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -257,10 +257,10 @@ class _$_UserPostState implements _UserPostState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserPostState &&
+            other is _$UserPostStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -294,8 +294,8 @@ class _$_UserPostState implements _UserPostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserPostStateCopyWith<_$_UserPostState> get copyWith =>
-      __$$_UserPostStateCopyWithImpl<_$_UserPostState>(this, _$identity);
+  _$$UserPostStateImplCopyWith<_$UserPostStateImpl> get copyWith =>
+      __$$UserPostStateImplCopyWithImpl<_$UserPostStateImpl>(this, _$identity);
 }
 
 abstract class _UserPostState implements UserPostState {
@@ -309,7 +309,7 @@ abstract class _UserPostState implements UserPostState {
           final TonnageType? tonnageSearch,
           required final List<AddressDataModel> provincesSearch,
           required final List<AddressDataModel> provincesDeliverySearch}) =
-      _$_UserPostState;
+      _$UserPostStateImpl;
 
   @override
   bool get isLoading;
@@ -331,6 +331,6 @@ abstract class _UserPostState implements UserPostState {
   List<AddressDataModel> get provincesDeliverySearch;
   @override
   @JsonKey(ignore: true)
-  _$$_UserPostStateCopyWith<_$_UserPostState> get copyWith =>
+  _$$UserPostStateImplCopyWith<_$UserPostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

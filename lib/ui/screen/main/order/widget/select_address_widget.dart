@@ -288,7 +288,6 @@ class _SelectAddressWidgetState extends State<SelectAddressWidget> {
                           width: 0.1.sw,
                           child: const Icon(
                             Icons.done,
-                            color: primaryColor,
                           ),
                         ),
                       ),

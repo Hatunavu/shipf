@@ -12,7 +12,7 @@ part of 'forget_pass_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ForgetPassState {
@@ -76,11 +76,11 @@ class _$ForgetPassStateCopyWithImpl<$Res, $Val extends ForgetPassState>
 }
 
 /// @nodoc
-abstract class _$$_ForgetPassStateCopyWith<$Res>
+abstract class _$$ForgetPassStateImplCopyWith<$Res>
     implements $ForgetPassStateCopyWith<$Res> {
-  factory _$$_ForgetPassStateCopyWith(
-          _$_ForgetPassState value, $Res Function(_$_ForgetPassState) then) =
-      __$$_ForgetPassStateCopyWithImpl<$Res>;
+  factory _$$ForgetPassStateImplCopyWith(_$ForgetPassStateImpl value,
+          $Res Function(_$ForgetPassStateImpl) then) =
+      __$$ForgetPassStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_ForgetPassStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ForgetPassStateCopyWithImpl<$Res>
-    extends _$ForgetPassStateCopyWithImpl<$Res, _$_ForgetPassState>
-    implements _$$_ForgetPassStateCopyWith<$Res> {
-  __$$_ForgetPassStateCopyWithImpl(
-      _$_ForgetPassState _value, $Res Function(_$_ForgetPassState) _then)
+class __$$ForgetPassStateImplCopyWithImpl<$Res>
+    extends _$ForgetPassStateCopyWithImpl<$Res, _$ForgetPassStateImpl>
+    implements _$$ForgetPassStateImplCopyWith<$Res> {
+  __$$ForgetPassStateImplCopyWithImpl(
+      _$ForgetPassStateImpl _value, $Res Function(_$ForgetPassStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_ForgetPassStateCopyWithImpl<$Res>
     Object? showPass = null,
     Object? showConfirmPass = null,
   }) {
-    return _then(_$_ForgetPassState(
+    return _then(_$ForgetPassStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_ForgetPassStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ForgetPassState implements _ForgetPassState {
-  const _$_ForgetPassState(
+class _$ForgetPassStateImpl implements _ForgetPassState {
+  const _$ForgetPassStateImpl(
       {required this.isLoading,
       required this.error,
       required this.showPass,
@@ -148,10 +148,10 @@ class _$_ForgetPassState implements _ForgetPassState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ForgetPassState &&
+            other is _$ForgetPassStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -168,8 +168,9 @@ class _$_ForgetPassState implements _ForgetPassState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ForgetPassStateCopyWith<_$_ForgetPassState> get copyWith =>
-      __$$_ForgetPassStateCopyWithImpl<_$_ForgetPassState>(this, _$identity);
+  _$$ForgetPassStateImplCopyWith<_$ForgetPassStateImpl> get copyWith =>
+      __$$ForgetPassStateImplCopyWithImpl<_$ForgetPassStateImpl>(
+          this, _$identity);
 }
 
 abstract class _ForgetPassState implements ForgetPassState {
@@ -177,7 +178,7 @@ abstract class _ForgetPassState implements ForgetPassState {
       {required final bool isLoading,
       required final String error,
       required final bool showPass,
-      required final bool showConfirmPass}) = _$_ForgetPassState;
+      required final bool showConfirmPass}) = _$ForgetPassStateImpl;
 
   @override
   bool get isLoading;
@@ -189,6 +190,6 @@ abstract class _ForgetPassState implements ForgetPassState {
   bool get showConfirmPass;
   @override
   @JsonKey(ignore: true)
-  _$$_ForgetPassStateCopyWith<_$_ForgetPassState> get copyWith =>
+  _$$ForgetPassStateImplCopyWith<_$ForgetPassStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'order_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderState {
@@ -432,11 +432,11 @@ class _$OrderStateCopyWithImpl<$Res, $Val extends OrderState>
 }
 
 /// @nodoc
-abstract class _$$_OrderStateCopyWith<$Res>
+abstract class _$$OrderStateImplCopyWith<$Res>
     implements $OrderStateCopyWith<$Res> {
-  factory _$$_OrderStateCopyWith(
-          _$_OrderState value, $Res Function(_$_OrderState) then) =
-      __$$_OrderStateCopyWithImpl<$Res>;
+  factory _$$OrderStateImplCopyWith(
+          _$OrderStateImpl value, $Res Function(_$OrderStateImpl) then) =
+      __$$OrderStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -495,11 +495,11 @@ abstract class _$$_OrderStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderStateCopyWithImpl<$Res>
-    extends _$OrderStateCopyWithImpl<$Res, _$_OrderState>
-    implements _$$_OrderStateCopyWith<$Res> {
-  __$$_OrderStateCopyWithImpl(
-      _$_OrderState _value, $Res Function(_$_OrderState) _then)
+class __$$OrderStateImplCopyWithImpl<$Res>
+    extends _$OrderStateCopyWithImpl<$Res, _$OrderStateImpl>
+    implements _$$OrderStateImplCopyWith<$Res> {
+  __$$OrderStateImplCopyWithImpl(
+      _$OrderStateImpl _value, $Res Function(_$OrderStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -558,7 +558,7 @@ class __$$_OrderStateCopyWithImpl<$Res>
     Object? codController = freezed,
     Object? noteController = freezed,
   }) {
-    return _then(_$_OrderState(
+    return _then(_$OrderStateImpl(
       isFirstLoad: null == isFirstLoad
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
@@ -773,8 +773,8 @@ class __$$_OrderStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderState implements _OrderState {
-  const _$_OrderState(
+class _$OrderStateImpl implements _OrderState {
+  const _$OrderStateImpl(
       {required this.isFirstLoad,
       required this.isLoading,
       required this.isUpdate,
@@ -984,10 +984,10 @@ class _$_OrderState implements _OrderState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderState &&
+            other is _$OrderStateImpl &&
             (identical(other.isFirstLoad, isFirstLoad) ||
                 other.isFirstLoad == isFirstLoad) &&
             (identical(other.isLoading, isLoading) ||
@@ -1143,8 +1143,8 @@ class _$_OrderState implements _OrderState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
-      __$$_OrderStateCopyWithImpl<_$_OrderState>(this, _$identity);
+  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
+      __$$OrderStateImplCopyWithImpl<_$OrderStateImpl>(this, _$identity);
 }
 
 abstract class _OrderState implements OrderState {
@@ -1200,7 +1200,7 @@ abstract class _OrderState implements OrderState {
       final TextEditingController? widthController,
       final TextEditingController? heightController,
       final TextEditingController? codController,
-      final TextEditingController? noteController}) = _$_OrderState;
+      final TextEditingController? noteController}) = _$OrderStateImpl;
 
   @override
   bool get isFirstLoad;
@@ -1308,6 +1308,6 @@ abstract class _OrderState implements OrderState {
   TextEditingController? get noteController;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderStateCopyWith<_$_OrderState> get copyWith =>
+  _$$OrderStateImplCopyWith<_$OrderStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PostState {
@@ -115,10 +115,11 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
 }
 
 /// @nodoc
-abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
-  factory _$$_PostStateCopyWith(
-          _$_PostState value, $Res Function(_$_PostState) then) =
-      __$$_PostStateCopyWithImpl<$Res>;
+abstract class _$$PostStateImplCopyWith<$Res>
+    implements $PostStateCopyWith<$Res> {
+  factory _$$PostStateImplCopyWith(
+          _$PostStateImpl value, $Res Function(_$PostStateImpl) then) =
+      __$$PostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +135,11 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PostStateCopyWithImpl<$Res>
-    extends _$PostStateCopyWithImpl<$Res, _$_PostState>
-    implements _$$_PostStateCopyWith<$Res> {
-  __$$_PostStateCopyWithImpl(
-      _$_PostState _value, $Res Function(_$_PostState) _then)
+class __$$PostStateImplCopyWithImpl<$Res>
+    extends _$PostStateCopyWithImpl<$Res, _$PostStateImpl>
+    implements _$$PostStateImplCopyWith<$Res> {
+  __$$PostStateImplCopyWithImpl(
+      _$PostStateImpl _value, $Res Function(_$PostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +155,7 @@ class __$$_PostStateCopyWithImpl<$Res>
     Object? provincesSearch = null,
     Object? provincesDeliverySearch = null,
   }) {
-    return _then(_$_PostState(
+    return _then(_$PostStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -197,8 +198,8 @@ class __$$_PostStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostState implements _PostState {
-  const _$_PostState(
+class _$PostStateImpl implements _PostState {
+  const _$PostStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -255,10 +256,10 @@ class _$_PostState implements _PostState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostState &&
+            other is _$PostStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -292,8 +293,8 @@ class _$_PostState implements _PostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
-      __$$_PostStateCopyWithImpl<_$_PostState>(this, _$identity);
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
+      __$$PostStateImplCopyWithImpl<_$PostStateImpl>(this, _$identity);
 }
 
 abstract class _PostState implements PostState {
@@ -307,7 +308,7 @@ abstract class _PostState implements PostState {
           final TonnageType? tonnageSearch,
           required final List<AddressDataModel> provincesSearch,
           required final List<AddressDataModel> provincesDeliverySearch}) =
-      _$_PostState;
+      _$PostStateImpl;
 
   @override
   bool get isLoading;
@@ -329,6 +330,6 @@ abstract class _PostState implements PostState {
   List<AddressDataModel> get provincesDeliverySearch;
   @override
   @JsonKey(ignore: true)
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

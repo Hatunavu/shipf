@@ -12,7 +12,7 @@ part of 'search_post_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchPostState {
@@ -102,11 +102,11 @@ class _$SearchPostStateCopyWithImpl<$Res, $Val extends SearchPostState>
 }
 
 /// @nodoc
-abstract class _$$_SearchPostStateCopyWith<$Res>
+abstract class _$$SearchPostStateImplCopyWith<$Res>
     implements $SearchPostStateCopyWith<$Res> {
-  factory _$$_SearchPostStateCopyWith(
-          _$_SearchPostState value, $Res Function(_$_SearchPostState) then) =
-      __$$_SearchPostStateCopyWithImpl<$Res>;
+  factory _$$SearchPostStateImplCopyWith(_$SearchPostStateImpl value,
+          $Res Function(_$SearchPostStateImpl) then) =
+      __$$SearchPostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -120,11 +120,11 @@ abstract class _$$_SearchPostStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchPostStateCopyWithImpl<$Res>
-    extends _$SearchPostStateCopyWithImpl<$Res, _$_SearchPostState>
-    implements _$$_SearchPostStateCopyWith<$Res> {
-  __$$_SearchPostStateCopyWithImpl(
-      _$_SearchPostState _value, $Res Function(_$_SearchPostState) _then)
+class __$$SearchPostStateImplCopyWithImpl<$Res>
+    extends _$SearchPostStateCopyWithImpl<$Res, _$SearchPostStateImpl>
+    implements _$$SearchPostStateImplCopyWith<$Res> {
+  __$$SearchPostStateImplCopyWithImpl(
+      _$SearchPostStateImpl _value, $Res Function(_$SearchPostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -138,7 +138,7 @@ class __$$_SearchPostStateCopyWithImpl<$Res>
     Object? selectedProvincesDeliver = null,
     Object? tonnage = freezed,
   }) {
-    return _then(_$_SearchPostState(
+    return _then(_$SearchPostStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -173,8 +173,8 @@ class __$$_SearchPostStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchPostState implements _SearchPostState {
-  const _$_SearchPostState(
+class _$SearchPostStateImpl implements _SearchPostState {
+  const _$SearchPostStateImpl(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
@@ -227,10 +227,10 @@ class _$_SearchPostState implements _SearchPostState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchPostState &&
+            other is _$SearchPostStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -259,8 +259,9 @@ class _$_SearchPostState implements _SearchPostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchPostStateCopyWith<_$_SearchPostState> get copyWith =>
-      __$$_SearchPostStateCopyWithImpl<_$_SearchPostState>(this, _$identity);
+  _$$SearchPostStateImplCopyWith<_$SearchPostStateImpl> get copyWith =>
+      __$$SearchPostStateImplCopyWithImpl<_$SearchPostStateImpl>(
+          this, _$identity);
 }
 
 abstract class _SearchPostState implements SearchPostState {
@@ -271,7 +272,7 @@ abstract class _SearchPostState implements SearchPostState {
       required final List<AddressDataModel> provinces,
       required final List<AddressDataModel> selectedProvinces,
       required final List<AddressDataModel> selectedProvincesDeliver,
-      final TonnageType? tonnage}) = _$_SearchPostState;
+      final TonnageType? tonnage}) = _$SearchPostStateImpl;
 
   @override
   bool get isLoading;
@@ -289,6 +290,6 @@ abstract class _SearchPostState implements SearchPostState {
   TonnageType? get tonnage;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchPostStateCopyWith<_$_SearchPostState> get copyWith =>
+  _$$SearchPostStateImplCopyWith<_$SearchPostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

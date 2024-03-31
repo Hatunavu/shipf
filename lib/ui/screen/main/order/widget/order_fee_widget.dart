@@ -123,7 +123,7 @@ class OrderFeeWidget extends StatelessWidget {
                     style: textHeading.copyWith(fontWeight: FontWeight.w500),
                   )),
                   Text(
-                    orderState.serviceSelected?.serviceFee.toString() ?? '',
+                    '${orderState.serviceSelected?.serviceFee.toString() ?? '0'} đ',
                     style:
                         primaryHeaderTitleStyle.copyWith(color: primaryColor),
                   )
@@ -204,7 +204,7 @@ class OrderFeeWidget extends StatelessWidget {
                         width: kDefaultPaddingWidthScreen / 2,
                       ),
                       Text(
-                        service.serviceFee.toString(),
+                        '${service.serviceFee} đ',
                         style: textHeading.copyWith(color: primaryColor),
                       )
                     ],

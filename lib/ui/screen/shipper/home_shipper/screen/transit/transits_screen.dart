@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shipf/enums/enum_loading_type.dart';
 import 'package:shipf/foundation/app_path.dart';
-import 'package:shipf/ui/router/router.gr.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_cubit.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/cubit/transits_state.dart';
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/widget/transit_item.dart';
@@ -91,13 +90,13 @@ class TransitsScreen extends StatelessWidget {
                                     .then((value) =>
                                         transitsCubit.getTransits(type)),
                                 acceptTransit: () async {
-                                  final bool success =
-                                      await transitsCubit.acceptTransit(
-                                          transitId:
-                                              state.listTransitData[index].id);
-                                  success
-                                      ? context.router.replace(ShipmentsPage())
-                                      : null;
+                                  // final bool success =
+                                  await transitsCubit.acceptTransit(
+                                      transitId:
+                                          state.listTransitData[index].id);
+                                  // success
+                                  //     ? context.router.replace(ShipmentsPage())
+                                  //     : null;
                                 },
                                 transit: state.listTransitData[index],
                               );

@@ -11,9 +11,20 @@ class HomeShipperCubit extends Cubit<HomeShipperState> {
   HomeShipperCubit() : super(HomeShipperState.initial());
 
   Future<void> init() async {
-    final analysis = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     try {
       emit(state.copyWith(isLoading: true));
+      await getData();
+
+      emit(state.copyWith(isLoading: false));
+    } on DioError catch (e) {
+      final errorMessage = mainRepository.mapDioErrorToMessage(e);
+      emit(state.copyWith(isLoading: false, error: errorMessage));
+    }
+  }
+
+  Future<void> getData() async {
+    final analysis = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    try {
       final transitSummary = await mainRepository.getTransitSummary();
       final shipmentSummary = await mainRepository.getShipmentSummary();
       analysis[0] = transitSummary
@@ -41,10 +52,10 @@ class HomeShipperCubit extends Cubit<HomeShipperState> {
               (element) => element.shipmentStatus == ShipmentStatus.transiting)]
           .totalElements;
 
-      emit(state.copyWith(isLoading: false, analysis: analysis));
+      emit(state.copyWith(analysis: analysis));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isLoading: false, error: errorMessage));
+      emit(state.copyWith(error: errorMessage));
     }
   }
 

@@ -22,65 +22,81 @@ import 'package:shipf/ui/theme/text_style.dart';
 class HomeShipperScreen extends StatelessWidget {
   HomeShipperScreen({Key? key}) : super(key: key);
 
-  final List<HomeAction> actions = [
-    HomeAction(
-        content: 'Chuyển lấy',
-        icon: AppPath.pick,
-        onTap: () {
-          getIt<AppRouter>().push(TransitsPage(type: LoadingType.pickup));
-        }),
-    HomeAction(
-        content: 'Chuyến giao',
-        icon: AppPath.deliver,
-        onTap: () {
-          getIt<AppRouter>().push(TransitsPage(type: LoadingType.delivery));
-        }),
-    HomeAction(
-        content: 'Trung chuyển',
-        icon: AppPath.transshipment,
-        onTap: () {
-          getIt<AppRouter>().push(TransitsPage(type: LoadingType.transit));
-        }),
-    HomeAction(
-        content: 'Đơn lấy',
-        icon: AppPath.application,
-        onTap: () {
-          getIt<AppRouter>()
-              .push(ShipmentsPage(shipmentStatus: ShipmentStatus.pickingUp));
-        }),
-    HomeAction(
-      content: 'Đơn giao',
-      icon: AppPath.deliverOrder,
-      // onTap: () {
-      //   getIt<AppRouter>().push(const OrderListPage());
-      // }
-    ),
-    HomeAction(
-      content: 'Chuyến hoàn',
-      icon: AppPath.returnTrip,
-      // onTap: () {
-      //   getIt<AppRouter>().push(const OrderListPage());
-      // }
-    ),
-    HomeAction(
-      content: 'Đơn thất bại',
-      icon: AppPath.failed,
-      // onTap: () {
-      //   getIt<AppRouter>().push(const OrderCompletePage());
-      // }
-    ),
-    HomeAction(
-      content: 'Đơn thành công',
-      icon: AppPath.success,
-      // onTap: () {
-      //   getIt<AppRouter>().push(const OrderCompletePage());
-      // }
-    ),
-    // HomeAction(content: 'Đối soát', icon: AppPath.transfer),
-  ];
   late HomeShipperCubit homeShipperCubit;
+  late List<HomeAction> actions;
   @override
   Widget build(BuildContext context) {
+    actions = [
+      HomeAction(
+          content: 'Chuyển lấy',
+          icon: AppPath.pick,
+          onTap: () {
+            getIt<AppRouter>()
+                .push(TransitsPage(type: LoadingType.pickup))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      HomeAction(
+          content: 'Chuyến giao',
+          icon: AppPath.deliver,
+          onTap: () {
+            getIt<AppRouter>()
+                .push(TransitsPage(type: LoadingType.delivery))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      HomeAction(
+          content: 'Trung chuyển',
+          icon: AppPath.transshipment,
+          onTap: () {
+            getIt<AppRouter>()
+                .push(TransitsPage(type: LoadingType.transit))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      HomeAction(
+          content: 'Đơn lấy',
+          icon: AppPath.application,
+          onTap: () {
+            getIt<AppRouter>()
+                .push(ShipmentsPage(shipmentStatus: ShipmentStatus.pickingUp))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      HomeAction(
+          content: 'Đơn giao',
+          icon: AppPath.deliverOrder,
+          onTap: () {
+            // getIt<AppRouter>().push(const OrderListPage());
+            getIt<AppRouter>()
+                .push(ShipmentsPage(shipmentStatus: ShipmentStatus.delivering))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      // HomeAction(
+      //   content: 'Chuyến hoàn',
+      //   icon: AppPath.returnTrip,
+      //   // onTap: () {
+      //   //   getIt<AppRouter>().push(const OrderListPage());
+      //   // }
+      // ),
+      HomeAction(
+          content: 'Đơn thất bại',
+          icon: AppPath.failed,
+          onTap: () {
+            // getIt<AppRouter>().push(const OrderCompletePage());
+            getIt<AppRouter>()
+                .push(
+                    ShipmentsPage(shipmentStatus: ShipmentStatus.failDelivery))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      HomeAction(
+          content: 'Đơn thành công',
+          icon: AppPath.success,
+          onTap: () {
+            // getIt<AppRouter>().push(const OrderCompletePage());
+            getIt<AppRouter>()
+                .push(ShipmentsPage(
+                    shipmentStatus: ShipmentStatus.successDelivery))
+                .then((value) => homeShipperCubit.getData());
+          }),
+      // HomeAction(content: 'Đối soát', icon: AppPath.transfer),
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

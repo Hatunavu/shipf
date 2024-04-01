@@ -192,9 +192,12 @@ class ShipmentItem extends StatelessWidget {
             ),
           ),
           Visibility(
-              visible: shipment
-                      .currentShipmentStatusTracking?.shipmentStatus?.code ==
-                  ShipmentStatus.pickingUp,
+              visible: shipment.currentShipmentStatusTracking?.shipmentStatus
+                          ?.code ==
+                      ShipmentStatus.pickingUp ||
+                  shipment.currentShipmentStatusTracking?.shipmentStatus
+                          ?.code ==
+                      ShipmentStatus.delivering,
               child: deliveryAction(context, shipment: shipment))
         ],
       ),
@@ -238,7 +241,9 @@ class ShipmentItem extends StatelessWidget {
 
   void updateShipmentStatus(BuildContext context,
       {required ShipmentData shipment}) {
-    ShipmentUpdate dropDownValue = ShipmentUpdate.pickedUp;
+    ShipmentUpdate dropDownValue = shipmentStatus == ShipmentStatus.pickingUp
+        ? ShipmentUpdate.pickedUp
+        : ShipmentUpdate.successDelivery;
     showDialog(
         context: context,
         builder: (context) {
@@ -275,10 +280,16 @@ class ShipmentItem extends StatelessWidget {
                         underline: const SizedBox(),
                         isExpanded: true,
                         value: dropDownValue,
-                        items: [
-                          ShipmentUpdate.pickedUp,
-                          ShipmentUpdate.failPickup
-                        ].map((value) {
+                        items: (shipmentStatus == ShipmentStatus.pickingUp
+                                ? [
+                                    ShipmentUpdate.pickedUp,
+                                    ShipmentUpdate.failPickup
+                                  ]
+                                : [
+                                    ShipmentUpdate.successDelivery,
+                                    ShipmentUpdate.failDelivery
+                                  ])
+                            .map((value) {
                           return DropdownMenuItem(
                             value: value,
                             child: Row(
@@ -290,7 +301,10 @@ class ShipmentItem extends StatelessWidget {
                         }).toList(),
                         onChanged: (ShipmentUpdate? value) {
                           dropDownState(() {
-                            dropDownValue = value ?? ShipmentUpdate.pickedUp;
+                            dropDownValue = value ??
+                                (shipmentStatus == ShipmentStatus.pickingUp
+                                    ? ShipmentUpdate.pickedUp
+                                    : ShipmentUpdate.successDelivery);
                           });
                         },
                       ),

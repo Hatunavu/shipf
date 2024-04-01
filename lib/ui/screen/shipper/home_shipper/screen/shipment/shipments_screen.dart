@@ -27,7 +27,8 @@ class ShipmentsScreen extends StatelessWidget {
 
     ShipmentsCubit shipmentsCubit;
     return BlocProvider(
-      create: (context) => ShipmentsCubit()..getShipments(),
+      create: (context) =>
+          ShipmentsCubit()..getShipments(shipmentStatus: shipmentStatus),
       child: BlocConsumer<ShipmentsCubit, ShipmentsState>(
         listener: (context, state) {
           if (!state.isLoading) {
@@ -47,7 +48,7 @@ class ShipmentsScreen extends StatelessWidget {
               title: 'Danh sách đơn hàng',
               leading: InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,

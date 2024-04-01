@@ -185,9 +185,11 @@ class AppRouter extends _i27.RootStackRouter {
       );
     },
     UpdateInfoPage.name: (routeData) {
+      final args = routeData.argsAs<UpdateInfoPageArgs>(
+          orElse: () => const UpdateInfoPageArgs());
       return _i27.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i15.UpdateInfoScreen(),
+        child: _i15.UpdateInfoScreen(key: args.key),
       );
     },
     OrderSuccessPage.name: (routeData) {
@@ -789,14 +791,26 @@ class NotificationPage extends _i27.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.UpdateInfoScreen]
-class UpdateInfoPage extends _i27.PageRouteInfo<void> {
-  const UpdateInfoPage()
+class UpdateInfoPage extends _i27.PageRouteInfo<UpdateInfoPageArgs> {
+  UpdateInfoPage({_i28.Key? key})
       : super(
           UpdateInfoPage.name,
           path: '/update_info',
+          args: UpdateInfoPageArgs(key: key),
         );
 
   static const String name = 'UpdateInfoPage';
+}
+
+class UpdateInfoPageArgs {
+  const UpdateInfoPageArgs({this.key});
+
+  final _i28.Key? key;
+
+  @override
+  String toString() {
+    return 'UpdateInfoPageArgs{key: $key}';
+  }
 }
 
 /// generated route for

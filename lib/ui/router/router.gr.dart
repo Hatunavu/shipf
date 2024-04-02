@@ -14,11 +14,12 @@
 import 'package:auto_route/auto_route.dart' as _i27;
 import 'package:flutter/material.dart' as _i28;
 
+import '../../data/model/account/account_model.dart' as _i30;
 import '../../data/model/address/address.dart' as _i29;
-import '../../data/model/post/post_response.dart' as _i32;
-import '../../enums/enum_loading_type.dart' as _i31;
-import '../../enums/enum_shipment_status.dart' as _i30;
-import '../../enums/enum_tonnage.dart' as _i33;
+import '../../data/model/post/post_response.dart' as _i33;
+import '../../enums/enum_loading_type.dart' as _i32;
+import '../../enums/enum_shipment_status.dart' as _i31;
+import '../../enums/enum_tonnage.dart' as _i34;
 import '../screen/auth/forget_pass/forget_pass_screen.dart' as _i9;
 import '../screen/auth/login/enter_pass/enter_pass_screen.dart' as _i7;
 import '../screen/auth/login/login_screen.dart' as _i3;
@@ -185,11 +186,13 @@ class AppRouter extends _i27.RootStackRouter {
       );
     },
     UpdateInfoPage.name: (routeData) {
-      final args = routeData.argsAs<UpdateInfoPageArgs>(
-          orElse: () => const UpdateInfoPageArgs());
+      final args = routeData.argsAs<UpdateInfoPageArgs>();
       return _i27.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.UpdateInfoScreen(key: args.key),
+        child: _i15.UpdateInfoScreen(
+          key: args.key,
+          accountData: args.accountData,
+        ),
       );
     },
     OrderSuccessPage.name: (routeData) {
@@ -792,24 +795,34 @@ class NotificationPage extends _i27.PageRouteInfo<void> {
 /// generated route for
 /// [_i15.UpdateInfoScreen]
 class UpdateInfoPage extends _i27.PageRouteInfo<UpdateInfoPageArgs> {
-  UpdateInfoPage({_i28.Key? key})
-      : super(
+  UpdateInfoPage({
+    _i28.Key? key,
+    required _i30.AccountData accountData,
+  }) : super(
           UpdateInfoPage.name,
           path: '/update_info',
-          args: UpdateInfoPageArgs(key: key),
+          args: UpdateInfoPageArgs(
+            key: key,
+            accountData: accountData,
+          ),
         );
 
   static const String name = 'UpdateInfoPage';
 }
 
 class UpdateInfoPageArgs {
-  const UpdateInfoPageArgs({this.key});
+  const UpdateInfoPageArgs({
+    this.key,
+    required this.accountData,
+  });
 
   final _i28.Key? key;
 
+  final _i30.AccountData accountData;
+
   @override
   String toString() {
-    return 'UpdateInfoPageArgs{key: $key}';
+    return 'UpdateInfoPageArgs{key: $key, accountData: $accountData}';
   }
 }
 
@@ -866,7 +879,7 @@ class HomeShipperPageArgs {
 class ShipmentsPage extends _i27.PageRouteInfo<ShipmentsPageArgs> {
   ShipmentsPage({
     _i28.Key? key,
-    _i30.ShipmentStatus shipmentStatus = _i30.ShipmentStatus.pickingUp,
+    _i31.ShipmentStatus shipmentStatus = _i31.ShipmentStatus.pickingUp,
   }) : super(
           ShipmentsPage.name,
           path: '/shipments',
@@ -882,12 +895,12 @@ class ShipmentsPage extends _i27.PageRouteInfo<ShipmentsPageArgs> {
 class ShipmentsPageArgs {
   const ShipmentsPageArgs({
     this.key,
-    this.shipmentStatus = _i30.ShipmentStatus.pickingUp,
+    this.shipmentStatus = _i31.ShipmentStatus.pickingUp,
   });
 
   final _i28.Key? key;
 
-  final _i30.ShipmentStatus shipmentStatus;
+  final _i31.ShipmentStatus shipmentStatus;
 
   @override
   String toString() {
@@ -912,7 +925,7 @@ class OrderCompletePage extends _i27.PageRouteInfo<void> {
 class TransitsPage extends _i27.PageRouteInfo<TransitsPageArgs> {
   TransitsPage({
     _i28.Key? key,
-    _i31.LoadingType type = _i31.LoadingType.pickup,
+    _i32.LoadingType type = _i32.LoadingType.pickup,
   }) : super(
           TransitsPage.name,
           path: '/transits',
@@ -928,12 +941,12 @@ class TransitsPage extends _i27.PageRouteInfo<TransitsPageArgs> {
 class TransitsPageArgs {
   const TransitsPageArgs({
     this.key,
-    this.type = _i31.LoadingType.pickup,
+    this.type = _i32.LoadingType.pickup,
   });
 
   final _i28.Key? key;
 
-  final _i31.LoadingType type;
+  final _i32.LoadingType type;
 
   @override
   String toString() {
@@ -1004,7 +1017,7 @@ class PostPageArgs {
 class CreatePostPage extends _i27.PageRouteInfo<CreatePostPageArgs> {
   CreatePostPage({
     _i28.Key? key,
-    _i32.PostData? postData,
+    _i33.PostData? postData,
     dynamic Function()? callBack,
   }) : super(
           CreatePostPage.name,
@@ -1028,7 +1041,7 @@ class CreatePostPageArgs {
 
   final _i28.Key? key;
 
-  final _i32.PostData? postData;
+  final _i33.PostData? postData;
 
   final dynamic Function()? callBack;
 
@@ -1070,9 +1083,9 @@ class SearchPostPage extends _i27.PageRouteInfo<SearchPostPageArgs> {
     dynamic Function({
       List<_i29.AddressDataModel>? provinces,
       List<_i29.AddressDataModel>? provincesDelivery,
-      _i33.TonnageType? tonnage,
+      _i34.TonnageType? tonnage,
     })? callBack,
-    _i33.TonnageType? tonnage,
+    _i34.TonnageType? tonnage,
     List<_i29.AddressDataModel> provinces = const [],
     List<_i29.AddressDataModel> provincesDelivery = const [],
   }) : super(
@@ -1104,10 +1117,10 @@ class SearchPostPageArgs {
   final dynamic Function({
     List<_i29.AddressDataModel>? provinces,
     List<_i29.AddressDataModel>? provincesDelivery,
-    _i33.TonnageType? tonnage,
+    _i34.TonnageType? tonnage,
   })? callBack;
 
-  final _i33.TonnageType? tonnage;
+  final _i34.TonnageType? tonnage;
 
   final List<_i29.AddressDataModel> provinces;
 

@@ -165,7 +165,7 @@ class PrimaryTextField extends StatelessWidget {
                             size: 18.sp,
                             color: primaryColor,
                           )
-                        : isPass != null
+                        : (isPass != null && showPrefixIcon)
                             ? Icon(
                                 Ionicons.lock_closed_outline,
                                 size: 18.sp,

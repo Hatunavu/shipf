@@ -52,6 +52,10 @@ AccountData _$AccountDataFromJson(Map<String, dynamic> json) => AccountData(
       phone: json['phone'] as String? ?? '',
       email: json['email'] as String? ?? '',
       isActive: json['isActive'] as bool? ?? false,
+      zones: (json['zones'] as List<dynamic>?)
+              ?.map((e) => AccountZone.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$AccountDataToJson(AccountData instance) =>
@@ -65,4 +69,52 @@ Map<String, dynamic> _$AccountDataToJson(AccountData instance) =>
       'phone': instance.phone,
       'email': instance.email,
       'isActive': instance.isActive,
+      'zones': instance.zones,
+    };
+
+AccountZone _$AccountZoneFromJson(Map<String, dynamic> json) => AccountZone(
+      id: json['id'] as int? ?? 0,
+      provinceId: json['provinceId'] as int? ?? 0,
+      districtId: json['districtId'] as int?,
+      wardId: json['wardId'] as int?,
+      fullAddress: json['fullAddress'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      type: json['type'] == null
+          ? ZoneType.pickupZone
+          : stringToZoneType(json['type'] as String),
+      isActive: json['isActive'] as bool? ?? true,
+    );
+
+Map<String, dynamic> _$AccountZoneToJson(AccountZone instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'provinceId': instance.provinceId,
+      'districtId': instance.districtId,
+      'wardId': instance.wardId,
+      'fullAddress': instance.fullAddress,
+      'code': instance.code,
+      'type': zoneTypeToString(instance.type),
+      'isActive': instance.isActive,
+    };
+
+ZoneResponse _$ZoneResponseFromJson(Map<String, dynamic> json) => ZoneResponse(
+      message: json['message'] as String? ?? '',
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => AccountZone.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      metadata: json['metadata'] == null
+          ? null
+          : NoDataMetaData.fromJson(json['metadata'] as Map<String, dynamic>),
+      success: json['success'] as bool? ?? true,
+      status: json['status'] as int? ?? 0,
+    );
+
+Map<String, dynamic> _$ZoneResponseToJson(ZoneResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+      'metadata': instance.metadata,
+      'success': instance.success,
+      'status': instance.status,
     };

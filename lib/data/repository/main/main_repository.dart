@@ -210,6 +210,20 @@ abstract class MainRepository {
   @PUT(endpoint.updatePost)
   Future<NoDataResponse> updatePost(
       {@Path('id') required int id, @Body() required PostRequest postRequest});
+
+  //zone
+  @GET(endpoint.getZones)
+  Future<ZoneResponse> getZones({
+    @Query('page') int? page,
+    @Query('size') int? size,
+    @Query('search') String? search,
+    @Query('orderKey') String? orderKey,
+    @Query('orderBy') String? orderBy,
+    @Query('fromDate') String? fromDate,
+    @Query('toDate') String? toDate,
+    @Query('isGetAll') bool? isGetAll,
+    @Query('type') String? type,
+  });
 }
 
 extension ApiClientAWSS3 on MainRepository {

@@ -21,7 +21,6 @@ const getPickupAddresses = "/pickup-addresses";
 const getDeliveryAddresses = "/delivery-addresses";
 const getAddresses = "/customer-addresses";
 
-
 //order
 const getOrderService = '/price-lists/quote';
 const createOrder = '/shipments';
@@ -52,3 +51,6 @@ const getPost = '/express/post';
 const createPost = '/express/post';
 const getPostSaved = '/express/post/saved';
 const updatePost = '/express/post/{id}';
+
+//zone
+const getZones = '/zone';

@@ -12,12 +12,24 @@ part of 'update_info_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UpdateInfoState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isFirstLoad => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  TextEditingController? get nameController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get phoneController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get emailController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get paswordController =>
+      throw _privateConstructorUsedError;
+  TextEditingController? get confirmPasswordController =>
+      throw _privateConstructorUsedError;
+  bool get showPass => throw _privateConstructorUsedError;
   List<AddressDataModel> get provinces => throw _privateConstructorUsedError;
   List<AddressDataModel> get selectedProvinces =>
       throw _privateConstructorUsedError;
@@ -41,7 +53,14 @@ abstract class $UpdateInfoStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isFirstLoad,
       String? error,
+      TextEditingController? nameController,
+      TextEditingController? phoneController,
+      TextEditingController? emailController,
+      TextEditingController? paswordController,
+      TextEditingController? confirmPasswordController,
+      bool showPass,
       List<AddressDataModel> provinces,
       List<AddressDataModel> selectedProvinces,
       List<AddressDataModel> selectedProvincesDeliver,
@@ -65,7 +84,14 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
     Object? error = freezed,
+    Object? nameController = freezed,
+    Object? phoneController = freezed,
+    Object? emailController = freezed,
+    Object? paswordController = freezed,
+    Object? confirmPasswordController = freezed,
+    Object? showPass = null,
     Object? provinces = null,
     Object? selectedProvinces = null,
     Object? selectedProvincesDeliver = null,
@@ -79,10 +105,38 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      nameController: freezed == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      phoneController: freezed == phoneController
+          ? _value.phoneController
+          : phoneController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      emailController: freezed == emailController
+          ? _value.emailController
+          : emailController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      paswordController: freezed == paswordController
+          ? _value.paswordController
+          : paswordController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      confirmPasswordController: freezed == confirmPasswordController
+          ? _value.confirmPasswordController
+          : confirmPasswordController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      showPass: null == showPass
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
       provinces: null == provinces
           ? _value.provinces
           : provinces // ignore: cast_nullable_to_non_nullable
@@ -116,16 +170,23 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
 }
 
 /// @nodoc
-abstract class _$$_UpdateInfoStateCopyWith<$Res>
+abstract class _$$UpdateInfoStateImplCopyWith<$Res>
     implements $UpdateInfoStateCopyWith<$Res> {
-  factory _$$_UpdateInfoStateCopyWith(
-          _$_UpdateInfoState value, $Res Function(_$_UpdateInfoState) then) =
-      __$$_UpdateInfoStateCopyWithImpl<$Res>;
+  factory _$$UpdateInfoStateImplCopyWith(_$UpdateInfoStateImpl value,
+          $Res Function(_$UpdateInfoStateImpl) then) =
+      __$$UpdateInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool isLoading,
+      bool isFirstLoad,
       String? error,
+      TextEditingController? nameController,
+      TextEditingController? phoneController,
+      TextEditingController? emailController,
+      TextEditingController? paswordController,
+      TextEditingController? confirmPasswordController,
+      bool showPass,
       List<AddressDataModel> provinces,
       List<AddressDataModel> selectedProvinces,
       List<AddressDataModel> selectedProvincesDeliver,
@@ -136,18 +197,25 @@ abstract class _$$_UpdateInfoStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateInfoStateCopyWithImpl<$Res>
-    extends _$UpdateInfoStateCopyWithImpl<$Res, _$_UpdateInfoState>
-    implements _$$_UpdateInfoStateCopyWith<$Res> {
-  __$$_UpdateInfoStateCopyWithImpl(
-      _$_UpdateInfoState _value, $Res Function(_$_UpdateInfoState) _then)
+class __$$UpdateInfoStateImplCopyWithImpl<$Res>
+    extends _$UpdateInfoStateCopyWithImpl<$Res, _$UpdateInfoStateImpl>
+    implements _$$UpdateInfoStateImplCopyWith<$Res> {
+  __$$UpdateInfoStateImplCopyWithImpl(
+      _$UpdateInfoStateImpl _value, $Res Function(_$UpdateInfoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isFirstLoad = null,
     Object? error = freezed,
+    Object? nameController = freezed,
+    Object? phoneController = freezed,
+    Object? emailController = freezed,
+    Object? paswordController = freezed,
+    Object? confirmPasswordController = freezed,
+    Object? showPass = null,
     Object? provinces = null,
     Object? selectedProvinces = null,
     Object? selectedProvincesDeliver = null,
@@ -156,15 +224,43 @@ class __$$_UpdateInfoStateCopyWithImpl<$Res>
     Object? tonnage = freezed,
     Object? notiConfig = freezed,
   }) {
-    return _then(_$_UpdateInfoState(
+    return _then(_$UpdateInfoStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstLoad: null == isFirstLoad
+          ? _value.isFirstLoad
+          : isFirstLoad // ignore: cast_nullable_to_non_nullable
               as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      nameController: freezed == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      phoneController: freezed == phoneController
+          ? _value.phoneController
+          : phoneController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      emailController: freezed == emailController
+          ? _value.emailController
+          : emailController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      paswordController: freezed == paswordController
+          ? _value.paswordController
+          : paswordController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      confirmPasswordController: freezed == confirmPasswordController
+          ? _value.confirmPasswordController
+          : confirmPasswordController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      showPass: null == showPass
+          ? _value.showPass
+          : showPass // ignore: cast_nullable_to_non_nullable
+              as bool,
       provinces: null == provinces
           ? _value._provinces
           : provinces // ignore: cast_nullable_to_non_nullable
@@ -199,10 +295,17 @@ class __$$_UpdateInfoStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateInfoState implements _UpdateInfoState {
-  const _$_UpdateInfoState(
+class _$UpdateInfoStateImpl implements _UpdateInfoState {
+  const _$UpdateInfoStateImpl(
       {required this.isLoading,
+      required this.isFirstLoad,
       this.error,
+      this.nameController,
+      this.phoneController,
+      this.emailController,
+      this.paswordController,
+      this.confirmPasswordController,
+      required this.showPass,
       required final List<AddressDataModel> provinces,
       required final List<AddressDataModel> selectedProvinces,
       required final List<AddressDataModel> selectedProvincesDeliver,
@@ -217,7 +320,21 @@ class _$_UpdateInfoState implements _UpdateInfoState {
   @override
   final bool isLoading;
   @override
+  final bool isFirstLoad;
+  @override
   final String? error;
+  @override
+  final TextEditingController? nameController;
+  @override
+  final TextEditingController? phoneController;
+  @override
+  final TextEditingController? emailController;
+  @override
+  final TextEditingController? paswordController;
+  @override
+  final TextEditingController? confirmPasswordController;
+  @override
+  final bool showPass;
   final List<AddressDataModel> _provinces;
   @override
   List<AddressDataModel> get provinces {
@@ -255,17 +372,32 @@ class _$_UpdateInfoState implements _UpdateInfoState {
 
   @override
   String toString() {
-    return 'UpdateInfoState(isLoading: $isLoading, error: $error, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, tonnage: $tonnage, notiConfig: $notiConfig)';
+    return 'UpdateInfoState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, nameController: $nameController, phoneController: $phoneController, emailController: $emailController, paswordController: $paswordController, confirmPasswordController: $confirmPasswordController, showPass: $showPass, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, tonnage: $tonnage, notiConfig: $notiConfig)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateInfoState &&
+            other is _$UpdateInfoStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isFirstLoad, isFirstLoad) ||
+                other.isFirstLoad == isFirstLoad) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.nameController, nameController) ||
+                other.nameController == nameController) &&
+            (identical(other.phoneController, phoneController) ||
+                other.phoneController == phoneController) &&
+            (identical(other.emailController, emailController) ||
+                other.emailController == emailController) &&
+            (identical(other.paswordController, paswordController) ||
+                other.paswordController == paswordController) &&
+            (identical(other.confirmPasswordController,
+                    confirmPasswordController) ||
+                other.confirmPasswordController == confirmPasswordController) &&
+            (identical(other.showPass, showPass) ||
+                other.showPass == showPass) &&
             const DeepCollectionEquality()
                 .equals(other._provinces, _provinces) &&
             const DeepCollectionEquality()
@@ -285,7 +417,14 @@ class _$_UpdateInfoState implements _UpdateInfoState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isFirstLoad,
       error,
+      nameController,
+      phoneController,
+      emailController,
+      paswordController,
+      confirmPasswordController,
+      showPass,
       const DeepCollectionEquality().hash(_provinces),
       const DeepCollectionEquality().hash(_selectedProvinces),
       const DeepCollectionEquality().hash(_selectedProvincesDeliver),
@@ -297,26 +436,48 @@ class _$_UpdateInfoState implements _UpdateInfoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
-      __$$_UpdateInfoStateCopyWithImpl<_$_UpdateInfoState>(this, _$identity);
+  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
+      __$$UpdateInfoStateImplCopyWithImpl<_$UpdateInfoStateImpl>(
+          this, _$identity);
 }
 
 abstract class _UpdateInfoState implements UpdateInfoState {
   const factory _UpdateInfoState(
       {required final bool isLoading,
+      required final bool isFirstLoad,
       final String? error,
+      final TextEditingController? nameController,
+      final TextEditingController? phoneController,
+      final TextEditingController? emailController,
+      final TextEditingController? paswordController,
+      final TextEditingController? confirmPasswordController,
+      required final bool showPass,
       required final List<AddressDataModel> provinces,
       required final List<AddressDataModel> selectedProvinces,
       required final List<AddressDataModel> selectedProvincesDeliver,
       required final String errorProvince,
       required final String errorProvinceDeliver,
       final TonnageType? tonnage,
-      final NotiConfig? notiConfig}) = _$_UpdateInfoState;
+      final NotiConfig? notiConfig}) = _$UpdateInfoStateImpl;
 
   @override
   bool get isLoading;
   @override
+  bool get isFirstLoad;
+  @override
   String? get error;
+  @override
+  TextEditingController? get nameController;
+  @override
+  TextEditingController? get phoneController;
+  @override
+  TextEditingController? get emailController;
+  @override
+  TextEditingController? get paswordController;
+  @override
+  TextEditingController? get confirmPasswordController;
+  @override
+  bool get showPass;
   @override
   List<AddressDataModel> get provinces;
   @override
@@ -333,6 +494,6 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   NotiConfig? get notiConfig;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
+  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

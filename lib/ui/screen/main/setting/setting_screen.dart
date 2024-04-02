@@ -97,7 +97,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   : SingleChildScrollView(
                       child: Column(
                         children: [
-                          mainInfo(state.userInfo),
+                          mainInfo(state.userInfo!),
                           settingList(),
                           logout(),
                           VerticalSpace(kDefaultPaddingHeightWidget),
@@ -110,10 +110,10 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Widget mainInfo(AccountData? userInfo) {
+  Widget mainInfo(AccountData userInfo) {
     return GestureDetector(
       onTap: () {
-        context.router.push(UpdateInfoPage());
+        context.router.push(UpdateInfoPage(accountData: userInfo));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -147,12 +147,12 @@ class _SettingScreenState extends State<SettingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  userInfo?.name ?? '',
+                  userInfo.name,
                   style: textHeading,
                 ),
                 VerticalSpace(kDefaultPaddingHeightScreen / 2),
                 Text(
-                  userInfo?.phone ?? '',
+                  userInfo.phone,
                   style: textBody,
                 ),
               ],

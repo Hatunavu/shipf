@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shipf/data/model/no_data/no_data_response.dart';
+import 'package:shipf/enums/enum_zone_type.dart';
 
 part 'account_model.g.dart';
 
@@ -51,6 +53,7 @@ class AccountData {
   final String phone;
   final String email;
   final bool isActive;
+  final List<AccountZone> zones;
   AccountData(
       {this.id = 0,
       this.userConfigId = 0,
@@ -60,10 +63,58 @@ class AccountData {
       this.name = '',
       this.phone = '',
       this.email = '',
-      this.isActive = false});
+      this.isActive = false,
+      this.zones = const []});
 
   factory AccountData.fromJson(Map<String, dynamic> json) =>
       _$AccountDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$AccountDataToJson(this);
+}
+
+@JsonSerializable()
+class AccountZone {
+  final int id;
+  final int provinceId;
+  final int? districtId;
+  final int? wardId;
+  final String fullAddress;
+  final String code;
+  @JsonKey(name: 'type', toJson: zoneTypeToString, fromJson: stringToZoneType)
+  final ZoneType type;
+  final bool isActive;
+  AccountZone(
+      {this.id = 0,
+      this.provinceId = 0,
+      this.districtId,
+      this.wardId,
+      this.fullAddress = '',
+      this.code = '',
+      this.type = ZoneType.pickupZone,
+      this.isActive = true});
+
+  factory AccountZone.fromJson(Map<String, dynamic> json) =>
+      _$AccountZoneFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AccountZoneToJson(this);
+}
+
+@JsonSerializable()
+class ZoneResponse {
+  final String message;
+  final List<AccountZone> data;
+  final NoDataMetaData? metadata;
+  final bool success;
+  final int status;
+  ZoneResponse(
+      {this.message = '',
+      this.data = const [],
+      this.metadata,
+      this.success = true,
+      this.status = 0});
+
+  factory ZoneResponse.fromJson(Map<String, dynamic> json) =>
+      _$ZoneResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ZoneResponseToJson(this);
 }

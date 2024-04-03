@@ -17,9 +17,11 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tags = [
-      ...postData.pickupProvinces.map((e) => e.name).toList(),
-      ...postData.deliveryProvinces.map((e) => e.name).toList(),
+    final List<Tag> tags = [
+      ...postData.pickupProvinces.map((e) => Tag(tagName: e.name)).toList(),
+      ...postData.deliveryProvinces
+          .map((e) => Tag(tagName: e.name, isPickup: false))
+          .toList(),
     ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen)
@@ -78,13 +80,15 @@ class PostItem extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.only(bottom: 2.h, right: 2.w),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
-                      color: darkContentColor),
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: darkContentColor,
+                  ),
                   padding: EdgeInsets.symmetric(
                       vertical: 6.h, horizontal: kDefaultPaddingWidthScreen),
                   child: Text(
-                    tag,
-                    style: primarySubTitleStyle,
+                    tag.tagName,
+                    style: primarySubTitleStyle.copyWith(
+                        color: tag.isPickup ? primaryColor : Colors.grey[500]),
                   ),
                 );
               }).toList(),

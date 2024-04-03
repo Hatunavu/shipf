@@ -102,3 +102,10 @@ class PostMetaData {
 
   Map<String, dynamic> toJson() => _$PostMetaDataToJson(this);
 }
+
+class Tag {
+  final String tagName;
+  final bool isPickup;
+
+  Tag({this.tagName = '', this.isPickup = true});
+}

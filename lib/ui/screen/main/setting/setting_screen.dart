@@ -113,7 +113,9 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget mainInfo(AccountData userInfo) {
     return GestureDetector(
       onTap: () {
-        context.router.push(UpdateInfoPage(accountData: userInfo));
+        context.router
+            .push(UpdateInfoPage(accountData: userInfo))
+            .then((value) => cubit.getUserInfo());
       },
       child: Container(
         decoration: BoxDecoration(

@@ -336,7 +336,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           selectProvince: (index) {},
           validator: (_) {
             if (createPostCubit.state.selectedProvinces.isEmpty) {
-              createPostCubit.updateProvinceError(isDelivery: isDeliver);
+              createPostCubit.updateProvinceError();
+            }
+            if (createPostCubit.state.selectedProvincesDeliver.isEmpty) {
+              createPostCubit.updateProvinceError(isDelivery: true);
             }
             return null;
           },

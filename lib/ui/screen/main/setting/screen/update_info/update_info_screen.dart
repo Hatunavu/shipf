@@ -11,10 +11,12 @@ import 'package:shipf/ui/screen/main/order/widget/order_label_text_filed_widget.
 import 'package:shipf/ui/screen/main/order/widget/select_address_widget.dart';
 import 'package:shipf/ui/screen/main/setting/screen/update_info/cubit/update_info_cubit.dart';
 import 'package:shipf/ui/screen/main/setting/screen/update_info/cubit/update_info_state.dart';
+import 'package:shipf/ui/screen/main/setting/widget/select_zone_widget.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/widget/select_tonnage_widget.dart';
 import 'package:shipf/ui/shared/base_screen.dart';
 import 'package:shipf/ui/shared/textfield/primary_textfield.dart';
 import 'package:shipf/ui/shared/utils/functions.dart';
+import 'package:shipf/ui/shared/widget/button/primary_button.dart';
 import 'package:shipf/ui/shared/widget/space/vertical_space.dart';
 import 'package:shipf/ui/theme/constant.dart';
 
@@ -25,13 +27,15 @@ class UpdateInfoScreen extends StatelessWidget {
   late UpdateInfoCubit updateInfoCubit;
   bool isLoading = false;
 
+  final GlobalKey<FormState> updateInfoFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     RoleType? role = context.read<AppCubit>().state.role;
     return GestureDetector(
       onTap: () => unfocus(context),
       child: BlocProvider(
-          create: (context) => UpdateInfoCubit()..init(accountData),
+          create: (context) =>
+              UpdateInfoCubit()..init(accountData, roleType: role!),
           child: BlocConsumer<UpdateInfoCubit, UpdateInfoState>(
               listener: (context, state) {},
               builder: (context, state) {
@@ -59,69 +63,155 @@ class UpdateInfoScreen extends StatelessWidget {
                   ),
                   child: state.isFirstLoad
                       ? const SizedBox()
-                      : role == RoleType.shipper
-                          ? updateShipper(state)
-                          : const Center(
-                              child: Text("Tính năng đang được phát triển")),
+                      : Form(
+                          key: updateInfoFormKey,
+                          child: Column(
+                            children: [
+                              Expanded(child: updateWidget(state, role!)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: kDefaultPaddingWidthScreen,
+                                    vertical: kDefaultPaddingHeightScreen),
+                                child: PrimaryButton(
+                                  label: 'Cập nhật',
+                                  onPressed: () async {
+                                    if (role == RoleType.shipper) {
+                                      if (updateInfoFormKey.currentState!
+                                              .validate() &&
+                                          state.selectedZones.isNotEmpty &&
+                                          state.selectedZonesDeliver
+                                              .isNotEmpty) {
+                                        await updateInfoCubit.updateInfo();
+                                        context.router.pop();
+                                      }
+                                    } else {
+                                      if (updateInfoFormKey.currentState!
+                                          .validate()) {
+                                        await updateInfoCubit.updateInfo();
+                                        context.router.pop();
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                 );
               })),
     );
   }
 
-  Widget updateShipper(UpdateInfoState state) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingWidthWidget,
-          vertical: kDefaultPaddingHeightScreen),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const OrderLabelTextFieldWidget(label: 'Họ và tên'),
-          PrimaryTextField(
-            controller: state.nameController!,
-            label: '',
-            maxLines: 1,
-            hintText: 'Họ và tên',
-            fieldRequire: 'Họ và tên',
-          ),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
-          ),
-          const OrderLabelTextFieldWidget(label: 'Số điện thoại'),
-          PrimaryTextField(
-            controller: state.phoneController!,
-            label: '',
-            maxLines: 1,
-            hintText: 'Họ và tên',
-            fieldRequire: 'Họ và tên',
-            isPhone: true,
-            showPrefixIcon: false,
-          ),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
-          ),
-          const OrderLabelTextFieldWidget(label: 'Email'),
-          PrimaryTextField(
-            controller: state.emailController!,
-            label: '',
-            maxLines: 1,
-            hintText: 'Email',
-            isValidate: false,
-          ),
-          VerticalSpace(
-            kDefaultPaddingHeightScreen,
-          ),
-          const OrderLabelTextFieldWidget(label: 'Mật khẩu'),
-          PrimaryTextField(
-              controller: state.paswordController!,
+  Widget updateWidget(UpdateInfoState state, RoleType role) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingWidthWidget,
+            vertical: kDefaultPaddingHeightScreen),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const OrderLabelTextFieldWidget(label: 'Họ và tên'),
+            PrimaryTextField(
+              controller: state.nameController!,
               label: '',
               maxLines: 1,
-              hintText: 'Mật khẩu',
-              isPass: state.showPass,
+              hintText: 'Họ và tên',
+              fieldRequire: 'Họ và tên',
+            ),
+            VerticalSpace(
+              kDefaultPaddingHeightScreen,
+            ),
+            const OrderLabelTextFieldWidget(label: 'Số điện thoại'),
+            PrimaryTextField(
+              controller: state.phoneController!,
+              label: '',
+              maxLines: 1,
+              hintText: 'Họ và tên',
+              fieldRequire: 'Họ và tên',
+              isPhone: true,
               showPrefixIcon: false,
-              showPass: () => updateInfoCubit.showPass()),
-        ],
+            ),
+            VerticalSpace(
+              kDefaultPaddingHeightScreen,
+            ),
+            const OrderLabelTextFieldWidget(label: 'Email'),
+            PrimaryTextField(
+              controller: state.emailController!,
+              label: '',
+              maxLines: 1,
+              hintText: 'Email',
+              isValidate: false,
+            ),
+            VerticalSpace(
+              kDefaultPaddingHeightScreen,
+            ),
+            const OrderLabelTextFieldWidget(label: 'Mật khẩu'),
+            PrimaryTextField(
+                controller: state.passwordController!,
+                label: '',
+                maxLines: 1,
+                hintText: 'Mật khẩu',
+                isPass: state.showPass,
+                showPrefixIcon: false,
+                showPass: () => updateInfoCubit.showPass()),
+            role == RoleType.shipper
+                ? Column(
+                    children: [
+                      VerticalSpace(
+                        kDefaultPaddingHeightScreen,
+                      ),
+                      itemSelectZone(
+                        label: 'Khu vực bốc hàng',
+                      ),
+                      VerticalSpace(
+                        kDefaultPaddingHeightScreen,
+                      ),
+                      itemSelectZone(
+                          label: 'Khu vực trả hàng', isDeliver: true),
+                    ],
+                  )
+                : const SizedBox()
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget itemSelectZone({
+    required String label,
+    bool isDeliver = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OrderLabelTextFieldWidget(label: label),
+        SelectZoneWidget(
+          label: label,
+          isDeliver: isDeliver,
+          zones: isDeliver
+              ? updateInfoCubit.state.zonesDelivery
+              : updateInfoCubit.state.zones,
+          validator: (_) {
+            if (updateInfoCubit.state.selectedZones.isEmpty) {
+              updateInfoCubit.updateZoneError();
+            }
+            if (updateInfoCubit.state.selectedZonesDeliver.isEmpty) {
+              updateInfoCubit.updateZoneError(isDelivery: true);
+            }
+            return null;
+          },
+          errorZone: isDeliver
+              ? updateInfoCubit.state.errorZoneDeliver
+              : updateInfoCubit.state.errorZone,
+          multiZone: (zones) {
+            updateInfoCubit.updateZone(zones, isDelivery: isDeliver);
+          },
+          multiZones: isDeliver
+              ? updateInfoCubit.state.selectedZonesDeliver
+              : updateInfoCubit.state.selectedZones,
+        ),
+      ],
     );
   }
 

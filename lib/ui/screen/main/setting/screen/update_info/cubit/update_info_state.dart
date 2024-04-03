@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shipf/data/model/account/account_model.dart';
 import 'package:shipf/data/model/address/address.dart';
 import 'package:shipf/enums/enum_noti_config.dart';
 import 'package:shipf/enums/enum_tonnage.dart';
@@ -15,9 +16,15 @@ class UpdateInfoState with _$UpdateInfoState {
     TextEditingController? nameController,
     TextEditingController? phoneController,
     TextEditingController? emailController,
-    TextEditingController? paswordController,
+    TextEditingController? passwordController,
     TextEditingController? confirmPasswordController,
     required bool showPass,
+    required List<AccountZone> zones,
+    required List<AccountZone> zonesDelivery,
+    required List<AccountZone> selectedZones,
+    required List<AccountZone> selectedZonesDeliver,
+    required String errorZone,
+    required String errorZoneDeliver,
     required List<AddressDataModel> provinces,
     required List<AddressDataModel> selectedProvinces,
     required List<AddressDataModel> selectedProvincesDeliver,
@@ -32,6 +39,12 @@ class UpdateInfoState with _$UpdateInfoState {
         isFirstLoad: true,
         error: "",
         showPass: false,
+        zones: [],
+        zonesDelivery: [],
+        selectedZones: [],
+        selectedZonesDeliver: [],
+        errorZone: '',
+        errorZoneDeliver: '',
         provinces: [],
         selectedProvinces: [],
         selectedProvincesDeliver: [],

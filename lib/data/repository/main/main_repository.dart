@@ -124,6 +124,10 @@ abstract class MainRepository {
   @GET(endpoint.getUserInfo)
   Future<AccountResponse> getUserInfo();
 
+  @PUT(endpoint.updateProfile)
+  Future<NoDataResponse> updateProfile(
+      {@Body() required AccountRequest request});
+
   //shipment
   @GET(endpoint.getShipments)
   Future<ShipmentResponse> getShipments({

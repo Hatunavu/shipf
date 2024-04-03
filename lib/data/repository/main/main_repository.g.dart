@@ -507,6 +507,30 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<NoDataResponse> updateProfile({required request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<NoDataResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/update-profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NoDataResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ShipmentResponse> getShipments({
     page,
     size,

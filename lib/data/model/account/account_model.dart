@@ -118,3 +118,24 @@ class ZoneResponse {
 
   Map<String, dynamic> toJson() => _$ZoneResponseToJson(this);
 }
+
+@JsonSerializable()
+class AccountRequest {
+  final String name;
+  final String phone;
+  final String? email;
+  final String password;
+  final List<String> zoneIds;
+
+  AccountRequest(
+      {this.name = '',
+      this.phone = '',
+      this.email,
+      this.password = '',
+      this.zoneIds = const []});
+
+  factory AccountRequest.fromJson(Map<String, dynamic> json) =>
+      _$AccountRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AccountRequestToJson(this);
+}

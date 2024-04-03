@@ -12,7 +12,7 @@ part of 'update_info_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UpdateInfoState {
@@ -25,11 +25,18 @@ mixin _$UpdateInfoState {
       throw _privateConstructorUsedError;
   TextEditingController? get emailController =>
       throw _privateConstructorUsedError;
-  TextEditingController? get paswordController =>
+  TextEditingController? get passwordController =>
       throw _privateConstructorUsedError;
   TextEditingController? get confirmPasswordController =>
       throw _privateConstructorUsedError;
   bool get showPass => throw _privateConstructorUsedError;
+  List<AccountZone> get zones => throw _privateConstructorUsedError;
+  List<AccountZone> get zonesDelivery => throw _privateConstructorUsedError;
+  List<AccountZone> get selectedZones => throw _privateConstructorUsedError;
+  List<AccountZone> get selectedZonesDeliver =>
+      throw _privateConstructorUsedError;
+  String get errorZone => throw _privateConstructorUsedError;
+  String get errorZoneDeliver => throw _privateConstructorUsedError;
   List<AddressDataModel> get provinces => throw _privateConstructorUsedError;
   List<AddressDataModel> get selectedProvinces =>
       throw _privateConstructorUsedError;
@@ -58,9 +65,15 @@ abstract class $UpdateInfoStateCopyWith<$Res> {
       TextEditingController? nameController,
       TextEditingController? phoneController,
       TextEditingController? emailController,
-      TextEditingController? paswordController,
+      TextEditingController? passwordController,
       TextEditingController? confirmPasswordController,
       bool showPass,
+      List<AccountZone> zones,
+      List<AccountZone> zonesDelivery,
+      List<AccountZone> selectedZones,
+      List<AccountZone> selectedZonesDeliver,
+      String errorZone,
+      String errorZoneDeliver,
       List<AddressDataModel> provinces,
       List<AddressDataModel> selectedProvinces,
       List<AddressDataModel> selectedProvincesDeliver,
@@ -89,9 +102,15 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
     Object? nameController = freezed,
     Object? phoneController = freezed,
     Object? emailController = freezed,
-    Object? paswordController = freezed,
+    Object? passwordController = freezed,
     Object? confirmPasswordController = freezed,
     Object? showPass = null,
+    Object? zones = null,
+    Object? zonesDelivery = null,
+    Object? selectedZones = null,
+    Object? selectedZonesDeliver = null,
+    Object? errorZone = null,
+    Object? errorZoneDeliver = null,
     Object? provinces = null,
     Object? selectedProvinces = null,
     Object? selectedProvincesDeliver = null,
@@ -125,9 +144,9 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
           ? _value.emailController
           : emailController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
-      paswordController: freezed == paswordController
-          ? _value.paswordController
-          : paswordController // ignore: cast_nullable_to_non_nullable
+      passwordController: freezed == passwordController
+          ? _value.passwordController
+          : passwordController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
       confirmPasswordController: freezed == confirmPasswordController
           ? _value.confirmPasswordController
@@ -137,6 +156,30 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
           ? _value.showPass
           : showPass // ignore: cast_nullable_to_non_nullable
               as bool,
+      zones: null == zones
+          ? _value.zones
+          : zones // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      zonesDelivery: null == zonesDelivery
+          ? _value.zonesDelivery
+          : zonesDelivery // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      selectedZones: null == selectedZones
+          ? _value.selectedZones
+          : selectedZones // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      selectedZonesDeliver: null == selectedZonesDeliver
+          ? _value.selectedZonesDeliver
+          : selectedZonesDeliver // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      errorZone: null == errorZone
+          ? _value.errorZone
+          : errorZone // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorZoneDeliver: null == errorZoneDeliver
+          ? _value.errorZoneDeliver
+          : errorZoneDeliver // ignore: cast_nullable_to_non_nullable
+              as String,
       provinces: null == provinces
           ? _value.provinces
           : provinces // ignore: cast_nullable_to_non_nullable
@@ -170,11 +213,11 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
 }
 
 /// @nodoc
-abstract class _$$UpdateInfoStateImplCopyWith<$Res>
+abstract class _$$_UpdateInfoStateCopyWith<$Res>
     implements $UpdateInfoStateCopyWith<$Res> {
-  factory _$$UpdateInfoStateImplCopyWith(_$UpdateInfoStateImpl value,
-          $Res Function(_$UpdateInfoStateImpl) then) =
-      __$$UpdateInfoStateImplCopyWithImpl<$Res>;
+  factory _$$_UpdateInfoStateCopyWith(
+          _$_UpdateInfoState value, $Res Function(_$_UpdateInfoState) then) =
+      __$$_UpdateInfoStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -184,9 +227,15 @@ abstract class _$$UpdateInfoStateImplCopyWith<$Res>
       TextEditingController? nameController,
       TextEditingController? phoneController,
       TextEditingController? emailController,
-      TextEditingController? paswordController,
+      TextEditingController? passwordController,
       TextEditingController? confirmPasswordController,
       bool showPass,
+      List<AccountZone> zones,
+      List<AccountZone> zonesDelivery,
+      List<AccountZone> selectedZones,
+      List<AccountZone> selectedZonesDeliver,
+      String errorZone,
+      String errorZoneDeliver,
       List<AddressDataModel> provinces,
       List<AddressDataModel> selectedProvinces,
       List<AddressDataModel> selectedProvincesDeliver,
@@ -197,11 +246,11 @@ abstract class _$$UpdateInfoStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UpdateInfoStateImplCopyWithImpl<$Res>
-    extends _$UpdateInfoStateCopyWithImpl<$Res, _$UpdateInfoStateImpl>
-    implements _$$UpdateInfoStateImplCopyWith<$Res> {
-  __$$UpdateInfoStateImplCopyWithImpl(
-      _$UpdateInfoStateImpl _value, $Res Function(_$UpdateInfoStateImpl) _then)
+class __$$_UpdateInfoStateCopyWithImpl<$Res>
+    extends _$UpdateInfoStateCopyWithImpl<$Res, _$_UpdateInfoState>
+    implements _$$_UpdateInfoStateCopyWith<$Res> {
+  __$$_UpdateInfoStateCopyWithImpl(
+      _$_UpdateInfoState _value, $Res Function(_$_UpdateInfoState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -213,9 +262,15 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
     Object? nameController = freezed,
     Object? phoneController = freezed,
     Object? emailController = freezed,
-    Object? paswordController = freezed,
+    Object? passwordController = freezed,
     Object? confirmPasswordController = freezed,
     Object? showPass = null,
+    Object? zones = null,
+    Object? zonesDelivery = null,
+    Object? selectedZones = null,
+    Object? selectedZonesDeliver = null,
+    Object? errorZone = null,
+    Object? errorZoneDeliver = null,
     Object? provinces = null,
     Object? selectedProvinces = null,
     Object? selectedProvincesDeliver = null,
@@ -224,7 +279,7 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
     Object? tonnage = freezed,
     Object? notiConfig = freezed,
   }) {
-    return _then(_$UpdateInfoStateImpl(
+    return _then(_$_UpdateInfoState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -249,9 +304,9 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
           ? _value.emailController
           : emailController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
-      paswordController: freezed == paswordController
-          ? _value.paswordController
-          : paswordController // ignore: cast_nullable_to_non_nullable
+      passwordController: freezed == passwordController
+          ? _value.passwordController
+          : passwordController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
       confirmPasswordController: freezed == confirmPasswordController
           ? _value.confirmPasswordController
@@ -261,6 +316,30 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
           ? _value.showPass
           : showPass // ignore: cast_nullable_to_non_nullable
               as bool,
+      zones: null == zones
+          ? _value._zones
+          : zones // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      zonesDelivery: null == zonesDelivery
+          ? _value._zonesDelivery
+          : zonesDelivery // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      selectedZones: null == selectedZones
+          ? _value._selectedZones
+          : selectedZones // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      selectedZonesDeliver: null == selectedZonesDeliver
+          ? _value._selectedZonesDeliver
+          : selectedZonesDeliver // ignore: cast_nullable_to_non_nullable
+              as List<AccountZone>,
+      errorZone: null == errorZone
+          ? _value.errorZone
+          : errorZone // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorZoneDeliver: null == errorZoneDeliver
+          ? _value.errorZoneDeliver
+          : errorZoneDeliver // ignore: cast_nullable_to_non_nullable
+              as String,
       provinces: null == provinces
           ? _value._provinces
           : provinces // ignore: cast_nullable_to_non_nullable
@@ -295,17 +374,23 @@ class __$$UpdateInfoStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateInfoStateImpl implements _UpdateInfoState {
-  const _$UpdateInfoStateImpl(
+class _$_UpdateInfoState implements _UpdateInfoState {
+  const _$_UpdateInfoState(
       {required this.isLoading,
       required this.isFirstLoad,
       this.error,
       this.nameController,
       this.phoneController,
       this.emailController,
-      this.paswordController,
+      this.passwordController,
       this.confirmPasswordController,
       required this.showPass,
+      required final List<AccountZone> zones,
+      required final List<AccountZone> zonesDelivery,
+      required final List<AccountZone> selectedZones,
+      required final List<AccountZone> selectedZonesDeliver,
+      required this.errorZone,
+      required this.errorZoneDeliver,
       required final List<AddressDataModel> provinces,
       required final List<AddressDataModel> selectedProvinces,
       required final List<AddressDataModel> selectedProvincesDeliver,
@@ -313,7 +398,11 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
       required this.errorProvinceDeliver,
       this.tonnage,
       this.notiConfig})
-      : _provinces = provinces,
+      : _zones = zones,
+        _zonesDelivery = zonesDelivery,
+        _selectedZones = selectedZones,
+        _selectedZonesDeliver = selectedZonesDeliver,
+        _provinces = provinces,
         _selectedProvinces = selectedProvinces,
         _selectedProvincesDeliver = selectedProvincesDeliver;
 
@@ -330,11 +419,48 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
   @override
   final TextEditingController? emailController;
   @override
-  final TextEditingController? paswordController;
+  final TextEditingController? passwordController;
   @override
   final TextEditingController? confirmPasswordController;
   @override
   final bool showPass;
+  final List<AccountZone> _zones;
+  @override
+  List<AccountZone> get zones {
+    if (_zones is EqualUnmodifiableListView) return _zones;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_zones);
+  }
+
+  final List<AccountZone> _zonesDelivery;
+  @override
+  List<AccountZone> get zonesDelivery {
+    if (_zonesDelivery is EqualUnmodifiableListView) return _zonesDelivery;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_zonesDelivery);
+  }
+
+  final List<AccountZone> _selectedZones;
+  @override
+  List<AccountZone> get selectedZones {
+    if (_selectedZones is EqualUnmodifiableListView) return _selectedZones;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedZones);
+  }
+
+  final List<AccountZone> _selectedZonesDeliver;
+  @override
+  List<AccountZone> get selectedZonesDeliver {
+    if (_selectedZonesDeliver is EqualUnmodifiableListView)
+      return _selectedZonesDeliver;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedZonesDeliver);
+  }
+
+  @override
+  final String errorZone;
+  @override
+  final String errorZoneDeliver;
   final List<AddressDataModel> _provinces;
   @override
   List<AddressDataModel> get provinces {
@@ -372,14 +498,14 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
 
   @override
   String toString() {
-    return 'UpdateInfoState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, nameController: $nameController, phoneController: $phoneController, emailController: $emailController, paswordController: $paswordController, confirmPasswordController: $confirmPasswordController, showPass: $showPass, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, tonnage: $tonnage, notiConfig: $notiConfig)';
+    return 'UpdateInfoState(isLoading: $isLoading, isFirstLoad: $isFirstLoad, error: $error, nameController: $nameController, phoneController: $phoneController, emailController: $emailController, passwordController: $passwordController, confirmPasswordController: $confirmPasswordController, showPass: $showPass, zones: $zones, zonesDelivery: $zonesDelivery, selectedZones: $selectedZones, selectedZonesDeliver: $selectedZonesDeliver, errorZone: $errorZone, errorZoneDeliver: $errorZoneDeliver, provinces: $provinces, selectedProvinces: $selectedProvinces, selectedProvincesDeliver: $selectedProvincesDeliver, errorProvince: $errorProvince, errorProvinceDeliver: $errorProvinceDeliver, tonnage: $tonnage, notiConfig: $notiConfig)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateInfoStateImpl &&
+            other is _$_UpdateInfoState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFirstLoad, isFirstLoad) ||
@@ -391,13 +517,24 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
                 other.phoneController == phoneController) &&
             (identical(other.emailController, emailController) ||
                 other.emailController == emailController) &&
-            (identical(other.paswordController, paswordController) ||
-                other.paswordController == paswordController) &&
+            (identical(other.passwordController, passwordController) ||
+                other.passwordController == passwordController) &&
             (identical(other.confirmPasswordController,
                     confirmPasswordController) ||
                 other.confirmPasswordController == confirmPasswordController) &&
             (identical(other.showPass, showPass) ||
                 other.showPass == showPass) &&
+            const DeepCollectionEquality().equals(other._zones, _zones) &&
+            const DeepCollectionEquality()
+                .equals(other._zonesDelivery, _zonesDelivery) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedZones, _selectedZones) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedZonesDeliver, _selectedZonesDeliver) &&
+            (identical(other.errorZone, errorZone) ||
+                other.errorZone == errorZone) &&
+            (identical(other.errorZoneDeliver, errorZoneDeliver) ||
+                other.errorZoneDeliver == errorZoneDeliver) &&
             const DeepCollectionEquality()
                 .equals(other._provinces, _provinces) &&
             const DeepCollectionEquality()
@@ -414,31 +551,37 @@ class _$UpdateInfoStateImpl implements _UpdateInfoState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      isFirstLoad,
-      error,
-      nameController,
-      phoneController,
-      emailController,
-      paswordController,
-      confirmPasswordController,
-      showPass,
-      const DeepCollectionEquality().hash(_provinces),
-      const DeepCollectionEquality().hash(_selectedProvinces),
-      const DeepCollectionEquality().hash(_selectedProvincesDeliver),
-      errorProvince,
-      errorProvinceDeliver,
-      tonnage,
-      notiConfig);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isLoading,
+        isFirstLoad,
+        error,
+        nameController,
+        phoneController,
+        emailController,
+        passwordController,
+        confirmPasswordController,
+        showPass,
+        const DeepCollectionEquality().hash(_zones),
+        const DeepCollectionEquality().hash(_zonesDelivery),
+        const DeepCollectionEquality().hash(_selectedZones),
+        const DeepCollectionEquality().hash(_selectedZonesDeliver),
+        errorZone,
+        errorZoneDeliver,
+        const DeepCollectionEquality().hash(_provinces),
+        const DeepCollectionEquality().hash(_selectedProvinces),
+        const DeepCollectionEquality().hash(_selectedProvincesDeliver),
+        errorProvince,
+        errorProvinceDeliver,
+        tonnage,
+        notiConfig
+      ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
-      __$$UpdateInfoStateImplCopyWithImpl<_$UpdateInfoStateImpl>(
-          this, _$identity);
+  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
+      __$$_UpdateInfoStateCopyWithImpl<_$_UpdateInfoState>(this, _$identity);
 }
 
 abstract class _UpdateInfoState implements UpdateInfoState {
@@ -449,16 +592,22 @@ abstract class _UpdateInfoState implements UpdateInfoState {
       final TextEditingController? nameController,
       final TextEditingController? phoneController,
       final TextEditingController? emailController,
-      final TextEditingController? paswordController,
+      final TextEditingController? passwordController,
       final TextEditingController? confirmPasswordController,
       required final bool showPass,
+      required final List<AccountZone> zones,
+      required final List<AccountZone> zonesDelivery,
+      required final List<AccountZone> selectedZones,
+      required final List<AccountZone> selectedZonesDeliver,
+      required final String errorZone,
+      required final String errorZoneDeliver,
       required final List<AddressDataModel> provinces,
       required final List<AddressDataModel> selectedProvinces,
       required final List<AddressDataModel> selectedProvincesDeliver,
       required final String errorProvince,
       required final String errorProvinceDeliver,
       final TonnageType? tonnage,
-      final NotiConfig? notiConfig}) = _$UpdateInfoStateImpl;
+      final NotiConfig? notiConfig}) = _$_UpdateInfoState;
 
   @override
   bool get isLoading;
@@ -473,11 +622,23 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   @override
   TextEditingController? get emailController;
   @override
-  TextEditingController? get paswordController;
+  TextEditingController? get passwordController;
   @override
   TextEditingController? get confirmPasswordController;
   @override
   bool get showPass;
+  @override
+  List<AccountZone> get zones;
+  @override
+  List<AccountZone> get zonesDelivery;
+  @override
+  List<AccountZone> get selectedZones;
+  @override
+  List<AccountZone> get selectedZonesDeliver;
+  @override
+  String get errorZone;
+  @override
+  String get errorZoneDeliver;
   @override
   List<AddressDataModel> get provinces;
   @override
@@ -494,6 +655,6 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   NotiConfig? get notiConfig;
   @override
   @JsonKey(ignore: true)
-  _$$UpdateInfoStateImplCopyWith<_$UpdateInfoStateImpl> get copyWith =>
+  _$$_UpdateInfoStateCopyWith<_$_UpdateInfoState> get copyWith =>
       throw _privateConstructorUsedError;
 }

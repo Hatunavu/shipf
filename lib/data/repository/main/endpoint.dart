@@ -29,6 +29,7 @@ const updateOrderStatus = '/shipments/update-status-tracking/{orderId}';
 
 //account
 const getUserInfo = '/users/information';
+const updateProfile = '/users/update-profile';
 
 //shipment
 const getShipments = '/shipments';

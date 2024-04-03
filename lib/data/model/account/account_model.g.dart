@@ -118,3 +118,24 @@ Map<String, dynamic> _$ZoneResponseToJson(ZoneResponse instance) =>
       'success': instance.success,
       'status': instance.status,
     };
+
+AccountRequest _$AccountRequestFromJson(Map<String, dynamic> json) =>
+    AccountRequest(
+      name: json['name'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      email: json['email'] as String?,
+      password: json['password'] as String? ?? '',
+      zoneIds: (json['zoneIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$AccountRequestToJson(AccountRequest instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'phone': instance.phone,
+      'email': instance.email,
+      'password': instance.password,
+      'zoneIds': instance.zoneIds,
+    };

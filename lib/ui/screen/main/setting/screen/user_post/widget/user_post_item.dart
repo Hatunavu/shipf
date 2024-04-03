@@ -14,13 +14,16 @@ import 'package:shipf/ui/theme/text_style.dart';
 class UserPostItem extends StatelessWidget {
   final UserPostCubit userPostCubit;
   final PostData postData;
-  const UserPostItem({super.key, required this.postData,required this.userPostCubit});
+  const UserPostItem(
+      {super.key, required this.postData, required this.userPostCubit});
 
   @override
   Widget build(BuildContext context) {
-    final tags = [
-      ...postData.pickupProvinces.map((e) => e.name).toList(),
-      ...postData.deliveryProvinces.map((e) => e.name).toList(),
+    final List<Tag> tags = [
+      ...postData.pickupProvinces.map((e) => Tag(tagName: e.name)).toList(),
+      ...postData.deliveryProvinces
+          .map((e) => Tag(tagName: e.name, isPickup: false))
+          .toList(),
     ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingWidthScreen)
@@ -77,8 +80,9 @@ class UserPostItem extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       vertical: 6.h, horizontal: kDefaultPaddingWidthScreen),
                   child: Text(
-                    tag,
-                    style: primarySubTitleStyle,
+                    tag.tagName,
+                    style: primarySubTitleStyle.copyWith(
+                        color: tag.isPickup ? primaryColor : Colors.grey[500]),
                   ),
                 );
               }).toList(),
@@ -95,7 +99,10 @@ class UserPostItem extends StatelessWidget {
                   Expanded(
                       child: GestureDetector(
                     onTap: () {
-                      context.router.push(CreatePostPage(postData: postData, callBack: () => userPostCubit.getPosts(),));
+                      context.router.push(CreatePostPage(
+                        postData: postData,
+                        callBack: () => userPostCubit.getPosts(),
+                      ));
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(

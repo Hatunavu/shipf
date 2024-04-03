@@ -84,7 +84,9 @@ class UpdateInfoCubit extends Cubit<UpdateInfoState> {
           request: AccountRequest(
               name: state.nameController!.text,
               phone: state.phoneController!.text,
-              email: state.emailController!.text,
+              email: state.emailController!.text.isEmpty
+                  ? null
+                  : state.emailController!.text,
               password: state.passwordController!.text,
               zoneIds: [
             ...state.selectedZones.map((e) => e.id.toString()).toList(),

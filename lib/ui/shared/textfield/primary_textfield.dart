@@ -35,6 +35,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool showPrefixIcon;
   final Function()? callBack;
   final Function()? showPass;
+  final bool isRequire;
 
   PrimaryTextField(
       {Key? key,
@@ -60,7 +61,8 @@ class PrimaryTextField extends StatelessWidget {
       this.fieldRequire = '',
       this.showPrefixIcon = true,
       this.callBack,
-      this.showPass})
+      this.showPass,
+      this.isRequire = true})
       : super(key: key);
 
   final ValueNotifier _isShow = ValueNotifier(false);
@@ -91,7 +93,7 @@ class PrimaryTextField extends StatelessWidget {
       }
       if (isEmail) {
         if (text == null || text.isEmpty) {
-          return 'Vui lòng nhập Email';
+          return isRequire ? 'Vui lòng nhập Email' : null;
         } else if (!StringX(text).isEmail()) {
           return 'Email không đúng định dạng';
         }
@@ -171,7 +173,7 @@ class PrimaryTextField extends StatelessWidget {
                                 size: 18.sp,
                                 color: primaryColor,
                               )
-                            : isEmail == true
+                            : (isEmail == true && showPrefixIcon)
                                 ? Icon(
                                     Ionicons.mail_outline,
                                     size: 18.sp,

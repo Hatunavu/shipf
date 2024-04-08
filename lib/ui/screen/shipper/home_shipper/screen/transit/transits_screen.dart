@@ -81,6 +81,8 @@ class TransitsScreen extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: state.listTransitData.length,
+                            padding: EdgeInsets.only(
+                                bottom: kDefaultPaddingHeightScreen),
                             itemBuilder: (context, index) {
                               return TransitItem(
                                 cancelTransit: () => transitsCubit

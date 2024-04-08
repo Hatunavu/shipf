@@ -26,6 +26,10 @@ class TransitItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+        border: Border.all(
+            color: transit.status == TransitStatus.neww
+                ? primaryColor
+                : Colors.transparent),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),

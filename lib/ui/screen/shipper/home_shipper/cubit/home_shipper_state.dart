@@ -7,8 +7,9 @@ class HomeShipperState with _$HomeShipperState {
   const factory HomeShipperState(
       {required bool isLoading,
       String? error,
-      required List<int> analysis}) = _HomeShipperState;
+      required List<int> analysis,
+      required List<int> newElements}) = _HomeShipperState;
 
-  factory HomeShipperState.initial() =>
-      const HomeShipperState(isLoading: false, error: "", analysis: []);
+  factory HomeShipperState.initial() => const HomeShipperState(
+      isLoading: false, error: "", analysis: [], newElements: []);
 }

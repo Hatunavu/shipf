@@ -12,13 +12,14 @@ part of 'home_shipper_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$HomeShipperState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<int> get analysis => throw _privateConstructorUsedError;
+  List<int> get newElements => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeShipperStateCopyWith<HomeShipperState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $HomeShipperStateCopyWith<$Res> {
           HomeShipperState value, $Res Function(HomeShipperState) then) =
       _$HomeShipperStateCopyWithImpl<$Res, HomeShipperState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<int> analysis});
+  $Res call(
+      {bool isLoading,
+      String? error,
+      List<int> analysis,
+      List<int> newElements});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
     Object? isLoading = null,
     Object? error = freezed,
     Object? analysis = null,
+    Object? newElements = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -64,27 +70,35 @@ class _$HomeShipperStateCopyWithImpl<$Res, $Val extends HomeShipperState>
           ? _value.analysis
           : analysis // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      newElements: null == newElements
+          ? _value.newElements
+          : newElements // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$HomeShipperStateImplCopyWith<$Res>
+abstract class _$$_HomeShipperStateCopyWith<$Res>
     implements $HomeShipperStateCopyWith<$Res> {
-  factory _$$HomeShipperStateImplCopyWith(_$HomeShipperStateImpl value,
-          $Res Function(_$HomeShipperStateImpl) then) =
-      __$$HomeShipperStateImplCopyWithImpl<$Res>;
+  factory _$$_HomeShipperStateCopyWith(
+          _$_HomeShipperState value, $Res Function(_$_HomeShipperState) then) =
+      __$$_HomeShipperStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<int> analysis});
+  $Res call(
+      {bool isLoading,
+      String? error,
+      List<int> analysis,
+      List<int> newElements});
 }
 
 /// @nodoc
-class __$$HomeShipperStateImplCopyWithImpl<$Res>
-    extends _$HomeShipperStateCopyWithImpl<$Res, _$HomeShipperStateImpl>
-    implements _$$HomeShipperStateImplCopyWith<$Res> {
-  __$$HomeShipperStateImplCopyWithImpl(_$HomeShipperStateImpl _value,
-      $Res Function(_$HomeShipperStateImpl) _then)
+class __$$_HomeShipperStateCopyWithImpl<$Res>
+    extends _$HomeShipperStateCopyWithImpl<$Res, _$_HomeShipperState>
+    implements _$$_HomeShipperStateCopyWith<$Res> {
+  __$$_HomeShipperStateCopyWithImpl(
+      _$_HomeShipperState _value, $Res Function(_$_HomeShipperState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,8 +107,9 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
     Object? analysis = null,
+    Object? newElements = null,
   }) {
-    return _then(_$HomeShipperStateImpl(
+    return _then(_$_HomeShipperState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -107,16 +122,24 @@ class __$$HomeShipperStateImplCopyWithImpl<$Res>
           ? _value._analysis
           : analysis // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      newElements: null == newElements
+          ? _value._newElements
+          : newElements // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$HomeShipperStateImpl implements _HomeShipperState {
-  const _$HomeShipperStateImpl(
-      {required this.isLoading, this.error, required final List<int> analysis})
-      : _analysis = analysis;
+class _$_HomeShipperState implements _HomeShipperState {
+  const _$_HomeShipperState(
+      {required this.isLoading,
+      this.error,
+      required final List<int> analysis,
+      required final List<int> newElements})
+      : _analysis = analysis,
+        _newElements = newElements;
 
   @override
   final bool isLoading;
@@ -130,39 +153,53 @@ class _$HomeShipperStateImpl implements _HomeShipperState {
     return EqualUnmodifiableListView(_analysis);
   }
 
+  final List<int> _newElements;
   @override
-  String toString() {
-    return 'HomeShipperState(isLoading: $isLoading, error: $error, analysis: $analysis)';
+  List<int> get newElements {
+    if (_newElements is EqualUnmodifiableListView) return _newElements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newElements);
   }
 
   @override
-  bool operator ==(Object other) {
+  String toString() {
+    return 'HomeShipperState(isLoading: $isLoading, error: $error, analysis: $analysis, newElements: $newElements)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeShipperStateImpl &&
+            other is _$_HomeShipperState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other._analysis, _analysis));
+            const DeepCollectionEquality().equals(other._analysis, _analysis) &&
+            const DeepCollectionEquality()
+                .equals(other._newElements, _newElements));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, error,
-      const DeepCollectionEquality().hash(_analysis));
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      error,
+      const DeepCollectionEquality().hash(_analysis),
+      const DeepCollectionEquality().hash(_newElements));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
-      __$$HomeShipperStateImplCopyWithImpl<_$HomeShipperStateImpl>(
-          this, _$identity);
+  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
+      __$$_HomeShipperStateCopyWithImpl<_$_HomeShipperState>(this, _$identity);
 }
 
 abstract class _HomeShipperState implements HomeShipperState {
   const factory _HomeShipperState(
       {required final bool isLoading,
       final String? error,
-      required final List<int> analysis}) = _$HomeShipperStateImpl;
+      required final List<int> analysis,
+      required final List<int> newElements}) = _$_HomeShipperState;
 
   @override
   bool get isLoading;
@@ -171,7 +208,9 @@ abstract class _HomeShipperState implements HomeShipperState {
   @override
   List<int> get analysis;
   @override
+  List<int> get newElements;
+  @override
   @JsonKey(ignore: true)
-  _$$HomeShipperStateImplCopyWith<_$HomeShipperStateImpl> get copyWith =>
+  _$$_HomeShipperStateCopyWith<_$_HomeShipperState> get copyWith =>
       throw _privateConstructorUsedError;
 }

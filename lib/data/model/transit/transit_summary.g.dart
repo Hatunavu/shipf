@@ -34,10 +34,12 @@ TransitSummaryData _$TransitSummaryDataFromJson(Map<String, dynamic> json) =>
           ? LoadingType.pickup
           : stringToLoadingType(json['type'] as String),
       totalElements: json['totalElements'] as int? ?? 0,
+      newElement: json['newElement'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$TransitSummaryDataToJson(TransitSummaryData instance) =>
     <String, dynamic>{
       'type': loadingTypeToString(instance.type),
       'totalElements': instance.totalElements,
+      'newElement': instance.newElement,
     };

@@ -178,30 +178,61 @@ class HomeShipperScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: kDefaultPaddingHeightScreen / 2,
                             horizontal: kDefaultPaddingWidthScreen / 2),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Stack(
                           children: [
-                            SizedBox(
-                                height: 0.15.sw,
-                                width: 0.15.sw,
-                                child: ImageCreator.assetImage(
-                                    imagePath: actions[index].icon,
-                                    color: Colors.white)),
-                            Text(
-                              state.analysis[index].toString(),
-                              overflow: TextOverflow.ellipsis,
-                              style: primaryHeaderTitleStyle.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        height: 0.15.sw,
+                                        width: 0.15.sw,
+                                        child: ImageCreator.assetImage(
+                                            imagePath: actions[index].icon,
+                                            color: Colors.white)),
+                                  ],
+                                ),
+                                Text(
+                                  state.analysis[index].toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: primaryHeaderTitleStyle.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  actions[index].content,
+                                  style: primarySubTitleStyle.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
                             ),
-                            Text(
-                              actions[index].content,
-                              style: primarySubTitleStyle.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                              textAlign: TextAlign.center,
-                            )
+                            Visibility(
+                              visible: state.newElements[index] != 0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 3),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius)),
+                                    child: Text(
+                                      state.newElements[index].toString(),
+                                      style: primarySubTitleStyle.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),

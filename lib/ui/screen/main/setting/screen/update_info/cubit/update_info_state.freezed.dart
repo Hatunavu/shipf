@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UpdateInfoState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isFirstLoad => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
   TextEditingController? get nameController =>
       throw _privateConstructorUsedError;
   TextEditingController? get phoneController =>
@@ -61,7 +61,7 @@ abstract class $UpdateInfoStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isFirstLoad,
-      String? error,
+      String error,
       TextEditingController? nameController,
       TextEditingController? phoneController,
       TextEditingController? emailController,
@@ -98,7 +98,7 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
   $Res call({
     Object? isLoading = null,
     Object? isFirstLoad = null,
-    Object? error = freezed,
+    Object? error = null,
     Object? nameController = freezed,
     Object? phoneController = freezed,
     Object? emailController = freezed,
@@ -128,10 +128,10 @@ class _$UpdateInfoStateCopyWithImpl<$Res, $Val extends UpdateInfoState>
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       nameController: freezed == nameController
           ? _value.nameController
           : nameController // ignore: cast_nullable_to_non_nullable
@@ -223,7 +223,7 @@ abstract class _$$_UpdateInfoStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isFirstLoad,
-      String? error,
+      String error,
       TextEditingController? nameController,
       TextEditingController? phoneController,
       TextEditingController? emailController,
@@ -258,7 +258,7 @@ class __$$_UpdateInfoStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isFirstLoad = null,
-    Object? error = freezed,
+    Object? error = null,
     Object? nameController = freezed,
     Object? phoneController = freezed,
     Object? emailController = freezed,
@@ -288,10 +288,10 @@ class __$$_UpdateInfoStateCopyWithImpl<$Res>
           ? _value.isFirstLoad
           : isFirstLoad // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       nameController: freezed == nameController
           ? _value.nameController
           : nameController // ignore: cast_nullable_to_non_nullable
@@ -378,7 +378,7 @@ class _$_UpdateInfoState implements _UpdateInfoState {
   const _$_UpdateInfoState(
       {required this.isLoading,
       required this.isFirstLoad,
-      this.error,
+      required this.error,
       this.nameController,
       this.phoneController,
       this.emailController,
@@ -411,7 +411,7 @@ class _$_UpdateInfoState implements _UpdateInfoState {
   @override
   final bool isFirstLoad;
   @override
-  final String? error;
+  final String error;
   @override
   final TextEditingController? nameController;
   @override
@@ -588,7 +588,7 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   const factory _UpdateInfoState(
       {required final bool isLoading,
       required final bool isFirstLoad,
-      final String? error,
+      required final String error,
       final TextEditingController? nameController,
       final TextEditingController? phoneController,
       final TextEditingController? emailController,
@@ -614,7 +614,7 @@ abstract class _UpdateInfoState implements UpdateInfoState {
   @override
   bool get isFirstLoad;
   @override
-  String? get error;
+  String get error;
   @override
   TextEditingController? get nameController;
   @override

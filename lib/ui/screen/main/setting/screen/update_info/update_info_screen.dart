@@ -61,7 +61,7 @@ class UpdateInfoScreen extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  child: state.isFirstLoad
+                  child: state.isFirstLoad || state.error.isNotEmpty
                       ? const SizedBox()
                       : Form(
                           key: updateInfoFormKey,

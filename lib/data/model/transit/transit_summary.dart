@@ -28,8 +28,12 @@ class TransitSummaryData {
       name: 'type', fromJson: stringToLoadingType, toJson: loadingTypeToString)
   final LoadingType type;
   final int totalElements;
+  final int newElement;
 
-  TransitSummaryData({this.type = LoadingType.pickup, this.totalElements = 0});
+  TransitSummaryData(
+      {this.type = LoadingType.pickup,
+      this.totalElements = 0,
+      this.newElement = 0});
 
   factory TransitSummaryData.fromJson(Map<String, dynamic> json) =>
       _$TransitSummaryDataFromJson(json);

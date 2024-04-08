@@ -12,7 +12,7 @@ class UpdateInfoState with _$UpdateInfoState {
   const factory UpdateInfoState({
     required bool isLoading,
     required bool isFirstLoad,
-    String? error,
+    required String error,
     TextEditingController? nameController,
     TextEditingController? phoneController,
     TextEditingController? emailController,

@@ -392,7 +392,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
               changeAmountButton(controller, isIncrease: false),
               Expanded(
                   child:
-                      inputNumber(controller, lengthLimit: isAmount ? 2 : 7)),
+                      inputNumber(controller, lengthLimit: isAmount ? 5 : 7)),
               changeAmountButton(controller),
             ],
           ),
@@ -407,7 +407,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
       onChanged: (string) {
         string = NumberFormat.decimalPattern().format(int.parse(
             string.replaceAll(',', '').isEmpty
-                ? '1'
+                ? '0'
                 : string.replaceAll(',', '')));
         controller.value = TextEditingValue(
           text: string,
@@ -437,7 +437,7 @@ class _OrderParcelWidgetState extends State<OrderParcelWidget> {
   Widget changeAmountButton(TextEditingController controller,
       {bool isIncrease = true}) {
     bool isActive = (isIncrease && controller.text != '999,999') ||
-        (!isIncrease && controller.text != '1');
+        (!isIncrease && controller.text != '0');
     return GestureDetector(
       onTap: isActive
           ? () {

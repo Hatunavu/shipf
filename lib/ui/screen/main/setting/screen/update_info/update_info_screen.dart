@@ -156,6 +156,7 @@ class UpdateInfoScreen extends StatelessWidget {
                 hintText: 'Mật khẩu',
                 isPass: state.showPass,
                 showPrefixIcon: false,
+                isRequire: false,
                 showPass: () => updateInfoCubit.showPass()),
             role == RoleType.shipper
                 ? Column(

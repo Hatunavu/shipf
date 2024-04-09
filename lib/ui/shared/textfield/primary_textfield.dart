@@ -87,7 +87,9 @@ class PrimaryTextField extends StatelessWidget {
         }
       }
       if (isPass != null) {
-        if (text == null || text.isEmpty || !StringX(text).isValidPassword()) {
+        if (text == null || text.isEmpty) {
+          return isRequire ? 'Vui lòng nhập mật khẩu' : null;
+        } else if (!StringX(text).isValidPassword()) {
           return 'Mật khẩu phải từ 6 ký tự';
         }
       }

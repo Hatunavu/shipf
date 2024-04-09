@@ -38,3 +38,22 @@ Map<String, dynamic> _$PostRequestToJson(PostRequest instance) =>
       'tonnage': instance.tonnage,
       'status': postStatusTypeToString(instance.status),
     };
+
+QuoteRequest _$QuoteRequestFromJson(Map<String, dynamic> json) => QuoteRequest(
+      postId: json['postId'] as int? ?? 0,
+      tonnageType: json['tonnage'] == null
+          ? TonnageType.one
+          : stringToTonnageType(json['tonnage'] as String),
+      priceList: json['priceList'] as int? ?? 0,
+      priceListUnit: json['priceListUnit'] as String? ?? 'VND',
+      note: json['note'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$QuoteRequestToJson(QuoteRequest instance) =>
+    <String, dynamic>{
+      'postId': instance.postId,
+      'tonnage': tonnageTypeToString(instance.tonnageType),
+      'priceList': instance.priceList,
+      'priceListUnit': instance.priceListUnit,
+      'note': instance.note,
+    };

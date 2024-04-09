@@ -215,6 +215,9 @@ abstract class MainRepository {
   Future<NoDataResponse> updatePost(
       {@Path('id') required int id, @Body() required PostRequest postRequest});
 
+  @POST(endpoint.quote)
+  Future<NoDataResponse> quote({@Body() required QuoteRequest quoteRequest});
+
   //zone
   @GET(endpoint.getZones)
   Future<ZoneResponse> getZones({

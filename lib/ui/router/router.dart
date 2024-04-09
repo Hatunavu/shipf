@@ -26,6 +26,7 @@ import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/screen/trans
 import 'package:shipf/ui/screen/shipper/home_shipper/screen/transit/transits_screen.dart';
 import 'package:shipf/ui/screen/shipper/post/post_screen.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/create_post/create_post_screen.dart';
+import 'package:shipf/ui/screen/shipper/post/screen/quote/quote_screen.dart';
 import 'package:shipf/ui/screen/shipper/post/screen/search_post/search_post_screen.dart';
 
 @MaterialAutoRouter(
@@ -168,6 +169,12 @@ import 'package:shipf/ui/screen/shipper/post/screen/search_post/search_post_scre
       page: SearchPostScreen,
       name: "SearchPostPage",
       path: AppRoutes.searchPostScreen,
+    ),
+
+    AutoRoute(
+      page: QuoteScreen,
+      name: "QuotePage",
+      path: AppRoutes.quoteScreen,
     ),
   ],
 )

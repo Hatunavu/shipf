@@ -932,6 +932,30 @@ class _MainRepository implements MainRepository {
   }
 
   @override
+  Future<NoDataResponse> quote({required quoteRequest}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(quoteRequest.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<NoDataResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/express/price-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NoDataResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ZoneResponse> getZones({
     page,
     size,

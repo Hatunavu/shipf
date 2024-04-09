@@ -143,6 +143,7 @@ class PostScreen extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       return PostItem(
                                         postData: state.posts[index],
+                                        role: role,
                                       );
                                     }),
                                 Visibility(

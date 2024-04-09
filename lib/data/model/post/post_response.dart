@@ -78,6 +78,15 @@ class PostData {
     return DateFormatting(createdAt!).tohhmmddMMyyyy();
   }
 
+  List<Tag> get tags {
+    return [
+      ...pickupProvinces.map((e) => Tag(tagName: e.name)).toList(),
+      ...deliveryProvinces
+          .map((e) => Tag(tagName: e.name, isPickup: false))
+          .toList(),
+    ];
+  }
+
   factory PostData.fromJson(Map<String, dynamic> json) =>
       _$PostDataFromJson(json);
 

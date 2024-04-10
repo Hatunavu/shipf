@@ -15,7 +15,7 @@ import 'package:shipf/ui/theme/text_style.dart';
 
 class ShipmentItem extends StatelessWidget {
   final ShipmentsCubit shipmentsCubit;
-  final ShipmentStatus shipmentStatus;
+  final ShipmentStatus? shipmentStatus;
   final ShipmentData shipment;
 
   const ShipmentItem(

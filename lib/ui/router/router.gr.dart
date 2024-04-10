@@ -224,6 +224,7 @@ class AppRouter extends _i28.RootStackRouter {
         child: _i19.ShipmentsScreen(
           key: args.key,
           shipmentStatus: args.shipmentStatus,
+          isShowHeader: args.isShowHeader,
         ),
       );
     },
@@ -894,13 +895,15 @@ class HomeShipperPageArgs {
 class ShipmentsPage extends _i28.PageRouteInfo<ShipmentsPageArgs> {
   ShipmentsPage({
     _i29.Key? key,
-    _i32.ShipmentStatus shipmentStatus = _i32.ShipmentStatus.pickingUp,
+    _i32.ShipmentStatus? shipmentStatus,
+    bool isShowHeader = true,
   }) : super(
           ShipmentsPage.name,
           path: '/shipments',
           args: ShipmentsPageArgs(
             key: key,
             shipmentStatus: shipmentStatus,
+            isShowHeader: isShowHeader,
           ),
         );
 
@@ -910,16 +913,19 @@ class ShipmentsPage extends _i28.PageRouteInfo<ShipmentsPageArgs> {
 class ShipmentsPageArgs {
   const ShipmentsPageArgs({
     this.key,
-    this.shipmentStatus = _i32.ShipmentStatus.pickingUp,
+    this.shipmentStatus,
+    this.isShowHeader = true,
   });
 
   final _i29.Key? key;
 
-  final _i32.ShipmentStatus shipmentStatus;
+  final _i32.ShipmentStatus? shipmentStatus;
+
+  final bool isShowHeader;
 
   @override
   String toString() {
-    return 'ShipmentsPageArgs{key: $key, shipmentStatus: $shipmentStatus}';
+    return 'ShipmentsPageArgs{key: $key, shipmentStatus: $shipmentStatus, isShowHeader: $isShowHeader}';
   }
 }
 

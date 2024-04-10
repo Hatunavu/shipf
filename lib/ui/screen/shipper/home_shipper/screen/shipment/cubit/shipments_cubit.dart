@@ -11,12 +11,11 @@ import 'package:shipf/ui/shared/widget/toast_util.dart';
 class ShipmentsCubit extends Cubit<ShipmentsState> {
   ShipmentsCubit() : super(ShipmentsState.initial());
 
-  Future<void> getShipments(
-      {ShipmentStatus shipmentStatus = ShipmentStatus.pickingUp}) async {
+  Future<void> getShipments({ShipmentStatus? shipmentStatus}) async {
     try {
       emit(state.copyWith(isFirstLoad: true));
       final response = await mainRepository.getShipments(
-          shipmentStatusCode: shipmentStatus.toJsonString());
+          shipmentStatusCode: shipmentStatus?.toJsonString());
       emit(state.copyWith(isFirstLoad: false, shipments: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);

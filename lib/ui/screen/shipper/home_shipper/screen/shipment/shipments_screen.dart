@@ -16,9 +16,10 @@ import 'package:shipf/ui/theme/constant.dart';
 import 'package:shipf/ui/theme/text_style.dart';
 
 class ShipmentsScreen extends StatelessWidget {
-  final ShipmentStatus shipmentStatus;
+  final bool isShowHeader;
+  final ShipmentStatus? shipmentStatus;
   const ShipmentsScreen(
-      {Key? key, this.shipmentStatus = ShipmentStatus.pickingUp})
+      {Key? key, this.shipmentStatus, this.isShowHeader = true})
       : super(key: key);
 
   @override
@@ -45,16 +46,18 @@ class ShipmentsScreen extends StatelessWidget {
         builder: (context, state) {
           shipmentsCubit = context.read<ShipmentsCubit>();
           return BaseScreen(
-              title: 'Danh sách đơn hàng',
-              leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context, true);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
-              ),
+              title: isShowHeader ? 'Danh sách đơn hàng' : null,
+              leading: isShowHeader
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.pop(context, true);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ),
+                    )
+                  : null,
               child: SingleChildScrollView(
                 child: state.isFirstLoad
                     ? const OrderShimmer()

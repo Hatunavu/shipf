@@ -13,7 +13,7 @@ class SettingCubit extends Cubit<SettingState> {
     try {
       emit(state.copyWith(isFirstLoad: true, isLoading: true));
       final response = await mainRepository.getUserInfo();
-      emit(state.copyWith(isFirstLoad: false, userInfo: response.data));
+      emit(state.copyWith(isFirstLoad: false,isLoading: false, userInfo: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
       emit(state.copyWith(

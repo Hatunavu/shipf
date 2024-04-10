@@ -124,14 +124,14 @@ class AccountRequest {
   final String name;
   final String phone;
   final String? email;
-  final String password;
+  final String? password;
   final List<String> zoneIds;
 
   AccountRequest(
       {this.name = '',
       this.phone = '',
       this.email,
-      this.password = '',
+      this.password,
       this.zoneIds = const []});
 
   factory AccountRequest.fromJson(Map<String, dynamic> json) =>

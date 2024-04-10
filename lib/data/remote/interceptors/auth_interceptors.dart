@@ -32,7 +32,8 @@ class AuthInterceptor extends Interceptor {
       ToastUtils.showFail('Tài khoản đã hết hạn đăng nhập');
     } else if (err.response?.statusCode == 403 ||
         err.response?.statusCode == 500) {
-      ToastUtils.showFail('Đã có lỗi xảy ra, vui lòng thử lại sau!');
+      // ToastUtils.showFail('Đã có lỗi xảy ra, vui lòng thử lại sau!');
+      ToastUtils.showFail(err.message);
     }
     super.onError(err, handler);
   }

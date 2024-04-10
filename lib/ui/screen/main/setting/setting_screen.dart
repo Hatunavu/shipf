@@ -88,12 +88,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: Colors.black,
                 ),
               ),
-              child: state.isFirstLoad
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: primaryColor,
-                      ),
-                    )
+              child: state.isFirstLoad || state.error!.isNotEmpty
+                  ? const SizedBox()
                   : SingleChildScrollView(
                       child: Column(
                         children: [

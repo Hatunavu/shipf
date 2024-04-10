@@ -11,12 +11,13 @@ class SettingCubit extends Cubit<SettingState> {
 
   Future getUserInfo() async {
     try {
-      emit(state.copyWith(isFirstLoad: true));
+      emit(state.copyWith(isFirstLoad: true, isLoading: true));
       final response = await mainRepository.getUserInfo();
       emit(state.copyWith(isFirstLoad: false, userInfo: response.data));
     } on DioError catch (e) {
       final errorMessage = mainRepository.mapDioErrorToMessage(e);
-      emit(state.copyWith(isFirstLoad: false, error: errorMessage));
+      emit(state.copyWith(
+          isFirstLoad: false, isLoading: false, error: errorMessage));
     }
   }
 
